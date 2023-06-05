@@ -31,6 +31,10 @@
 #' prop_data <- prop_obs_rep(tab_combine, "sexo", na_obs = TRUE, digits = 2)
 prop_obs_rep <- function(data_obs_rep, strata_vars, na_obs = TRUE, digits = NULL){
 
+    if (is.null(digits)) {
+        digits <- 2
+    }
+
     if (na_obs == FALSE)  {
 
         tab_na <- data_obs_rep %>%

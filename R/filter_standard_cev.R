@@ -22,7 +22,6 @@
 filter_standard_cev <- function(replicates, violation) {
 
     data_filter <- replicates %>%
-        dplyr::filter(dplyr::between(yy_hecho, 1985, 2019)) %>%
         dplyr::mutate(p_str = as.character(p_str)) %>%
         dplyr::mutate(p_str = base::ifelse(yy_hecho > 2016 & p_str == "GUE-FARC",
                               "GUE-OTRO", p_str)) %>%
@@ -53,7 +52,6 @@ filter_standard_cev <- function(replicates, violation) {
     if (violation == "desaparicion") {
 
         data_filter <- data_filter %>%
-            dplyr::filter(dplyr::between(yy_hecho, 1985, 2016)) %>%
             dplyr::mutate(is_forced_dis = as.integer(is_forced_dis)) %>%
             dplyr::mutate(is_conflict = as.integer(is_conflict))
 
@@ -73,23 +71,24 @@ filter_standard_cev <- function(replicates, violation) {
             is.na(data_filter$is_conflict_dis), TRUE, FALSE
         )
 
+        data_filter$is_conflict_dis <- dplyr::case_when(
+            is.na(data_filter$is_conflict_dis) ~ 1,
+            data_filter$is_conflict_dis == 0 ~ 0,
+            data_filter$is_conflict_dis == 1 ~ 1
+        )
+
+        data_filter <- data_filter %>%
+            mutate(is_conflict_dis_rep = NA) %>%
+            mutate(is_conflict_dis_rep = case_when(
+                is_forced_dis==0 | is_conflict==0 ~ 0,
+                is_forced_dis==1 & is_conflict==1 ~ 1))
 
     } else if (violation == "reclutamiento") {
         data_filter <- data_filter %>%
-            dplyr::filter(dplyr::between(yy_hecho, 1990, 2017)) %>%
             dplyr::filter(edad_categoria == "De 0 a 4" |
                           edad_categoria == "De 5 a 9" |
                           edad_categoria == "De 10 a 14" |
                           edad_categoria == "De 15 a 17")
-
-    } else if (violation == "secuestro") {
-        data_filter <- data_filter %>%
-            dplyr::filter(dplyr::between(yy_hecho, 1990, 2018))
-
-    } else if (violation == "homicidio") {
-        data_filter <- data_filter %>%
-            dplyr::filter(dplyr::between(yy_hecho, 1985, 2018))
-
     } else {
 
         stop("There is not more violations")

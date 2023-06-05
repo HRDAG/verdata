@@ -19,4 +19,8 @@ utils::globalVariables(c("replica","is_conflict","observed",
                          "edad_minors", "observed", "imp_lo", "imp_mean",
                          "imp_hi", "obs_prop", "imp_lo_p", "imp_mean_p",
                          "imp_hi_p", "prop", "obs_prop_na", "prop_obs_rep",
-                         "data_obs_rep", "na_obs", "data_combine", "edad_na"))
+                         "data_obs_rep", "na_obs", "data_combine", "edad_na",
+                         "is_conflict_na", "is_forced_dis_na", "perp_na",
+                         "sexo_na", "municipio_na", "etnia_na", "p_str_imputed",
+                         "sexo_imputed", "etnia_imputed", "muni_code_hecho_imputed",
+                         "is_conflict_dis_rep"))

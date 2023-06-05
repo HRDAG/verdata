@@ -29,8 +29,9 @@
 #' replicates_data <- read_replicates(local_dir, "reclutamiento", 1, 2, "parquet")
 #' tab_observed <- summary_observed("reclutamiento", replicates_data,
 #' strata_vars = "sexo", strata_vars_com = "yy_hecho",
-#' conflict_filter = TRUE, forced_dis = FALSE, edad_minors = TRUE,
-#' edad_na = TRUE)
+#' conflict_filter = TRUE, is_conflict_na = TRUE, forced_dis = FALSE,
+#' is_forced_dis_na = TRUE, edad_minors = TRUE, edad_na = FALSE, perp_na = FALSE,
+#' sexo_na = FALSE, municipio_na = FALSE, etnia_na = FALSE)
 #' tab_combine <- combine_replicates("reclutamiento", tab_observed,
 #' replicates_data, strata_vars_rep = 'sexo', conflict_filter = TRUE,
 #' forced_dis = FALSE, edad_minors = TRUE)
@@ -76,7 +77,7 @@ combine_replicates <- function(violation,
 
         logger::log_info("Filtering minors (< 18 years old)")
         prep_data <- prep_data %>%
-            dplyr::filter(edad_categoria == "De 0 a 4" | 
+            dplyr::filter(edad_categoria == "De 0 a 4" |
                           edad_categoria == "De 5 a 9" |
                           edad_categoria == "De 10 a 14" |
                           edad_categoria == "De 15 a 17")
