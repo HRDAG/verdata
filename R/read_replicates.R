@@ -21,11 +21,11 @@
 #'
 #' @examples
 #' local_dir <- system.file("extdata", "right",
-#' package = "verdata", "codata-reclutamiento-R1.csv.zip")
+#' package = "verdata", "verdata-reclutamiento-R1.csv.zip")
 #' read_replicate(local_dir, "csv")
 #' 
 #' local_dir <- system.file("extdata", "right",
-#' package = "verdata", "codata-reclutamiento-R1.parquet")
+#' package = "verdata", "verdata-reclutamiento-R1.parquet")
 #' read_replicate(local_dir, "parquet")
 #'
 #' @noRd

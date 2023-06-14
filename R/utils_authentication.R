@@ -49,7 +49,7 @@ medidas <- function(path) {
     edad <- df %>%
         dplyr::group_by(edad_categoria) %>%
         dplyr::summarise(valor = dplyr::n()) %>%
-        dplyr::filter(edad_categoria == "De 48 a 52 años") %>%
+        dplyr::filter(edad_categoria == "50-54") %>%
         dplyr::mutate(edad_categoria = as.character(edad_categoria)) %>%
         dplyr::rename(variable = edad_categoria) %>%
         dplyr::select(variable, valor)
@@ -79,7 +79,7 @@ medidas <- function(path) {
         dplyr::select(variable, valor)
 
     w_minor <- df %>%
-        dplyr::filter(sexo == "MUJER" & edad_categoria == "De 10 a 14 años") %>%
+        dplyr::filter(sexo == "MUJER" & edad_categoria == "10-14") %>%
         dplyr::group_by(sexo) %>%
         dplyr::summarise(valor = dplyr::n()) %>%
         dplyr::mutate(variable = dplyr::recode(sexo,

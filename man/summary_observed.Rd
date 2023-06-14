@@ -10,9 +10,15 @@ summary_observed(
   strata_vars_com = NULL,
   strata_vars = NULL,
   conflict_filter = TRUE,
-  forced_dis = TRUE,
-  edad_minors = TRUE,
-  edad_na = FALSE
+  is_conflict_na = TRUE,
+  forced_dis = FALSE,
+  is_forced_dis_na = FALSE,
+  edad_minors = FALSE,
+  edad_na = FALSE,
+  perp_na = FALSE,
+  sexo_na = FALSE,
+  municipio_na = FALSE,
+  etnia_na = FALSE
 )
 }
 \arguments{
@@ -29,13 +35,37 @@ had missing values}
 \item{conflict_filter}{Filter that indicates if the data is filtered by
 the rule "is_conflict" or not.}
 
+\item{is_conflict_na}{Filter that indicates if the data is filtered by observations
+(in "is_conflict") that was not imputed (original in the data) = TRUE, or if shows
+all observations (FALSE).}
+
 \item{forced_dis}{Filter that indicates if the data is filter by
 the rule "is_forced_dis" or not.}
+
+\item{is_forced_dis_na}{Filter that indicates if the data is filtered by observations
+(in "is_forced_dis") that was not imputed (original in the data) = TRUE, or if shows
+all observations (FALSE).}
 
 \item{edad_minors}{Optional filter by "edad" < 18.}
 
 \item{edad_na}{Filter that indicates if the data is filtered by observations
 (in "edad") that was not imputed (original in the data) = TRUE, or if shows
+all observations (FALSE).}
+
+\item{perp_na}{Filter that indicates if the data is filtered by observations
+(in "p_str") that was not imputed (original in the data) = TRUE, or if shows
+all observations (FALSE).}
+
+\item{sexo_na}{Filter that indicates if the data is filtered by observations
+(in "sexo") that was not imputed (original in the data) = TRUE, or if shows
+all observations (FALSE).}
+
+\item{municipio_na}{Filter that indicates if the data is filtered by observations
+(in "muni_code_hecho") that was not imputed (original in the data) = TRUE, or if shows
+all observations (FALSE).}
+
+\item{etnia_na}{Filter that indicates if the data is filtered by observations
+(in "etnia") that was not imputed (original in the data) = TRUE, or if shows
 all observations (FALSE).}
 }
 \value{
@@ -46,10 +76,11 @@ number of observations in each category.
 Summary observed data
 }
 \examples{
-local_dir <- system.file("extdata", "right", package = "verdata")
+local_dir <- system.file("extdata", "right", package = "rcodata")
 replicates_data <- read_replicates(local_dir, "reclutamiento", 1, 2, "parquet")
 tab_observed <- summary_observed("reclutamiento", replicates_data,
 strata_vars = "sexo", strata_vars_com = "yy_hecho",
-conflict_filter = TRUE, forced_dis = FALSE,
-edad_minors = TRUE, edad_na = TRUE)
+conflict_filter = TRUE, is_conflict_na = TRUE, forced_dis = FALSE,
+is_forced_dis_na = TRUE, edad_minors = TRUE, edad_na = FALSE, perp_na = FALSE,
+sexo_na = FALSE, municipio_na = FALSE, etnia_na = FALSE)
 }

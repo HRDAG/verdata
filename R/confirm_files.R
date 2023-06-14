@@ -21,7 +21,7 @@
 #'
 #' @examples
 #' local_dir_csv <- system.file("extdata", "right",
-#' "codata-reclutamiento-R1.csv.zip", package = "verdata")
+#' "verdata-reclutamiento-R1.csv.zip", package = "verdata")
 #' confirm_file(local_dir_csv, "csv")
 #'
 #' @noRd
