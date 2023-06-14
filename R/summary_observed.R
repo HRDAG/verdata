@@ -47,7 +47,7 @@
 #' @importFrom dplyr filter
 #'
 #' @examples
-#' local_dir <- system.file("extdata", "right", package = "rcodata")
+#' local_dir <- system.file("extdata", "right", package = "verdata")
 #' replicates_data <- read_replicates(local_dir, "reclutamiento", 1, 2, "parquet")
 #' tab_observed <- summary_observed("reclutamiento", replicates_data,
 #' strata_vars = "sexo", strata_vars_com = "yy_hecho",
@@ -81,10 +81,8 @@ summary_observed <- function(violation, data_rep, strata_vars_com = NULL,
 
         logger::log_info("Filtering minors (< 18 years old)")
         obs_tab <- obs_tab %>%
-            dplyr::filter(edad_categoria == "De 0 a 4" |
-                              edad_categoria == "De 5 a 9" |
-                              edad_categoria == "De 10 a 14" |
-                              edad_categoria == "De 15 a 17")
+          dplyr::filter(edad_jep == "INFANCIA" |
+                        edad_jep == "ADOLESCENCIA")
 
     } else {
 

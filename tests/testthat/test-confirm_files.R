@@ -4,9 +4,9 @@ t# ============================================
 # Copyright:   2022, HRDAG, GPL v2 or later
 # ============================================
 
-right_dir <- system.file("extdata", "right", package = "verdata", "codata-reclutamiento-R1.parquet")
-wrong_dir <- system.file("extdata", "wrong", package = "verdata", "codata-reclutamiento-R1.parquet")
-csv_right <- system.file("extdata", "right", package = "verdata", "codata-reclutamiento-R1.csv.zip")
+right_dir <- system.file("extdata", "right", package = "verdata", "verdata-reclutamiento-R1.parquet")
+wrong_dir <- system.file("extdata", "wrong", package = "verdata", "verdata-reclutamiento-R1.parquet")
+csv_right <- system.file("extdata", "right", package = "verdata", "verdata-reclutamiento-R1.csv.zip")
 
 testthat::test_that("Hashing file", {
 

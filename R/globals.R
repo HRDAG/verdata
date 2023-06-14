@@ -23,4 +23,4 @@ utils::globalVariables(c("replica","is_conflict","observed",
                          "is_conflict_na", "is_forced_dis_na", "perp_na",
                          "sexo_na", "municipio_na", "etnia_na", "p_str_imputed",
                          "sexo_imputed", "etnia_imputed", "muni_code_hecho_imputed",
-                         "is_conflict_dis_rep"))
+                         "is_conflict_dis_rep", "edad_jep", "edad_jep_imputed"))

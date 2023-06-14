@@ -4,7 +4,7 @@
 # Copyright:   2022, HRDAG, GPL v2 or later
 # ============================================
 
-local_dir <- system.file("extdata", "right", package = "rcodata")
+local_dir <- system.file("extdata", "right", package = "verdata")
 
 replicates_data <- read_replicates(local_dir, "reclutamiento", 1, 2, "parquet")
 
