@@ -1,7 +1,7 @@
 
 # ⚠️Under construction. Data not yet available. ⚠️
 
-Click [here](https://github.com/HRDAG/verdata/blob/main/README-en.md) for instructions in English.
+Click [here](https://github.com/HRDAG/verdata/blob/main/inst/docs/README-en.md) for instructions in English.
 
 <div class="columns">
 
