@@ -25,26 +25,9 @@ filter_standard_cev <- function(replicates, violation) {
         dplyr::mutate(p_str = as.character(p_str)) %>%
         dplyr::mutate(p_str = base::ifelse(yy_hecho > 2016 & p_str == "GUE-FARC",
                               "GUE-OTRO", p_str)) %>%
-        dplyr::mutate(edad_c = dplyr::case_when(edad_categoria == "0-4" ~ "MENOR",
-                                                edad_categoria == "5-9" ~ "MENOR",
-                                                edad_categoria == "10-14" ~ "MENOR",
-                                                edad_categoria == "15-19" ~ "MENOR",
-                                                edad_categoria == "20-24" ~ "ADULTO",
-                                                edad_categoria == "25-29" ~ "ADULTO",
-                                                edad_categoria == "30-34" ~ "ADULTO",
-                                                edad_categoria == "35-39" ~ "ADULTO",
-                                                edad_categoria == "40-44" ~ "ADULTO",
-                                                edad_categoria == "45-49" ~ "ADULTO",
-                                                edad_categoria == "50-54" ~ "ADULTO",
-                                                edad_categoria == "55-59" ~ "ADULTO",
-                                                edad_categoria == "60-64" ~ "ADULTO",
-                                                edad_categoria == "65-69" ~ "ADULTO",
-                                                edad_categoria == "70-74" ~ "ADULTO",
-                                                edad_categoria == "75-79" ~ "ADULTO",
-                                                edad_categoria == "80-84" ~ "ADULTO",
-                                                edad_categoria == "85-89" ~ "ADULTO",
-                                                edad_categoria == "90-94" ~ "ADULTO",
-                                                edad_categoria == "95+" ~ "ADULTO",
+        dplyr::mutate(edad_c = dplyr::case_when(edad_jep == "INFANCIA" ~ "MENOR",
+                                                edad_jep == "ADOLESCENCIA" ~ "MENOR",
+                                                edad_jep == "ADULTEZ" ~ "ADULTO",
                                                 TRUE ~ NA_character_)) %>%
         dplyr::mutate(edad_c_imputed = dplyr::if_else(edad_categoria_imputed == FALSE, FALSE, TRUE))
 
