@@ -9,13 +9,13 @@ lookup_estimates(stratum_recs, estimates_dir)
 \arguments{
 \item{stratum_recs}{A dataframe including all records in a stratum of interest.
 The dataframe should only include the source columns prefixed with \code{in_} and
-all columns should only contain 1s and 0s.}
+all columns should only contain 1's and 0's.}
 
 \item{estimates_dir}{File path for the folder containing pre-calculated
 estimates, if you would like to use pre-calculated results. Note, setting this
 option forces the model specification parameters to be identical to those used
-to calculate the pre-calculated estimates. If you would like to use a custom
-model specification, keep this argument \code{NULL}.}
+to calculate the pre-calculated estimates. Do not specify a file path If you
+would like to use a custom model specification.}
 }
 \value{
 A dataframe with one column, \code{N}, indicating the results. If the

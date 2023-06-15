@@ -14,13 +14,13 @@ indicating that an individual was not documented in the source.}
 
 \item{min_n}{The minimum number of records that must appear in a source to be
 considered valid for estimation. \code{min_n} should never be less than or equal
-to 0; the default is 1.}
+to 0; the default value is 1.}
 }
 \value{
 A character vector containing the names of the valid sources.
 }
 \description{
-Determine valid sources for estimation in a stratum of interest.
+Determine valid sources for estimation of a stratum of interest.
 }
 \examples{
 set.seed(19481210)

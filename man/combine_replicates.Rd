@@ -2,7 +2,7 @@
 % Please edit documentation in R/combine_replicates.R
 \name{combine_replicates}
 \alias{combine_replicates}
-\title{Combine replicates according to the Normal approximation using the laws of total expectation and variance}
+\title{Combine replicates according to the Normal approximation using the laws of total expectation and variance.}
 \usage{
 combine_replicates(
   violation,
@@ -15,32 +15,31 @@ combine_replicates(
 )
 }
 \arguments{
-\item{violation}{type of violation}
+\item{violation}{Violation to be analyzed. Options are "homicidio", "secuestro",
+"reclutamiento", and "desaparicion".}
 
-\item{data_obs}{Data frame that come from summary_observed's function}
+\item{data_obs}{Dataframe that results from applying summary_observed.}
 
-\item{data_rep}{Original data, not filter for is_conflict.}
+\item{data_rep}{Original data, not filtered by is_conflict.}
 
-\item{strata_vars_rep}{variable with all observations (without missing values)}
+\item{strata_vars_rep}{Variable with all observations (without missing values).}
 
-\item{conflict_filter}{Filter that indicates if the data is filter for
-the rule "is_conflict" or not.}
+\item{conflict_filter}{Filter that indicates if the data is filtered using
+the "is_conflict" rule.}
 
-\item{forced_dis}{Filter that indicates if the data is filter for
-the rule "is_forced_dis" or not.}
+\item{forced_dis}{Filter that indicates if the data is filtered using the
+"is_forced_dis" rule.}
 
-\item{edad_minors}{Optional filter by "edad" < 18.}
+\item{edad_minors}{Optional filter by age ("edad") < 18.}
 }
 \value{
-Data frame with 5 o more columns:
-\enumerate{
-\item Name of variable(s);
-2.# Observations that shows each variable's category;
-\item Confidence intervals (lower and upper) and median value imputed.
-}
+A dataframe with 5 or more columns: name of variable(s), \code{observed}
+the number of observations in each category for every variable, \code{imp_lo} the
+lower bound of the 95\% confidence interval, \code{imp_hi} the upper bound of the
+95\% confidence interval, and \code{imp_mean} the point estimate of the mean value.
 }
 \description{
-Combine replicates according to the Normal approximation using the laws of total expectation and variance
+Combine replicates according to the Normal approximation using the laws of total expectation and variance.
 }
 \examples{
 local_dir <- system.file("extdata", "right", package = "verdata")

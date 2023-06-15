@@ -4,22 +4,23 @@
 # Copyright:   2023, HRDAG, GPL v2 or later
 # ============================================
 
-#' Combine replicates according to the Normal approximation using the laws of total expectation and variance
+#' Combine replicates according to the Normal approximation using the laws of total expectation and variance.
 #'
-#' @param data_obs Data frame that come from summary_observed's function
-#' @param data_rep Original data, not filter for is_conflict.
-#' @param strata_vars_rep variable with all observations (without missing values)
-#' @param conflict_filter Filter that indicates if the data is filter for
-#' the rule "is_conflict" or not.
-#' @param violation type of violation
-#' @param forced_dis Filter that indicates if the data is filter for
-#' the rule "is_forced_dis" or not.
-#' @param edad_minors Optional filter by "edad" < 18.
+#' @param data_obs Dataframe that results from applying summary_observed.
+#' @param data_rep Original data, not filtered by is_conflict.
+#' @param strata_vars_rep Variable with all observations (without missing values).
+#' @param conflict_filter Filter that indicates if the data is filtered using
+#' the "is_conflict" rule.
+#' @param violation Violation to be analyzed. Options are "homicidio", "secuestro",
+#' "reclutamiento", and "desaparicion".
+#' @param forced_dis Filter that indicates if the data is filtered using the
+#' "is_forced_dis" rule.
+#' @param edad_minors Optional filter by age ("edad") < 18.
 #'
-#' @return Data frame with 5 o more columns:
-#' 1.  Name of variable(s);
-#' 2.# Observations that shows each variable's category;
-#' 3.  Confidence intervals (lower and upper) and median value imputed.
+#' @return A dataframe with 5 or more columns: name of variable(s), `observed`
+#' the number of observations in each category for every variable, `imp_lo` the
+#' lower bound of the 95% confidence interval, `imp_hi` the upper bound of the
+#' 95% confidence interval, and `imp_mean` the point estimate of the mean value.
 #'
 #' @export
 #' @importFrom dplyr %>%

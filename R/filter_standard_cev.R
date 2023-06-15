@@ -1,13 +1,14 @@
 # ============================================
 # Authors:     PA
-# Maintainers: PA
+# Maintainers: PA, MG
 # Copyright:   2023, HRDAG, GPL v2 or later
 # ============================================
 
-#' Filter to obtain the CEV's results - methodological document
+#' Filter records to replicate results presented in the CEV methodology report.
 #'
-#' @param replicates Data frame with the replicates
-#' @param violation Violation to be analyzed
+#' @param replicates Dataframe with data from all replicates to be filtered.
+#' @param violation Violation to be analyzed. Options are "homicidio", "secuestro",
+#' "reclutamiento", and "desaparicion"
 #'
 #' @return Data frame filter
 #' @export
@@ -21,10 +22,16 @@
 #'
 filter_standard_cev <- function(replicates, violation) {
 
+    if (!(violation %in% c("homicidio", "secuestro", "reclutamiento", "secuestro"))) {
+
+        stop("violation argument incorrectly specified")
+
+    }
+
     data_filter <- replicates %>%
         dplyr::mutate(p_str = as.character(p_str)) %>%
         dplyr::mutate(p_str = base::ifelse(yy_hecho > 2016 & p_str == "GUE-FARC",
-                              "GUE-OTRO", p_str)) %>%
+                                           "GUE-OTRO", p_str)) %>%
         dplyr::mutate(edad_c = dplyr::case_when(edad_jep == "INFANCIA" ~ "MENOR",
                                                 edad_jep == "ADOLESCENCIA" ~ "MENOR",
                                                 edad_jep == "ADULTEZ" ~ "ADULTO",
@@ -32,7 +39,7 @@ filter_standard_cev <- function(replicates, violation) {
         dplyr::mutate(edad_c_imputed = dplyr::if_else(edad_categoria_imputed == FALSE, FALSE, TRUE))
 
     if (violation == "desaparicion") {
-
+        # apply additional filters for desaparicion
         data_filter <- data_filter %>%
             dplyr::mutate(is_forced_dis = as.integer(is_forced_dis)) %>%
             dplyr::mutate(is_conflict = as.integer(is_conflict))
@@ -65,13 +72,12 @@ filter_standard_cev <- function(replicates, violation) {
                 is_forced_dis==0 | is_conflict==0 ~ 0,
                 is_forced_dis==1 & is_conflict==1 ~ 1))
 
+
     } else if (violation == "reclutamiento") {
+        # apply additional filters for reclutamiento
         data_filter <- data_filter %>%
             dplyr::filter(edad_jep == "INFANCIA" |
-                          edad_jep == "ADOLESCENCIA")
-    } else {
-
-        stop("There are no more violations")
+                              edad_jep == "ADOLESCENCIA")
     }
 
     return(data_filter)
