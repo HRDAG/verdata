@@ -31,7 +31,7 @@ testthat::test_that("Hashing wrong content with crash set to F", {
     testthat::expect_s3_class(read_replicate(wrong_dir, "parquet", F),
                               "data.frame")
     testthat::expect_warning(read_replicate(wrong_dir, "parquet", F), "The content of the files is not identical to the ones published.
-                This means the results of the analysis may potentially be inconsistent.")
+                The results of the analysis may be inconsistent.")
 
 })
 

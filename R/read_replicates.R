@@ -4,18 +4,18 @@
 # Copyright:   2022, HRDAG, GPL v2 or later
 # ============================================
 
-#' Read a replicate and hash its content to make sure it's identical to the one published
+#' Read a replicate and hash its contents to make sure it's identical to the one published.
 #'
 #' @param where_replicate Path to the replicate. The name of the file must include
-#' the violation in spanish and lower case letters (homicidio,
-#' secuestro, reclutamiento, desaparicion).
+#' the violation in Spanish and lower case letters (homicidio, secuestro,
+#' reclutamiento, desaparicion).
 #' @param crash A parameter to define whether the function should crash if the file
-#' is not idrntical to the one published. If crash = TRUE (default), data won't
-#' be loaded. If crash = FALSE, data will be loaded with a warning.
+#' is not identical to the one published. If crash = TRUE (default), the data won't
+#' be loaded. If crash = FALSE, the data will be loaded with a warning.
 #' @param file_extension Extension of the file to be read. Available options are
 #' "parquet" or "csv".
 #'
-#' @return A data frame, or an error or warning (depending on crash argument)
+#' @return A dataframe with the data from the indicated replicate.
 #'
 #' @importFrom dplyr %>%
 #'
@@ -93,7 +93,7 @@ read_replicate <- function(where_replicate, file_extension, crash = TRUE) {
         } else {
 
         warning("The content of the files is not identical to the ones published.
-                This means the results of the analysis may potentially be inconsistent.")
+                The results of the analysis may be inconsistent.")
         return(df)
 
         }
@@ -102,24 +102,24 @@ read_replicate <- function(where_replicate, file_extension, crash = TRUE) {
 
 }
 
-#' Read replicates in a path and make sure they are identical to the ones published
+#' Read replicates in a directory and verify they are identical to the ones published.
 #'
-#' @param rep_directory A file path for the folder in which the replicates are stored.
+#' @param rep_directory A file path for the directory where the replicates are stored.
 #' Then file name of each replicate must contain at least the name of the violation
-#' in spanish and lower case letters (homicidio, secuestro, reclutamiento, desaparicion),
-#' and the replicate number preceded by "R".
-#' @param violacion Violation being analyzed (homicidio, secuestro, reclutamiento,
-#' desaparicion).
+#' in Spanish and lower case letters (homicidio, secuestro, reclutamiento, desaparicion),
+#' and the replicate number preceded by "R", (e.g., "R1" for replicate 1).
+#' @param violacion A string indicating the violation being analyzed. Options are
+#' "homicidio", "secuestro", "reclutamiento", and "desaparicion".
 #' @param first_rep First replicate in the range of replicates to be analyzed.
 #' @param last_rep Last replicate in the range of replicates to be analyzed.
 #' @param file_extension Extension of the file to be read. Available options are
 #' "parquet" or "csv".
-#' @param crash A parameter to define whether the function should crash if the content
-#' of the file is not identical to the one published.
-#' If crash = TRUE (default), it will return error and not read the data,
-#' if crash = FALSE, the function will return a warning but still read the data.
+#' @param crash A parameter to define whether the function should crash if the
+#' content of the file is not identical to the one published. If crash = TRUE
+#' (default), it will return error and not read the data, if crash = FALSE, the
+#' function will return a warning but still read the data.
 #'
-#' @return A data frame or an error or warning (depending on crash)
+#' @return A dataframe with the data from all indicated replicates.
 #' @export
 #'
 #' @importFrom dplyr %>%
