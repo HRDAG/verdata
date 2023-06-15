@@ -77,10 +77,7 @@ combine_replicates <- function(violation,
 
         logger::log_info("Filtering minors (< 18 years old)")
         prep_data <- prep_data %>%
-            dplyr::filter(edad_categoria == "De 0 a 4" |
-                          edad_categoria == "De 5 a 9" |
-                          edad_categoria == "De 10 a 14" |
-                          edad_categoria == "De 15 a 17")
+            dplyr::filter(edad_jep == "INFANCIA" | edad_jep == "ADOLESCENCIA")
 
     } else {
 
