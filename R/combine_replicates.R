@@ -34,7 +34,7 @@
 #' sexo_na = FALSE, municipio_na = FALSE, etnia_na = FALSE)
 #' tab_combine <- combine_replicates("reclutamiento", tab_observed,
 #' replicates_data, strata_vars_rep = 'sexo', conflict_filter = TRUE,
-#' forced_dis = FALSE, edad_minors = TRUE)
+#' forced_dis = FALSE, edad_minors = FALSE)
 combine_replicates <- function(violation,
                                data_obs,
                                data_rep,
@@ -59,19 +59,15 @@ combine_replicates <- function(violation,
         }
 
     if (conflict_filter == TRUE) {
-
         prep_data <- data_rep %>%
             dplyr::mutate(is_conflict = as.integer(is_conflict)) %>%
             dplyr::filter(is_conflict == 1)
-
-        } else {
-
-            print("Not filter is_conflict = 1 in data_rep")
-
-            prep_data <- data_rep
-
-        }
-
+    } else {
+        print("Not filter is_conflict = 1 in the data")
+        pre_data <- data_rep %>%
+            dplyr::mutate(is_conflict = as.integer(is_conflict))
+    }
+    
 
     if (edad_minors == TRUE) {
 

@@ -63,20 +63,14 @@ summary_observed <- function(violation, data_rep, strata_vars_com = NULL,
                              etnia_na = FALSE) {
 
     if (conflict_filter == TRUE) {
-
         obs_tab <- data_rep %>%
             dplyr::mutate(is_conflict = as.integer(is_conflict)) %>%
             dplyr::filter(is_conflict == 1)
-
     } else {
-
         print("Not filter is_conflict = 1 in the data")
-
         obs_tab <- data_rep %>%
             dplyr::mutate(is_conflict = as.integer(is_conflict))
-
     }
-
     if (edad_minors == TRUE) {
 
         logger::log_info("Filtering minors (< 18 years old)")
