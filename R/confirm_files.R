@@ -9,8 +9,6 @@
 #' @param where_replicate File path to the replicates. The name
 #' of the files must include the violation in Spanish and lower case letters
 #' (homicidio, secuestro, reclutamiento, desaparicion)
-#' @param file_extension Extension of the file to be read. Available options are
-#' "parquet" or "csv".
 #
 #' @return "You have the right file!" message if the files are identical to the
 #' files published or error and "This file is not identical to the one published.
@@ -22,13 +20,16 @@
 #' @examples
 #' local_dir_csv <- system.file("extdata", "right",
 #' "verdata-reclutamiento-R1.csv.zip", package = "verdata")
-#' confirm_file(local_dir_csv, "csv")
+#' confirm_file(local_dir_csv)
 #'
 #' @noRd
-confirm_file <- function(where_replicate, file_extension) {
+confirm_file <- function(where_replicate) {
 
     violacion <- stringr::str_extract(pattern = "homicidio|desaparicion|secuestro|reclutamiento",
                                       where_replicate)
+    
+    file_extension <- stringr::str_extract(pattern = "parquet|csv",
+                                           where_replicate)
 
     hash_file <- dplyr::tibble(violacion = violacion,
                                replica = stringr::str_extract(pattern = ("(?:R)\\d+"),
@@ -45,7 +46,7 @@ confirm_file <- function(where_replicate, file_extension) {
                               violacion %in% hash_file$violacion)
 
 
-    } else {
+    } else if (file_extension == "csv") {
 
         file_test <- file_csv %>%
             dplyr::filter(replica %in% hash_file$replica &
@@ -101,8 +102,6 @@ confirm_file <- function(where_replicate, file_extension) {
 #' "reclutamiento", and "desaparicion".
 #' @param first_rep First replicate in the range of replicates to be analyzed
 #' @param last_rep Last replicate in the range of replicates to be analyzed.
-#' @param file_extension Extension of the file to be read. Available options are
-#' "parquet" or "csv".
 #'
 #' @return "You have the right file!" message if the files are identical to the
 #' files published or error and "This file is not identical to the one published.
@@ -114,13 +113,11 @@ confirm_file <- function(where_replicate, file_extension) {
 #'
 #' @examples
 #' local_dir <- system.file("extdata", "right", package = "verdata")
-#' confirm_files(local_dir, "reclutamiento", 1, 2, "parquet")
-confirm_files <- function(where_replicate, violacion, first_rep, last_rep,
-                          file_extension) {
+#' confirm_files(local_dir, "reclutamiento", 1, 2)
+confirm_files <- function(where_replicate, violacion, first_rep, last_rep) {
 
-    files <- build_path(where_replicate, violacion, first_rep, last_rep,
-                        file_extension)
-    purrr::walk(files, confirm_file, file_extension)
+    files <- build_path(where_replicate, violacion, first_rep, last_rep)
+    purrr::walk(files, confirm_file)
 
 }
 

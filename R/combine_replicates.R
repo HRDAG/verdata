@@ -27,7 +27,7 @@
 #'
 #' @examples
 #' local_dir <- system.file("extdata", "right", package = "verdata")
-#' replicates_data <- read_replicates(local_dir, "reclutamiento", 1, 2, "parquet")
+#' replicates_data <- read_replicates(local_dir, "reclutamiento", 1, 2)
 #' tab_observed <- summary_observed("reclutamiento", replicates_data,
 #' strata_vars = "sexo", strata_vars_com = "yy_hecho",
 #' conflict_filter = TRUE, is_conflict_na = TRUE, forced_dis = FALSE,

@@ -10,27 +10,27 @@ csv_right <- system.file("extdata", "right", package = "verdata", "verdata-reclu
 
 testthat::test_that("Hashing content", {
 
-    testthat::expect_s3_class(read_replicate(right_dir, "parquet"), "data.frame")
+    testthat::expect_s3_class(read_replicate(right_dir), "data.frame")
 
 })
 
 testthat::test_that("Hashing csv content", {
 
-    testthat::expect_s3_class(read_replicate(csv_right, "csv"), "data.frame")
+    testthat::expect_s3_class(read_replicate(csv_right), "data.frame")
 
 })
 
 testthat::test_that("Hashing wrong content with default crash", {
 
-    testthat::expect_error(read_replicate(wrong_dir, "parquet"))
+    testthat::expect_error(read_replicate(wrong_dir))
 
 })
 
 testthat::test_that("Hashing wrong content with crash set to F", {
 
-    testthat::expect_s3_class(read_replicate(wrong_dir, "parquet", F),
+    testthat::expect_s3_class(read_replicate(wrong_dir, F),
                               "data.frame")
-    testthat::expect_warning(read_replicate(wrong_dir, "parquet", F), "The content of the files is not identical to the ones published.
+    testthat::expect_warning(read_replicate(wrong_dir, F), "The content of the files is not identical to the ones published.
                 The results of the analysis may be inconsistent.")
 
 })
@@ -40,23 +40,19 @@ wrong_dir <- system.file("extdata", "wrong", package = "verdata")
 
 testthat::test_that("Hashing content of files", {
 
-    testthat::expect_s3_class(read_replicates(right_dir, "reclutamiento", 1, 2,
-                                              "parquet"), "data.frame")
+    testthat::expect_s3_class(read_replicates(right_dir, "reclutamiento", 1, 2), "data.frame")
 
 })
 
 testthat::test_that("Hashing content of wrong files with default crash", {
 
-    testthat::expect_error(read_replicates(wrong_dir, "reclutamiento", 1, 2,
-                                           "parquet"))
+    testthat::expect_error(read_replicates(wrong_dir, "reclutamiento", 1, 2))
 
 })
 
 testthat::test_that("Hashing content of wrong with crash set to F", {
-    testthat::expect_warning(read_replicates(wrong_dir, "reclutamiento", 1, 2,
-                                             "parquet", F))
-    testthat::expect_s3_class(read_replicates(wrong_dir, "reclutamiento", 1, 2,
-                                              "parquet", F), "data.frame")
+    testthat::expect_warning(read_replicates(wrong_dir, "reclutamiento", 1, 2, F))
+    testthat::expect_s3_class(read_replicates(wrong_dir, "reclutamiento", 1, 2, F), "data.frame")
 
 })
 

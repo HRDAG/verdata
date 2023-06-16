@@ -12,8 +12,6 @@
 #' @param crash A parameter to define whether the function should crash if the file
 #' is not identical to the one published. If crash = TRUE (default), the data won't
 #' be loaded. If crash = FALSE, the data will be loaded with a warning.
-#' @param file_extension Extension of the file to be read. Available options are
-#' "parquet" or "csv".
 #'
 #' @return A dataframe with the data from the indicated replicate.
 #'
@@ -22,17 +20,20 @@
 #' @examples
 #' local_dir <- system.file("extdata", "right",
 #' package = "verdata", "verdata-reclutamiento-R1.csv.zip")
-#' read_replicate(local_dir, "csv")
+#' read_replicate(local_dir)
 #' 
 #' local_dir <- system.file("extdata", "right",
 #' package = "verdata", "verdata-reclutamiento-R1.parquet")
-#' read_replicate(local_dir, "parquet")
+#' read_replicate(local_dir)
 #'
 #' @noRd
-read_replicate <- function(where_replicate, file_extension, crash = TRUE) {
+read_replicate <- function(where_replicate, crash = TRUE) {
 
     violacion <- stringr::str_extract(pattern = "homicidio|desaparicion|secuestro|reclutamiento",
                                       where_replicate)
+    
+    file_extension <- stringr::str_extract(pattern = "parquet|csv",
+                                           where_replicate)
 
     if (file_extension == "parquet") {
 
@@ -112,8 +113,6 @@ read_replicate <- function(where_replicate, file_extension, crash = TRUE) {
 #' "homicidio", "secuestro", "reclutamiento", and "desaparicion".
 #' @param first_rep First replicate in the range of replicates to be analyzed.
 #' @param last_rep Last replicate in the range of replicates to be analyzed.
-#' @param file_extension Extension of the file to be read. Available options are
-#' "parquet" or "csv".
 #' @param crash A parameter to define whether the function should crash if the
 #' content of the file is not identical to the one published. If crash = TRUE
 #' (default), it will return error and not read the data, if crash = FALSE, the
@@ -126,13 +125,12 @@ read_replicate <- function(where_replicate, file_extension, crash = TRUE) {
 #'
 #' @examples
 #' local_dir <- system.file("extdata", "right", package = "verdata")
-#' read_replicates(local_dir, "reclutamiento", 1, 2, "parquet")
+#' read_replicates(local_dir, "reclutamiento", 1, 2)
 read_replicates <- function(rep_directory, violacion, first_rep, last_rep,
-                            file_extension, crash = TRUE) {
+                            crash = TRUE) {
 
-    files <- build_path(rep_directory, violacion, first_rep, last_rep,
-                        file_extension)
-    df <- purrr::map_dfr(files, read_replicate, file_extension, crash)
+    files <- build_path(rep_directory, violacion, first_rep, last_rep)
+    df <- purrr::map_dfr(files, read_replicate, crash)
 
     return(df)
 

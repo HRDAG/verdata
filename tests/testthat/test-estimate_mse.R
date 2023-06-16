@@ -95,7 +95,7 @@ testthat::test_that("mse function returns correct results for estimable and non-
 testthat::test_that("mse function returns correct results when using lookup functionality", {
 
     local_dir <- system.file("extdata", "right", package = "verdata")
-    replicates <- read_replicates(local_dir, "reclutamiento", 1, 1, "csv")
+    replicates <- read_replicates(local_dir, "reclutamiento", 1, 1)
 
     estimates_dir <- system.file("extdata", "estimates", package = "verdata")
 

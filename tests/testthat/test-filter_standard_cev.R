@@ -6,7 +6,7 @@
 
 local_dir <- system.file("extdata", "right", package = "verdata")
 
-replicates_data <- read_replicates(local_dir, "reclutamiento", 1, 1, "parquet")
+replicates_data <- read_replicates(local_dir, "reclutamiento", 1, 1)
 expected <- filter_standard_cev(replicates_data, "reclutamiento")
 
 testthat::test_that("Function CEV works", {

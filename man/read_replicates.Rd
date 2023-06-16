@@ -4,14 +4,7 @@
 \alias{read_replicates}
 \title{Read replicates in a directory and verify they are identical to the ones published.}
 \usage{
-read_replicates(
-  rep_directory,
-  violacion,
-  first_rep,
-  last_rep,
-  file_extension,
-  crash = TRUE
-)
+read_replicates(rep_directory, violacion, first_rep, last_rep, crash = TRUE)
 }
 \arguments{
 \item{rep_directory}{A file path for the directory where the replicates are stored.
@@ -26,9 +19,6 @@ and the replicate number preceded by "R", (e.g., "R1" for replicate 1).}
 
 \item{last_rep}{Last replicate in the range of replicates to be analyzed.}
 
-\item{file_extension}{Extension of the file to be read. Available options are
-"parquet" or "csv".}
-
 \item{crash}{A parameter to define whether the function should crash if the
 content of the file is not identical to the one published. If crash = TRUE
 (default), it will return error and not read the data, if crash = FALSE, the
@@ -42,5 +32,5 @@ Read replicates in a directory and verify they are identical to the ones publish
 }
 \examples{
 local_dir <- system.file("extdata", "right", package = "verdata")
-read_replicates(local_dir, "reclutamiento", 1, 2, "parquet")
+read_replicates(local_dir, "reclutamiento", 1, 2)
 }

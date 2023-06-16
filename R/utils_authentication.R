@@ -157,17 +157,23 @@ medidas <- function(path) {
 #' "reclutamiento", and "desaparicion".
 #' @param first_rep First replicate in the range of replicates to be analyzed.
 #' @param last_rep Last replicate in the range of replicates to be analyzed.
-#' @param file_extension Extension of the file to be read. Options are
-#' "parquet" or "csv".
 #
 #' @return A dataframe with the path to the replicates, the replicate number,
 #' and violation type.
 #'
 #' @noRd
-build_path <- function(rep_directory, violacion, first_rep, last_rep,
-                       file_extension) {
+build_path <- function(rep_directory, violacion, first_rep, last_rep) {
 
     path <- list.files(path = rep_directory, full.names = TRUE)
+    
+    file_extension <- stringr::str_extract(pattern = "parque|csv",
+                                           rep_directory)
+    
+    if (is.na(file_extension)) {
+      
+      file_extension <- "parquet"
+    
+    }
 
     if (file_extension == "parquet") {
 

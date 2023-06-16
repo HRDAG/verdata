@@ -43,7 +43,7 @@ Combine replicates according to the Normal approximation using the laws of total
 }
 \examples{
 local_dir <- system.file("extdata", "right", package = "verdata")
-replicates_data <- read_replicates(local_dir, "reclutamiento", 1, 2, "parquet")
+replicates_data <- read_replicates(local_dir, "reclutamiento", 1, 2)
 tab_observed <- summary_observed("reclutamiento", replicates_data,
 strata_vars = "sexo", strata_vars_com = "yy_hecho",
 conflict_filter = TRUE, is_conflict_na = TRUE, forced_dis = FALSE,
@@ -51,5 +51,5 @@ is_forced_dis_na = TRUE, edad_minors = TRUE, edad_na = FALSE, perp_na = FALSE,
 sexo_na = FALSE, municipio_na = FALSE, etnia_na = FALSE)
 tab_combine <- combine_replicates("reclutamiento", tab_observed,
 replicates_data, strata_vars_rep = 'sexo', conflict_filter = TRUE,
-forced_dis = FALSE, edad_minors = TRUE)
+forced_dis = FALSE, edad_minors = FALSE)
 }

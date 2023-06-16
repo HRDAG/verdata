@@ -4,7 +4,7 @@
 \alias{confirm_files}
 \title{Confirm files are identical to the ones published.}
 \usage{
-confirm_files(where_replicate, violacion, first_rep, last_rep, file_extension)
+confirm_files(where_replicate, violacion, first_rep, last_rep)
 }
 \arguments{
 \item{where_replicate}{File path for the folder containing the replicates.
@@ -17,9 +17,6 @@ letters (homicidio, secuestro, reclutamiento, desaparicion)}
 \item{first_rep}{First replicate in the range of replicates to be analyzed}
 
 \item{last_rep}{Last replicate in the range of replicates to be analyzed.}
-
-\item{file_extension}{Extension of the file to be read. Available options are
-"parquet" or "csv".}
 }
 \value{
 "You have the right file!" message if the files are identical to the
@@ -32,5 +29,5 @@ Confirm files are identical to the ones published.
 }
 \examples{
 local_dir <- system.file("extdata", "right", package = "verdata")
-confirm_files(local_dir, "reclutamiento", 1, 2, "parquet")
+confirm_files(local_dir, "reclutamiento", 1, 2)
 }
