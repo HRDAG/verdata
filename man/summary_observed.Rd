@@ -2,7 +2,7 @@
 % Please edit documentation in R/summary_observed.R
 \name{summary_observed}
 \alias{summary_observed}
-\title{Summary observed data}
+\title{Summary statistics for observed data.}
 \usage{
 summary_observed(
   violation,
@@ -22,15 +22,16 @@ summary_observed(
 )
 }
 \arguments{
-\item{violation}{Violation to be analyzed}
+\item{violation}{Violation to be analyzed. Options are "homicidio", "secuestro",
+"reclutamiento", and "desaparicion".}
 
-\item{data_rep}{Data frame containing the replicates}
+\item{data_rep}{Data frame containing replicate data.}
 
 \item{strata_vars_com}{Variable that will be analyzed and does not have
-missing values (before imputation)}
+missing values (before imputation).}
 
-\item{strata_vars}{Variable to be analyzed - before imputation
-had missing values}
+\item{strata_vars}{Variable to be analyzed. Before imputation
+this variable may have missing values.}
 
 \item{conflict_filter}{Filter that indicates if the data is filtered by
 the rule "is_conflict" or not.}
@@ -46,10 +47,10 @@ the rule "is_forced_dis" or not.}
 (in "is_forced_dis") that was not imputed (original in the data) = TRUE, or if shows
 all observations (FALSE).}
 
-\item{edad_minors}{Optional filter by "edad" < 18.}
+\item{edad_minors}{Optional filter by age ("edad") < 18.}
 
 \item{edad_na}{Filter that indicates if the data is filtered by observations
-(in "edad") that was not imputed (original in the data) = TRUE, or if shows
+(in age "edad") that was not imputed (original in the data) = TRUE, or if shows
 all observations (FALSE).}
 
 \item{perp_na}{Filter that indicates if the data is filtered by observations
@@ -69,11 +70,11 @@ all observations (FALSE).}
 all observations (FALSE).}
 }
 \value{
-Data frame with two or more columns, 1: name of variable(s) and 2;
-number of observations in each category.
+Data frame with two or more columns, (1) name of variable(s) and (2)
+the number of observations in each variable's category.
 }
 \description{
-Summary observed data
+Summary statistics for observed data.
 }
 \examples{
 local_dir <- system.file("extdata", "right", package = "verdata")

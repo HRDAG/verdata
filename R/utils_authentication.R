@@ -4,12 +4,12 @@
 # Copyright:   2022, HRDAG, GPL v2 or later
 # ============================================
 
-#' Calculate measurements in order to make sure each replicate has the correct
-#' content
+#' Calculate measurements in order to make sure each replicate file has the correct
+#' content.
 #'
-#' @param path A string that contains a path to the replicate to be checked
+#' @param path A string that contains a path to the replicates to be checked.
 #'
-#' @return A dataframe with the results
+#' @return A dataframe with the results.
 #'
 #' @noRd
 medidas <- function(path) {
@@ -149,20 +149,19 @@ medidas <- function(path) {
 
 }
 
-#' Calculate measurements in order to make sure each replicate has the correct
-#' content
+#' Calculate measurements in order to ensure that each replicate file has the
+#' correct content.
 #'
-#' @param rep_directory A string that contains a path to the replicates to be checked
-#' @param violacion Violation being analyzed (homicidio, secuestro, reclutamiento,
-#' desaparicion)
-#' @param first_rep First replicate in the range of replicates to be analyzed
-#' @param last_rep Last replicate in the range of replicates to be analyzed
-#' @param file_extension Extension of the file to be read. Available options are
+#' @param rep_directory A string that contains a path for the replicates to be checked
+#' @param violacion Violation to be analyzed. Options are "homicidio", "secuestro",
+#' "reclutamiento", and "desaparicion".
+#' @param first_rep First replicate in the range of replicates to be analyzed.
+#' @param last_rep Last replicate in the range of replicates to be analyzed.
+#' @param file_extension Extension of the file to be read. Options are
 #' "parquet" or "csv".
 #
-#'
-#' @return A dataframe with the path to the replicates, the replicate number
-#' and violation
+#' @return A dataframe with the path to the replicates, the replicate number,
+#' and violation type.
 #'
 #' @noRd
 build_path <- function(rep_directory, violacion, first_rep, last_rep,

@@ -6,7 +6,7 @@
 
 #' @title get_valid_sources
 #'
-#' @description Determine valid sources for estimation in a stratum of interest.
+#' @description Determine valid sources for estimation of a stratum of interest.
 #'
 #' @param stratum_recs A dataframe with all records in a stratum of interest.
 #' Columns indicating sources should be prefixed with `in_` and should be numeric
@@ -14,7 +14,7 @@
 #' indicating that an individual was not documented in the source.
 #' @param min_n The minimum number of records that must appear in a source to be
 #' considered valid for estimation. `min_n` should never be less than or equal
-#' to 0; the default is 1.
+#' to 0; the default value is 1.
 #'
 #' @return A character vector containing the names of the valid sources.
 #' @export
@@ -48,11 +48,11 @@ get_valid_sources <- function(stratum_recs, min_n = 1) {
 
 #' @title run_lcmcr
 #'
-#' @description Calculate multiple systems estimation estimates using Bayesian
+#' @description Calculate multiple systems estimation estimates using the Bayesian
 #' Non-Parametric Latent-Class Capture-Recapture model developed by Daniel
 #' Manrique-Vallier (2016).
 #'
-#' @param stratum_recs A dataframe with all records in a stratum of interest
+#' @param stratum_recs A dataframe with all records in the stratum of interest
 #' documented by sources considered valid for estimation (i.e., there should be
 #' no rows with all 0's). Columns indicating sources should be prefixed with
 #' `in_` and should be numeric with 1 indicating that an individual was
@@ -61,7 +61,7 @@ get_valid_sources <- function(stratum_recs, min_n = 1) {
 #' @param stratum_name An identifier for the stratum.
 #' @param min_n The minimum number of records that must appear in a source to be
 #' considered valid for estimation. `min_n` should never be less than or equal to
-#' 0; the default is 1.
+#' 0; the default value is 1.
 #' @param K The maximum number of latent classes to fit.
 #' @param buffer_size Size of the tracing buffer.
 #' @param sampler_thinning Thinning interval for the tracing buffer.
@@ -69,10 +69,10 @@ get_valid_sources <- function(stratum_recs, min_n = 1) {
 #' @param burnin Number of burn in iterations.
 #' @param n_samples Number of samples to be generated. Samples are taken one
 #' every `posterior_thinning` iterations of the sampler. Final number of samples
-#' from the posterior is `n_samples` divided by 1000.
+#' from the posterior is `n_samples` divided by 1,000.
 #' @param posterior_thinning Thinning interval for the sampler.
 #'
-#' @return A dataframe with four columns and `n_samples` divided by 1000 rows.
+#' @return A dataframe with four columns and `n_samples` divided by 1,000 rows.
 #' `N` is the draws from the posterior distribution, `valid_sources` is a string
 #' indicating which sources were used in the estimation, `n_obs` is the number of
 #' observations in the stratum of interest, and  `stratum_name` is the stratum
@@ -112,7 +112,7 @@ run_lcmcr <- function(stratum_recs, stratum_name, min_n = 1,
 
     if (length(valid_sources) < 3) {
 
-        stop("Stratum not estimable, contains fewer than 3 valid sources")
+        stop("Stratum not estimable because it has fewer than 3 valid sources")
 
     }
 
@@ -154,12 +154,12 @@ run_lcmcr <- function(stratum_recs, stratum_name, min_n = 1,
 #'
 #' @param stratum_recs A dataframe including all records in a stratum of interest.
 #' The dataframe should only include the source columns prefixed with `in_` and
-#' all columns should only contain 1s and 0s.
+#' all columns should only contain 1's and 0's.
 #' @param estimates_dir File path for the folder containing pre-calculated
 #' estimates, if you would like to use pre-calculated results. Note, setting this
 #' option forces the model specification parameters to be identical to those used
-#' to calculate the pre-calculated estimates. If you would like to use a custom
-#' model specification, keep this argument `NULL`.
+#' to calculate the pre-calculated estimates. Do not specify a file path If you
+#' would like to use a custom model specification.
 #'
 #' @return A dataframe with one column, `N`, indicating the results. If the
 #' stratum was not found in the pre-calculated files, `N` will be `NA` and the
@@ -240,21 +240,21 @@ lookup_estimates <- function(stratum_recs, estimates_dir) {
 #' @param estimates_dir File path for the folder containing pre-calculated
 #' estimates, if you would like to use pre-calculated results. Note, setting this
 #' option forces the model specification parameters to be identical to those used
-#' to calculate the pre-calculated estimates. If you would like to use a custom
-#' model specification, keep this argument `NULL`.
+#' to calculate the pre-calculated estimates. Do not specify a file path If you
+#' would like to use a custom model specification.
 #' @param stratum_name An identifier for the stratum.
 #' @param min_n The minimum number of records that must appear in a source to be
 #' considered valid for estimation. `min_n` should never be less than or equal to
-#' 0; the default is 1.
+#' 0; the default value is 1.
 #' @param K The maximum number of latent classes to fit. By default the function
 #' will calculate `K` as the minimum value of 2^{number of valid sources} - 1 or 15.
-#' @param buffer_size Size of the tracing buffer. Default value is 10000.
-#' @param sampler_thinning Thinning interval for the tracing buffer. Default value is 1000.
+#' @param buffer_size Size of the tracing buffer. Default value is 10,000.
+#' @param sampler_thinning Thinning interval for the tracing buffer. Default value is 1,000.
 #' @param seed Integer seed for the internal random number generator. Default value is 19481210.
-#' @param burnin Number of burn in iterations. Default value is 10000.
+#' @param burnin Number of burn in iterations. Default value is 10,000.
 #' @param n_samples Number of samples to be generated. Samples are taken one
-#' every `posterior_thinning` iterations of the sampler. Default value is 10000.
-#' The final number of samples from the posterior is `n_samples` divided by 1000.
+#' every `posterior_thinning` iterations of the sampler. Default value is 10,000.
+#' The final number of samples from the posterior is `n_samples` divided by 1,000.
 #' @param posterior_thinning Thinning interval for the sampler. Default value is 500.
 #'
 #' @return A dataframe with five columns. `validated` is a logical value
@@ -264,7 +264,7 @@ lookup_estimates <- function(stratum_recs, estimates_dir) {
 #' the number of observations on valid lists in the stratum of interest (`NA` if
 #' the stratum is not estimable), and  `stratum_name` is a stratum identifier.
 #' If the stratum is estimable the return will consist of `n_samples` divided by
-#' 1000 rows.
+#' 1,000 rows.
 #' @export
 #' @importFrom dplyr "%>%"
 #'

@@ -17,7 +17,7 @@
 #' additional column `replicate` indicating which replicate the estimates were
 #' calculated on.
 #'
-#' @return A dataframe row with the estimation point estimate (`N_mean`) and the
+#' @return A dataframe row with the point estimate (`N_mean`) and the
 #' associated 95% uncertainty interval (lower bound is `N_025`, upper bound is
 #' `N_975`).
 #' @export
@@ -91,7 +91,7 @@ combine_estimates <- function(stratum_estimates) {
 
     if (num_replicates < 10) {
 
-        warning("stratums estimated on fewer than 10 replicates, results may be unreliable")
+        warning("stratum estimated with fewer than 10 replicates, results may be unreliable")
 
     }
 

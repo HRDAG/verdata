@@ -2,30 +2,29 @@
 % Please edit documentation in R/prop_obs_rep.R
 \name{prop_obs_rep}
 \alias{prop_obs_rep}
-\title{Function to obtain proportions of each
-variable after to use combine_replicates}
+\title{Calculate the proportions of each level of a variable after combining
+calculation using \code{combine_replicates} on observed and imputed values.}
 \usage{
 prop_obs_rep(data_obs_rep, strata_vars, na_obs = TRUE, digits = NULL)
 }
 \arguments{
-\item{data_obs_rep}{a data frame containing the observed and
-imputed values to be analyzed}
+\item{data_obs_rep}{A dataframe containing the observed and imputed values
+to be analyzed.}
 
-\item{strata_vars}{a vector of column names
-identifying the variables to be used as strata in the analysis.}
+\item{strata_vars}{A vector of column names identifying the variables to be
+used for stratification.}
 
-\item{na_obs}{a logical value indicating whether or not to include missing
-observations in the calculations (according to strata_vars).}
+\item{na_obs}{A logical value indicating whether or not to include missing
+observations in the calculations.}
 
-\item{digits}{Number of decimal places to round the proportion results to.}
+\item{digits}{Number of decimal places to round the results to.}
 }
 \value{
-Data frame that contains the proportions of each variable (from
-summary_observed and combine_replicates)
+A dataframe that contains the proportions of
 }
 \description{
-Function to obtain proportions of each
-variable after to use combine_replicates
+Calculate the proportions of each level of a variable after combining
+calculation using \code{combine_replicates} on observed and imputed values.
 }
 \examples{
 local_dir <- system.file("extdata", "right", package = "verdata")
@@ -34,7 +33,7 @@ tab_observed <- summary_observed("reclutamiento", replicates_data,
 strata_vars = "sexo", strata_vars_com = "yy_hecho",
 conflict_filter = TRUE, forced_dis = FALSE, edad_minors = TRUE)
 tab_combine <- combine_replicates("reclutamiento", tab_observed,
-replicates_data, strata_vars_rep = 'sexo', conflict_filter = TRUE,
+replicates_data, strata_vars_rep = "sexo", conflict_filter = TRUE,
 forced_dis = FALSE, edad_minors = TRUE)
 prop_data <- prop_obs_rep(tab_combine, "sexo", na_obs = TRUE, digits = 2)
 }

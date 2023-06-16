@@ -18,7 +18,7 @@ run_lcmcr(
 )
 }
 \arguments{
-\item{stratum_recs}{A dataframe with all records in a stratum of interest
+\item{stratum_recs}{A dataframe with all records in the stratum of interest
 documented by sources considered valid for estimation (i.e., there should be
 no rows with all 0's). Columns indicating sources should be prefixed with
 \code{in_} and should be numeric with 1 indicating that an individual was
@@ -29,7 +29,7 @@ documented in the source.}
 
 \item{min_n}{The minimum number of records that must appear in a source to be
 considered valid for estimation. \code{min_n} should never be less than or equal to
-0; the default is 1.}
+0; the default value is 1.}
 
 \item{K}{The maximum number of latent classes to fit.}
 
@@ -43,19 +43,19 @@ considered valid for estimation. \code{min_n} should never be less than or equal
 
 \item{n_samples}{Number of samples to be generated. Samples are taken one
 every \code{posterior_thinning} iterations of the sampler. Final number of samples
-from the posterior is \code{n_samples} divided by 1000.}
+from the posterior is \code{n_samples} divided by 1,000.}
 
 \item{posterior_thinning}{Thinning interval for the sampler.}
 }
 \value{
-A dataframe with four columns and \code{n_samples} divided by 1000 rows.
+A dataframe with four columns and \code{n_samples} divided by 1,000 rows.
 \code{N} is the draws from the posterior distribution, \code{valid_sources} is a string
 indicating which sources were used in the estimation, \code{n_obs} is the number of
 observations in the stratum of interest, and  \code{stratum_name} is the stratum
 identifier.
 }
 \description{
-Calculate multiple systems estimation estimates using Bayesian
+Calculate multiple systems estimation estimates using the Bayesian
 Non-Parametric Latent-Class Capture-Recapture model developed by Daniel
 Manrique-Vallier (2016).
 }

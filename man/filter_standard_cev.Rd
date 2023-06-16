@@ -2,20 +2,21 @@
 % Please edit documentation in R/filter_standard_cev.R
 \name{filter_standard_cev}
 \alias{filter_standard_cev}
-\title{Filter to obtain the CEV's results - methodological document}
+\title{Filter records to replicate results presented in the CEV methodology report.}
 \usage{
 filter_standard_cev(replicates, violation)
 }
 \arguments{
-\item{replicates}{Data frame with the replicates}
+\item{replicates}{Dataframe with data from all replicates to be filtered.}
 
-\item{violation}{Violation to be analyzed}
+\item{violation}{Violation to be analyzed. Options are "homicidio", "secuestro",
+"reclutamiento", and "desaparicion"}
 }
 \value{
 Data frame filter
 }
 \description{
-Filter to obtain the CEV's results - methodological document
+Filter records to replicate results presented in the CEV methodology report.
 }
 \examples{
 local_dir <- system.file("extdata", "right", package = "verdata")

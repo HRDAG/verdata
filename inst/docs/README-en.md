@@ -7,7 +7,7 @@ Haga clic [aquí](https://github.com/HRDAG/verdata/blob/main/README.md) para ins
 
 <div class="column" width="40%">
 
-<img src="man/figures/verdata_HEX_v2_249x288_transp.png" align="right" width="200" />
+<img src="../../man/figures/verdata_HEX_v2_249x288_transp.png" align="right" width="200" />
 
 </div>
 

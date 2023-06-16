@@ -14,7 +14,7 @@ additional column \code{replicate} indicating which replicate the estimates were
 calculated on.}
 }
 \value{
-A dataframe row with the estimation point estimate (\code{N_mean}) and the
+A dataframe row with the point estimate (\code{N_mean}) and the
 associated 95\% uncertainty interval (lower bound is \code{N_025}, upper bound is
 \code{N_975}).
 }

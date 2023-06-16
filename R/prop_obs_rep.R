@@ -4,19 +4,18 @@
 # Copyright:   2023, HRDAG, GPL v2 or later
 # ============================================
 
-#' Function to obtain proportions of each
-#' variable after to use combine_replicates
+#' Calculate the proportions of each level of a variable after combining
+#' calculation using `combine_replicates` on observed and imputed values.
 #'
-#' @param data_obs_rep a data frame containing the observed and
-#' imputed values to be analyzed
-#' @param strata_vars a vector of column names
-#' identifying the variables to be used as strata in the analysis.
-#' @param na_obs a logical value indicating whether or not to include missing
-#' observations in the calculations (according to strata_vars).
-#' @param digits Number of decimal places to round the proportion results to.
+#' @param data_obs_rep A dataframe containing the observed and imputed values
+#' to be analyzed.
+#' @param strata_vars A vector of column names identifying the variables to be
+#' used for stratification.
+#' @param na_obs A logical value indicating whether or not to include missing
+#' observations in the calculations.
+#' @param digits Number of decimal places to round the results to.
 #'
-#' @return Data frame that contains the proportions of each variable (from
-#' summary_observed and combine_replicates)
+#' @return A dataframe that contains the proportions of 
 #' @export
 #'
 #' @examples
@@ -26,7 +25,7 @@
 #' strata_vars = "sexo", strata_vars_com = "yy_hecho",
 #' conflict_filter = TRUE, forced_dis = FALSE, edad_minors = TRUE)
 #' tab_combine <- combine_replicates("reclutamiento", tab_observed,
-#' replicates_data, strata_vars_rep = 'sexo', conflict_filter = TRUE,
+#' replicates_data, strata_vars_rep = "sexo", conflict_filter = TRUE,
 #' forced_dis = FALSE, edad_minors = TRUE)
 #' prop_data <- prop_obs_rep(tab_combine, "sexo", na_obs = TRUE, digits = 2)
 prop_obs_rep <- function(data_obs_rep, strata_vars, na_obs = TRUE, digits = NULL){

@@ -2,17 +2,17 @@
 % Please edit documentation in R/confirm_files.R
 \name{confirm_files}
 \alias{confirm_files}
-\title{Confirm the files in a path are identical to the ones published}
+\title{Confirm files are identical to the ones published.}
 \usage{
 confirm_files(where_replicate, violacion, first_rep, last_rep, file_extension)
 }
 \arguments{
 \item{where_replicate}{File path for the folder containing the replicates.
-The name of the files must include the violation in spanish and lower case
+The name of the files must include the violation in Spanish and lower case
 letters (homicidio, secuestro, reclutamiento, desaparicion)}
 
-\item{violacion}{Violation being analyzed (homicidio, secuestro, reclutamiento,
-desaparicion)}
+\item{violacion}{Violation being analyzed. Options are "homicidio", "secuestro",
+"reclutamiento", and "desaparicion".}
 
 \item{first_rep}{First replicate in the range of replicates to be analyzed}
 
@@ -28,7 +28,7 @@ This means the results of the analysis may potentially be inconsistent." if
 they are not.
 }
 \description{
-Confirm the files in a path are identical to the ones published
+Confirm files are identical to the ones published.
 }
 \examples{
 local_dir <- system.file("extdata", "right", package = "verdata")

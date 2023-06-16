@@ -4,10 +4,10 @@
 # Copyright:   2022, HRDAG, GPL v2 or later
 # ============================================
 
-#' Confirm the file is the same as the one published
+#' Confirm a file is the same as the published version.
 #'
 #' @param where_replicate File path to the replicates. The name
-#' of the files must include the violation in spanish and lower case letters
+#' of the files must include the violation in Spanish and lower case letters
 #' (homicidio, secuestro, reclutamiento, desaparicion)
 #' @param file_extension Extension of the file to be read. Available options are
 #' "parquet" or "csv".
@@ -92,13 +92,13 @@ confirm_file <- function(where_replicate, file_extension) {
 }
 
 
-#' Confirm the files in a path are identical to the ones published
+#' Confirm files are identical to the ones published.
 #'
 #' @param where_replicate File path for the folder containing the replicates.
-#' The name of the files must include the violation in spanish and lower case
+#' The name of the files must include the violation in Spanish and lower case
 #' letters (homicidio, secuestro, reclutamiento, desaparicion)
-#' @param violacion Violation being analyzed (homicidio, secuestro, reclutamiento,
-#' desaparicion)
+#' @param violacion Violation being analyzed. Options are "homicidio", "secuestro",
+#' "reclutamiento", and "desaparicion".
 #' @param first_rep First replicate in the range of replicates to be analyzed
 #' @param last_rep Last replicate in the range of replicates to be analyzed.
 #' @param file_extension Extension of the file to be read. Available options are

@@ -4,21 +4,22 @@
 # Copyright:   2023, HRDAG, GPL v2 or later
 # ============================================
 
-#' Summary observed data
+#' Summary statistics for observed data.
 #'
-#' @param violation Violation to be analyzed
-#' @param data_rep Data frame containing the replicates
-#' @param strata_vars Variable to be analyzed - before imputation
-#' had missing values
+#' @param violation Violation to be analyzed. Options are "homicidio", "secuestro",
+#' "reclutamiento", and "desaparicion".
+#' @param data_rep Data frame containing replicate data.
+#' @param strata_vars Variable to be analyzed. Before imputation
+#' this variable may have missing values.
 #' @param conflict_filter Filter that indicates if the data is filtered by
 #' the rule "is_conflict" or not.
 #' @param forced_dis Filter that indicates if the data is filter by
 #' the rule "is_forced_dis" or not.
 #' @param strata_vars_com Variable that will be analyzed and does not have
-#' missing values (before imputation)
-#' @param edad_minors Optional filter by "edad" < 18.
+#' missing values (before imputation).
+#' @param edad_minors Optional filter by age ("edad") < 18.
 #' @param edad_na Filter that indicates if the data is filtered by observations
-#' (in "edad") that was not imputed (original in the data) = TRUE, or if shows
+#' (in age "edad") that was not imputed (original in the data) = TRUE, or if shows
 #' all observations (FALSE).
 #' @param perp_na Filter that indicates if the data is filtered by observations
 #' (in "p_str") that was not imputed (original in the data) = TRUE, or if shows
@@ -39,8 +40,8 @@
 #' (in "is_forced_dis") that was not imputed (original in the data) = TRUE, or if shows
 #' all observations (FALSE).
 #'
-#' @return Data frame with two or more columns, 1: name of variable(s) and 2;
-#' number of observations in each category.
+#' @return Data frame with two or more columns, (1) name of variable(s) and (2)
+#' the number of observations in each variable's category.
 #' @export
 #' @importFrom dplyr if_else
 #' @importFrom dplyr %>%

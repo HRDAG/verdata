@@ -27,27 +27,27 @@ Columns indicating sources should be prefixed with \code{in_} and should be nume
 \item{estimates_dir}{File path for the folder containing pre-calculated
 estimates, if you would like to use pre-calculated results. Note, setting this
 option forces the model specification parameters to be identical to those used
-to calculate the pre-calculated estimates. If you would like to use a custom
-model specification, keep this argument \code{NULL}.}
+to calculate the pre-calculated estimates. Do not specify a file path If you
+would like to use a custom model specification.}
 
 \item{min_n}{The minimum number of records that must appear in a source to be
 considered valid for estimation. \code{min_n} should never be less than or equal to
-0; the default is 1.}
+0; the default value is 1.}
 
 \item{K}{The maximum number of latent classes to fit. By default the function
 will calculate \code{K} as the minimum value of 2^{number of valid sources} - 1 or 15.}
 
-\item{buffer_size}{Size of the tracing buffer. Default value is 10000.}
+\item{buffer_size}{Size of the tracing buffer. Default value is 10,000.}
 
-\item{sampler_thinning}{Thinning interval for the tracing buffer. Default value is 1000.}
+\item{sampler_thinning}{Thinning interval for the tracing buffer. Default value is 1,000.}
 
 \item{seed}{Integer seed for the internal random number generator. Default value is 19481210.}
 
-\item{burnin}{Number of burn in iterations. Default value is 10000.}
+\item{burnin}{Number of burn in iterations. Default value is 10,000.}
 
 \item{n_samples}{Number of samples to be generated. Samples are taken one
-every \code{posterior_thinning} iterations of the sampler. Default value is 10000.
-The final number of samples from the posterior is \code{n_samples} divided by 1000.}
+every \code{posterior_thinning} iterations of the sampler. Default value is 10,000.
+The final number of samples from the posterior is \code{n_samples} divided by 1,000.}
 
 \item{posterior_thinning}{Thinning interval for the sampler. Default value is 500.}
 }
@@ -59,7 +59,7 @@ is a string indicating which sources were used in the estimation, \code{n_obs} i
 the number of observations on valid lists in the stratum of interest (\code{NA} if
 the stratum is not estimable), and  \code{stratum_name} is a stratum identifier.
 If the stratum is estimable the return will consist of \code{n_samples} divided by
-1000 rows.
+1,000 rows.
 }
 \description{
 Prepare data for estimation and calculate estimates using \code{run_lcmcr}.
