@@ -119,6 +119,9 @@ combine_replicates <- function(violation,
         dplyr::select(all_of({{strata_vars_rep}}), lower_ci, theta, upper_ci) %>%
         dplyr::rename(imp_mean = theta, imp_lo = lower_ci, imp_hi = upper_ci)
 
+    data_obs <- data_obs %>% 
+        dplyr::mutate(dplyr::across(all_of(strata_vars_rep), as.character)) 
+    
     final_data <- dplyr::full_join(rep_data, data_obs, by = {{strata_vars_rep}}) %>%
         dplyr::mutate(imp_lo = dplyr::if_else(imp_lo < observed,
                                               observed, imp_lo))
