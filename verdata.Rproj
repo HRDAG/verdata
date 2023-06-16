@@ -1,33 +1,17 @@
 Version: 1.0
 
-<<<<<<< HEAD
 RestoreWorkspace: Default
 SaveWorkspace: Default
 AlwaysSaveHistory: Default
 
 EnableCodeIndexing: Yes
 UseSpacesForTab: Yes
-NumSpacesForTab: 4
-=======
-RestoreWorkspace: No
-SaveWorkspace: No
-AlwaysSaveHistory: No
-
-EnableCodeIndexing: Yes
-UseSpacesForTab: Yes
 NumSpacesForTab: 2
->>>>>>> 978a7d0 (New hashes)
 Encoding: UTF-8
 
 RnwWeave: Sweave
 LaTeX: pdfLaTeX
 
-<<<<<<< HEAD
-AutoAppendNewline: Yes
-StripTrailingWhitespace: Yes
-
-=======
->>>>>>> 978a7d0 (New hashes)
 BuildType: Package
 PackageUseDevtools: Yes
 PackageInstallArgs: --no-multiarch --with-keep.source
