@@ -6,29 +6,21 @@
 \usage{
 summary_observed(
   violation,
-  data_rep,
-  strata_vars_com = NULL,
+  replicates_df,
   strata_vars = NULL,
-  conflict_filter = TRUE,
-  is_conflict_na = TRUE,
-  forced_dis = FALSE,
-  is_forced_dis_na = FALSE,
-  edad_minors = FALSE,
-  edad_na = FALSE,
-  perp_na = FALSE,
-  sexo_na = FALSE,
-  municipio_na = FALSE,
-  etnia_na = FALSE
+  conflict_filter = FALSE,
+  forced_dis_filter = FALSE,
+  edad_minors_filter = FALSE,
+  include_props = TRUE,
+  prop_obs_na = FALSE,
+  digits = NULL
 )
 }
 \arguments{
 \item{violation}{Violation to be analyzed. Options are "homicidio", "secuestro",
 "reclutamiento", and "desaparicion".}
 
-\item{data_rep}{Data frame containing replicate data.}
-
-\item{strata_vars_com}{Variable that will be analyzed and does not have
-missing values (before imputation).}
+\item{replicates_df}{Data frame containing replicate data.}
 
 \item{strata_vars}{Variable to be analyzed. Before imputation
 this variable may have missing values.}
@@ -36,38 +28,18 @@ this variable may have missing values.}
 \item{conflict_filter}{Filter that indicates if the data is filtered by
 the rule "is_conflict" or not.}
 
-\item{is_conflict_na}{Filter that indicates if the data is filtered by observations
-(in "is_conflict") that was not imputed (original in the data) = TRUE, or if shows
-all observations (FALSE).}
-
-\item{forced_dis}{Filter that indicates if the data is filter by
+\item{forced_dis_filter}{Filter that indicates if the data is filter by
 the rule "is_forced_dis" or not.}
 
-\item{is_forced_dis_na}{Filter that indicates if the data is filtered by observations
-(in "is_forced_dis") that was not imputed (original in the data) = TRUE, or if shows
-all observations (FALSE).}
+\item{edad_minors_filter}{Optional filter by age ("edad") < 18.}
 
-\item{edad_minors}{Optional filter by age ("edad") < 18.}
+\item{include_props}{A logical value indicating whether or not to include
+the proportions from the calculations.}
 
-\item{edad_na}{Filter that indicates if the data is filtered by observations
-(in age "edad") that was not imputed (original in the data) = TRUE, or if shows
-all observations (FALSE).}
+\item{prop_obs_na}{A logical value indicating whether or not to include missing
+observations in the calculations.}
 
-\item{perp_na}{Filter that indicates if the data is filtered by observations
-(in "p_str") that was not imputed (original in the data) = TRUE, or if shows
-all observations (FALSE).}
-
-\item{sexo_na}{Filter that indicates if the data is filtered by observations
-(in "sexo") that was not imputed (original in the data) = TRUE, or if shows
-all observations (FALSE).}
-
-\item{municipio_na}{Filter that indicates if the data is filtered by observations
-(in "muni_code_hecho") that was not imputed (original in the data) = TRUE, or if shows
-all observations (FALSE).}
-
-\item{etnia_na}{Filter that indicates if the data is filtered by observations
-(in "etnia") that was not imputed (original in the data) = TRUE, or if shows
-all observations (FALSE).}
+\item{digits}{Number of decimal places to round the results to.}
 }
 \value{
 Data frame with two or more columns, (1) name of variable(s) and (2)
@@ -78,10 +50,9 @@ Summary statistics for observed data.
 }
 \examples{
 local_dir <- system.file("extdata", "right", package = "verdata")
-replicates_data <- read_replicates(local_dir, "reclutamiento", 1, 2, "parquet")
+replicates_data <- read_replicates(local_dir, "reclutamiento", 1, 2)
 tab_observed <- summary_observed("reclutamiento", replicates_data,
-strata_vars = "sexo", strata_vars_com = "yy_hecho",
-conflict_filter = TRUE, is_conflict_na = TRUE, forced_dis = FALSE,
-is_forced_dis_na = TRUE, edad_minors = TRUE, edad_na = FALSE, perp_na = FALSE,
-sexo_na = FALSE, municipio_na = FALSE, etnia_na = FALSE)
+strata_vars = "sexo", conflict_filter = FALSE, forced_dis_filter = FALSE, 
+edad_minors_filter = FALSE, include_props = FALSE, prop_obs_na = FALSE, 
+digits = 2)
 }

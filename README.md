@@ -35,7 +35,7 @@ devtools::install_github("HRDAG/verdata")
 ## Uso
 
 Para el uso de este paquete es necesario haber descargado los datos previamente de alguno de los sitios en los
-que se encuentran publicados. Este paquete ofrece al público 8 funciones para el tratamiento de los datos:
+que se encuentran publicados. Este paquete ofrece al público 7 funciones para el tratamiento de los datos:
 
 1. La función `confirm_files` permite autenticar que los archivos descargados correspondan exactamente a los
 archivos originalmente publicados.
@@ -55,10 +55,7 @@ diferentes réplicas.
 
 5. La función `combine_replicates` usa la aproximación normal usando las reglas de total expectativa y varianza para combinar las réplicas, lo que permite obtener un intervalo de la imputación. Ver sección 18.2 de [*Bayesian Data Analysis*](http://www.stat.columbia.edu/~gelman/book/) para más información.
 
-6. el uso de la función `prop_obs_rep` es opcional y permite obtener las proporciones de los datos para las variables por
-las que se agrupó.
-
-7. La función `mse` permite hacer estimaciones del subregistro, usando el modelo de [LCMCR](https://onlinelibrary.wiley.com/doi/10.1111/biom.12502) (ver sección 6 del [informe metódologico del proyecto](https://www.comisiondelaverdad.co/sites/default/files/descargables/2022-08/04_Anexo_Proyecto_JEP_CEV_HRDAG_08022022.pdf)).
+6. La función `mse` permite hacer estimaciones del subregistro, usando el modelo de [LCMCR](https://onlinelibrary.wiley.com/doi/10.1111/biom.12502) (ver sección 6 del [informe metódologico del proyecto](https://www.comisiondelaverdad.co/sites/default/files/descargables/2022-08/04_Anexo_Proyecto_JEP_CEV_HRDAG_08022022.pdf)).
 Para usar esta función es necesario haber definido variables de estratificación, es decir, agrupación, para hacer la estimación
 y haber hecho la estratificación (ver ejemplo y sección 8.4.2 del [informe metódologico del proyecto](https://www.comisiondelaverdad.co/sites/default/files/descargables/2022-08/04_Anexo_Proyecto_JEP_CEV_HRDAG_08022022.pdf)).
 Además, considerando que la estimación requiere de tiempo y recursos computacionales, en caso de querer hacer uso de las
@@ -67,5 +64,5 @@ los datos ya estratificados y el directorio en el que se encuentran las estimaci
 de estas. Tenga presente que al proveer un directorio la función asume las mismas especificaciones para el modelo usadas en el
 proyecto. Si usted quiere usar otras especificaciones, no debe suministrar un directorio a las estimaciones.
 
-8. Por último, la función `combine_estimates` permite combinar los resultados de la estimación, lo que, una vez más, dará como
+7. Por último, la función `combine_estimates` permite combinar los resultados de la estimación, lo que, una vez más, dará como
 resultado un intervalo (que incluye la media). Usa la aproximación normal usando las reglas de total expectativa y varianza. Ver sección 18.2 de [*Bayesian Data Analysis*](http://www.stat.columbia.edu/~gelman/book/) para más información.

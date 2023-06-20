@@ -7,7 +7,9 @@
 local_dir <- system.file("extdata", "right", package = "verdata")
 
 replicates_data <- read_replicates(local_dir, "reclutamiento", 1, 2)
-replicates_data_filter <- filter_standard_cev(replicates_data, "reclutamiento")
+replicates_data_filter <- filter_standard_cev(replicates_data, 
+                                              "reclutamiento", 
+                                              perp_change = TRUE)
 
 testthat::test_that("The table must have the same observations to CEV document", {
 
@@ -20,15 +22,10 @@ testthat::test_that("The table must have the same observations to CEV document",
                                      replicates_data_filter,
                                      strata_vars = "sexo",
                                      conflict_filter = TRUE,
-                                     is_conflict_na = TRUE,
-                                     forced_dis = FALSE,
-                                     is_forced_dis_na = TRUE,
-                                     edad_minors = TRUE,
-                                     edad_na = TRUE,
-                                     perp_na = FALSE,
-                                     sexo_na = FALSE,
-                                     municipio_na = FALSE,
-                                     etnia_na = FALSE)
+                                     forced_dis_filter = FALSE,
+                                     edad_minors_filter = TRUE,
+                                     include_props = FALSE,
+                                     prop_obs_na = FALSE)
 
     testthat::expect_identical(tab_observed$observed, tab_cev$observed)
 
@@ -38,21 +35,14 @@ testthat::test_that("The table must have the same observations to CEV document",
 testthat::test_that("This function works with more than one strata", {
 
     testthat::expect_no_error(
-        mtab_observed <- summary_observed("reclutamiento",
-                                          replicates_data_filter,
-                                          strata_vars = c("sexo", "etnia"),
-                                          strata_vars_com = c("yy_hecho",
-                                                              "dept_code_hecho"),
-                                          conflict_filter = TRUE,
-                                          is_conflict_na = TRUE,
-                                          forced_dis = FALSE,
-                                          is_forced_dis_na = TRUE,
-                                          edad_minors = TRUE,
-                                          edad_na = TRUE,
-                                          perp_na = FALSE,
-                                          sexo_na = FALSE,
-                                          municipio_na = FALSE,
-                                          etnia_na = FALSE))
+      tab_observed <- summary_observed("reclutamiento",
+                                       replicates_data_filter,
+                                       strata_vars = c("sexo", "yy_hecho"),
+                                       conflict_filter = TRUE,
+                                       forced_dis_filter = FALSE,
+                                       edad_minors_filter = TRUE,
+                                       include_props = FALSE,
+                                       prop_obs_na = FALSE))
 
 })
 
@@ -60,19 +50,14 @@ testthat::test_that("This function works with more than one strata", {
 testthat::test_that("This function works with strata does not have missing values", {
 
     testthat::expect_no_error(
-        dtab_observed <- summary_observed("reclutamiento",
+        tab_observed <- summary_observed("reclutamiento",
                                           replicates_data_filter,
-                                          strata_vars_com = "dept_code_hecho",
+                                          strata_vars = "dept_code_hecho",
                                           conflict_filter = TRUE,
-                                          is_conflict_na = TRUE,
-                                          forced_dis = FALSE,
-                                          is_forced_dis_na = TRUE,
-                                          edad_minors = TRUE,
-                                          edad_na = TRUE,
-                                          perp_na = FALSE,
-                                          sexo_na = FALSE,
-                                          municipio_na = FALSE,
-                                          etnia_na = FALSE))
+                                          forced_dis_filter = FALSE,
+                                          edad_minors_filter = TRUE,
+                                          include_props = FALSE,
+                                          prop_obs_na = FALSE))
 })
 
 
@@ -80,19 +65,14 @@ testthat::test_that("This function works with strata does not have missing value
 testthat::test_that("This function works with more than one strata that has missing values", {
 
     testthat::expect_no_error(
-        strata_tab_observed <- summary_observed("reclutamiento",
-                                                replicates_data_filter,
-                                                strata_vars = c("p_str", "etnia"),
-                                                conflict_filter = TRUE,
-                                                is_conflict_na = TRUE,
-                                                forced_dis = FALSE,
-                                                is_forced_dis_na = TRUE,
-                                                edad_minors = TRUE,
-                                                edad_na = TRUE,
-                                                perp_na = FALSE,
-                                                sexo_na = FALSE,
-                                                municipio_na = FALSE,
-                                                etnia_na = FALSE))
+        tab_observed <- summary_observed("reclutamiento",
+                                         replicates_data_filter,
+                                         strata_vars = c("p_str", "etnia"),
+                                         conflict_filter = TRUE,
+                                         forced_dis_filter = FALSE,
+                                         edad_minors_filter = TRUE,
+                                         include_props = FALSE,
+                                         prop_obs_na = FALSE))
 })
 
 testthat::test_that("This function works with more than one strata that does not has missing values", {
@@ -100,17 +80,59 @@ testthat::test_that("This function works with more than one strata that does not
     testthat::expect_no_error(
         strata_tab_observed <- summary_observed("reclutamiento",
                                                 replicates_data_filter,
-                                                strata_vars_com = c("yy_hecho", "dept_code_hecho"),
+                                                strata_vars = c("yy_hecho", "dept_code_hecho"),
                                                 conflict_filter = TRUE,
-                                                is_conflict_na = TRUE,
-                                                forced_dis = FALSE,
-                                                is_forced_dis_na = TRUE,
-                                                edad_minors = TRUE,
-                                                edad_na = TRUE,
-                                                perp_na = FALSE,
-                                                sexo_na = FALSE,
-                                                municipio_na = FALSE,
-                                                etnia_na = FALSE))
+                                                forced_dis_filter = FALSE,
+                                                edad_minors_filter = TRUE,
+                                                include_props = FALSE,
+                                                prop_obs_na = FALSE))
+})
+
+testthat::test_that("Confirm sum = 1 in observed", {
+  
+  tab_observed <- summary_observed("reclutamiento",
+                                   replicates_data_filter,
+                                   strata_vars = "etnia",
+                                   conflict_filter = TRUE,
+                                   forced_dis_filter = FALSE,
+                                   edad_minors_filter = TRUE,
+                                   include_props = TRUE,
+                                   prop_obs_na = TRUE,
+                                   digits = 2)
+
+testthat::expect_equal(sum(tab_observed$obs_prop_na), 1)
+
+})
+
+testthat::test_that("Works with any digit", {
+  
+  
+  tab_observed <- summary_observed("reclutamiento",
+                                   replicates_data_filter,
+                                   strata_vars = "sexo",
+                                   conflict_filter = TRUE,
+                                   forced_dis_filter = FALSE,
+                                   edad_minors_filter = TRUE,
+                                   include_props = TRUE,
+                                   prop_obs_na = TRUE,
+                                   digits = 6)
+  
+  testthat::expect_equal(round(sum(tab_observed$obs_prop_na), 6), round(1, 6))
+  
+})
+
+testthat::test_that("The function works without digist", {
+  
+  testthat::expect_no_error(
+    tab_observed <- summary_observed("reclutamiento",
+                                     replicates_data_filter,
+                                     strata_vars = c("sexo", "yy_hecho"),
+                                     conflict_filter = TRUE,
+                                     forced_dis_filter = FALSE,
+                                     edad_minors_filter = TRUE,
+                                     include_props = TRUE,
+                                     prop_obs_na = TRUE))
+  
 })
 
 # --- Done

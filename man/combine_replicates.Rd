@@ -6,31 +6,38 @@
 \usage{
 combine_replicates(
   violation,
-  data_obs,
-  data_rep,
-  strata_vars_rep,
+  tab_observed,
+  replicates_df,
+  strata_vars,
   conflict_filter = TRUE,
-  forced_dis = FALSE,
-  edad_minors = FALSE
+  forced_dis_filter = FALSE,
+  edad_minors_filter = FALSE,
+  include_props = FALSE,
+  digits = NULL
 )
 }
 \arguments{
 \item{violation}{Violation to be analyzed. Options are "homicidio", "secuestro",
-"reclutamiento", and "desaparicion".}
+"reclutamiento" and "desaparicion".}
 
-\item{data_obs}{Dataframe that results from applying summary_observed.}
+\item{tab_observed}{Dataframe that results from applying \code{summary_observed}.}
 
-\item{data_rep}{Original data, not filtered by is_conflict.}
+\item{replicates_df}{Data frame containing replicates data.}
 
-\item{strata_vars_rep}{Variable with all observations (without missing values).}
+\item{strata_vars}{Variable with all observations (without missing values).}
 
 \item{conflict_filter}{Filter that indicates if the data is filtered using
 the "is_conflict" rule.}
 
-\item{forced_dis}{Filter that indicates if the data is filtered using the
+\item{forced_dis_filter}{Filter that indicates if the data is filtered using the
 "is_forced_dis" rule.}
 
-\item{edad_minors}{Optional filter by age ("edad") < 18.}
+\item{edad_minors_filter}{Optional filter by age ("edad") < 18.}
+
+\item{include_props}{A logical value indicating whether or not to include
+the proportions from the calculations before to merge with summary_observed's output}
+
+\item{digits}{Number of decimal places to round the results to.}
 }
 \value{
 A dataframe with 5 or more columns: name of variable(s), \code{observed}
@@ -45,11 +52,10 @@ Combine replicates according to the Normal approximation using the laws of total
 local_dir <- system.file("extdata", "right", package = "verdata")
 replicates_data <- read_replicates(local_dir, "reclutamiento", 1, 2)
 tab_observed <- summary_observed("reclutamiento", replicates_data,
-strata_vars = "sexo", strata_vars_com = "yy_hecho",
-conflict_filter = TRUE, is_conflict_na = TRUE, forced_dis = FALSE,
-is_forced_dis_na = TRUE, edad_minors = TRUE, edad_na = FALSE, perp_na = FALSE,
-sexo_na = FALSE, municipio_na = FALSE, etnia_na = FALSE)
+strata_vars = "sexo", conflict_filter = FALSE, forced_dis_filter = FALSE, 
+edad_minors_filter = FALSE, include_props = FALSE, prop_obs_na = FALSE, 
+digits = 2)
 tab_combine <- combine_replicates("reclutamiento", tab_observed,
-replicates_data, strata_vars_rep = 'sexo', conflict_filter = TRUE,
-forced_dis = FALSE, edad_minors = FALSE)
+replicates_data, strata_vars = 'sexo', conflict_filter = TRUE,
+forced_dis_filter = FALSE, edad_minors_filter = FALSE, include_props = TRUE)
 }

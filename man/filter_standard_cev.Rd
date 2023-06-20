@@ -4,13 +4,17 @@
 \alias{filter_standard_cev}
 \title{Filter records to replicate results presented in the CEV methodology report.}
 \usage{
-filter_standard_cev(replicates, violation)
+filter_standard_cev(replicates, violation, perp_change = TRUE)
 }
 \arguments{
 \item{replicates}{Dataframe with data from all replicates to be filtered.}
 
 \item{violation}{Violation to be analyzed. Options are "homicidio", "secuestro",
 "reclutamiento", and "desaparicion"}
+
+\item{perp_change}{Change option: if there are victims in years after 2016 and
+if the perpetrator "p_str" is "GUE-FARC", these victims become victims of
+other guerrillas "GUE-OTRO"}
 }
 \value{
 Data frame filter

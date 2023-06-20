@@ -42,10 +42,9 @@ Imports:
     assertr,
     tidyr,
     tidyselect,
-    rlang,
     readr,
     stringr,
     tibble,
-    rjson
+    rjson,
 LazyData: true
 RdMacros: Rdpack

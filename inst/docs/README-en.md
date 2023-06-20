@@ -34,7 +34,7 @@ devtools::install_github("HRDAG/verdata")
 
 ## Usage
 
-To use this package, it is necessary to have previously downloaded the data from one of the sites where they are published. This package offers 8 functions to handle the data:
+To use this package, it is necessary to have previously downloaded the data from one of the sites where they are published. This package offers 7 functions to handle the data:
 
 1. The `confirm_files` function allows you to authenticate the downloaded, making sure that your files exactly correspond to
 the files originally published.
@@ -49,9 +49,7 @@ before the statistical imputation of missing fields. The number obtained is the 
 
 5. The `combine_replicates` function uses the Normal approximation using the laws of total expectation and variance to combine the replicates, which allows you to obtain an interval of the imputation. See Section 18.2 of [*Bayesian Data Analysis*](http://www.stat.columbia.edu/~gelman/book/) for more information.
 
-6. The use of the `prop_obs_rep` function is optional and allows you to obtain the proportions of the data for the variables by which it was grouped.
-
-7. The `mse` function allows you to make estimates of underreporting using [LCMCR](https://onlinelibrary.wiley.com/doi/10.1111/biom.12502) specification (see Section 6 of the [methodological report](https://www.comisiondelaverdad.co/sites/default/files/descargables/2022-08/04_Anexo_Proyecto_JEP_CEV_HRDAG_08022022.pdf)).
+6. The `mse` function allows you to make estimates of underreporting using [LCMCR](https://onlinelibrary.wiley.com/doi/10.1111/biom.12502) specification (see Section 6 of the [methodological report](https://www.comisiondelaverdad.co/sites/default/files/descargables/2022-08/04_Anexo_Proyecto_JEP_CEV_HRDAG_08022022.pdf)).
 To use this function, it is necessary to have defined stratification variables, that is, grouping, to calculate the estimation,
 and to have done the stratification (see example and Section 8.4.2 of the [methodological report](https://www.comisiondelaverdad.co/sites/default/files/descargables/2022-08/04_Anexo_Proyecto_JEP_CEV_HRDAG_08022022.pdf)).
 Additionally, considering that the estimation requires time and computational resources, in case you want to make use of the
@@ -60,5 +58,5 @@ as input the already stratified data and the directory where the published estim
 of these. Keep in mind that by providing a directory, the function assumes the same specifications for the model used in the
 project. If you want to use other specifications, don't provide a directory to the estimates.
 
-8. Finally, the `combine_estimates` function allows you to combine the results of the estimation, which once again will result in
+7. Finally, the `combine_estimates` function allows you to combine the results of the estimation, which once again will result in
 an interval (including the mean). The function uses the Normal approximation using the laws of total expectation and total variance. See Section 18.2 of [*Bayesian Data Analysis*](http://www.stat.columbia.edu/~gelman/book/) for more information.
