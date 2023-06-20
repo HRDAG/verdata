@@ -1,5 +1,5 @@
 
-# ⚠️Under construction. Data not yet available. ⚠️
+# ⚠️ Under construction. ⚠️
 
 Click [here](https://github.com/HRDAG/verdata/blob/main/inst/docs/README-en.md) for instructions in English.
 
@@ -13,10 +13,7 @@ Click [here](https://github.com/HRDAG/verdata/blob/main/inst/docs/README-en.md) 
 
 # verdata
 
-`verdata` es un paquete de `R` que está pensado como una herramienta para el uso y análisis de los datos de Conflicto armado en
-Colombia resultantes del proyecto conjunto [JEP-CEV-HRDAG](https://www.comisiondelaverdad.co/sites/default/files/descargables/2022-08/04_Anexo_Proyecto_JEP_CEV_HRDAG_08022022.pdf).
-Los datos de este proyecto que han sido publicados corresponden a 100 réplicas, producto del proceso de
-imputación estadística de campos faltantes (ver sección 4 del [informe metódologico del proyecto](https://www.comisiondelaverdad.co/sites/default/files/descargables/2022-08/04_Anexo_Proyecto_JEP_CEV_HRDAG_08022022.pdf)).
+`verdata` es un paquete de `R` que está pensado como una herramienta para el uso y análisis de los datos de Conflicto armado en Colombia resultantes del proyecto conjunto [JEP-CEV-HRDAG](https://www.comisiondelaverdad.co/sites/default/files/descargables/2022-08/04_Anexo_Proyecto_JEP_CEV_HRDAG_08022022.pdf). Se puede descargar los datos sobre desaparición, homicidio, reclutamiento de niños, niñas y adolescentes y secuestro del [sitio web del Departamento Administrativo Nacional de Estadística](https://microdatos.dane.gov.co/index.php/catalog/795#metadata-sampling). Estos datos corresponden a 100 réplicas, producto del proceso de imputación estadística de campos faltantes (ver sección 4 del [informe metódologico del proyecto](https://www.comisiondelaverdad.co/sites/default/files/descargables/2022-08/04_Anexo_Proyecto_JEP_CEV_HRDAG_08022022.pdf)).
 
 <div class="column" width="60%">
 
