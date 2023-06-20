@@ -166,7 +166,7 @@ build_path <- function(rep_directory, violacion, first_rep, last_rep) {
 
     path <- list.files(path = rep_directory, full.names = TRUE)
     
-    file_extension <- stringr::str_extract(pattern = "parque|csv",
+    file_extension <- stringr::str_extract(pattern = "parquet|csv",
                                            rep_directory)
     
     if (is.na(file_extension)) {
