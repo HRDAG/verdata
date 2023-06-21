@@ -198,6 +198,9 @@ combine_replicates <- function(violation,
     final_data <- rep_data %>% 
         dplyr::mutate(dplyr::across(all_of(strata_vars), as.character)) 
     
+    tab_observed <- tab_observed %>% 
+      dplyr::mutate(dplyr::across(all_of(strata_vars), as.character)) 
+    
     final_data <- dplyr::full_join(rep_data, tab_observed, by = {{strata_vars}}) %>%
         dplyr::mutate(imp_lo = dplyr::if_else(imp_lo < observed,
                                               observed, imp_lo))
