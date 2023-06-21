@@ -135,4 +135,27 @@ testthat::test_that("The function works without digist", {
   
 })
 
+
+tab_observed <- summary_observed("reclutamiento",
+                                 replicates_data_filter,
+                                 strata_vars = "sexo",
+                                 conflict_filter = TRUE,
+                                 forced_dis_filter = FALSE,
+                                 edad_minors_filter = TRUE,
+                                 include_props = FALSE,
+                                 prop_obs_na = FALSE)
+
+testthat::test_that("The proportions' function works without digist", {
+  
+  testthat::expect_no_error(
+    
+    tab_proportions <- verdata::proportions_observed(tab_observed, 
+                                                     strata_vars = "sexo",
+                                                     prop_obs_na = TRUE)
+    
+    )
+  
+})
+
+
 # --- Done
