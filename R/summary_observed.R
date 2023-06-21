@@ -105,6 +105,12 @@ summary_observed <- function(violation,
                              prop_obs_na = FALSE,
                              digits = NULL) {
   
+  if (!(violation %in% c("homicidio", "secuestro", "reclutamiento", "secuestro"))) {
+    
+    stop("violation argument incorrectly specified")
+    
+  }
+
   num_replicates <- dplyr::n_distinct(replicates_df$replica)
   
   if (num_replicates == 1) {

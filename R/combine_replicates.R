@@ -94,8 +94,14 @@ combine_replicates <- function(violation,
                                edad_minors_filter = FALSE,
                                include_props = FALSE,
                                digits = NULL) {
-
-    num_replicates <- dplyr::n_distinct(replicates_df$replica)
+  
+  if (!(violation %in% c("homicidio", "secuestro", "reclutamiento", "secuestro"))) {
+    
+    stop("violation argument incorrectly specified")
+    
+  }
+  
+  num_replicates <- dplyr::n_distinct(replicates_df$replica)
 
     if (num_replicates == 1) {
 
