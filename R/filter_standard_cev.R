@@ -24,7 +24,7 @@
 #'
 filter_standard_cev <- function(replicates, violation, perp_change = TRUE) {
 
-    if (!(violation %in% c("homicidio", "secuestro", "reclutamiento", "secuestro"))) {
+    if (!(violation %in% c("homicidio", "secuestro", "reclutamiento", "desaparicion"))) {
 
         stop("violation argument incorrectly specified")
 

@@ -95,7 +95,7 @@ combine_replicates <- function(violation,
                                include_props = FALSE,
                                digits = NULL) {
   
-  if (!(violation %in% c("homicidio", "secuestro", "reclutamiento", "secuestro"))) {
+  if (!(violation %in% c("homicidio", "secuestro", "reclutamiento", "desaparicion"))) {
     
     stop("violation argument incorrectly specified")
     

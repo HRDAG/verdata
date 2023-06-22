@@ -105,7 +105,7 @@ summary_observed <- function(violation,
                              prop_obs_na = FALSE,
                              digits = NULL) {
   
-  if (!(violation %in% c("homicidio", "secuestro", "reclutamiento", "secuestro"))) {
+  if (!(violation %in% c("homicidio", "secuestro", "reclutamiento", "desaparicion"))) {
     
     stop("violation argument incorrectly specified")
     
