@@ -29,7 +29,7 @@
 #' replicates_data, strata_vars = 'sexo', conflict_filter = TRUE,
 #' forced_dis_filter = FALSE, edad_minors_filter = FALSE)
 #' prop_data_complete <- proportions_imputed(tab_combine, strata_vars = "sexo", 
-#' na_obs = TRUE, digits = 2)
+#' digits = 2)
 proportions_imputed <- function(complete_tab, 
                                 strata_vars, 
                                 digits = NULL) {
