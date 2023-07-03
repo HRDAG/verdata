@@ -13,7 +13,7 @@ Haga clic [aquí](https://github.com/HRDAG/verdata/blob/main/README.md) para ins
 
 # verdata
 
-`verdata` is an `R` package designed as a tool for the use and analysis of data about the armed conflict in Colombia resulting from the joint JEP-CEV-HRDAG project. Data about disappearance, homicide, recruitment of children and adolescents, and kidnapping can be downloaded from the [National Administrative Department of Statistics' website](https://microdatos.dane.gov.co/index.php/catalog/795#metadata-sampling). The data from this project that has been published corresponds to 100 replicates, which are the result of a statistical imputation process of missing fields (see Section 4 of the [methodological report of the project](https://www.comisiondelaverdad.co/sites/default/files/descargables/2022-08/04_Anexo_Proyecto_JEP_CEV_HRDAG_08022022.pdf)).
+`verdata` is an `R` package designed as a tool for the use and analysis of data about the armed conflict in Colombia resulting from the joint JEP-CEV-HRDAG project. Data about disappearance, homicide, recruitment of children and adolescents, and kidnapping can be downloaded from the [National Administrative Department of Statistics' website](https://microdatos.dane.gov.co/index.php/catalog/795). The data from this project that has been published corresponds to 100 replicates, which are the result of a statistical imputation process of missing fields (see Section 4 of the [methodological report of the project](https://www.comisiondelaverdad.co/sites/default/files/descargables/2022-08/04_Anexo_Proyecto_JEP_CEV_HRDAG_08022022.pdf)).
 
 <div class="column" width="60%">
 

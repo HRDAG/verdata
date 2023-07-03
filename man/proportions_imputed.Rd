@@ -24,7 +24,6 @@ to calculate using \code{combine_replicates} on completed data (that includes
 imputed values).
 }
 \examples{
-\dontrun{
 local_dir <- system.file("extdata", "right", package = "verdata")
 replicates_data <- read_replicates(local_dir, "reclutamiento", 1, 2, "parquet")
 tab_observed <- summary_observed("reclutamiento", replicates_data,
@@ -34,7 +33,6 @@ digits = 2)
 tab_combine <- combine_replicates("reclutamiento", tab_observed,
 replicates_data, strata_vars = 'sexo', conflict_filter = TRUE,
 forced_dis_filter = FALSE, edad_minors_filter = FALSE)
-prop_data_complete <- proportions_imputed(tab_combine, strata_vars, 
-na_obs = TRUE, digits = 2)
-}
+prop_data_complete <- proportions_imputed(tab_combine, strata_vars = "sexo", 
+digits = 2)
 }
