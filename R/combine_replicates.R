@@ -128,7 +128,7 @@ combine_replicates <- function(violation,
       
       logger::log_info("You are working with all victims (related and not related to is_conflict)")
       
-        pre_data <- replicates_df %>%
+        prep_data <- replicates_df %>%
             dplyr::mutate(is_conflict = as.integer(is_conflict))
     }
     
