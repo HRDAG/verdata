@@ -144,6 +144,7 @@ combine_replicates <- function(violation,
     } else {
 
       logger::log_info("Analyzing victims of all ages")
+      prep_data <- prep_data
 
     }
 
@@ -193,6 +194,9 @@ combine_replicates <- function(violation,
 
       rep_data <- proportions_imputed(rep_data, strata_vars, digits)
       
+      rep_data <- rep_data %>% 
+        dplyr::mutate(imp_lo_p = dplyr::if_else(imp_lo_p < 0, 0, imp_lo_p))
+      
     } else {
       
       logger::log_info("Didn't include the proportions")
@@ -211,7 +215,8 @@ combine_replicates <- function(violation,
 
     final_data <- final_data %>%
         dplyr::select(all_of({{strata_vars}}), observed,
-                      dplyr::everything())
+                      dplyr::everything()) %>% 
+      dplyr::arrange(desc(imp_mean))
 
     return(final_data)
 
