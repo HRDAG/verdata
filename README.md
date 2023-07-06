@@ -59,7 +59,7 @@ diferentes réplicas.
 Para usar esta función es necesario haber definido variables de estratificación, es decir, agrupación, para hacer la estimación
 y haber hecho la estratificación (ver ejemplo y sección 8.4.2 del [informe metódologico del proyecto](https://www.comisiondelaverdad.co/sites/default/files/descargables/2022-08/04_Anexo_Proyecto_JEP_CEV_HRDAG_08022022.pdf)).
 Además, considerando que la estimación requiere de tiempo y recursos computacionales, en caso de querer hacer uso de las
-estimaciones ya calculadas por el equipo, se requiere haberlas descragado a su máquina local. Esta función requiere como input
+estimaciones ya calculadas por el equipo, se requiere haberlas descargado del [sitio de la Comisión](https://www.comisiondelaverdad.co/analitica-de-datos-informacion-y-recursos#c3) a su máquina local. Esta función requiere como input
 los datos ya estratificados y el directorio en el que se encuentran las estimaciones publicadas -en caso de querer hacer uso
 de estas. Tenga presente que al proveer un directorio la función asume las mismas especificaciones para el modelo usadas en el
 proyecto. Si usted quiere usar otras especificaciones, no debe suministrar un directorio a las estimaciones.
