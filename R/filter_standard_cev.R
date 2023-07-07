@@ -35,8 +35,12 @@ filter_standard_cev <- function(replicates, violation, perp_change = TRUE) {
                                                 edad_jep == "ADOLESCENCIA" ~ "MENOR",
                                                 edad_jep == "ADULTEZ" ~ "ADULTO",
                                                 TRUE ~ NA_character_)) %>%
-        dplyr::mutate(edad_c_imputed = dplyr::if_else(edad_categoria_imputed == FALSE, FALSE, TRUE))
-    
+      dplyr::mutate(edad_c_imputed = dplyr::if_else(edad_categoria_imputed == FALSE, FALSE, TRUE)) %>% 
+      dplyr::mutate(etnia2 = case_when(etnia %in% c('MESTIZO') ~ "MESTIZO", 
+                                       etnia %in% c('INDIGENA','NARP','ROM') ~ "ETNICO", 
+                                       TRUE ~ NA_character_)) %>% 
+      dplyr::mutate(etnia2_imputed = dplyr::if_else(etnia_imputed == FALSE, FALSE, TRUE))
+      
     if (perp_change == TRUE) {
       
       data_filter <- data_filter %>% 
