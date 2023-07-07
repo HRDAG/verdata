@@ -39,8 +39,22 @@ filter_standard_cev <- function(replicates, violation, perp_change = TRUE) {
       dplyr::mutate(etnia2 = case_when(etnia %in% c('MESTIZO') ~ "MESTIZO", 
                                        etnia %in% c('INDIGENA','NARP','ROM') ~ "ETNICO", 
                                        TRUE ~ NA_character_)) %>% 
-      dplyr::mutate(etnia2_imputed = dplyr::if_else(etnia_imputed == FALSE, FALSE, TRUE))
-      
+      dplyr::mutate(etnia2_imputed = dplyr::if_else(etnia_imputed == FALSE, FALSE, TRUE)) %>% 
+      dplyr::mutate(quinquenio = case_when(yy_hecho >= 1985 & yy_hecho <= 1989 ~ "1985_1989",
+                                           yy_hecho >= 1990 & yy_hecho <= 1994 ~ "1990_1994",
+                                           yy_hecho >= 1995 & yy_hecho <= 1999 ~ "1995_1999",
+                                           yy_hecho >= 2000 & yy_hecho <= 2004 ~ "2000_2004",
+                                           yy_hecho >= 2005 & yy_hecho <= 2009 ~ "2005_2009",
+                                           yy_hecho >= 2010 & yy_hecho <= 2014 ~ "2010_2014",
+                                           yy_hecho >= 2015 & yy_hecho <= 2019 ~ "2015_2019",
+                                           TRUE ~ NA_character_)) %>%
+      dplyr::mutate(muni_code_hecho = as.character(muni_code_hecho)) %>%
+      dplyr::mutate_at(vars(muni_code_hecho),
+                ~case_when(. == "91236" ~ "91263",
+                           TRUE ~ .)) %>% 
+      dplyr::mutate(muni_code_hecho = as.numeric(muni_code_hecho)) %>%
+      assertr::verify(!is.na(quinquenio))
+
     if (perp_change == TRUE) {
       
       data_filter <- data_filter %>% 
