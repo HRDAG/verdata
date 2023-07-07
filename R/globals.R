@@ -20,5 +20,6 @@ utils::globalVariables(c("replica","is_conflict","observed",
                          "imp_hi", "obs_prop", "imp_lo_p", "imp_mean_p",
                          "imp_hi_p", "obs_prop_na", "data_obs", "na_obs", 
                          "data_combine", "digits", "is_conflict_dis_rep",
-                         "edad_jep", "edad_jep_imputed",
-                         "proportions_observed"))
+                         "edad_jep", "edad_jep_imputed", "muni_code_hecho",
+                         "proportions_observed", "etnia_imputed", "etnia2",
+                         "quinquenio"))

@@ -216,7 +216,7 @@ combine_replicates <- function(violation,
     final_data <- final_data %>%
         dplyr::select(all_of({{strata_vars}}), observed,
                       dplyr::everything()) %>% 
-      dplyr::arrange(desc(imp_mean))
+      dplyr::arrange(dplyr::desc(imp_mean))
 
     return(final_data)
 
