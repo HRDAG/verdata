@@ -152,10 +152,10 @@ run_lcmcr <- function(stratum_recs, stratum_name, min_n = 1,
 #'
 #' @description Look up existing estimates from pre-calculated files.
 #'
-#' @param stratum_recs A dataframe including all records in a stratum of interest.
+#' @param stratum_data_prepped A dataframe including all records in a stratum of interest.
 #' The dataframe should only include the source columns prefixed with `in_` and
 #' all columns should only contain 1's and 0's.
-#' @param estimates_dir File path for the folder containing pre-calculated
+#' @param estimates_dir Directory containing pre-calculated
 #' estimates, if you would like to use pre-calculated results. Note, setting this
 #' option forces the model specification parameters to be identical to those used
 #' to calculate the pre-calculated estimates. Do not specify a file path If you
@@ -181,19 +181,19 @@ run_lcmcr <- function(stratum_recs, stratum_name, min_n = 1,
 #'     dplyr::filter(rs >= 1) %>%
 #'     dplyr::select(-rs)
 #'
-#' lookup_estimates(stratum_recs = my_stratum, estimates_dir = "path_to_estimates")
+#' lookup_estimates(stratum_data_prepped = my_stratum, estimates_dir = "path_to_estimates")
 #'
 #' }
-lookup_estimates <- function(stratum_recs, estimates_dir) {
+lookup_estimates <- function(stratum_data_prepped, estimates_dir) {
 
-    valid_sources <- get_valid_sources(stratum_recs)
+    valid_sources <- get_valid_sources(stratum_data_prepped)
 
     lettersplus <- c(letters, paste0(letters, "1"))
     stopifnot(length(lettersplus) >= length(valid_sources))
     anon_sources <- as.character(glue::glue("in_{lettersplus[1:length(valid_sources)]}"))
 
     options(dplyr.summarise.inform = FALSE)
-    summary_table <- stratum_recs %>%
+    summary_table <- stratum_data_prepped %>%
         dplyr::mutate(rs = rowSums(.)) %>%
         dplyr::filter(rs >= 1) %>%
         dplyr::select(-rs) %>%

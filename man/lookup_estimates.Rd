@@ -4,14 +4,14 @@
 \alias{lookup_estimates}
 \title{lookup_estimates}
 \usage{
-lookup_estimates(stratum_recs, estimates_dir)
+lookup_estimates(stratum_data_prepped, estimates_dir)
 }
 \arguments{
-\item{stratum_recs}{A dataframe including all records in a stratum of interest.
+\item{stratum_data_prepped}{A dataframe including all records in a stratum of interest.
 The dataframe should only include the source columns prefixed with \code{in_} and
 all columns should only contain 1's and 0's.}
 
-\item{estimates_dir}{File path for the folder containing pre-calculated
+\item{estimates_dir}{Directory containing pre-calculated
 estimates, if you would like to use pre-calculated results. Note, setting this
 option forces the model specification parameters to be identical to those used
 to calculate the pre-calculated estimates. Do not specify a file path If you
@@ -39,7 +39,7 @@ my_stratum <- tibble::tibble(in_A, in_B, in_C, in_D) \%>\%
     dplyr::filter(rs >= 1) \%>\%
     dplyr::select(-rs)
 
-lookup_estimates(stratum_recs = my_stratum, estimates_dir = "path_to_estimates")
+lookup_estimates(stratum_data_prepped = my_stratum, estimates_dir = "path_to_estimates")
 
 }
 }

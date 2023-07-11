@@ -6,7 +6,7 @@
 
 #' Confirm a file is the same as the published version.
 #'
-#' @param where_replicate File path to the replicates. The name
+#' @param replicate_path Path to the replicate to be confirmed. The name
 #' of the files must include the violation in Spanish and lower case letters
 #' (homicidio, secuestro, reclutamiento, desaparicion)
 #
@@ -23,18 +23,18 @@
 #' confirm_file(local_dir_csv)
 #'
 #' @noRd
-confirm_file <- function(where_replicate) {
+confirm_file <- function(replicate_path) {
 
     violacion <- stringr::str_extract(pattern = "homicidio|desaparicion|secuestro|reclutamiento",
-                                      where_replicate)
+                                      replicate_path)
     
     file_extension <- stringr::str_extract(pattern = "parquet|csv",
-                                           where_replicate)
+                                           replicate_path)
 
     hash_file <- dplyr::tibble(violacion = violacion,
                                replica = stringr::str_extract(pattern = ("(?:R)\\d+"),
-                                                              where_replicate),
-                               hash = purrr::map_chr(where_replicate,
+                                                              replicate_path),
+                               hash = purrr::map_chr(replicate_path,
                                                      ~digest::digest(.x,
                                                                      algo = "sha1",
                                                                      file = TRUE)))
@@ -64,7 +64,7 @@ confirm_file <- function(where_replicate) {
      else {
 
 
-    final <- medidas(where_replicate)
+    final <- medidas(replicate_path)
 
     summary_table <- get(violacion) %>%
             dplyr::filter(replica %in% final$replica)
@@ -95,10 +95,10 @@ confirm_file <- function(where_replicate) {
 
 #' Confirm files are identical to the ones published.
 #'
-#' @param where_replicate File path for the folder containing the replicates.
+#' @param replicates_dir Directory containing the replicates.
 #' The name of the files must include the violation in Spanish and lower case
 #' letters (homicidio, secuestro, reclutamiento, desaparicion)
-#' @param violacion Violation being analyzed. Options are "homicidio", "secuestro",
+#' @param violation Violation being analyzed. Options are "homicidio", "secuestro",
 #' "reclutamiento", and "desaparicion".
 #' @param first_rep First replicate in the range of replicates to be analyzed
 #' @param last_rep Last replicate in the range of replicates to be analyzed.
@@ -114,9 +114,9 @@ confirm_file <- function(where_replicate) {
 #' @examples
 #' local_dir <- system.file("extdata", "right", package = "verdata")
 #' confirm_files(local_dir, "reclutamiento", 1, 2)
-confirm_files <- function(where_replicate, violacion, first_rep, last_rep) {
+confirm_files <- function(replicates_dir, violation, first_rep, last_rep) {
 
-    files <- build_path(where_replicate, violacion, first_rep, last_rep)
+    files <- build_path(replicates_dir, violation, first_rep, last_rep)
     purrr::walk(files, confirm_file)
 
 }

@@ -7,30 +7,30 @@
 #' Calculate measurements in order to make sure each replicate file has the correct
 #' content.
 #'
-#' @param path A string that contains a path to the replicates to be checked.
+#' @param replicate_path A string that contains a path to the replicate to be checked.
 #'
 #' @return A dataframe with the results.
 #'
 #' @noRd
-medidas <- function(path) {
+medidas <- function(replicate_path) {
 
-    ext <- tools::file_ext(path)
+    ext <- tools::file_ext(replicate_path)
 
     if (ext == "parquet") {
 
-        df <- arrow::read_parquet(path)
+        replicate_data <- arrow::read_parquet(replicate_path)
 
         }
 
     else {
-
-        df <- readr::read_csv(path)
+      
+        replicate_data <- readr::read_csv(replicate_path)
 
         }
 
-    replicate <- unique(df$replica)
+    replicate <- unique(replicate_data$replica)
 
-    dpto <- df %>%
+    dpto <- replicate_data %>%
         dplyr::group_by(dept_code_hecho) %>%
         dplyr::summarise(valor = dplyr::n()) %>%
         dplyr::filter(dept_code_hecho == 5 | dept_code_hecho == 20) %>%
@@ -39,14 +39,14 @@ medidas <- function(path) {
                                  "20" = "cesar")) %>%
         dplyr::select(variable,valor)
 
-    etnia <- df %>%
+    etnia <- replicate_data %>%
         dplyr::group_by(etnia) %>%
         dplyr::summarise(valor = dplyr::n()) %>%
         dplyr::filter(etnia == "NARP" | etnia == "INDIGENA") %>%
         dplyr::rename(variable = etnia) %>%
         dplyr::select(variable,valor)
 
-    edad <- df %>%
+    edad <- replicate_data %>%
         dplyr::group_by(edad_categoria) %>%
         dplyr::summarise(valor = dplyr::n()) %>%
         dplyr::filter(edad_categoria == "50-54") %>%
@@ -54,31 +54,31 @@ medidas <- function(path) {
         dplyr::rename(variable = edad_categoria) %>%
         dplyr::select(variable, valor)
 
-    year_2002_2007 <- df %>%
+    year_2002_2007 <- replicate_data %>%
         dplyr::filter(yy_hecho >= 2002 & yy_hecho <= 2007) %>%
         dplyr::summarise(valor = dplyr::n()) %>%
         dplyr::mutate(variable = "2002-2007") %>%
         dplyr::select(variable, valor)
 
-    year_1990_1994 <- df %>%
+    year_1990_1994 <- replicate_data %>%
         dplyr::filter(yy_hecho >= 1990 & yy_hecho <= 1994) %>%
         dplyr::summarise(valor = dplyr::n()) %>%
         dplyr::mutate(variable = "1990-1994") %>%
         dplyr::select(variable, valor)
 
-    sexo <- df %>%
+    sexo <- replicate_data %>%
         dplyr::group_by(sexo) %>%
         dplyr::summarise(valor = dplyr::n()) %>%
         dplyr::rename(variable = sexo) %>%
         dplyr::select(variable, valor)
 
-    perp <- df %>%
+    perp <- replicate_data %>%
         dplyr::group_by(p_str) %>%
         dplyr::summarise(valor = dplyr::n()) %>%
         dplyr::rename(variable = p_str) %>%
         dplyr::select(variable, valor)
 
-    w_minor <- df %>%
+    w_minor <- replicate_data %>%
         dplyr::filter(sexo == "MUJER" & edad_categoria == "10-14") %>%
         dplyr::group_by(sexo) %>%
         dplyr::summarise(valor = dplyr::n()) %>%
@@ -86,7 +86,7 @@ medidas <- function(path) {
                                         "MUJER" = "mujer menor de edad")) %>%
         dplyr::select(variable, valor)
 
-    caq_89_93 <- df %>%
+    caq_89_93 <- replicate_data %>%
         dplyr::filter(yy_hecho >= 1989 & yy_hecho <= 1993 & dept_code_hecho == 18) %>%
         dplyr::group_by(dept_code_hecho) %>%
         dplyr::summarise(valor = dplyr::n()) %>%
@@ -94,13 +94,13 @@ medidas <- function(path) {
                                                "18" = "caqueta entre 1989 y 1993")) %>%
         dplyr::select(variable, valor)
 
-    may <- df %>%
+    may <- replicate_data %>%
         dplyr::filter(yymm_hecho == 199005) %>%
         dplyr::summarise(valor = dplyr::n()) %>%
         dplyr::mutate(variable = "mayo de 1999") %>%
         dplyr::select(variable, valor)
 
-    paras_bog <- df %>%
+    paras_bog <- replicate_data %>%
         dplyr::filter(p_str == "PARA" & dept_code_hecho == 11) %>%
         dplyr::group_by(dept_code_hecho) %>%
         dplyr::summarise(valor = dplyr::n()) %>%
@@ -108,7 +108,7 @@ medidas <- function(path) {
                                                "11" = "paramilitares en bogota")) %>%
         dplyr::select(variable, valor)
 
-    paras_2016 <- df %>%
+    paras_2016 <- replicate_data %>%
         dplyr::filter(p_str == "PARA" & yy_hecho == 2016) %>%
         dplyr::group_by(yy_hecho) %>%
         dplyr::summarise(valor = dplyr::n()) %>%
@@ -116,7 +116,7 @@ medidas <- function(path) {
                                                "2016" = "paramilitares en 2016")) %>%
         dplyr::select(variable, valor)
 
-    mestizo_2000 <- df %>%
+    mestizo_2000 <- replicate_data %>%
         dplyr::filter(yy_hecho == 2000 & etnia == "MESTIZO") %>%
         dplyr::group_by(etnia) %>%
         dplyr::summarise(valor = dplyr::n()) %>%
@@ -124,7 +124,7 @@ medidas <- function(path) {
                                                "MESTIZO" = "mestizos en el 2000")) %>%
         dplyr::select(variable, valor)
 
-    farc_2007 <- df %>%
+    farc_2007 <- replicate_data %>%
         dplyr::filter(yy_hecho == 2007 & p_str == "GUE-FARC") %>%
         dplyr::group_by(yy_hecho) %>%
         dplyr::summarise(valor = dplyr::n()) %>%
@@ -152,8 +152,9 @@ medidas <- function(path) {
 #' Calculate measurements in order to ensure that each replicate file has the
 #' correct content.
 #'
-#' @param rep_directory A string that contains a path for the replicates to be checked
-#' @param violacion Violation to be analyzed. Options are "homicidio", "secuestro",
+#' @param replicates_dir A string that contains a path to the directory containing 
+#' the replicates to be checked
+#' @param violation Violation to be analyzed. Options are "homicidio", "secuestro",
 #' "reclutamiento", and "desaparicion".
 #' @param first_rep First replicate in the range of replicates to be analyzed.
 #' @param last_rep Last replicate in the range of replicates to be analyzed.
@@ -162,12 +163,12 @@ medidas <- function(path) {
 #' and violation type.
 #'
 #' @noRd
-build_path <- function(rep_directory, violacion, first_rep, last_rep) {
+build_path <- function(replicates_dir, violation, first_rep, last_rep) {
 
-    path <- list.files(path = rep_directory, full.names = TRUE)
+    path <- list.files(path = replicates_dir, full.names = TRUE)
     
     file_extension <- stringr::str_extract(pattern = "parquet|csv",
-                                           rep_directory)
+                                           replicates_dir)
     
     if (is.na(file_extension)) {
       
@@ -184,7 +185,7 @@ build_path <- function(rep_directory, violacion, first_rep, last_rep) {
 
     rep_lista <- tibble::tibble(full_path = path, matches) %>%
         dplyr::mutate(rep_number = as.integer(rep_number)) %>%
-        dplyr::filter(violation == violacion,
+        dplyr::filter(violation == violation,
                       dplyr::between(rep_number, first_rep, last_rep)) %>%
         purrr::pluck("full_path")
 
@@ -197,7 +198,7 @@ build_path <- function(rep_directory, violacion, first_rep, last_rep) {
 
         rep_lista <- tibble::tibble(full_path = path, matches) %>%
             dplyr::mutate(rep_number = as.integer(rep_number)) %>%
-            dplyr::filter(violation == violacion,
+            dplyr::filter(violation == violation,
                           dplyr::between(rep_number, first_rep, last_rep)) %>%
             purrr::pluck("full_path")
     }

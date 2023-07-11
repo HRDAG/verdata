@@ -24,7 +24,7 @@ Filter records to replicate results presented in the CEV methodology report.
 }
 \examples{
 local_dir <- system.file("extdata", "right", package = "verdata")
-replicates_data <- read_replicates(local_dir, "reclutamiento", 1, 2, "parquet")
-filter_standard_cev(replicates_data, "reclutamiento")
+replicates_data <- read_replicates(local_dir, "reclutamiento", 1, 2)
+filter_standard_cev(replicates_data, "reclutamiento", perp_change = TRUE)
 
 }

@@ -4,14 +4,14 @@
 \alias{confirm_files}
 \title{Confirm files are identical to the ones published.}
 \usage{
-confirm_files(where_replicate, violacion, first_rep, last_rep)
+confirm_files(replicates_dir, violation, first_rep, last_rep)
 }
 \arguments{
-\item{where_replicate}{File path for the folder containing the replicates.
+\item{replicates_dir}{Directory containing the replicates.
 The name of the files must include the violation in Spanish and lower case
 letters (homicidio, secuestro, reclutamiento, desaparicion)}
 
-\item{violacion}{Violation being analyzed. Options are "homicidio", "secuestro",
+\item{violation}{Violation being analyzed. Options are "homicidio", "secuestro",
 "reclutamiento", and "desaparicion".}
 
 \item{first_rep}{First replicate in the range of replicates to be analyzed}

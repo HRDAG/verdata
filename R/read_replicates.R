@@ -6,7 +6,7 @@
 
 #' Read a replicate and hash its contents to make sure it's identical to the one published.
 #'
-#' @param where_replicate Path to the replicate. The name of the file must include
+#' @param replicate_path Path to the replicate. The name of the file must include
 #' the violation in Spanish and lower case letters (homicidio, secuestro,
 #' reclutamiento, desaparicion).
 #' @param crash A parameter to define whether the function should crash if the file
@@ -27,22 +27,22 @@
 #' read_replicate(local_dir)
 #'
 #' @noRd
-read_replicate <- function(where_replicate, crash = TRUE) {
+read_replicate <- function(replicate_path, crash = TRUE) {
 
     violacion <- stringr::str_extract(pattern = "homicidio|desaparicion|secuestro|reclutamiento",
-                                      where_replicate)
+                                      replicate_path)
     
     file_extension <- stringr::str_extract(pattern = "parquet|csv",
-                                           where_replicate)
+                                           replicate_path)
 
     if (file_extension == "parquet") {
 
-        df <- arrow::read_parquet(where_replicate)
+        replicate_data <- arrow::read_parquet(replicate_path)
 
         hash_intor <- dplyr::tibble(violacion = violacion,
                                     replica = stringr::str_extract(pattern = ("(?:R)\\d+"),
-                                                                   where_replicate),
-                                    hash = digest::digest(df, algo = "sha1"))
+                                                                   replicate_path),
+                                    hash = digest::digest(replicate_data, algo = "sha1"))
 
         content_test <- content %>%
             dplyr::filter(replica %in% hash_intor$replica,
@@ -50,12 +50,12 @@ read_replicate <- function(where_replicate, crash = TRUE) {
 
         } else {
 
-        df <- readr::read_csv(where_replicate)
+        replicate_data <- readr::read_csv(replicate_path)
 
         hash_intor <- dplyr::tibble(violacion = violacion,
                                     replica = stringr::str_extract(pattern = ("(?:R)\\d+"),
-                                                                   where_replicate),
-                                    hash = digest::digest(df, algo = "sha1"))
+                                                                   replicate_path),
+                                    hash = digest::digest(replicate_data, algo = "sha1"))
 
         content_test <- content_csv %>%
             dplyr::filter(replica %in% hash_intor$replica)
@@ -66,11 +66,11 @@ read_replicate <- function(where_replicate, crash = TRUE) {
 
     if (isTRUE(is_eq)) {
 
-        return(df)
+        return(replicate_data)
 
     } else {
 
-    final <- medidas(where_replicate)
+    final <- medidas(replicate_path)
 
     summary_table <- get(violacion) %>%
             dplyr::filter(replica %in% final$replica)
@@ -83,7 +83,7 @@ read_replicate <- function(where_replicate, crash = TRUE) {
 
     if (isTRUE(mea_eq)) {
 
-        return(df)
+        return(replicate_data)
 
     }
 
@@ -95,7 +95,7 @@ read_replicate <- function(where_replicate, crash = TRUE) {
 
         warning("The content of the files is not identical to the ones published.
                 The results of the analysis may be inconsistent.")
-        return(df)
+        return(replicate_data)
 
         }
 
@@ -105,7 +105,7 @@ read_replicate <- function(where_replicate, crash = TRUE) {
 
 #' Read replicates in a directory and verify they are identical to the ones published.
 #'
-#' @param rep_directory A file path for the directory where the replicates are stored.
+#' @param replicates_dir Adirectory to the replicates.
 #' Then file name of each replicate must contain at least the name of the violation
 #' in Spanish and lower case letters (homicidio, secuestro, reclutamiento, desaparicion),
 #' and the replicate number preceded by "R", (e.g., "R1" for replicate 1).
@@ -126,13 +126,13 @@ read_replicate <- function(where_replicate, crash = TRUE) {
 #' @examples
 #' local_dir <- system.file("extdata", "right", package = "verdata")
 #' read_replicates(local_dir, "reclutamiento", 1, 2)
-read_replicates <- function(rep_directory, violacion, first_rep, last_rep,
+read_replicates <- function(replicates_dir, violacion, first_rep, last_rep,
                             crash = TRUE) {
 
-    files <- build_path(rep_directory, violacion, first_rep, last_rep)
-    df <- purrr::map_dfr(files, read_replicate, crash)
+    files <- build_path(replicates_dir, violacion, first_rep, last_rep)
+    replicate_data <- purrr::map_dfr(files, read_replicate, crash)
 
-    return(df)
+    return(replicate_data)
 
 }
 
