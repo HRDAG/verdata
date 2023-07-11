@@ -25,7 +25,7 @@ testthat::test_that("The table must have the same observations to CEV document",
                                      forced_dis_filter = FALSE,
                                      edad_minors_filter = TRUE,
                                      include_props = FALSE,
-                                     prop_obs_na = FALSE)
+                                     include_props_na = FALSE)
 
     testthat::expect_identical(tab_observed$observed, tab_cev$observed)
 
@@ -42,7 +42,7 @@ testthat::test_that("This function works with more than one strata", {
                                        forced_dis_filter = FALSE,
                                        edad_minors_filter = TRUE,
                                        include_props = FALSE,
-                                       prop_obs_na = FALSE))
+                                       include_props_na = FALSE))
 
 })
 
@@ -57,7 +57,7 @@ testthat::test_that("This function works with strata does not have missing value
                                           forced_dis_filter = FALSE,
                                           edad_minors_filter = TRUE,
                                           include_props = FALSE,
-                                          prop_obs_na = FALSE))
+                                          include_props_na = FALSE))
 })
 
 
@@ -72,7 +72,7 @@ testthat::test_that("This function works with more than one strata that has miss
                                          forced_dis_filter = FALSE,
                                          edad_minors_filter = TRUE,
                                          include_props = FALSE,
-                                         prop_obs_na = FALSE))
+                                         include_props_na = FALSE))
 })
 
 testthat::test_that("This function works with more than one strata that does not has missing values", {
@@ -85,7 +85,7 @@ testthat::test_that("This function works with more than one strata that does not
                                                 forced_dis_filter = FALSE,
                                                 edad_minors_filter = TRUE,
                                                 include_props = FALSE,
-                                                prop_obs_na = FALSE))
+                                                include_props_na = FALSE))
 })
 
 testthat::test_that("Confirm sum = 1 in observed", {
@@ -97,44 +97,11 @@ testthat::test_that("Confirm sum = 1 in observed", {
                                    forced_dis_filter = FALSE,
                                    edad_minors_filter = TRUE,
                                    include_props = TRUE,
-                                   prop_obs_na = TRUE,
-                                   digits = 2)
+                                   include_props_na = TRUE)
 
 testthat::expect_equal(sum(tab_observed$obs_prop_na), 1)
 
 })
-
-testthat::test_that("Works with any digit", {
-  
-  
-  tab_observed <- summary_observed("reclutamiento",
-                                   replicates_data_filter,
-                                   strata_vars = "sexo",
-                                   conflict_filter = TRUE,
-                                   forced_dis_filter = FALSE,
-                                   edad_minors_filter = TRUE,
-                                   include_props = TRUE,
-                                   prop_obs_na = TRUE,
-                                   digits = 6)
-  
-  testthat::expect_equal(round(sum(tab_observed$obs_prop_na), 6), round(1, 6))
-  
-})
-
-testthat::test_that("The function works without digist", {
-  
-  testthat::expect_no_error(
-    tab_observed <- summary_observed("reclutamiento",
-                                     replicates_data_filter,
-                                     strata_vars = c("sexo", "yy_hecho"),
-                                     conflict_filter = TRUE,
-                                     forced_dis_filter = FALSE,
-                                     edad_minors_filter = TRUE,
-                                     include_props = TRUE,
-                                     prop_obs_na = TRUE))
-  
-})
-
 
 tab_observed <- summary_observed("reclutamiento",
                                  replicates_data_filter,
@@ -143,15 +110,16 @@ tab_observed <- summary_observed("reclutamiento",
                                  forced_dis_filter = FALSE,
                                  edad_minors_filter = TRUE,
                                  include_props = FALSE,
-                                 prop_obs_na = FALSE)
+                                 include_props_na = FALSE)
 
-testthat::test_that("The proportions' function works without digist", {
+testthat::test_that("The proportions' function does not work with a digit different to 2", {
   
-  testthat::expect_no_error(
+  testthat::expect_error(
     
     tab_proportions <- verdata::proportions_observed(tab_observed, 
                                                      strata_vars = "sexo",
-                                                     prop_obs_na = TRUE)
+                                                     include_props_na = TRUE,
+                                                     digits = 4)
     
     )
   

@@ -9,12 +9,12 @@
 #' @description Calculate the proportions of each level of a variable after 
 #' to calculate using `summary_observed` on observed values.
 #'
-#' @param obs_tab A dataframe containing the output from `summary_observed`.
+#' @param obs_data A dataframe containing the output from `summary_observed`.
 #' @param strata_vars A vector of column names identifying the variables to be
 #' used for stratification.
-#' @param prop_obs_na A logical value indicating whether or not to include missing
+#' @param include_props_na A logical value indicating whether or not to include missing
 #' observations in the calculations.
-#' @param digits Number of decimal places to round the results to.
+#' @param digits Number (2) of decimal places to round the results to.
 #'
 #' @return A dataframe that contains the proportions after to apply 
 #' `summary_observed` 
@@ -24,37 +24,39 @@
 #' replicates_data <- read_replicates(local_dir, "reclutamiento", 1, 2)
 #' tab_observed <- summary_observed("reclutamiento", replicates_data,
 #' strata_vars = "sexo", conflict_filter = TRUE, forced_dis_filter = FALSE, 
-#' edad_minors_filter = TRUE, include_props = TRUE, prop_obs_na = TRUE)
+#' edad_minors_filter = TRUE, include_props = TRUE, include_props_na = TRUE)
 #' prop_data <- proportions_observed(tab_observed, strata_vars = "sexo", 
-#' prop_obs_na = TRUE, digits = 2)
-proportions_observed <- function(obs_tab, strata_vars, prop_obs_na = TRUE, 
-                                 digits = NULL){
+#' include_props_na = TRUE, digits = 2)
+proportions_observed <- function(obs_data,
+                                 strata_vars, 
+                                 include_props_na = TRUE, 
+                                 digits = 2){
   
-  if (is.null(digits)) {
-    digits <- 2
+  if (digits != 2) {
+    stop("Digits incorrectly specified")
   }
   
-  if (prop_obs_na == FALSE)  {
+  if (include_props_na == FALSE)  {
     
-    tab_na <- obs_tab %>%
+    tab_na <- obs_data %>%
       dplyr::mutate(obs_prop = round(observed / sum(observed, na.rm = TRUE),
-                                     digits = digits))
+                                     digits = 2))
     
-    data_final_prop <- dplyr::left_join(obs_tab, tab_na) %>%
+    data_final_prop <- dplyr::left_join(obs_data, tab_na) %>%
       dplyr::select(all_of({{strata_vars}}),
                     observed, obs_prop)
     
   } else {
     
-    tab_com <- obs_tab %>%
+    tab_com <- obs_data %>%
       dplyr::mutate(obs_prop_na = round((observed / sum(observed, na.rm = TRUE)),
-                                        digits = digits))
+                                        digits = 2))
     
     tab_na <- tab_com %>%
       dplyr::filter(!is.na(observed)) %>%
       dplyr::filter(dplyr::if_any(all_of({{strata_vars}}), ~!is.na(.))) %>%
       dplyr::mutate(obs_prop = round(observed / sum(observed, na.rm = TRUE), 
-                                     digits = digits))
+                                     digits = 2))
     
     data_final_prop <- dplyr::left_join(tab_com, tab_na) %>%
       dplyr::select(all_of({{strata_vars}}), observed, obs_prop_na, obs_prop)
@@ -68,7 +70,7 @@ proportions_observed <- function(obs_tab, strata_vars, prop_obs_na = TRUE,
 #'
 #' @param violation Violation to be analyzed. Options are "homicidio", "secuestro",
 #' "reclutamiento", and "desaparicion".
-#' @param replicates_df Data frame containing replicate data.
+#' @param replicates_data Data frame containing replicate data.
 #' @param strata_vars Variable to be analyzed. Before imputation
 #' this variable may have missing values.
 #' @param conflict_filter Filter that indicates if the data is filtered by
@@ -78,9 +80,8 @@ proportions_observed <- function(obs_tab, strata_vars, prop_obs_na = TRUE,
 #' @param edad_minors_filter Optional filter by age ("edad") < 18.
 #' @param include_props A logical value indicating whether or not to include
 #'  the proportions from the calculations.
-#' @param prop_obs_na A logical value indicating whether or not to include missing
+#' @param include_props_na A logical value indicating whether or not to include missing
 #' observations in the calculations.
-#' @param digits Number of decimal places to round the results to.
 #' @return Data frame with two or more columns, (1) name of variable(s) and (2)
 #' the number of observations in each variable's category.
 #' @export
@@ -93,29 +94,27 @@ proportions_observed <- function(obs_tab, strata_vars, prop_obs_na = TRUE,
 #' replicates_data <- read_replicates(local_dir, "reclutamiento", 1, 2)
 #' tab_observed <- summary_observed("reclutamiento", replicates_data,
 #' strata_vars = "sexo", conflict_filter = FALSE, forced_dis_filter = FALSE, 
-#' edad_minors_filter = FALSE, include_props = FALSE, prop_obs_na = FALSE, 
-#' digits = 2)
+#' edad_minors_filter = FALSE, include_props = FALSE, include_props_na = FALSE) 
 summary_observed <- function(violation,
-                             replicates_df, 
+                             replicates_data, 
                              strata_vars = NULL, 
                              conflict_filter = FALSE,
                              forced_dis_filter = FALSE,
                              edad_minors_filter = FALSE,
-                             include_props = TRUE,
-                             prop_obs_na = FALSE,
-                             digits = NULL) {
+                             include_props = FALSE,
+                             include_props_na = FALSE) {
   
   if (!(violation %in% c("homicidio", "secuestro", "reclutamiento", "desaparicion"))) {
     
-    stop("violation argument incorrectly specified")
+    stop("Violation argument incorrectly specified")
     
   }
-
-  num_replicates <- dplyr::n_distinct(replicates_df$replica)
+  
+  num_replicates <- dplyr::n_distinct(replicates_data$replica)
   
   if (num_replicates == 1) {
     
-    stop("You should work with more than one replicate")
+    stop("You should work with more than ten replicates")
     
   } else {
     
@@ -127,7 +126,7 @@ summary_observed <- function(violation,
     
     logger::log_info("Analyzing documented victims related to armed conflict")
     
-    obs_tab <- replicates_df %>%
+    obs_data <- replicates_data %>%
       dplyr::mutate(is_conflict = as.integer(is_conflict)) %>%
       dplyr::filter(is_conflict == 1) %>%
       dplyr::mutate(is_conflict_imputed = as.logical(is_conflict_imputed)) %>%
@@ -137,7 +136,7 @@ summary_observed <- function(violation,
     
     print("You are working with all victims (related and not related to is_conflict)")
     
-    obs_tab <- replicates_df %>%
+    obs_data <- replicates_data %>%
       dplyr::mutate(is_conflict = as.integer(is_conflict))
     
   } 
@@ -146,7 +145,7 @@ summary_observed <- function(violation,
     
     logger::log_info("Analyzing documented victims under 18 years of age")
     
-    obs_tab <- obs_tab %>%
+    obs_data <- obs_data %>%
       dplyr::filter(edad_jep == "INFANCIA" |
                     edad_jep == "ADOLESCENCIA") %>% 
       dplyr::mutate(edad_jep_imputed = as.logical(edad_jep_imputed)) %>%
@@ -155,7 +154,7 @@ summary_observed <- function(violation,
   } else {
     
     logger::log_info("Analyzing victims of all ages")
-    obs_tab <- obs_tab 
+    obs_data <- obs_data 
     
   } 
   
@@ -163,7 +162,7 @@ summary_observed <- function(violation,
     
     logger::log_info("Analyzing the documented victims who were victims of forced disappearance")
     
-    obs_tab <- obs_tab %>%
+    obs_data <- obs_data %>%
       dplyr::mutate(is_forced_dis = as.integer(is_forced_dis)) %>%
       dplyr::filter(is_forced_dis == 1) %>% 
       dplyr::mutate(is_forced_dis_imputed = as.logical(is_forced_dis_imputed)) %>%
@@ -173,19 +172,19 @@ summary_observed <- function(violation,
 
     logger::log_info("Not filtering in is_forced_dis")
 
-    obs_tab <- obs_tab
+    obs_data <- obs_data
 
   }
 
   for (var_rep in strata_vars) {
     var_imputed <- paste0(var_rep, "_imputed")
-    if (!(var_imputed %in% names(obs_tab))) {
-      obs_tab[[var_imputed]] <- FALSE
+    if (!(var_imputed %in% names(obs_data))) {
+      obs_data[[var_imputed]] <- FALSE
     }
-    obs_tab[[var_rep]][as.logical(obs_tab[[var_imputed]])] <- NA_character_
+    obs_data[[var_rep]][as.logical(obs_data[[var_imputed]])] <- NA_character_
   } 
 
-  obs_tab <- obs_tab %>%
+  obs_data <- obs_data %>%
     dplyr::mutate(dplyr::across(any_of({{strata_vars}}), as.character)) %>%
     dplyr::group_by(replica, dplyr::across(any_of({{strata_vars}}))) %>%
     dplyr::summarize(N = dplyr::n(), .groups = 'drop') %>%
@@ -196,7 +195,10 @@ summary_observed <- function(violation,
   if (include_props == TRUE) {
     
     logger::log_info("Including the proportions")
-    obs_tab <- proportions_observed(obs_tab, strata_vars, prop_obs_na, digits)
+    obs_data <- proportions_observed(obs_data,
+                                     strata_vars,
+                                     include_props_na, 
+                                     digits = 2)
 
   } else {
 
@@ -204,7 +206,7 @@ summary_observed <- function(violation,
 
   }
 
-  return(obs_tab)
+  return(obs_data)
 }
 
 # --- Done

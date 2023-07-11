@@ -4,10 +4,10 @@
 \alias{proportions_imputed}
 \title{proportions_imputed}
 \usage{
-proportions_imputed(complete_tab, strata_vars, digits = NULL)
+proportions_imputed(complete_data, strata_vars, digits = 2)
 }
 \arguments{
-\item{complete_tab}{A dataframe containing the output from \code{combine_replicates}.}
+\item{complete_data}{A dataframe containing the output from \code{combine_replicates}.}
 
 \item{strata_vars}{A vector of column names identifying the variables to be
 used for stratification.}
@@ -20,19 +20,18 @@ A dataframe that contains the proportions after to apply
 }
 \description{
 Calculate the proportions of each level of a variable after
-to calculate using \code{combine_replicates} on completed data (that includes
+to calculate using \code{combine_replicates} on complete data (that includes
 imputed values).
 }
 \examples{
 local_dir <- system.file("extdata", "right", package = "verdata")
 replicates_data <- read_replicates(local_dir, "reclutamiento", 1, 2, "parquet")
-tab_observed <- summary_observed("reclutamiento", replicates_data,
+replicates_obs_data <- summary_observed("reclutamiento", replicates_data,
 strata_vars = "sexo", conflict_filter = FALSE, forced_dis_filter = FALSE, 
-edad_minors_filter = FALSE, include_props = FALSE, prop_obs_na = FALSE, 
-digits = 2)
-tab_combine <- combine_replicates("reclutamiento", tab_observed,
+edad_minors_filter = FALSE, include_props = FALSE, include_props_na  = FALSE)
+tab_combine <- combine_replicates("reclutamiento", replicates_obs_data,
 replicates_data, strata_vars = 'sexo', conflict_filter = TRUE,
-forced_dis_filter = FALSE, edad_minors_filter = FALSE)
+forced_dis_filter = FALSE, edad_minors_filter = FALSE,include_props = FALSE)
 prop_data_complete <- proportions_imputed(tab_combine, strata_vars = "sexo", 
 digits = 2)
 }

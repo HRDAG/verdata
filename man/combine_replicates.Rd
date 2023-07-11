@@ -6,23 +6,22 @@
 \usage{
 combine_replicates(
   violation,
-  tab_observed,
-  replicates_df,
+  replicates_obs_data,
+  replicates_data,
   strata_vars,
   conflict_filter = TRUE,
   forced_dis_filter = FALSE,
   edad_minors_filter = FALSE,
-  include_props = FALSE,
-  digits = NULL
+  include_props = FALSE
 )
 }
 \arguments{
 \item{violation}{Violation to be analyzed. Options are "homicidio", "secuestro",
 "reclutamiento" and "desaparicion".}
 
-\item{tab_observed}{Dataframe that results from applying \code{summary_observed}.}
+\item{replicates_obs_data}{Dataframe that results from applying \code{summary_observed}.}
 
-\item{replicates_df}{Data frame containing replicates data.}
+\item{replicates_data}{Data frame containing replicates data.}
 
 \item{strata_vars}{Variable with all observations (without missing values).}
 
@@ -36,8 +35,6 @@ the "is_conflict" rule.}
 
 \item{include_props}{A logical value indicating whether or not to include
 the proportions from the calculations before to merge with summary_observed's output}
-
-\item{digits}{Number of decimal places to round the results to.}
 }
 \value{
 A dataframe with 5 or more columns: name of variable(s), \code{observed}
@@ -51,11 +48,10 @@ Combine replicates according to the Normal approximation using the laws of total
 \examples{
 local_dir <- system.file("extdata", "right", package = "verdata")
 replicates_data <- read_replicates(local_dir, "reclutamiento", 1, 2)
-tab_observed <- summary_observed("reclutamiento", replicates_data,
+replicates_obs_data <- summary_observed("reclutamiento", replicates_data,
 strata_vars = "sexo", conflict_filter = FALSE, forced_dis_filter = FALSE, 
-edad_minors_filter = FALSE, include_props = FALSE, prop_obs_na = FALSE, 
-digits = 2)
-tab_combine <- combine_replicates("reclutamiento", tab_observed,
+edad_minors_filter = FALSE, include_props = FALSE, include_props_na = FALSE)
+tab_combine <- combine_replicates("reclutamiento", replicates_obs_data,
 replicates_data, strata_vars = 'sexo', conflict_filter = TRUE,
-forced_dis_filter = FALSE, edad_minors_filter = FALSE, include_props = TRUE)
+forced_dis_filter = FALSE, edad_minors_filter = FALSE, include_props = FALSE)
 }

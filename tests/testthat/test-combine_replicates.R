@@ -19,8 +19,7 @@ tab_observed <- summary_observed("reclutamiento",
                                  forced_dis_filter = FALSE,
                                  edad_minors_filter = TRUE,
                                  include_props = TRUE,
-                                 prop_obs_na = TRUE,
-                                 digits = 2)
+                                 include_props_na = TRUE)
 
 testthat::test_that("The imp_lo can't be less from observed and
                     can't be bigger than imp_mean" , {
@@ -32,8 +31,7 @@ testthat::test_that("The imp_lo can't be less from observed and
                                                         conflict_filter = TRUE,
                                                         forced_dis_filter = FALSE,
                                                         edad_minors_filter = FALSE,
-                                                        include_props = TRUE,
-                                                        digits = 2)
+                                                        include_props = TRUE)
 
                         testthat::expect_error(stop(tab_combine$imp_lo < tab_combine$observed))
                         testthat::expect_error(stop(tab_combine$imp_lo > tab_combine$imp_mean))
@@ -48,7 +46,7 @@ tab_observed <- summary_observed("reclutamiento",
                                  forced_dis_filter = FALSE,
                                  edad_minors_filter = TRUE,
                                  include_props = FALSE,
-                                 prop_obs_na = FALSE)
+                                 include_props_na = FALSE)
 
 testthat::test_that("The function works to one strata" , {
 
@@ -70,7 +68,7 @@ tab_observed <- summary_observed("reclutamiento",
                                  forced_dis_filter = FALSE,
                                  edad_minors_filter = TRUE,
                                  include_props = FALSE,
-                                 prop_obs_na = FALSE)
+                                 include_props_na = FALSE)
 
 testthat::test_that("The function works to more than one strata" , {
 
@@ -92,7 +90,7 @@ tab_observed <- summary_observed("reclutamiento",
                                  forced_dis_filter = FALSE,
                                  edad_minors_filter = TRUE,
                                  include_props = FALSE,
-                                 prop_obs_na = FALSE)
+                                 include_props_na = FALSE)
 
 tab_combine <- combine_replicates("reclutamiento",
                                   tab_observed,
@@ -103,11 +101,12 @@ tab_combine <- combine_replicates("reclutamiento",
                                   edad_minors_filter = FALSE,
                                   include_props = FALSE)
 
-testthat::test_that("The proportions' function works without digist in tab_combine", {
+testthat::test_that("The proportions' function does not work with a different digit (2)", {
   
-  testthat::expect_no_error(
+  testthat::expect_error(
     tab_proportions <- verdata::proportions_imputed(tab_combine, 
-                                                    strata_vars = "sexo")
+                                                    strata_vars = "sexo",
+                                                    digits = 4)
     
   )
   
