@@ -5,7 +5,7 @@
 \title{run_lcmcr}
 \usage{
 run_lcmcr(
-  stratum_recs,
+  stratum_data_prepped,
   stratum_name,
   min_n = 1,
   K,
@@ -18,7 +18,7 @@ run_lcmcr(
 )
 }
 \arguments{
-\item{stratum_recs}{A dataframe with all records in the stratum of interest
+\item{stratum_data_prepped}{A dataframe with all records in the stratum of interest
 documented by sources considered valid for estimation (i.e., there should be
 no rows with all 0's). Columns indicating sources should be prefixed with
 \code{in_} and should be numeric with 1 indicating that an individual was
@@ -73,7 +73,7 @@ my_stratum <- tibble::tibble(in_A, in_B, in_C, in_D) \%>\%
     dplyr::mutate(rs = rowSums(.)) \%>\%
     dplyr::filter(rs >= 1) \%>\%
     dplyr::select(-rs)
-run_lcmcr(stratum_recs = my_stratum, stratum_name = "my_stratum",
+run_lcmcr(stratum_data_prepped = my_stratum, stratum_name = "my_stratum",
           K = 4, buffer_size = 10000, sampler_thinning = 1000, seed = 19481210,
           burnin = 10000, n_samples = 10000, posterior_thinning = 500)
 }

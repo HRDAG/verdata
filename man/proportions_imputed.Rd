@@ -12,7 +12,8 @@ proportions_imputed(complete_data, strata_vars, digits = 2)
 \item{strata_vars}{A vector of column names identifying the variables to be
 used for stratification.}
 
-\item{digits}{Number of decimal places to round the results to.}
+\item{digits}{Number of decimal places to round the results to. Default value
+is 2.}
 }
 \value{
 A dataframe that contains the proportions after to apply

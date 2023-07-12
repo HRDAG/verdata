@@ -8,7 +8,7 @@
 #'
 #' @description Determine valid sources for estimation of a stratum of interest.
 #'
-#' @param stratum_recs A dataframe with all records in a stratum of interest.
+#' @param stratum_data_prepped A dataframe with all records in a stratum of interest.
 #' Columns indicating sources should be prefixed with `in_` and should be numeric
 #' with 1 indicating that an individual was documented in the source and 0
 #' indicating that an individual was not documented in the source.
@@ -29,11 +29,11 @@
 #'
 #' my_stratum <- tibble::tibble(in_A, in_B, in_C, in_D)
 #' get_valid_sources(my_stratum)
-get_valid_sources <- function(stratum_recs, min_n = 1) {
+get_valid_sources <- function(stratum_data_prepped, min_n = 1) {
 
     if (min_n <= 0) { stop("min_n value should be greater than 0") }
 
-    stratum_recs %>%
+    stratum_data_prepped %>%
         dplyr::select(tidyselect::starts_with("in_")) %>%
         assertr::verify(all(rowSums(.) <= ncol(.))) %>%
         dplyr::summarize(dplyr::across(tidyselect::everything(), sum)) %>%
@@ -52,7 +52,7 @@ get_valid_sources <- function(stratum_recs, min_n = 1) {
 #' Non-Parametric Latent-Class Capture-Recapture model developed by Daniel
 #' Manrique-Vallier (2016).
 #'
-#' @param stratum_recs A dataframe with all records in the stratum of interest
+#' @param stratum_data_prepped A dataframe with all records in the stratum of interest
 #' documented by sources considered valid for estimation (i.e., there should be
 #' no rows with all 0's). Columns indicating sources should be prefixed with
 #' `in_` and should be numeric with 1 indicating that an individual was
@@ -100,15 +100,15 @@ get_valid_sources <- function(stratum_recs, min_n = 1) {
 #'     dplyr::mutate(rs = rowSums(.)) %>%
 #'     dplyr::filter(rs >= 1) %>%
 #'     dplyr::select(-rs)
-#' run_lcmcr(stratum_recs = my_stratum, stratum_name = "my_stratum",
+#' run_lcmcr(stratum_data_prepped = my_stratum, stratum_name = "my_stratum",
 #'           K = 4, buffer_size = 10000, sampler_thinning = 1000, seed = 19481210,
 #'           burnin = 10000, n_samples = 10000, posterior_thinning = 500)
 #' }
-run_lcmcr <- function(stratum_recs, stratum_name, min_n = 1,
+run_lcmcr <- function(stratum_data_prepped, stratum_name, min_n = 1,
                       K, buffer_size, sampler_thinning, seed,
                       burnin, n_samples, posterior_thinning) {
 
-    valid_sources <- get_valid_sources(stratum_recs, min_n)
+    valid_sources <- get_valid_sources(stratum_data_prepped, min_n)
 
     if (length(valid_sources) < 3) {
 
@@ -117,13 +117,13 @@ run_lcmcr <- function(stratum_recs, stratum_name, min_n = 1,
     }
 
     # prep data according to LCMCR specs
-    stratum_recs <- stratum_recs %>%
+    stratum_data_prepped <- stratum_data_prepped %>%
         dplyr::mutate(dplyr::across(tidyselect::everything(),
                                     ~factor(.x, levels = c(0, 1)))) %>%
         as.data.frame()
 
     options(warn = -1)
-    sampler <- lcmCR(captures = stratum_recs,
+    sampler <- lcmCR(captures = stratum_data_prepped,
                      K = K,
                      tabular = FALSE,
                      seed = seed,
@@ -143,7 +143,7 @@ run_lcmcr <- function(stratum_recs, stratum_name, min_n = 1,
     N <- N[seq(1, length(N), n_samples / 1000)] # thin again
 
     return(tibble::tibble(N = N,
-                          valid_sources = paste(names(stratum_recs), collapse = ","),
+                          valid_sources = paste(names(stratum_data_prepped), collapse = ","),
                           stratum_name = stratum_name))
 
 }
@@ -284,11 +284,11 @@ mse <- function(stratum_data, stratum_name,
                 K = NULL, buffer_size = 10000, sampler_thinning = 1000, seed = 19481210,
                 burnin = 10000, n_samples = 10000, posterior_thinning = 500) {
 
-    stratum_recs <- stratum_data %>%
+    stratum_data_prepped <- stratum_data %>%
         dplyr::select(tidyselect::starts_with("in_")) %>%
         dplyr::mutate(dplyr::across(tidyselect::everything(), ~if_else(. >= 1, 1, 0)))
 
-    valid_sources <- get_valid_sources(stratum_recs, min_n)
+    valid_sources <- get_valid_sources(stratum_data_prepped, min_n)
 
     if (length(valid_sources) < 3) {
 
@@ -302,17 +302,17 @@ mse <- function(stratum_data, stratum_name,
 
     # keep only records that appear on one or more valid source (i.e., no rows
     # with all 0 values)
-    stratum_recs <- stratum_recs %>%
+    stratum_data_prepped <- stratum_data_prepped %>%
         dplyr::select(tidyselect::all_of(valid_sources)) %>%
         dplyr::mutate(rs = rowSums(.)) %>%
         dplyr::filter(rs >= 1) %>%
         dplyr::select(-rs)
 
-    n_obs <- nrow(stratum_recs)
+    n_obs <- nrow(stratum_data_prepped)
 
     if (!is.null(estimates_dir)) {
 
-        lookup_results <- lookup_estimates(stratum_recs, estimates_dir)
+        lookup_results <- lookup_estimates(stratum_data_prepped, estimates_dir)
 
         if (all(is.na(lookup_results$N))) {
 
@@ -321,7 +321,7 @@ mse <- function(stratum_data, stratum_name,
 
             K <- min((2 ** length(valid_sources)) - 1, 15)
 
-            estimates <- run_lcmcr(stratum_recs, stratum_name,
+            estimates <- run_lcmcr(stratum_data_prepped, stratum_name,
                                    min_n = 1,
                                    K = K,
                                    buffer_size = 10000,
@@ -338,7 +338,7 @@ mse <- function(stratum_data, stratum_name,
 
             estimates <- lookup_results %>%
                 dplyr::mutate(validated = TRUE,
-                              valid_sources = paste(names(stratum_recs), collapse = ","),
+                              valid_sources = paste(names(stratum_data_prepped), collapse = ","),
                               n_obs = n_obs,
                               stratum_name = stratum_name) %>%
                 dplyr::select(validated, N, valid_sources, n_obs, stratum_name)
@@ -354,7 +354,7 @@ mse <- function(stratum_data, stratum_name,
             K <- min((2 ** length(valid_sources)) - 1, 15)
         }
 
-        estimates <- run_lcmcr(stratum_recs, stratum_name, min_n,
+        estimates <- run_lcmcr(stratum_data_prepped, stratum_name, min_n,
                                K, buffer_size, sampler_thinning, seed,
                                burnin, n_samples, posterior_thinning) %>%
             dplyr::mutate(validated = TRUE,

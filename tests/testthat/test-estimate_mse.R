@@ -34,7 +34,7 @@ testthat::test_that("internal run_lcmcr function returns correct results for
         dplyr::mutate(rs = rowSums(.)) %>%
         dplyr::filter(rs >= 1) %>%
         dplyr::select(-rs)
-    r1 <- run_lcmcr(stratum_recs = stratum_1, stratum_name = "stratum 1",
+    r1 <- run_lcmcr(stratum_data_prepped = stratum_1, stratum_name = "stratum 1",
                     K = 4, buffer_size = 10000, sampler_thinning = 1000,
                     seed = 19481210, burnin = 10000, n_samples = 10000,
                     posterior_thinning = 500)

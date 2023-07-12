@@ -82,34 +82,4 @@ testthat::test_that("The function works to more than one strata" , {
                                           edad_minors_filter = TRUE))
 })
 
-
-tab_observed <- summary_observed("reclutamiento",
-                                 replicates_data_filter,
-                                 strata_vars = "sexo",
-                                 conflict_filter = TRUE,
-                                 forced_dis_filter = FALSE,
-                                 edad_minors_filter = TRUE,
-                                 include_props = FALSE,
-                                 include_props_na = FALSE)
-
-tab_combine <- combine_replicates("reclutamiento",
-                                  tab_observed,
-                                  replicates_data_filter, 
-                                  strata_vars = "sexo",
-                                  conflict_filter = TRUE,
-                                  forced_dis_filter = FALSE,
-                                  edad_minors_filter = FALSE,
-                                  include_props = FALSE)
-
-testthat::test_that("The proportions' function does not work with a different digit (2)", {
-  
-  testthat::expect_error(
-    tab_proportions <- verdata::proportions_imputed(tab_combine, 
-                                                    strata_vars = "sexo",
-                                                    digits = 4)
-    
-  )
-  
-})
-
 # --- Done

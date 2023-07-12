@@ -13,7 +13,8 @@
 #' @param complete_data A dataframe containing the output from `combine_replicates`.
 #' @param strata_vars A vector of column names identifying the variables to be
 #' used for stratification.
-#' @param digits Number of decimal places to round the results to.
+#' @param digits Number of decimal places to round the results to. Default value
+#' is 2.
 #' 
 #' @return A dataframe that contains the proportions after to apply 
 #' `combine_replicates` 
@@ -33,14 +34,10 @@ proportions_imputed <- function(complete_data,
                                 strata_vars, 
                                 digits = 2) {
   
-  if (digits != 2) {
-    stop("Digits incorrectly specified")
-  }
-  
   proportions_data <- complete_data %>%
-    dplyr::mutate(imp_lo_p = round(imp_lo / sum(imp_mean, na.rm = TRUE), digits = 2),
-                  imp_mean_p = round(imp_mean / sum(imp_mean, na.rm = TRUE), digits = 2),
-                  imp_hi_p = round(imp_hi / sum(imp_mean, na.rm = TRUE), digits = 2))
+    dplyr::mutate(imp_lo_p = round(imp_lo / sum(imp_mean, na.rm = TRUE), digits = digits),
+                  imp_mean_p = round(imp_mean / sum(imp_mean, na.rm = TRUE), digits = digits),
+                  imp_hi_p = round(imp_hi / sum(imp_mean, na.rm = TRUE), digits = digits))
   
   proportions_data <- proportions_data %>% 
     dplyr::select(all_of({{strata_vars}}), 
@@ -64,7 +61,9 @@ proportions_imputed <- function(complete_data,
 #' "is_forced_dis" rule.
 #' @param edad_minors_filter Optional filter by age ("edad") < 18.
 #' @param include_props A logical value indicating whether or not to include
-#'  the proportions from the calculations before to merge with summary_observed's output
+#'  the proportions from the calculations before to merge with summary_observed's output.
+#' @param digits Number of decimal places to round the results to (only relevant
+#' if `include_props` is `TRUE`). Default value is 2.
 #' @return A dataframe with 5 or more columns: name of variable(s), `observed`
 #' the number of observations in each category for every variable, `imp_lo` the
 #' lower bound of the 95% confidence interval, `imp_hi` the upper bound of the
@@ -89,7 +88,8 @@ combine_replicates <- function(violation,
                                conflict_filter = TRUE,
                                forced_dis_filter = FALSE,
                                edad_minors_filter = FALSE,
-                               include_props = FALSE) {
+                               include_props = FALSE,
+                               digits = 2) {
   
   if (!(violation %in% c("homicidio", "secuestro", "reclutamiento", "desaparicion"))) {
     
@@ -101,7 +101,7 @@ combine_replicates <- function(violation,
 
     if (num_replicates == 1) {
 
-        stop("You should work with more than ten replicates")
+        stop("Results cannot be calculated using only 1 replicate")
 
         }
 
@@ -188,7 +188,7 @@ combine_replicates <- function(violation,
       
       logger::log_info("Including the proportions")
 
-      rep_data <- proportions_imputed(rep_data, strata_vars, digits = 2)
+      rep_data <- proportions_imputed(rep_data, strata_vars, digits = digits)
       
       rep_data <- rep_data %>% 
         dplyr::mutate(imp_lo_p = dplyr::if_else(imp_lo_p < 0, 0, imp_lo_p))

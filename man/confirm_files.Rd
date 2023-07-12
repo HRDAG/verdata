@@ -9,7 +9,7 @@ confirm_files(replicates_dir, violation, first_rep, last_rep)
 \arguments{
 \item{replicates_dir}{Directory containing the replicates.
 The name of the files must include the violation in Spanish and lower case
-letters (homicidio, secuestro, reclutamiento, desaparicion)}
+letters (homicidio, secuestro, reclutamiento, desaparicion).}
 
 \item{violation}{Violation being analyzed. Options are "homicidio", "secuestro",
 "reclutamiento", and "desaparicion".}

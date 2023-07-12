@@ -8,7 +8,7 @@
 #'
 #' @param replicate_path Path to the replicate to be confirmed. The name
 #' of the files must include the violation in Spanish and lower case letters
-#' (homicidio, secuestro, reclutamiento, desaparicion)
+#' (homicidio, secuestro, reclutamiento, desaparicion).
 #
 #' @return "You have the right file!" message if the files are identical to the
 #' files published or error and "This file is not identical to the one published.
@@ -97,7 +97,7 @@ confirm_file <- function(replicate_path) {
 #'
 #' @param replicates_dir Directory containing the replicates.
 #' The name of the files must include the violation in Spanish and lower case
-#' letters (homicidio, secuestro, reclutamiento, desaparicion)
+#' letters (homicidio, secuestro, reclutamiento, desaparicion).
 #' @param violation Violation being analyzed. Options are "homicidio", "secuestro",
 #' "reclutamiento", and "desaparicion".
 #' @param first_rep First replicate in the range of replicates to be analyzed
