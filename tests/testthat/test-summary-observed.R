@@ -112,18 +112,4 @@ tab_observed <- summary_observed("reclutamiento",
                                  include_props = FALSE,
                                  include_props_na = FALSE)
 
-testthat::test_that("The proportions' function does not work with a digit different to 2", {
-  
-  testthat::expect_error(
-    
-    tab_proportions <- verdata::proportions_observed(tab_observed, 
-                                                     strata_vars = "sexo",
-                                                     include_props_na = TRUE,
-                                                     digits = 4)
-    
-    )
-  
-})
-
-
 # --- Done

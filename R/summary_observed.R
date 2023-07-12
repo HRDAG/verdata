@@ -14,7 +14,7 @@
 #' used for stratification.
 #' @param include_props_na A logical value indicating whether or not to include missing
 #' observations in the calculations.
-#' @param digits Number (2) of decimal places to round the results to.
+#' @param digits Number of decimal places to round the results to. Default is 2.
 #'
 #' @return A dataframe that contains the proportions after to apply 
 #' `summary_observed` 
@@ -31,16 +31,12 @@ proportions_observed <- function(obs_data,
                                  strata_vars, 
                                  include_props_na = TRUE, 
                                  digits = 2){
-  
-  if (digits != 2) {
-    stop("Digits incorrectly specified")
-  }
-  
+
   if (include_props_na == FALSE)  {
     
     tab_na <- obs_data %>%
       dplyr::mutate(obs_prop = round(observed / sum(observed, na.rm = TRUE),
-                                     digits = 2))
+                                     digits = digits))
     
     data_final_prop <- dplyr::left_join(obs_data, tab_na) %>%
       dplyr::select(all_of({{strata_vars}}),
@@ -50,13 +46,13 @@ proportions_observed <- function(obs_data,
     
     tab_com <- obs_data %>%
       dplyr::mutate(obs_prop_na = round((observed / sum(observed, na.rm = TRUE)),
-                                        digits = 2))
+                                        digits = digits))
     
     tab_na <- tab_com %>%
       dplyr::filter(!is.na(observed)) %>%
       dplyr::filter(dplyr::if_any(all_of({{strata_vars}}), ~!is.na(.))) %>%
       dplyr::mutate(obs_prop = round(observed / sum(observed, na.rm = TRUE), 
-                                     digits = 2))
+                                     digits = digits))
     
     data_final_prop <- dplyr::left_join(tab_com, tab_na) %>%
       dplyr::select(all_of({{strata_vars}}), observed, obs_prop_na, obs_prop)
@@ -114,7 +110,7 @@ summary_observed <- function(violation,
   
   if (num_replicates == 1) {
     
-    stop("You should work with more than ten replicates")
+      stop("Results cannot be calculated using only 1 replicate")
     
   } else {
     

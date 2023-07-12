@@ -20,7 +20,7 @@ used for stratification.}
 \item{include_props_na}{A logical value indicating whether or not to include missing
 observations in the calculations.}
 
-\item{digits}{Number (2) of decimal places to round the results to.}
+\item{digits}{Number of decimal places to round the results to. Default is 2.}
 }
 \value{
 A dataframe that contains the proportions after to apply
