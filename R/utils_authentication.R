@@ -164,46 +164,58 @@ medidas <- function(replicate_path) {
 #'
 #' @noRd
 build_path <- function(replicates_dir, violation, first_rep, last_rep) {
-
-    path <- list.files(path = replicates_dir, full.names = TRUE)
+  
+    valid_violations <- c("secuestro", "reclutamiento", "homicidio", "desaparicion")
     
-    file_extension <- stringr::str_extract(pattern = "parquet|csv",
-                                           replicates_dir)
-    
-    if (is.na(file_extension)) {
+    if (violation %in% valid_violations) {
       
-      file_extension <- "parquet"
-    
-    }
-
-    if (file_extension == "parquet") {
-
-    matchpattern <- "([^-]+)\\-R([0-9]+).parquet"
-
-    matches <- stringr::str_match(path, matchpattern) %>%
-        tibble::as_tibble(.name_repair = ~c("full_match", "violation", "rep_number"))
-
-    rep_lista <- tibble::tibble(full_path = path, matches) %>%
-        dplyr::mutate(rep_number = as.integer(rep_number)) %>%
-        dplyr::filter(violation == violation,
-                      dplyr::between(rep_number, first_rep, last_rep)) %>%
-        purrr::pluck("full_path")
-
-    } else {
-
-        matchpattern <- "([^-]+)\\-R([0-9]+).csv"
-
+      path <- list.files(path = replicates_dir, full.names = TRUE)
+      
+      file_extension <- stringr::str_extract(pattern = "parquet|csv",
+                                             replicates_dir)
+      
+      if (is.na(file_extension)) {
+        
+        file_extension <- "parquet"
+        
+      }
+      
+      if (file_extension == "parquet") {
+        
+        matchpattern <- "([^-]+)\\-R([0-9]+).parquet"
+        
         matches <- stringr::str_match(path, matchpattern) %>%
-            tibble::as_tibble(.name_repair = ~c("full_match", "violation", "rep_number"))
-
+          tibble::as_tibble(.name_repair = ~c("full_match", "violation", "rep_number"))
+        
         rep_lista <- tibble::tibble(full_path = path, matches) %>%
-            dplyr::mutate(rep_number = as.integer(rep_number)) %>%
-            dplyr::filter(violation == violation,
-                          dplyr::between(rep_number, first_rep, last_rep)) %>%
-            purrr::pluck("full_path")
+          dplyr::mutate(rep_number = as.integer(rep_number)) %>%
+          dplyr::filter(violation == violation,
+                        dplyr::between(rep_number, first_rep, last_rep)) %>%
+          purrr::pluck("full_path")
+        
+      } else {
+        
+        matchpattern <- "([^-]+)\\-R([0-9]+).csv"
+        
+        matches <- stringr::str_match(path, matchpattern) %>%
+          tibble::as_tibble(.name_repair = ~c("full_match", "violation", "rep_number"))
+        
+        rep_lista <- tibble::tibble(full_path = path, matches) %>%
+          dplyr::mutate(rep_number = as.integer(rep_number)) %>%
+          dplyr::filter(violation == violation,
+                        dplyr::between(rep_number, first_rep, last_rep)) %>%
+          purrr::pluck("full_path")
+      }
+      
+      return(rep_lista)
     }
-
-    return(rep_lista)
+    
+    else {
+      
+    stop("Violation argument incorrectly specified. Please enter a valid violation")
+      
+    }
+    
 }
 
 

@@ -41,4 +41,10 @@ testthat::test_that("Hashing wrong files", {
 
 })
 
+testthat::test_that("Function should return an error if the violation type is incorrect", {
+  
+  testthat::expect_error(confirm_files(right_dir, "RECLUTAMIENTO", 1, 2))
+  
+})
+
 # --- Done

@@ -56,4 +56,10 @@ testthat::test_that("Hashing content of wrong with crash set to F", {
 
 })
 
+testthat::test_that("Function should return an error if the violation type is incorrect", {
+  
+  testthat::expect_error(read_replicates(right_dir, "desplazamiento", 1, 2))
+  
+})
+
 # --- Done
