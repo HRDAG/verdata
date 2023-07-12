@@ -62,4 +62,37 @@ testthat::test_that("Function should return an error if the violation type is in
   
 })
 
+testthat::test_that("Expect message when number of replicates exceed available replicates", {
+  
+  testthat::expect_message(read_replicates(right_dir, "reclutamiento", 90, 110), 
+                           "There are only 100 replicates available. Authenticated and loaded replicates 90 to 100")
+  
+})
+
+testthat::test_that("Expect message when first replicate is less than 1", {
+  
+  testthat::expect_message(read_replicates(right_dir, "reclutamiento", 0, 2), 
+                           "First replicate available is replicate 1. Authenticated and loaded replicates 1 to 2")
+  
+})
+
+testthat::test_that("Expect message when first replicate is less than 1 and last is more than 100", {
+  
+  testthat::expect_message(read_replicates(right_dir, "reclutamiento", 0, 101), 
+                           "Replicates available go from 1 to 100. Authenticated and loaded replicates 1 to 100")
+})
+
+testthat::test_that("Function should return an error if the first_rep argument dos not have the correct format", {
+  
+  testthat::expect_error(read_replicates(right_dir, "reclutamiento", "1", 2))
+  
+})
+
+testthat::test_that("Function should return an error if the last_rep argument dos not have the correct format", {
+  
+  testthat::expect_error(read_replicates(right_dir, "RECLUTAMIENTO", 1, "dos"))
+  
+})
+
+
 # --- Done

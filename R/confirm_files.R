@@ -115,10 +115,23 @@ confirm_file <- function(replicate_path) {
 #' local_dir <- system.file("extdata", "right", package = "verdata")
 #' confirm_files(local_dir, "reclutamiento", 1, 2)
 confirm_files <- function(replicates_dir, violation, first_rep, last_rep) {
-
+  
     files <- build_path(replicates_dir, violation, first_rep, last_rep)
     purrr::walk(files, confirm_file)
-
+    
+    if (first_rep < 1 & last_rep > 100){
+      message("Replicates available go from 1 to 100. Authenticated replicates 1 to 100")
+    } else {
+      
+      if (first_rep < 1){
+        message(paste("First replicate available is replicate 1. Authenticated replicates 1 to", last_rep))
+      }
+      
+      if (last_rep > 100){
+        message(paste("There are only 100 replicates available. Authenticated replicates", first_rep, "to 100"))
+      }
+      
+    }
 }
 
 # --- Done

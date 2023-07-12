@@ -165,6 +165,14 @@ medidas <- function(replicate_path) {
 #' @noRd
 build_path <- function(replicates_dir, violation, first_rep, last_rep) {
   
+    if (!is.numeric(first_rep)) {
+      stop("first_rep argument should be numeric")
+    }
+  
+    if (!is.numeric(last_rep)) {
+      stop("last_rep argument should be numeric")
+    }
+  
     valid_violations <- c("secuestro", "reclutamiento", "homicidio", "desaparicion")
     
     if (violation %in% valid_violations) {

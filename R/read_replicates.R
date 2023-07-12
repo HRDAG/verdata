@@ -128,12 +128,26 @@ read_replicate <- function(replicate_path, crash = TRUE) {
 #' read_replicates(local_dir, "reclutamiento", 1, 2)
 read_replicates <- function(replicates_dir, violation, first_rep, last_rep,
                             crash = TRUE) {
-
+  
     files <- build_path(replicates_dir, violation, first_rep, last_rep)
     replicate_data <- purrr::map_dfr(files, read_replicate, crash)
-
+    
+    if (first_rep < 1 & last_rep > 100){
+      message("Replicates available go from 1 to 100. Authenticated and loaded replicates 1 to 100")
+    } else {
+      
+      if (first_rep < 1){
+        message(paste("First replicate available is replicate 1. Authenticated and loaded replicates 1 to", last_rep))
+      }
+      
+      if (last_rep > 100){
+        message(paste("There are only 100 replicates available. Authenticated and loaded replicates", first_rep, "to 100"))
+      }
+      
+    }
+    
     return(replicate_data)
-
+    
 }
 
 # --- Done
