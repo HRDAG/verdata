@@ -109,7 +109,7 @@ read_replicate <- function(replicate_path, crash = TRUE) {
 #' Then file name of each replicate must contain at least the name of the violation
 #' in Spanish and lower case letters (homicidio, secuestro, reclutamiento, desaparicion),
 #' and the replicate number preceded by "R", (e.g., "R1" for replicate 1).
-#' @param violacion A string indicating the violation being analyzed. Options are
+#' @param violation A string indicating the violation being analyzed. Options are
 #' "homicidio", "secuestro", "reclutamiento", and "desaparicion".
 #' @param first_rep First replicate in the range of replicates to be analyzed.
 #' @param last_rep Last replicate in the range of replicates to be analyzed.
@@ -126,10 +126,10 @@ read_replicate <- function(replicate_path, crash = TRUE) {
 #' @examples
 #' local_dir <- system.file("extdata", "right", package = "verdata")
 #' read_replicates(local_dir, "reclutamiento", 1, 2)
-read_replicates <- function(replicates_dir, violacion, first_rep, last_rep,
+read_replicates <- function(replicates_dir, violation, first_rep, last_rep,
                             crash = TRUE) {
 
-    files <- build_path(replicates_dir, violacion, first_rep, last_rep)
+    files <- build_path(replicates_dir, violation, first_rep, last_rep)
     replicate_data <- purrr::map_dfr(files, read_replicate, crash)
 
     return(replicate_data)

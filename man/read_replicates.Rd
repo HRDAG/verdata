@@ -4,7 +4,7 @@
 \alias{read_replicates}
 \title{Read replicates in a directory and verify they are identical to the ones published.}
 \usage{
-read_replicates(replicates_dir, violacion, first_rep, last_rep, crash = TRUE)
+read_replicates(replicates_dir, violation, first_rep, last_rep, crash = TRUE)
 }
 \arguments{
 \item{replicates_dir}{Adirectory to the replicates.
@@ -12,7 +12,7 @@ Then file name of each replicate must contain at least the name of the violation
 in Spanish and lower case letters (homicidio, secuestro, reclutamiento, desaparicion),
 and the replicate number preceded by "R", (e.g., "R1" for replicate 1).}
 
-\item{violacion}{A string indicating the violation being analyzed. Options are
+\item{violation}{A string indicating the violation being analyzed. Options are
 "homicidio", "secuestro", "reclutamiento", and "desaparicion".}
 
 \item{first_rep}{First replicate in the range of replicates to be analyzed.}

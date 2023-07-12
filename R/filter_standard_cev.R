@@ -6,13 +6,13 @@
 
 #' Filter records to replicate results presented in the CEV methodology report.
 #'
-#' @param replicates Dataframe with data from all replicates to be filtered.
+#' @param replicates_data Dataframe with data from all replicates to be filtered.
 #' @param violation Violation to be analyzed. Options are "homicidio", "secuestro",
-#' "reclutamiento", and "desaparicion"
-#' @param perp_change Change option: if there are victims in years after 2016 and 
-#' if the perpetrator "p_str" is "GUE-FARC", these victims become victims of 
-#' other guerrillas "GUE-OTRO"
-#' @return Data frame filter
+#' "reclutamiento", and "desaparicion".
+#' @param perp_change A logical value indicating whether victims in years after
+#' 2016 with perpetrator values (indicated by `p_str`) of the FARC-EP ("GUE-FARC")
+#' should be reassigned to other guerrilla groups (`p_str` value "GUE-OTRO").
+#' @return A filtered dataframe.
 #' @export
 #'
 #' @importFrom dplyr %>%
@@ -22,7 +22,7 @@
 #' replicates_data <- read_replicates(local_dir, "reclutamiento", 1, 2)
 #' filter_standard_cev(replicates_data, "reclutamiento", perp_change = TRUE)
 #'
-filter_standard_cev <- function(replicates, violation, perp_change = TRUE) {
+filter_standard_cev <- function(replicates_data, violation, perp_change = TRUE) {
 
     if (!(violation %in% c("homicidio", "secuestro", "reclutamiento", "desaparicion"))) {
 
@@ -30,7 +30,7 @@ filter_standard_cev <- function(replicates, violation, perp_change = TRUE) {
 
     }
   
-    data_filter <- replicates %>%
+    data_filter <- replicates_data %>%
         dplyr::mutate(edad_c = dplyr::case_when(edad_jep == "INFANCIA" ~ "MENOR",
                                                 edad_jep == "ADOLESCENCIA" ~ "MENOR",
                                                 edad_jep == "ADULTEZ" ~ "ADULTO",
