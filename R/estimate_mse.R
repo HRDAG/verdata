@@ -185,6 +185,31 @@ run_lcmcr <- function(stratum_data_prepped, stratum_name, min_n = 1,
 #'
 #' }
 lookup_estimates <- function(stratum_data_prepped, estimates_dir) {
+  
+    testing_columns <- stratum_data_prepped %>% 
+      dplyr::select(tidyselect::starts_with("in_"))
+    
+    right_columns <- isTRUE(all.equal(stratum_data_prepped, testing_columns))
+    
+    if (!right_columns) {
+      
+      stop("Your dataframe should only include the source columns prefixed with `in_`")
+      
+    }
+  
+    valid_values <- any(stratum_data_prepped < 0 | stratum_data_prepped > 1)
+    
+    if (valid_values) {
+      
+      stop("Your stratification should only contain 0 and 1 values")
+      
+    }
+    
+    if (!isTRUE(length(list.files(estimates_dir)) == 257)) {
+      
+      warning("Your estimates directory does not contain the same amount of files pubished. You might not be able to find estimates for your stratum")
+      
+    }
 
     valid_sources <- get_valid_sources(stratum_data_prepped)
 
@@ -200,7 +225,7 @@ lookup_estimates <- function(stratum_data_prepped, estimates_dir) {
         dplyr::mutate(dplyr::across(dplyr::everything(),
                                     ~factor(.x, levels = c(0, 1)))) %>%
         dplyr::group_by_all() %>%
-        dplyr::summarize(Freq = n()) %>%
+        dplyr::summarize(Freq = dplyr::n()) %>%
         as.data.frame()
 
     if (length(valid_sources) > 0) {

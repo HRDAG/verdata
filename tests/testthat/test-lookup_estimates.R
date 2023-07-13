@@ -9,6 +9,32 @@ replicates <- read_replicates(local_dir, "reclutamiento", 1, 1)
 
 estimates_dir <- system.file("extdata", "estimates", package = "verdata")
 
+in_A <- sample(c(0, 1), size = 100, replace = TRUE, prob = c(0.45, 0.65))
+in_B <- sample(c(0, 1), size = 100, replace = TRUE, prob = c(0.5, 0.5))
+in_C <- sample(c(0, 1), size = 100, replace = TRUE, prob = c(0.75, 0.25))
+in_D <- sample(c(0, 1), size = 100, replace = TRUE, prob = c(1, 0))
+not_in_E <- sample(c(0, 1), size = 100, replace = TRUE, prob = c(1, 0))
+
+bad_columns <- tibble::tibble(in_A, in_B, in_C, in_D, not_in_E) %>%
+  dplyr::mutate(rs = rowSums(.)) %>%
+  dplyr::filter(rs >= 1) %>%
+  dplyr::select(-rs)
+
+in_A <- sample(c(0, 2), size = 100, replace = TRUE, prob = c(0.45, 0.65))
+in_B <- sample(c(0, 1), size = 100, replace = TRUE, prob = c(0.5, 0.5))
+
+wrong_stratum <- tibble::tibble(in_A, in_B) %>%
+  dplyr::mutate(rs = rowSums(.)) %>%
+  dplyr::select(-rs)
+
+in_A <- sample(c(0, 1), size = 100, replace = TRUE, prob = c(0.45, 0.65))
+in_B <- sample(c(0, 1), size = 100, replace = TRUE, prob = c(0.5, 0.5))
+
+my_stratum <- tibble::tibble(in_A, in_B) %>%
+  dplyr::mutate(rs = rowSums(.)) %>%
+  dplyr::filter(rs >= 1) %>%
+  dplyr::select(-rs)
+
 testthat::test_that("Lookup existing estimates", {
 
     estrato <- replicates %>%
@@ -39,6 +65,25 @@ testthat::test_that("Lookup non existing estimates", {
     testthat::expect_named(no_estimates, "N")
     testthat::expect_equal(no_estimates$N, NA_real_)
 
+})
+
+
+testthat::test_that("Return error if the stratum cantains values different ti 0 and 1", {
+  
+  testthat::expect_error(lookup_estimates(wrong_stratum, estimates_dir))
+  
+})
+
+testthat::test_that("Return error if the dataframe includes columns different to `in_`", {
+  
+  testthat::expect_error(lookup_estimates(bad_columns, estimates_dir))
+  
+})
+
+testthat::test_that("Return warning if the estimates directory does not have all files", {
+  
+  testthat::expect_warning(lookup_estimates(my_stratum, estimates_dir))
+  
 })
 
 # --- Done
