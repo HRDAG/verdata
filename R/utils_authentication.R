@@ -220,7 +220,7 @@ build_path <- function(replicates_dir, violation, first_rep, last_rep) {
     
     else {
       
-    stop("Violation argument incorrectly specified. Please enter a valid violation")
+    stop("Violation argument incorrectly specified. Please enter one of the following valid violation types: reclutamiento, secuestro, homicidio, desaparicion")
       
     }
     
