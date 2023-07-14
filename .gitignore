@@ -7,3 +7,4 @@
 *.parquet
 *.json
 *.zip
+.RDataTmp
