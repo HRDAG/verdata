@@ -167,7 +167,7 @@ testthat::test_that("The function must return an error if the user put
 
 testthat::test_that("The function must return an error if the user put
                     an invalid combination of arguments:
-                    include_props == FALSE && include_props_na == TRUE", {
+                    include_props == FALSE & include_props_na == TRUE", {
 
                       testthat::expect_error(
                         tab_observed <- summary_observed("reclutamiento",
