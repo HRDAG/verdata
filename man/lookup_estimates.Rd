@@ -25,7 +25,7 @@ files, \code{N} will contain draws from the posterior distribution of the model
 and the dataframe will contain 1,000 rows.
 }
 \description{
-Look up existing estimates from pre-calculated files.
+Look up and read in existing estimates from pre-calculated files.
 }
 \examples{
 \dontrun{
