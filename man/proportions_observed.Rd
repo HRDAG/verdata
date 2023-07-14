@@ -17,8 +17,8 @@ proportions_observed(
 \item{strata_vars}{A vector of column names identifying the variables to be
 used for stratification.}
 
-\item{include_props_na}{A logical value indicating whether or not to include missing
-observations in the calculations.}
+\item{include_props_na}{A logical value indicating whether or
+not to include missing observations in the calculations.}
 
 \item{digits}{Number of decimal places to round the results to. Default is 2.}
 }
@@ -34,8 +34,8 @@ to calculate using \code{summary_observed} on observed values.
 local_dir <- system.file("extdata", "right", package = "verdata")
 replicates_data <- read_replicates(local_dir, "reclutamiento", 1, 2)
 tab_observed <- summary_observed("reclutamiento", replicates_data,
-strata_vars = "sexo", conflict_filter = TRUE, forced_dis_filter = FALSE, 
+strata_vars = "sexo", conflict_filter = TRUE, forced_dis_filter = FALSE,
 edad_minors_filter = TRUE, include_props = TRUE, include_props_na = TRUE)
-prop_data <- proportions_observed(tab_observed, strata_vars = "sexo", 
+prop_data <- proportions_observed(tab_observed, strata_vars = "sexo",
 include_props_na = TRUE, digits = 2)
 }

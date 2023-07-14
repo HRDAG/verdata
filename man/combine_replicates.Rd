@@ -8,19 +8,18 @@ combine_replicates(
   violation,
   replicates_obs_data,
   replicates_data,
-  strata_vars,
+  strata_vars = NULL,
   conflict_filter = TRUE,
   forced_dis_filter = FALSE,
   edad_minors_filter = FALSE,
-  include_props = FALSE,
-  digits = 2
+  include_props = FALSE
 )
 }
 \arguments{
 \item{violation}{Violation to be analyzed. Options are "homicidio", "secuestro",
 "reclutamiento" and "desaparicion".}
 
-\item{replicates_obs_data}{Dataframe that results from applying \code{summary_observed}.}
+\item{replicates_obs_data}{Data frame that results from applying \code{summary_observed}.}
 
 \item{replicates_data}{Data frame containing replicates data.}
 
@@ -36,9 +35,6 @@ the "is_conflict" rule.}
 
 \item{include_props}{A logical value indicating whether or not to include
 the proportions from the calculations before to merge with summary_observed's output.}
-
-\item{digits}{Number of decimal places to round the results to (only relevant
-if \code{include_props} is \code{TRUE}). Default value is 2.}
 }
 \value{
 A dataframe with 5 or more columns: name of variable(s), \code{observed}
