@@ -16,23 +16,23 @@ used for stratification.}
 is 2.}
 }
 \value{
-A dataframe that contains the proportions after to apply
-\code{combine_replicates}
+A dataframe that contains the proportions after applying
+\code{combine_replicates}.
 }
 \description{
 Calculate the proportions of each level of a variable after
-to calculate using \code{combine_replicates} on complete data (that includes
+applying \code{combine_replicates} to complete data (that includes
 imputed values).
 }
 \examples{
 local_dir <- system.file("extdata", "right", package = "verdata")
 replicates_data <- read_replicates(local_dir, "reclutamiento", 1, 2, "parquet")
 replicates_obs_data <- summary_observed("reclutamiento", replicates_data,
-strata_vars = "sexo", conflict_filter = FALSE, forced_dis_filter = FALSE, 
+strata_vars = "sexo", conflict_filter = FALSE, forced_dis_filter = FALSE,
 edad_minors_filter = FALSE, include_props = FALSE, include_props_na  = FALSE)
 tab_combine <- combine_replicates("reclutamiento", replicates_obs_data,
 replicates_data, strata_vars = 'sexo', conflict_filter = TRUE,
 forced_dis_filter = FALSE, edad_minors_filter = FALSE,include_props = FALSE)
-prop_data_complete <- proportions_imputed(tab_combine, strata_vars = "sexo", 
+prop_data_complete <- proportions_imputed(tab_combine, strata_vars = "sexo",
 digits = 2)
 }

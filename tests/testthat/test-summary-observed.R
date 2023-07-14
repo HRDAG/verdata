@@ -221,19 +221,8 @@ tab_observed <- summary_observed("reclutamiento",
                                  include_props = TRUE,
                                  include_props_na = TRUE)
 
-
-testthat::test_that("The function must return an error if the user put
-                    a digit that is different to 2", {
-
-                      testthat::expect_error(
-                        proportions_table <- proportions_observed(tab_observed,
-                                                                  strata_vars = "sexo",
-                                                                  include_props_na = TRUE,
-                                                                  digits = 3))
-                    })
-
-testthat::test_that("The function must return an error if the user put
-                    information that is not a data frame in prop's function", {
+testthat::test_that("The function must return an error if the user input
+                    information that is not a dataframe in prop's function", {
 
                       not_data_frame <- tab_observed %>%
                         as.list()

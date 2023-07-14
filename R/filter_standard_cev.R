@@ -6,7 +6,7 @@
 
 #' Filter records to replicate results presented in the CEV methodology report.
 #'
-#' @param replicates_data Dataframe with data from all replicates to be filtered.
+#' @param replicates_data A dataframe with data from all replicates to be filtered.
 #' @param violation Violation to be analyzed. Options are "homicidio", "secuestro",
 #' "reclutamiento", and "desaparicion".
 #' @param perp_change A logical value indicating whether victims in years after
@@ -24,7 +24,7 @@
 filter_standard_cev <- function(replicates_data, violation, perp_change = TRUE) {
 
   if (!is.data.frame(replicates_data)) {
-    stop("The argument 'replicates_data' must be a data frame")
+    stop("The argument 'replicates_data' must be a dataframe")
   }
 
     if (!(violation %in% c("homicidio", "secuestro", "reclutamiento", "desaparicion"))) {

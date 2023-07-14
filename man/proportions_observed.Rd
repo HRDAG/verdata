@@ -24,7 +24,7 @@ not to include missing observations in the calculations.}
 }
 \value{
 A dataframe that contains the proportions after to apply
-\code{summary_observed}
+\code{summary_observed}.
 }
 \description{
 Calculate the proportions of each level of a variable after

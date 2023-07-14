@@ -7,7 +7,7 @@
 #' @title proportions_imputed
 #'
 #' @description Calculate the proportions of each level of a variable after
-#' to calculate using `combine_replicates` on complete data (that includes
+#' applying `combine_replicates` to complete data (that includes
 #' imputed values).
 #'
 #' @param complete_data A dataframe containing the output from `combine_replicates`.
@@ -16,8 +16,8 @@
 #' @param digits Number of decimal places to round the results to. Default value
 #' is 2.
 #'
-#' @return A dataframe that contains the proportions after to apply
-#' `combine_replicates`
+#' @return A dataframe that contains the proportions after applying
+#' `combine_replicates`.
 #' @export
 #' @examples
 #' local_dir <- system.file("extdata", "right", package = "verdata")
@@ -58,8 +58,8 @@ proportions_imputed <- function(complete_data,
 
 #' Combine replicates according to the Normal approximation using the laws of total expectation and variance.
 #'
-#' @param replicates_obs_data Data frame that results from applying `summary_observed`.
-#' @param replicates_data Data frame containing replicates data.
+#' @param replicates_obs_data The dataframe that results from applying `summary_observed`.
+#' @param replicates_data A dataframe containing replicates data.
 #' @param strata_vars Variable with all observations (without missing values).
 #' @param conflict_filter Filter that indicates if the data is filtered using
 #' the "is_conflict" rule.
@@ -122,7 +122,7 @@ combine_replicates <- function(violation,
   }
 
   if (forced_dis_filter == TRUE && violation != "desaparicion") {
-    stop("This argument only applies in 'desaparicion'. Please change the
+    stop("This argument only applies to 'desaparicion'. Please change the
          TRUE option to FALSE")
   }
 
@@ -131,7 +131,7 @@ combine_replicates <- function(violation,
     if (num_replicates == 1) {
 
       stop("Results cannot be calculated using only 1 replicate. For more
-           consistent results please work with more replicates")
+           consistent results please work with more replicates.")
 
         }
 

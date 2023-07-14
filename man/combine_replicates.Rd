@@ -19,9 +19,9 @@ combine_replicates(
 \item{violation}{Violation to be analyzed. Options are "homicidio", "secuestro",
 "reclutamiento" and "desaparicion".}
 
-\item{replicates_obs_data}{Data frame that results from applying \code{summary_observed}.}
+\item{replicates_obs_data}{The dataframe that results from applying \code{summary_observed}.}
 
-\item{replicates_data}{Data frame containing replicates data.}
+\item{replicates_data}{A dataframe containing replicates data.}
 
 \item{strata_vars}{Variable with all observations (without missing values).}
 
@@ -49,7 +49,7 @@ Combine replicates according to the Normal approximation using the laws of total
 local_dir <- system.file("extdata", "right", package = "verdata")
 replicates_data <- read_replicates(local_dir, "reclutamiento", 1, 2)
 replicates_obs_data <- summary_observed("reclutamiento", replicates_data,
-strata_vars = "sexo", conflict_filter = FALSE, forced_dis_filter = FALSE, 
+strata_vars = "sexo", conflict_filter = FALSE, forced_dis_filter = FALSE,
 edad_minors_filter = FALSE, include_props = FALSE, include_props_na = FALSE)
 tab_combine <- combine_replicates("reclutamiento", replicates_obs_data,
 replicates_data, strata_vars = 'sexo', conflict_filter = TRUE,

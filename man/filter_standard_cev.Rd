@@ -7,7 +7,7 @@
 filter_standard_cev(replicates_data, violation, perp_change = TRUE)
 }
 \arguments{
-\item{replicates_data}{Dataframe with data from all replicates to be filtered.}
+\item{replicates_data}{A dataframe with data from all replicates to be filtered.}
 
 \item{violation}{Violation to be analyzed. Options are "homicidio", "secuestro",
 "reclutamiento", and "desaparicion".}
@@ -26,5 +26,4 @@ Filter records to replicate results presented in the CEV methodology report.
 local_dir <- system.file("extdata", "right", package = "verdata")
 replicates_data <- read_replicates(local_dir, "reclutamiento", 1, 2)
 filter_standard_cev(replicates_data, "reclutamiento", perp_change = TRUE)
-
 }
