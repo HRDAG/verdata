@@ -31,6 +31,7 @@
 #' get_valid_sources(my_stratum)
 get_valid_sources <- function(stratum_data_prepped, min_n = 1) {
 
+    if (!is.numeric(min_n)) { stop("min_n value should be numeric") }
     if (min_n <= 0) { stop("min_n value should be greater than 0") }
 
     stratum_data_prepped %>%
@@ -312,6 +313,12 @@ mse <- function(stratum_data, stratum_name,
     stratum_data_prepped <- stratum_data %>%
         dplyr::select(tidyselect::starts_with("in_")) %>%
         dplyr::mutate(dplyr::across(tidyselect::everything(), ~if_else(. >= 1, 1, 0)))
+    
+    if (ncol(stratum_data_prepped) < 1) {
+        
+        stop("Could not find any columns in 'stratum_data' prefixed with 'in_'")
+        
+    }
 
     valid_sources <- get_valid_sources(stratum_data_prepped, min_n)
 
@@ -377,6 +384,19 @@ mse <- function(stratum_data, stratum_name,
 
         if (is.null(K)) {
             K <- min((2 ** length(valid_sources)) - 1, 15)
+        }
+        
+        if (!all(is.numeric(min_n),
+                 is.numeric(K),
+                 is.numeric(buffer_size),
+                 is.numeric(sampler_thinning),
+                 is.numeric(seed),
+                 is.numeric(burnin),
+                 is.numeric(n_samples),
+                 is.numeric(posterior_thinning))) {
+            
+            stop("All model parameters should be numeric")
+            
         }
 
         estimates <- run_lcmcr(stratum_data_prepped, stratum_name, min_n,
