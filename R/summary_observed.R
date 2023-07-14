@@ -126,12 +126,12 @@ summary_observed <- function(violation,
     }
   }
 
-  if (forced_dis_filter == TRUE && violation != "desaparicion") {
+  if (forced_dis_filter == TRUE & violation != "desaparicion") {
     stop("This argument only applies in 'desaparicion'. Please change the
          TRUE option to FALSE")
   }
 
-  if (include_props == FALSE && include_props_na == TRUE) {
+  if (include_props == FALSE & include_props_na == TRUE) {
     stop("Invalid combination of arguments. 'include_props' = FALSE, so
          'include_props_na' can't be = TRUE")
   }
@@ -183,7 +183,7 @@ summary_observed <- function(violation,
 
   }
 
-  if (forced_dis_filter == TRUE && violation == "desaparicion") {
+  if (forced_dis_filter == TRUE & violation == "desaparicion") {
 
     logger::log_info("Analyzing the documented victims who were victims of 'desaparicion forzada'")
 

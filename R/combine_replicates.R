@@ -121,7 +121,7 @@ combine_replicates <- function(violation,
     }
   }
 
-  if (forced_dis_filter == TRUE && violation != "desaparicion") {
+  if (forced_dis_filter == TRUE & violation != "desaparicion") {
     stop("This argument only applies to 'desaparicion'. Please change the
          TRUE option to FALSE")
   }
