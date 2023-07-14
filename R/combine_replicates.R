@@ -5,8 +5,8 @@
 # ============================================
 
 #' @title proportions_imputed
-#' 
-#' @description Calculate the proportions of each level of a variable after 
+#'
+#' @description Calculate the proportions of each level of a variable after
 #' to calculate using `combine_replicates` on complete data (that includes
 #' imputed values).
 #'
@@ -15,42 +15,50 @@
 #' used for stratification.
 #' @param digits Number of decimal places to round the results to. Default value
 #' is 2.
-#' 
-#' @return A dataframe that contains the proportions after to apply 
-#' `combine_replicates` 
+#'
+#' @return A dataframe that contains the proportions after to apply
+#' `combine_replicates`
 #' @export
 #' @examples
 #' local_dir <- system.file("extdata", "right", package = "verdata")
 #' replicates_data <- read_replicates(local_dir, "reclutamiento", 1, 2, "parquet")
 #' replicates_obs_data <- summary_observed("reclutamiento", replicates_data,
-#' strata_vars = "sexo", conflict_filter = FALSE, forced_dis_filter = FALSE, 
+#' strata_vars = "sexo", conflict_filter = FALSE, forced_dis_filter = FALSE,
 #' edad_minors_filter = FALSE, include_props = FALSE, include_props_na  = FALSE)
 #' tab_combine <- combine_replicates("reclutamiento", replicates_obs_data,
 #' replicates_data, strata_vars = 'sexo', conflict_filter = TRUE,
 #' forced_dis_filter = FALSE, edad_minors_filter = FALSE,include_props = FALSE)
-#' prop_data_complete <- proportions_imputed(tab_combine, strata_vars = "sexo", 
+#' prop_data_complete <- proportions_imputed(tab_combine, strata_vars = "sexo",
 #' digits = 2)
-proportions_imputed <- function(complete_data, 
-                                strata_vars, 
+proportions_imputed <- function(complete_data,
+                                strata_vars,
                                 digits = 2) {
-  
+
+  if (!is.data.frame(complete_data)) {
+    stop("This argument must be a data.frame")
+  }
+
+  if (digits != 2) {
+    stop("The number of digits should not be different from 2")
+  }
+
   proportions_data <- complete_data %>%
-    dplyr::mutate(imp_lo_p = round(imp_lo / sum(imp_mean, na.rm = TRUE), digits = digits),
-                  imp_mean_p = round(imp_mean / sum(imp_mean, na.rm = TRUE), digits = digits),
-                  imp_hi_p = round(imp_hi / sum(imp_mean, na.rm = TRUE), digits = digits))
-  
-  proportions_data <- proportions_data %>% 
-    dplyr::select(all_of({{strata_vars}}), 
-                  imp_lo, imp_mean, imp_hi, 
+    dplyr::mutate(imp_lo_p = round(imp_lo / sum(imp_mean, na.rm = TRUE), digits = 2),
+                  imp_mean_p = round(imp_mean / sum(imp_mean, na.rm = TRUE), digits = 2),
+                  imp_hi_p = round(imp_hi / sum(imp_mean, na.rm = TRUE), digits = 2))
+
+  proportions_data <- proportions_data %>%
+    dplyr::select(all_of({{strata_vars}}),
+                  imp_lo, imp_mean, imp_hi,
                   imp_lo_p, imp_mean_p, imp_hi_p)
-  
+
   return(proportions_data)
 
 }
 
 #' Combine replicates according to the Normal approximation using the laws of total expectation and variance.
 #'
-#' @param replicates_obs_data Dataframe that results from applying `summary_observed`.
+#' @param replicates_obs_data Data frame that results from applying `summary_observed`.
 #' @param replicates_data Data frame containing replicates data.
 #' @param strata_vars Variable with all observations (without missing values).
 #' @param conflict_filter Filter that indicates if the data is filtered using
@@ -62,8 +70,6 @@ proportions_imputed <- function(complete_data,
 #' @param edad_minors_filter Optional filter by age ("edad") < 18.
 #' @param include_props A logical value indicating whether or not to include
 #'  the proportions from the calculations before to merge with summary_observed's output.
-#' @param digits Number of decimal places to round the results to (only relevant
-#' if `include_props` is `TRUE`). Default value is 2.
 #' @return A dataframe with 5 or more columns: name of variable(s), `observed`
 #' the number of observations in each category for every variable, `imp_lo` the
 #' lower bound of the 95% confidence interval, `imp_hi` the upper bound of the
@@ -76,7 +82,7 @@ proportions_imputed <- function(complete_data,
 #' local_dir <- system.file("extdata", "right", package = "verdata")
 #' replicates_data <- read_replicates(local_dir, "reclutamiento", 1, 2)
 #' replicates_obs_data <- summary_observed("reclutamiento", replicates_data,
-#' strata_vars = "sexo", conflict_filter = FALSE, forced_dis_filter = FALSE, 
+#' strata_vars = "sexo", conflict_filter = FALSE, forced_dis_filter = FALSE,
 #' edad_minors_filter = FALSE, include_props = FALSE, include_props_na = FALSE)
 #' tab_combine <- combine_replicates("reclutamiento", replicates_obs_data,
 #' replicates_data, strata_vars = 'sexo', conflict_filter = TRUE,
@@ -84,57 +90,80 @@ proportions_imputed <- function(complete_data,
 combine_replicates <- function(violation,
                                replicates_obs_data,
                                replicates_data,
-                               strata_vars,
+                               strata_vars = NULL,
                                conflict_filter = TRUE,
                                forced_dis_filter = FALSE,
                                edad_minors_filter = FALSE,
-                               include_props = FALSE,
-                               digits = 2) {
-  
+                               include_props = FALSE) {
+
   if (!(violation %in% c("homicidio", "secuestro", "reclutamiento", "desaparicion"))) {
-    
-    stop("violation argument incorrectly specified")
-    
+
+    stop("Violation argument incorrectly specified. Please put any of the following
+         violations (in quotes and in lower case): homicidio, secuestro,
+         reclutamiento or desaparicion")
   }
-  
+
+  if (!is.data.frame(replicates_obs_data)) {
+    stop("The argument 'replicates_obs_data' must be a data frame")
+  }
+
+  if (!is.data.frame(replicates_data)) {
+    stop("The argument 'replicates_data' must be a data frame")
+  }
+
+  if (!is.null(strata_vars)) {
+
+    strata_vars_missing <- setdiff(strata_vars, names(replicates_data))
+
+    if (length(strata_vars_missing) > 0) {
+      stop("This variable is not found in the replicates. Please check if
+           it exists or if it has another name.")
+    }
+  }
+
+  if (forced_dis_filter == TRUE && violation != "desaparicion") {
+    stop("This argument only applies in 'desaparicion'. Please change the
+         TRUE option to FALSE")
+  }
+
   num_replicates <- dplyr::n_distinct(replicates_data$replica)
 
     if (num_replicates == 1) {
 
-        stop("Results cannot be calculated using only 1 replicate")
+      stop("Results cannot be calculated using only 1 replicate. For more
+           consistent results please work with more replicates")
 
         }
 
     else {
 
-        logger::log_info("You are working to {num_replicates}
-                     replicates according to filter")
+        logger::log_info("You are working with {num_replicates} replicates according to filter")
 
         }
 
     if (conflict_filter == TRUE) {
-  
+
       logger::log_info("Analyzing victims related to armed conflict")
-      
+
         prep_data <- replicates_data %>%
             dplyr::mutate(is_conflict = as.integer(is_conflict)) %>%
             dplyr::filter(is_conflict == 1)
-        
+
     } else {
-      
+
       logger::log_info("You are working with all victims (related and not related to is_conflict)")
-      
+
         prep_data <- replicates_data %>%
             dplyr::mutate(is_conflict = as.integer(is_conflict))
     }
-    
+
 
     if (edad_minors_filter == TRUE) {
-      
+
       logger::log_info("Analyzing victims under 18 years of age")
-      
+
       prep_data <- prep_data %>%
-        dplyr::filter(edad_jep == "INFANCIA" | 
+        dplyr::filter(edad_jep == "INFANCIA" |
                       edad_jep == "ADOLESCENCIA")
 
     } else {
@@ -147,7 +176,7 @@ combine_replicates <- function(violation,
     if (violation == "desaparicion" & forced_dis_filter == TRUE) {
 
       logger::log_info("Analyzing the documented victims who were victims of forced disappearance")
-      
+
         prep_data <- prep_data %>%
             dplyr::mutate(is_forced_dis = as.integer(is_forced_dis)) %>%
             dplyr::filter(is_forced_dis == 1)
@@ -185,33 +214,33 @@ combine_replicates <- function(violation,
         dplyr::rename(imp_mean = theta, imp_lo = lower_ci, imp_hi = upper_ci)
 
     if (include_props == TRUE) {
-      
+
       logger::log_info("Including the proportions")
 
-      rep_data <- proportions_imputed(rep_data, strata_vars, digits = digits)
-      
-      rep_data <- rep_data %>% 
+      rep_data <- proportions_imputed(rep_data, strata_vars, digits = 2)
+
+      rep_data <- rep_data %>%
         dplyr::mutate(imp_lo_p = dplyr::if_else(imp_lo_p < 0, 0, imp_lo_p))
-      
+
     } else {
-      
-      logger::log_info("Didn't include the proportions")
-      
+
+      logger::log_info("Don't include the proportions")
+
     }
 
-    final_data <- rep_data %>% 
-        dplyr::mutate(dplyr::across(all_of(strata_vars), as.character)) 
-    
-    replicates_obs_data <- replicates_obs_data %>% 
-      dplyr::mutate(dplyr::across(all_of(strata_vars), as.character)) 
-    
+    final_data <- rep_data %>%
+        dplyr::mutate(dplyr::across(all_of(strata_vars), as.character))
+
+    replicates_obs_data <- replicates_obs_data %>%
+      dplyr::mutate(dplyr::across(all_of(strata_vars), as.character))
+
     final_data <- dplyr::full_join(rep_data, replicates_obs_data, by = {{strata_vars}}) %>%
         dplyr::mutate(imp_lo = dplyr::if_else(imp_lo < observed,
                                               observed, imp_lo))
 
     final_data <- final_data %>%
         dplyr::select(all_of({{strata_vars}}), observed,
-                      dplyr::everything()) %>% 
+                      dplyr::everything()) %>%
       dplyr::arrange(dplyr::desc(imp_mean))
 
     return(final_data)

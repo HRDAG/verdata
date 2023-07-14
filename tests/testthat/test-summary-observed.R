@@ -7,8 +7,9 @@
 local_dir <- system.file("extdata", "right", package = "verdata")
 
 replicates_data <- read_replicates(local_dir, "reclutamiento", 1, 2)
-replicates_data_filter <- filter_standard_cev(replicates_data, 
-                                              "reclutamiento", 
+
+replicates_data_filter <- filter_standard_cev(replicates_data,
+                                              "reclutamiento",
                                               perp_change = TRUE)
 
 testthat::test_that("The table must have the same observations to CEV document", {
@@ -89,7 +90,7 @@ testthat::test_that("This function works with more than one strata that does not
 })
 
 testthat::test_that("Confirm sum = 1 in observed", {
-  
+
   tab_observed <- summary_observed("reclutamiento",
                                    replicates_data_filter,
                                    strata_vars = "etnia",
@@ -103,13 +104,145 @@ testthat::expect_equal(sum(tab_observed$obs_prop_na), 1)
 
 })
 
+testthat::test_that("The function must return an error if the user put another
+                    violation that is different to: 'reclutamiento', 'desaparicion',
+                    'homicidio' or 'secuestro'", {
+
+                      testthat::expect_error(
+                        tab_observed <- summary_observed("exilio",
+                                                         replicates_data_filter,
+                                                         strata_vars = "sexo",
+                                                         conflict_filter = TRUE,
+                                                         forced_dis_filter = FALSE,
+                                                         edad_minors_filter = TRUE,
+                                                         include_props = TRUE,
+                                                         include_props_na = TRUE))
+})
+
+testthat::test_that("The function must return an error if the user put
+                    information that is not a data frame", {
+
+  not_data_frame <- replicates_data_filter %>%
+    as.list()
+                      testthat::expect_error(
+                        tab_observed <- summary_observed("reclutamiento",
+                                                         not_data_frame,
+                                                         strata_vars = "sexo",
+                                                         conflict_filter = TRUE,
+                                                         forced_dis_filter = FALSE,
+                                                         edad_minors_filter = TRUE,
+                                                         include_props = TRUE,
+                                                         include_props_na = TRUE))
+})
+
+
+testthat::test_that("The function must return an error if the user put a variable
+                    that does not exist in the currently data frame", {
+
+                      testthat::expect_error(
+                        tab_observed <- summary_observed("reclutamiento",
+                                                         replicates_data_filter,
+                                                         strata_vars = "regiones_naturales",
+                                                         conflict_filter = TRUE,
+                                                         forced_dis_filter = FALSE,
+                                                         edad_minors_filter = TRUE,
+                                                         include_props = TRUE,
+                                                         include_props_na = TRUE))
+})
+
+testthat::test_that("The function must return an error if the user put
+                    forced_dis_filter = TRUE and the violation is different to
+                    desaparicion", {
+
+                      testthat::expect_error(
+                        tab_observed <- summary_observed("reclutamiento",
+                                                         replicates_data_filter,
+                                                         strata_vars = "sexo",
+                                                         conflict_filter = TRUE,
+                                                         forced_dis_filter = TRUE,
+                                                         edad_minors_filter = TRUE,
+                                                         include_props = FALSE,
+                                                         include_props_na = FALSE))
+                    })
+
+testthat::test_that("The function must return an error if the user put
+                    an invalid combination of arguments:
+                    include_props == FALSE && include_props_na == TRUE", {
+
+                      testthat::expect_error(
+                        tab_observed <- summary_observed("reclutamiento",
+                                                         replicates_data_filter,
+                                                         strata_vars = "sexo",
+                                                         conflict_filter = TRUE,
+                                                         forced_dis_filter = FALSE,
+                                                         edad_minors_filter = TRUE,
+                                                         include_props = FALSE,
+                                                         include_props_na = TRUE))
+                    })
+
+testthat::test_that("The function must return an error if the user try to work with
+                    only 1 replicate", {
+
+  replicate_data <- replicates_data_filter %>%
+    filter(replica == "R1")
+
+                      testthat::expect_error(
+                        tab_observed <- summary_observed("reclutamiento",
+                                                         replicate_data,
+                                                         strata_vars = "sexo",
+                                                         conflict_filter = TRUE,
+                                                         forced_dis_filter = FALSE,
+                                                         edad_minors_filter = TRUE,
+                                                         include_props = FALSE,
+                                                         include_props_na = FALSE))
+                    })
+
+testthat::test_that("The function must return an error if the user put
+                    include_props_na = TRUE when the strata_vars' variable
+                    has not missing values", {
+
+                      testthat::expect_error(
+                        tab_observed <- summary_observed("reclutamiento",
+                                                         replicates_data_filter,
+                                                         strata_vars = "dept_code_hecho",
+                                                         conflict_filter = TRUE,
+                                                         forced_dis_filter = FALSE,
+                                                         edad_minors_filter = TRUE,
+                                                         include_props = TRUE,
+                                                         include_props_na = TRUE))
+                    })
+
 tab_observed <- summary_observed("reclutamiento",
                                  replicates_data_filter,
                                  strata_vars = "sexo",
                                  conflict_filter = TRUE,
                                  forced_dis_filter = FALSE,
                                  edad_minors_filter = TRUE,
-                                 include_props = FALSE,
-                                 include_props_na = FALSE)
+                                 include_props = TRUE,
+                                 include_props_na = TRUE)
+
+
+testthat::test_that("The function must return an error if the user put
+                    a digit that is different to 2", {
+
+                      testthat::expect_error(
+                        proportions_table <- proportions_observed(tab_observed,
+                                                                  strata_vars = "sexo",
+                                                                  include_props_na = TRUE,
+                                                                  digits = 3))
+                    })
+
+testthat::test_that("The function must return an error if the user put
+                    information that is not a data frame in prop's function", {
+
+                      not_data_frame <- tab_observed %>%
+                        as.list()
+
+                      testthat::expect_error(
+                          proportions_table <- proportions_observed(not_data_frame,
+                                                                    strata_vars = "sexo",
+                                                                    include_props_na = TRUE,
+                                                                    digits = 3))
+                    })
 
 # --- Done

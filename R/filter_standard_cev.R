@@ -21,26 +21,31 @@
 #' local_dir <- system.file("extdata", "right", package = "verdata")
 #' replicates_data <- read_replicates(local_dir, "reclutamiento", 1, 2)
 #' filter_standard_cev(replicates_data, "reclutamiento", perp_change = TRUE)
-#'
 filter_standard_cev <- function(replicates_data, violation, perp_change = TRUE) {
+
+  if (!is.data.frame(replicates_data)) {
+    stop("The argument 'replicates_data' must be a data frame")
+  }
 
     if (!(violation %in% c("homicidio", "secuestro", "reclutamiento", "desaparicion"))) {
 
-        stop("violation argument incorrectly specified")
+      stop("Violation argument incorrectly specified. Please put any of the following
+         violations (in quotes and in lower case): homicidio, secuestro,
+         reclutamiento or desaparicion")
 
     }
-  
+
     data_filter <- replicates_data %>%
         dplyr::mutate(edad_c = dplyr::case_when(edad_jep == "INFANCIA" ~ "MENOR",
                                                 edad_jep == "ADOLESCENCIA" ~ "MENOR",
                                                 edad_jep == "ADULTEZ" ~ "ADULTO",
                                                 TRUE ~ NA_character_)) %>%
-      dplyr::mutate(edad_c_imputed = dplyr::if_else(edad_categoria_imputed == FALSE, FALSE, TRUE)) %>% 
-      dplyr::mutate(etnia2 = dplyr::case_when(etnia %in% c('MESTIZO') ~ "MESTIZO", 
-                                       etnia %in% c('INDIGENA','NARP','ROM') ~ "ETNICO", 
-                                       TRUE ~ NA_character_)) %>% 
-      dplyr::mutate(etnia2 = as.character(etnia2)) %>% 
-      dplyr::mutate(etnia2_imputed = dplyr::if_else(etnia_imputed == FALSE, FALSE, TRUE)) %>% 
+      dplyr::mutate(edad_c_imputed = dplyr::if_else(edad_categoria_imputed == FALSE, FALSE, TRUE)) %>%
+      dplyr::mutate(etnia2 = dplyr::case_when(etnia %in% c('MESTIZO') ~ "MESTIZO",
+                                       etnia %in% c('INDIGENA','NARP','ROM') ~ "ETNICO",
+                                       TRUE ~ NA_character_)) %>%
+      dplyr::mutate(etnia2 = as.character(etnia2)) %>%
+      dplyr::mutate(etnia2_imputed = dplyr::if_else(etnia_imputed == FALSE, FALSE, TRUE)) %>%
       dplyr::mutate(quinquenio = dplyr::case_when(yy_hecho >= 1985 & yy_hecho <= 1989 ~ "1985_1989",
                                                   yy_hecho >= 1990 & yy_hecho <= 1994 ~ "1990_1994",
                                                   yy_hecho >= 1995 & yy_hecho <= 1999 ~ "1995_1999",
@@ -52,21 +57,21 @@ filter_standard_cev <- function(replicates_data, violation, perp_change = TRUE) 
       dplyr::mutate(muni_code_hecho = as.character(muni_code_hecho)) %>%
       dplyr::mutate(dplyr::across(muni_code_hecho,
                     ~ dplyr::case_when(. == "91236" ~ "91263",
-                                TRUE ~ .))) %>% 
+                                TRUE ~ .))) %>%
       dplyr::mutate(muni_code_hecho = as.numeric(muni_code_hecho)) %>%
       assertr::verify(!is.na(quinquenio))
 
     if (perp_change == TRUE) {
-      
-      data_filter <- data_filter %>% 
+
+      data_filter <- data_filter %>%
       dplyr::mutate(p_str = as.character(p_str)) %>%
         dplyr::mutate(p_str = base::ifelse(yy_hecho > 2016 & p_str == "GUE-FARC",
                                            "GUE-OTRO", p_str))
-        
+
     } else {
-      
-      logger::log_info("Not change in perp")
-      
+
+      logger::log_info("Not change in perp's argument")
+
     }
 
     if (violation == "desaparicion") {
@@ -100,19 +105,17 @@ filter_standard_cev <- function(replicates_data, violation, perp_change = TRUE) 
         data_filter <- data_filter %>%
             dplyr::mutate(is_conflict_dis_rep = NA) %>%
             dplyr::mutate(is_conflict_dis_rep = dplyr::case_when(
-                is_forced_dis==0 | is_conflict==0 ~ 0,
-                is_forced_dis==1 & is_conflict==1 ~ 1))
-
+                is_forced_dis == 0 | is_conflict == 0 ~ 0,
+                is_forced_dis == 1 & is_conflict == 1 ~ 1))
 
     } else if (violation == "reclutamiento") {
-        # apply additional filters for reclutamiento
-        data_filter <- data_filter %>%
-            dplyr::filter(edad_jep == "INFANCIA" |
-                          edad_jep == "ADOLESCENCIA")
+      # apply additional filters for reclutamiento
+      data_filter <- data_filter %>%
+        dplyr::filter(edad_jep == "INFANCIA" |
+                        edad_jep == "ADOLESCENCIA")
     }
 
     return(data_filter)
-    
-}
 
+}
 # --- Done
