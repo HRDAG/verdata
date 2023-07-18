@@ -185,20 +185,29 @@ build_path <- function(replicates_dir, violation, first_rep, last_rep) {
         
       }
       
-      file_extension <- stringr::str_extract(pattern = "parquet|csv",
-                                             replicates_dir)
-      
       parquet_check <- list.files(replicates_dir, pattern = "parquet")
       
       csv_check <- list.files(replicates_dir, pattern = "csv")
       
-      if (is.na(file_extension) & rlang::is_empty(parquet_check) & rlang::is_empty(csv_check)) {
+      if (rlang::is_empty(parquet_check) & rlang::is_empty(csv_check)) {
         
         stop("No parquet or csv files were found in this directory")
         
       }
       
-      if (is.na(file_extension) & !rlang::is_empty(parquet_check) & !rlang::is_empty(csv_check)) {
+      if (!rlang::is_empty(parquet_check) & rlang::is_empty(csv_check)) {
+        
+        file_extension <- "parquet"
+        
+      }
+      
+      if (rlang::is_empty(parquet_check) & !rlang::is_empty(csv_check)) {
+        
+        file_extension <- "csv"
+        
+      }
+      
+      if (!rlang::is_empty(parquet_check) & !rlang::is_empty(csv_check)) {
         
         file_extension <- "parquet"
         
