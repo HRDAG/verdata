@@ -3,6 +3,7 @@
 export(combine_estimates)
 export(combine_replicates)
 export(confirm_files)
+export(estimates_exist)
 export(filter_standard_cev)
 export(get_valid_sources)
 export(lookup_estimates)

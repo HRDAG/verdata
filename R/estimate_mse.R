@@ -165,6 +165,7 @@ run_lcmcr <- function(stratum_data_prepped, stratum_name, min_n = 1,
 #' estimates. If `estimates_exist` is `TRUE`, `estimates_path` will contain the
 #' full file path to the JSON file containing the estimates, otherwise it will
 #' be `NA`.
+#' @export
 
 estimates_exist <- function(stratum_data_prepped, estimates_dir) {
     
