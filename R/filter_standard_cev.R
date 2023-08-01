@@ -36,11 +36,11 @@ filter_standard_cev <- function(replicates_data, violation, perp_change = TRUE) 
     }
 
     data_filter <- replicates_data %>%
-        dplyr::mutate(edad_c = dplyr::case_when(edad_jep == "INFANCIA" ~ "MENOR",
+        dplyr::mutate(edad_minors = dplyr::case_when(edad_jep == "INFANCIA" ~ "MENOR",
                                                 edad_jep == "ADOLESCENCIA" ~ "MENOR",
                                                 edad_jep == "ADULTEZ" ~ "ADULTO",
                                                 TRUE ~ NA_character_)) %>%
-      dplyr::mutate(edad_c_imputed = dplyr::if_else(edad_categoria_imputed == FALSE, FALSE, TRUE)) %>%
+      dplyr::mutate(edad_minors_imputed = dplyr::if_else(edad_jep_imputed == FALSE, FALSE, TRUE)) %>%
       dplyr::mutate(etnia2 = dplyr::case_when(etnia %in% c('MESTIZO') ~ "MESTIZO",
                                        etnia %in% c('INDIGENA','NARP','ROM') ~ "ETNICO",
                                        TRUE ~ NA_character_)) %>%
@@ -111,8 +111,17 @@ filter_standard_cev <- function(replicates_data, violation, perp_change = TRUE) 
     } else if (violation == "reclutamiento") {
       # apply additional filters for reclutamiento
       data_filter <- data_filter %>%
+        dplyr::mutate(periodo_pres = dplyr::case_when(yy_hecho >= 1990 & yy_hecho <= 1993 ~ "1990_1993",
+                                                      yy_hecho >= 1994 & yy_hecho <= 1997 ~ "1994_1997",
+                                                      yy_hecho >= 1998 & yy_hecho <= 2001 ~ "1998_2001",
+                                                      yy_hecho >= 2002 & yy_hecho <= 2005 ~ "2002_2005",
+                                                      yy_hecho >= 2006 & yy_hecho <= 2009 ~ "2006_2009",
+                                                      yy_hecho >= 2010 & yy_hecho <= 2013 ~ "2010_2013",
+                                                      yy_hecho >= 2014 & yy_hecho <= 2017 ~ "2014_2017",
+                                                      TRUE ~ NA_character_)) %>%
+        assertr::verify(!is.na(periodo_pres)) %>%
         dplyr::filter(edad_jep == "INFANCIA" |
-                        edad_jep == "ADOLESCENCIA")
+                      edad_jep == "ADOLESCENCIA")
     }
 
     return(data_filter)
