@@ -47,11 +47,11 @@ número deseado de réplicas a R. Esta función acepta archivos en cualquiera de
 
 ### Transformación de datos:
 
-* Para sus análisis en violaciones a Derechos Humanos, la Comisión de la Verdad especificó [diferentes períodos
+* Para sus análisis en violaciones a derechos humanos, la Comisión de la Verdad especificó [diferentes períodos
 y condiciones](https://www.comisiondelaverdad.co/hasta-la-guerra-tiene-limites). En caso de querer replicar los resultados
 del Informe Final de la CEV, es necesario aplicar estos
 mismos filtros a los datos. El uso de la función `filter_standard_cev` es opcional y permite filtrar los datos del
-mismo modo que la cev lo hizo, dependiendo de la violación a Derechos Humanos a analizar.
+mismo modo que la cev lo hizo, dependiendo de la violación a derechos humanos a analizar.
 
 ### Datos observados:
 

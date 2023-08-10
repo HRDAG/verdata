@@ -23,7 +23,7 @@ medidas <- function(replicate_path) {
         }
 
     else {
-      
+
         replicate_data <- readr::read_csv(replicate_path)
 
         }
@@ -152,7 +152,7 @@ medidas <- function(replicate_path) {
 #' Calculate measurements in order to ensure that each replicate file has the
 #' correct content.
 #'
-#' @param replicates_dir A string that contains a path to the directory containing 
+#' @param replicates_dir A string that contains a path to the directory containing
 #' the replicates to be checked
 #' @param violation Violation to be analyzed. Options are "homicidio", "secuestro",
 #' "reclutamiento", and "desaparicion".
@@ -164,91 +164,91 @@ medidas <- function(replicate_path) {
 #'
 #' @noRd
 build_path <- function(replicates_dir, violation, first_rep, last_rep) {
-  
+
     if (!is.numeric(first_rep)) {
       stop("first_rep argument should be numeric")
     }
-  
+
     if (!is.numeric(last_rep)) {
       stop("last_rep argument should be numeric")
     }
-  
+
     valid_violations <- c("secuestro", "reclutamiento", "homicidio", "desaparicion")
-    
+
     if (violation %in% valid_violations) {
-      
+
       path <- list.files(path = replicates_dir, full.names = TRUE)
-      
+
       if (rlang::is_empty(path)) {
-        
+
         stop("This directory does not contain any files")
-        
+
       }
-      
+
       parquet_check <- list.files(replicates_dir, pattern = "parquet")
-      
+
       csv_check <- list.files(replicates_dir, pattern = "csv")
-      
+
       if (rlang::is_empty(parquet_check) & rlang::is_empty(csv_check)) {
-        
+
         stop("No parquet or csv files were found in this directory")
-        
+
       }
-      
+
       if (!rlang::is_empty(parquet_check) & rlang::is_empty(csv_check)) {
-        
+
         file_extension <- "parquet"
-        
+
       }
-      
+
       if (rlang::is_empty(parquet_check) & !rlang::is_empty(csv_check)) {
-        
+
         file_extension <- "csv"
-        
+
       }
-      
+
       if (!rlang::is_empty(parquet_check) & !rlang::is_empty(csv_check)) {
-        
+
         file_extension <- "parquet"
-        
+
       }
-      
+
       if (file_extension == "parquet") {
-        
+
         matchpattern <- "([^-]+)\\-R([0-9]+).parquet"
-        
+
         matches <- stringr::str_match(path, matchpattern) %>%
           tibble::as_tibble(.name_repair = ~c("full_match", "violation", "rep_number"))
-        
+
         rep_lista <- tibble::tibble(full_path = path, matches) %>%
           dplyr::mutate(rep_number = as.integer(rep_number)) %>%
           dplyr::filter(violation == violation,
                         dplyr::between(rep_number, first_rep, last_rep)) %>%
           purrr::pluck("full_path")
-        
+
       } else {
-        
+
         matchpattern <- "([^-]+)\\-R([0-9]+).csv"
-        
+
         matches <- stringr::str_match(path, matchpattern) %>%
           tibble::as_tibble(.name_repair = ~c("full_match", "violation", "rep_number"))
-        
+
         rep_lista <- tibble::tibble(full_path = path, matches) %>%
           dplyr::mutate(rep_number = as.integer(rep_number)) %>%
           dplyr::filter(violation == violation,
                         dplyr::between(rep_number, first_rep, last_rep)) %>%
           purrr::pluck("full_path")
       }
-      
+
       return(rep_lista)
     }
-    
+
     else {
-      
+
     stop("Violation argument incorrectly specified. Please enter one of the following valid violation types: reclutamiento, secuestro, homicidio, desaparicion")
-      
+
     }
-    
+
 }
 
 
