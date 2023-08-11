@@ -11,13 +11,13 @@
 #' is done using the standard approach that makes use of the laws of total
 #' expectation and total variance.
 #'
-#' @param stratum_estimates A dataframe of estimates for a stratum of interest
+#' @param stratum_estimates A data frame of estimates for a stratum of interest
 #' calculated using `mse` for all replicates being used for the analysis. The
-#' dataframe should have columns `N` and `n_obs` from the `mse` function and an
+#' data frame should have columns `N` and `n_obs` from the `mse` function and an
 #' additional column `replicate` indicating which replicate the estimates were
 #' calculated on.
 #'
-#' @return A dataframe row with the point estimate (`N_mean`) and the
+#' @return A data frame row with the point estimate (`N_mean`) and the
 #' associated 95% uncertainty interval (lower bound is `N_025`, upper bound is
 #' `N_975`).
 #' @export

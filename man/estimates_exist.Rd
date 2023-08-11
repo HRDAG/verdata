@@ -7,8 +7,8 @@
 estimates_exist(stratum_data_prepped, estimates_dir)
 }
 \arguments{
-\item{stratum_data_prepped}{A dataframe including all records in a stratum of
-interest. The dataframe should only include the source columns prefixed with
+\item{stratum_data_prepped}{A data frame including all records in a stratum of
+interest. The data frame should only include the source columns prefixed with
 \code{in_} and all columns should only contain 1's and 0's.}
 
 \item{estimates_dir}{Directory containing pre-calculated estimates, if you

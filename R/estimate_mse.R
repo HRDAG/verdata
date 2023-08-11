@@ -8,7 +8,7 @@
 #'
 #' @description Determine valid sources for estimation of a stratum of interest.
 #'
-#' @param stratum_data_prepped A dataframe with all records in a stratum of interest.
+#' @param stratum_data_prepped A data frame with all records in a stratum of interest.
 #' Columns indicating sources should be prefixed with `in_` and should be numeric
 #' with 1 indicating that an individual was documented in the source and 0
 #' indicating that an individual was not documented in the source.
@@ -53,7 +53,7 @@ get_valid_sources <- function(stratum_data_prepped, min_n = 1) {
 #' Non-Parametric Latent-Class Capture-Recapture model developed by Daniel
 #' Manrique-Vallier (2016).
 #'
-#' @param stratum_data_prepped A dataframe with all records in the stratum of interest
+#' @param stratum_data_prepped A data frame with all records in the stratum of interest
 #' documented by sources considered valid for estimation (i.e., there should be
 #' no rows with all 0's). Columns indicating sources should be prefixed with
 #' `in_` and should be numeric with 1 indicating that an individual was
@@ -73,7 +73,7 @@ get_valid_sources <- function(stratum_data_prepped, min_n = 1) {
 #' from the posterior is `n_samples` divided by 1,000.
 #' @param posterior_thinning Thinning interval for the sampler.
 #'
-#' @return A dataframe with four columns and `n_samples` divided by 1,000 rows.
+#' @return A data frame with four columns and `n_samples` divided by 1,000 rows.
 #' `N` is the draws from the posterior distribution, `valid_sources` is a string
 #' indicating which sources were used in the estimation, `n_obs` is the number of
 #' observations in the stratum of interest, and  `stratum_name` is the stratum
@@ -153,8 +153,8 @@ run_lcmcr <- function(stratum_data_prepped, stratum_name, min_n = 1,
 #'
 #' @description Check whether stratum estimates already exist in pre-calculated files.
 #'
-#' @param stratum_data_prepped A dataframe including all records in a stratum of
-#' interest. The dataframe should only include the source columns prefixed with
+#' @param stratum_data_prepped A data frame including all records in a stratum of
+#' interest. The data frame should only include the source columns prefixed with
 #' `in_` and all columns should only contain 1's and 0's.
 #' @param estimates_dir Directory containing pre-calculated estimates, if you
 #' would like to use pre-calculated results.
@@ -217,8 +217,8 @@ estimates_exist <- function(stratum_data_prepped, estimates_dir) {
 #'
 #' @description Look up and read in existing estimates from pre-calculated files.
 #'
-#' @param stratum_data_prepped A dataframe including all records in a stratum of interest.
-#' The dataframe should only include the source columns prefixed with `in_` and
+#' @param stratum_data_prepped A data frame including all records in a stratum of interest.
+#' The data frame should only include the source columns prefixed with `in_` and
 #' all columns should only contain 1's and 0's.
 #' @param estimates_dir Directory containing pre-calculated
 #' estimates, if you would like to use pre-calculated results. Note, setting this
@@ -226,11 +226,11 @@ estimates_exist <- function(stratum_data_prepped, estimates_dir) {
 #' to calculate the pre-calculated estimates. Do not specify a file path If you
 #' would like to use a custom model specification.
 #'
-#' @return A dataframe with one column, `N`, indicating the results. If the
+#' @return A data frame with one column, `N`, indicating the results. If the
 #' stratum was not found in the pre-calculated files, `N` will be `NA` and the
-#' dataframe will have one row. If the stratum was found in the pre-calculated
+#' data frame will have one row. If the stratum was found in the pre-calculated
 #' files, `N` will contain draws from the posterior distribution of the model
-#' and the dataframe will contain 1,000 rows.
+#' and the data frame will contain 1,000 rows.
 #' @export
 #' @importFrom dplyr "%>%"
 #'
@@ -258,7 +258,7 @@ lookup_estimates <- function(stratum_data_prepped, estimates_dir) {
 
     if (!right_columns) {
 
-        stop("Your dataframe should only include the source columns prefixed with `in_`")
+        stop("Your data frame should only include the source columns prefixed with `in_`")
 
     }
 
@@ -297,7 +297,7 @@ lookup_estimates <- function(stratum_data_prepped, estimates_dir) {
 #'
 #' @description Prepare data for estimation and calculate estimates using `run_lcmcr`.
 #'
-#' @param stratum_data A dataframe including all records in a stratum of interest.
+#' @param stratum_data A data frame including all records in a stratum of interest.
 #' Columns indicating sources should be prefixed with `in_` and should be numeric.
 #' @param estimates_dir File path for the folder containing pre-calculated
 #' estimates, if you would like to use pre-calculated results. Note, setting this
@@ -319,7 +319,7 @@ lookup_estimates <- function(stratum_data_prepped, estimates_dir) {
 #' The final number of samples from the posterior is `n_samples` divided by 1,000.
 #' @param posterior_thinning Thinning interval for the sampler. Default value is 500.
 #'
-#' @return A dataframe with five columns. `validated` is a logical value
+#' @return A data frame with five columns. `validated` is a logical value
 #' indicating whether the stratum is estimable, `N` is the draws from the
 #' posterior distribution (`NA` if the stratum is not estimable), `valid_sources`
 #' is a string indicating which sources were used in the estimation, `n_obs` is

@@ -7,7 +7,7 @@
 get_valid_sources(stratum_data_prepped, min_n = 1)
 }
 \arguments{
-\item{stratum_data_prepped}{A dataframe with all records in a stratum of interest.
+\item{stratum_data_prepped}{A data frame with all records in a stratum of interest.
 Columns indicating sources should be prefixed with \code{in_} and should be numeric
 with 1 indicating that an individual was documented in the source and 0
 indicating that an individual was not documented in the source.}

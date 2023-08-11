@@ -10,13 +10,13 @@
 #' applying `combine_replicates` to complete data (that includes
 #' imputed values).
 #'
-#' @param complete_data A dataframe containing the output from `combine_replicates`.
+#' @param complete_data A data frame containing the output from `combine_replicates`.
 #' @param strata_vars A vector of column names identifying the variables to be
 #' used for stratification.
 #' @param digits Number of decimal places to round the results to. Default value
 #' is 2.
 #'
-#' @return A dataframe that contains the proportions after applying
+#' @return A data frame that contains the proportions after applying
 #' `combine_replicates`.
 #' @export
 #' @examples
@@ -58,8 +58,8 @@ proportions_imputed <- function(complete_data,
 
 #' Combine replicates according to the Normal approximation using the laws of total expectation and variance.
 #'
-#' @param replicates_obs_data The dataframe that results from applying `summary_observed`.
-#' @param replicates_data A dataframe containing replicates data.
+#' @param replicates_obs_data The data frame that results from applying `summary_observed`.
+#' @param replicates_data A data frame containing replicates data.
 #' @param strata_vars Variable with all observations (without missing values).
 #' @param conflict_filter Filter that indicates if the data is filtered using
 #' the "is_conflict" rule.
@@ -70,7 +70,7 @@ proportions_imputed <- function(complete_data,
 #' @param edad_minors_filter Optional filter by age ("edad") < 18.
 #' @param include_props A logical value indicating whether or not to include
 #'  the proportions from the calculations before to merge with summary_observed's output.
-#' @return A dataframe with 5 or more columns: name of variable(s), `observed`
+#' @return A data frame with 5 or more columns: name of variable(s), `observed`
 #' the number of observations in each category for every variable, `imp_lo` the
 #' lower bound of the 95% confidence interval, `imp_hi` the upper bound of the
 #' 95% confidence interval, and `imp_mean` the point estimate of the mean value.

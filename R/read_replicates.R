@@ -13,7 +13,7 @@
 #' is not identical to the one published. If crash = TRUE (default), the data won't
 #' be loaded. If crash = FALSE, the data will be loaded with a warning.
 #'
-#' @return A dataframe with the data from the indicated replicate.
+#' @return A data frame with the data from the indicated replicate.
 #'
 #' @importFrom dplyr %>%
 #'
@@ -118,7 +118,7 @@ read_replicate <- function(replicate_path, crash = TRUE) {
 #' (default), it will return error and not read the data, if crash = FALSE, the
 #' function will return a warning but still read the data.
 #'
-#' @return A dataframe with the data from all indicated replicates.
+#' @return A data frame with the data from all indicated replicates.
 #' @export
 #'
 #' @importFrom dplyr %>%

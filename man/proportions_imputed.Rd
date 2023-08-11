@@ -7,7 +7,7 @@
 proportions_imputed(complete_data, strata_vars, digits = 2)
 }
 \arguments{
-\item{complete_data}{A dataframe containing the output from \code{combine_replicates}.}
+\item{complete_data}{A data frame containing the output from \code{combine_replicates}.}
 
 \item{strata_vars}{A vector of column names identifying the variables to be
 used for stratification.}
@@ -16,7 +16,7 @@ used for stratification.}
 is 2.}
 }
 \value{
-A dataframe that contains the proportions after applying
+A data frame that contains the proportions after applying
 \code{combine_replicates}.
 }
 \description{

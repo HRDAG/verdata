@@ -12,7 +12,7 @@ proportions_observed(
 )
 }
 \arguments{
-\item{obs_data}{A dataframe containing the output from \code{summary_observed}.}
+\item{obs_data}{A data frame containing the output from \code{summary_observed}.}
 
 \item{strata_vars}{A vector of column names identifying the variables to be
 used for stratification.}
@@ -23,7 +23,7 @@ not to include missing observations in the calculations.}
 \item{digits}{Number of decimal places to round the results to. Default is 2.}
 }
 \value{
-A dataframe that contains the proportions after to apply
+A data frame that contains the proportions after to apply
 \code{summary_observed}.
 }
 \description{

@@ -7,8 +7,8 @@
 lookup_estimates(stratum_data_prepped, estimates_dir)
 }
 \arguments{
-\item{stratum_data_prepped}{A dataframe including all records in a stratum of interest.
-The dataframe should only include the source columns prefixed with \code{in_} and
+\item{stratum_data_prepped}{A data frame including all records in a stratum of interest.
+The data frame should only include the source columns prefixed with \code{in_} and
 all columns should only contain 1's and 0's.}
 
 \item{estimates_dir}{Directory containing pre-calculated
@@ -18,11 +18,11 @@ to calculate the pre-calculated estimates. Do not specify a file path If you
 would like to use a custom model specification.}
 }
 \value{
-A dataframe with one column, \code{N}, indicating the results. If the
+A data frame with one column, \code{N}, indicating the results. If the
 stratum was not found in the pre-calculated files, \code{N} will be \code{NA} and the
-dataframe will have one row. If the stratum was found in the pre-calculated
+data frame will have one row. If the stratum was found in the pre-calculated
 files, \code{N} will contain draws from the posterior distribution of the model
-and the dataframe will contain 1,000 rows.
+and the data frame will contain 1,000 rows.
 }
 \description{
 Look up and read in existing estimates from pre-calculated files.

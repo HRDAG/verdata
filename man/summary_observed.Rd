@@ -39,7 +39,7 @@ the proportions from the calculations.}
 or not to include missing observations in the calculations.}
 }
 \value{
-A dataframe with two or more columns, (1) name of variable(s) and (2)
+A data frame with two or more columns, (1) name of variable(s) and (2)
 the number of observations in each of the variable's categories.
 }
 \description{

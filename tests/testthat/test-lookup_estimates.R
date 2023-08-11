@@ -74,7 +74,7 @@ testthat::test_that("Return error if the stratum cantains values different ti 0 
   
 })
 
-testthat::test_that("Return error if the dataframe includes columns different to `in_`", {
+testthat::test_that("Return error if the data frame includes columns different to `in_`", {
   
   testthat::expect_error(lookup_estimates(bad_columns, estimates_dir))
   

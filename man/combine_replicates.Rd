@@ -19,9 +19,9 @@ combine_replicates(
 \item{violation}{Violation to be analyzed. Options are "homicidio", "secuestro",
 "reclutamiento" and "desaparicion".}
 
-\item{replicates_obs_data}{The dataframe that results from applying \code{summary_observed}.}
+\item{replicates_obs_data}{The data frame that results from applying \code{summary_observed}.}
 
-\item{replicates_data}{A dataframe containing replicates data.}
+\item{replicates_data}{A data frame containing replicates data.}
 
 \item{strata_vars}{Variable with all observations (without missing values).}
 
@@ -37,7 +37,7 @@ the "is_conflict" rule.}
 the proportions from the calculations before to merge with summary_observed's output.}
 }
 \value{
-A dataframe with 5 or more columns: name of variable(s), \code{observed}
+A data frame with 5 or more columns: name of variable(s), \code{observed}
 the number of observations in each category for every variable, \code{imp_lo} the
 lower bound of the 95\% confidence interval, \code{imp_hi} the upper bound of the
 95\% confidence interval, and \code{imp_mean} the point estimate of the mean value.

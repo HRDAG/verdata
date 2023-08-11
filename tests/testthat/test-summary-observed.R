@@ -222,7 +222,7 @@ tab_observed <- summary_observed("reclutamiento",
                                  include_props_na = TRUE)
 
 testthat::test_that("The function must return an error if the user input
-                    information that is not a dataframe in prop's function", {
+                    information that is not a data frame in prop's function", {
 
                       not_data_frame <- tab_observed %>%
                         as.list()

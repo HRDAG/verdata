@@ -25,7 +25,7 @@ content of the file is not identical to the one published. If crash = TRUE
 function will return a warning but still read the data.}
 }
 \value{
-A dataframe with the data from all indicated replicates.
+A data frame with the data from all indicated replicates.
 }
 \description{
 Read replicates in a directory and verify they are identical to the ones published.

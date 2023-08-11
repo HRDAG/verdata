@@ -9,14 +9,14 @@
 #' @description Calculate the proportions of each level of a variable after
 #' to calculate using `summary_observed` on observed values.
 #'
-#' @param obs_data A dataframe containing the output from `summary_observed`.
+#' @param obs_data A data frame containing the output from `summary_observed`.
 #' @param strata_vars A vector of column names identifying the variables to be
 #' used for stratification.
 #' @param include_props_na A logical value indicating whether or
 #' not to include missing observations in the calculations.
 #' @param digits Number of decimal places to round the results to. Default is 2.
 #'
-#' @return A dataframe that contains the proportions after to apply
+#' @return A data frame that contains the proportions after to apply
 #' `summary_observed`.
 #' @export
 #' @examples
@@ -33,7 +33,7 @@ proportions_observed <- function(obs_data,
                                  digits = 2) {
 
   if (!is.data.frame(obs_data)) {
-    stop("The input 'obs_data' must be a dataframe")
+    stop("The input 'obs_data' must be a data frame")
   }
 
   if (include_props_na == FALSE)  {
@@ -83,7 +83,7 @@ proportions_observed <- function(obs_data,
 #'  the proportions from the calculations.
 #' @param include_props_na A logical value indicating whether
 #' or not to include missing observations in the calculations.
-#' @return A dataframe with two or more columns, (1) name of variable(s) and (2)
+#' @return A data frame with two or more columns, (1) name of variable(s) and (2)
 #' the number of observations in each of the variable's categories.
 #' @export
 #' @importFrom dplyr if_else
@@ -113,7 +113,7 @@ summary_observed <- function(violation,
   }
 
   if (!is.data.frame(replicates_data)) {
-    stop("The input 'replicates_data' must be a dataframe")
+    stop("The input 'replicates_data' must be a data frame")
   }
 
   if (!is.null(strata_vars)) {

@@ -7,14 +7,14 @@
 combine_estimates(stratum_estimates)
 }
 \arguments{
-\item{stratum_estimates}{A dataframe of estimates for a stratum of interest
+\item{stratum_estimates}{A data frame of estimates for a stratum of interest
 calculated using \code{mse} for all replicates being used for the analysis. The
-dataframe should have columns \code{N} and \code{n_obs} from the \code{mse} function and an
+data frame should have columns \code{N} and \code{n_obs} from the \code{mse} function and an
 additional column \code{replicate} indicating which replicate the estimates were
 calculated on.}
 }
 \value{
-A dataframe row with the point estimate (\code{N_mean}) and the
+A data frame row with the point estimate (\code{N_mean}) and the
 associated 95\% uncertainty interval (lower bound is \code{N_025}, upper bound is
 \code{N_975}).
 }

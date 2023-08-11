@@ -9,7 +9,7 @@
 #'
 #' @param replicate_path A string that contains a path to the replicate to be checked.
 #'
-#' @return A dataframe with the results.
+#' @return A data frame with the results.
 #'
 #' @noRd
 medidas <- function(replicate_path) {
@@ -159,7 +159,7 @@ medidas <- function(replicate_path) {
 #' @param first_rep First replicate in the range of replicates to be analyzed.
 #' @param last_rep Last replicate in the range of replicates to be analyzed.
 #
-#' @return A dataframe with the path to the replicates, the replicate number,
+#' @return A data frame with the path to the replicates, the replicate number,
 #' and violation type.
 #'
 #' @noRd

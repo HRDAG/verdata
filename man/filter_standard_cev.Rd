@@ -7,7 +7,7 @@
 filter_standard_cev(replicates_data, violation, perp_change = TRUE)
 }
 \arguments{
-\item{replicates_data}{A dataframe with data from all replicates to be filtered.}
+\item{replicates_data}{A data frame with data from all replicates to be filtered.}
 
 \item{violation}{Violation to be analyzed. Options are "homicidio", "secuestro",
 "reclutamiento", and "desaparicion".}
@@ -17,7 +17,7 @@ filter_standard_cev(replicates_data, violation, perp_change = TRUE)
 should be reassigned to other guerrilla groups (\code{p_str} value "GUE-OTRO").}
 }
 \value{
-A filtered dataframe.
+A filtered data frame.
 }
 \description{
 Filter records to replicate results presented in the CEV methodology report.

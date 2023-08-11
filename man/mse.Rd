@@ -19,7 +19,7 @@ mse(
 )
 }
 \arguments{
-\item{stratum_data}{A dataframe including all records in a stratum of interest.
+\item{stratum_data}{A data frame including all records in a stratum of interest.
 Columns indicating sources should be prefixed with \code{in_} and should be numeric.}
 
 \item{stratum_name}{An identifier for the stratum.}
@@ -52,7 +52,7 @@ The final number of samples from the posterior is \code{n_samples} divided by 1,
 \item{posterior_thinning}{Thinning interval for the sampler. Default value is 500.}
 }
 \value{
-A dataframe with five columns. \code{validated} is a logical value
+A data frame with five columns. \code{validated} is a logical value
 indicating whether the stratum is estimable, \code{N} is the draws from the
 posterior distribution (\code{NA} if the stratum is not estimable), \code{valid_sources}
 is a string indicating which sources were used in the estimation, \code{n_obs} is

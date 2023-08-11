@@ -18,7 +18,7 @@ run_lcmcr(
 )
 }
 \arguments{
-\item{stratum_data_prepped}{A dataframe with all records in the stratum of interest
+\item{stratum_data_prepped}{A data frame with all records in the stratum of interest
 documented by sources considered valid for estimation (i.e., there should be
 no rows with all 0's). Columns indicating sources should be prefixed with
 \code{in_} and should be numeric with 1 indicating that an individual was
@@ -48,7 +48,7 @@ from the posterior is \code{n_samples} divided by 1,000.}
 \item{posterior_thinning}{Thinning interval for the sampler.}
 }
 \value{
-A dataframe with four columns and \code{n_samples} divided by 1,000 rows.
+A data frame with four columns and \code{n_samples} divided by 1,000 rows.
 \code{N} is the draws from the posterior distribution, \code{valid_sources} is a string
 indicating which sources were used in the estimation, \code{n_obs} is the number of
 observations in the stratum of interest, and  \code{stratum_name} is the stratum
