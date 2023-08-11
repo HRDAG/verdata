@@ -78,3 +78,7 @@ proyecto. Si usted quiere usar otras especificaciones, no debe suministrar un di
 
 * Por último, la función `combine_estimates` permite combinar los resultados de la estimación, lo que, una vez más, dará como
 resultado un intervalo (que incluye la media). Usa la aproximación normal usando las reglas de total expectativa y varianza. Ver sección 18.2 de [*Bayesian Data Analysis*](http://www.stat.columbia.edu/~gelman/book/) para más información.
+
+### Recursos
+
+En la ruta `inst/docs` usted puede encontrar la información relacionada con el diccionario de datos de las réplicas. En este encontrará la definición de cada una de las variables que se encuentran allí, así como nuevas variables que fueron usadas en algunos análisis estadísticos durante la construcción del informe final de la CEV. 
