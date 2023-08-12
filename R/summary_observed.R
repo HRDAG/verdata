@@ -194,12 +194,6 @@ summary_observed <- function(violation,
       dplyr::mutate(is_forced_dis_imputed = as.logical(is_forced_dis_imputed)) %>%
       dplyr::filter(!is_forced_dis_imputed)
 
-  } else {
-
-    logger::log_info("Not filtering in is_forced_dis")
-
-    obs_data <- obs_data
-
   }
 
   for (var_rep in strata_vars) {
