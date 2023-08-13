@@ -10,7 +10,7 @@ Click [here](https://github.com/HRDAG/verdata/blob/main/inst/docs/README-en.md) 
 
 # verdata
 
-`verdata` es un paquete de `R` que está pensado como una herramienta para el uso y análisis de los datos de conflicto armado en Colombia resultantes del proyecto conjunto [JEP-CEV-HRDAG](https://www.comisiondelaverdad.co/sites/default/files/descargables/2022-08/04_Anexo_Proyecto_JEP_CEV_HRDAG_08022022.pdf). Se pueden descargar los datos sobre desaparición, homicidio, reclutamiento de niños, niñas y adolescentes y secuestro del [sitio web del Departamento Administrativo Nacional de Estadística](https://microdatos.dane.gov.co/index.php/catalog/795). Estos datos corresponden a 100 réplicas, producto del proceso de imputación estadística de campos faltantes (ver sección 4 del [informe metedológico del proyecto](https://hrdag.org/wp-content/uploads/2022/08/20220818-fase4-informe-corrected.pdf)). El repositorio [`verdata-examples`](https://github.com/HRDAG/verdata-examples) contiene ejemplos que ilustran cómo usar correctamente los datos y este paquete.
+`verdata` es un paquete de `R` que está pensado como una herramienta para el uso y análisis de los datos de conflicto armado en Colombia resultantes del [proyecto conjunto JEP-CEV-HRDAG](https://hrdag.org/wp-content/uploads/2022/08/20220818-fase4-informe-corrected.pdf). Se pueden descargar los datos sobre desaparición, homicidio, reclutamiento de niños, niñas y adolescentes y secuestro del [sitio web del Departamento Administrativo Nacional de Estadística](https://microdatos.dane.gov.co/index.php/catalog/795). Estos datos corresponden a 100 réplicas, producto del proceso de imputación estadística de campos faltantes (ver sección 4 del [informe metedológico del proyecto](https://hrdag.org/wp-content/uploads/2022/08/20220818-fase4-informe-corrected.pdf)). El repositorio [`verdata-examples`](https://github.com/HRDAG/verdata-examples) contiene ejemplos que ilustran cómo usar correctamente los datos y este paquete.
 
 <div class="column" width="60%">
 
@@ -31,34 +31,25 @@ devtools::install_github("HRDAG/verdata")
 
 ## Diccionario de datos
 
-En la ruta `inst/docs` usted puede encontrar la información relacionada con el diccionario de datos de las réplicas. En este encontrará la definición de cada una de las variables que se encuentran allí, así como nuevas variables que fueron usadas en algunos análisis estadísticos durante la construcción del informe final de la CEV.
+En el subdirectorio `inst/docs` usted puede encontrar la información relacionada con el diccionario de datos de las réplicas. En este encontrará la definición de cada una de las variables que se encuentran allí, así como nuevas variables que fueron usadas en algunos análisis estadísticos durante la construcción del informe final de la CEV.
 
 ## Uso
 
-Para el uso de este paquete es necesario haber descargado los datos previamente de alguno de los sitios en los
-que se encuentran publicados. Este paquete ofrece al público 8 funciones para el tratamiento de los datos, divididas así:
+Para el uso de este paquete es necesario haber descargado los datos previamente de alguno de los sitios en los que se encuentran publicados. Este paquete ofrece al público 8 funciones para el tratamiento de los datos, divididas así:
 
 ### Verificación y lectura de datos en `R`:
 
-* La función `confirm_files` permite autenticar que los archivos descargados correspondan exactamente a los
-archivos originalmente publicados. Esta función acepta archivos en cualquiera de los dos formatos publicados (`parquet` o `csv`).
+* La función `confirm_files` permite autenticar que los archivos descargados correspondan exactamente a los archivos originalmente publicados. Esta función acepta archivos en cualquiera de los dos formatos publicados (`parquet` o `csv`).
 
-* Además, la función `read_replicates` permite autenticar el contenido de los archivos, así como importar el
-número deseado de réplicas a `R`. Esta función acepta archivos en cualquiera de los dos formatos publicados (`parquet` o `csv`).
+* Además, la función `read_replicates` permite autenticar el contenido de los archivos, así como importar el número deseado de réplicas a `R`. Esta función acepta archivos en cualquiera de los dos formatos publicados (`parquet` o `csv`).
 
 ### Transformación de datos:
 
-* Para sus análisis en violaciones a derechos humanos, la Comisión de la Verdad especificó [diferentes períodos
-y condiciones](https://www.comisiondelaverdad.co/hasta-la-guerra-tiene-limites). En caso de querer replicar los resultados
-del Informe Final de la CEV, es necesario aplicar estos
-mismos filtros a los datos. El uso de la función `filter_standard_cev` es opcional y permite filtrar los datos del
-mismo modo que la CEV lo hizo, dependiendo de la violación a derechos humanos a analizar.
+* Para sus análisis en violaciones a derechos humanos, la Comisión de la Verdad especificó [diferentes períodos y condiciones](https://www.comisiondelaverdad.co/hasta-la-guerra-tiene-limites). En caso de querer replicar los resultados del Informe Final de la CEV, es necesario aplicar estos mismos filtros a los datos. El uso de la función `filter_standard_cev` es opcional y permite filtrar los datos del mismo modo que la CEV lo hizo, dependiendo de la violación a derechos humanos a analizar.
 
 ### Datos observados:
 
-* La función `summary_observed` ofrece un conteo del número observado de víctimas -totales o agrupadas por diferentes
-variables- antes de la imputación estadística de campos faltantes. El número que se obtiene es la media entre las
-diferentes réplicas.
+* La función `summary_observed` ofrece un conteo del número observado de víctimas -totales o agrupadas por diferentes variables- antes de la imputación estadística de campos faltantes. El número que se obtiene es la media entre las diferentes réplicas.
 
 ### Datos imputados:
 
@@ -66,7 +57,7 @@ diferentes réplicas.
 
 ### Datos estimados:
 
-* La función `estimates_exist` permite validar si la estimación de los estratos de intrés ya existen, y se encuentran en los archivos de estimaciones precalculadas publicados, que deben haber sido previamente descargados del [sitio de la Comisión](https://www.comisiondelaverdad.co/analitica-de-datos-informacion-y-recursos#c3). Esta función requiere los datos estratificados y el diccionario en el que se encuentran las estimaciones precalculadas y devolverá un valor lógico que indica si la estimación existe o no, y la ruta en la que se encuentra, en caso de que exista. En caso de que usted quiera replicar los resultados de la Comisión de la Verdad, los objetos de datos `estratificacion` (en español) y `stratification` (en inglés) especifican qué estratificaciones se usaron para cada estimación presente en el [informe metódologico del proyecto](https://hrdag.org/wp-content/uploads/2022/08/20220818-fase4-informe-corrected.pdf).
+* La función `estimates_exist` permite validar si la estimación de los estratos de intrés ya existen, y se encuentran en los archivos de estimaciones precalculadas publicados, que deben haber sido previamente descargados del [sitio de la Comisión](https://www.comisiondelaverdad.co/analitica-de-datos-informacion-y-recursos#c3). Esta función requiere los datos estratificados y el directorio en el que se encuentran las estimaciones precalculadas y devolverá un valor lógico que indica si la estimación existe o no, y la ruta en la que se encuentra, en caso de que exista. En caso de que usted quiera replicar los resultados de la Comisión de la Verdad, los objetos de datos `estratificacion` (en español) y `stratification` (en inglés) especifican qué estratificaciones se usaron para cada estimación presente en el [informe metodológico del proyecto](https://hrdag.org/wp-content/uploads/2022/08/20220818-fase4-informe-corrected.pdf).
 
 * La función `mse` permite hacer estimaciones del subregistro, usando el modelo de [LCMCR](https://onlinelibrary.wiley.com/doi/10.1111/biom.12502) (ver sección 6 del [informe metodológico del proyecto](https://hrdag.org/wp-content/uploads/2022/08/20220818-fase4-informe-corrected.pdf)).
 Para usar esta función es necesario haber definido variables de estratificación, es decir, agrupación, para hacer la estimación
