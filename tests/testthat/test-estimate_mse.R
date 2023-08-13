@@ -95,7 +95,7 @@ testthat::test_that("mse function returns correct results for estimable and non-
 
 
 testthat::test_that("mse function returns correct results when using lookup functionality", {
-
+    
     local_dir <- system.file("extdata", "right", package = "verdata")
     replicates <- read_replicates(local_dir, "reclutamiento", 1, 1)
 
@@ -108,6 +108,8 @@ testthat::test_that("mse function returns correct results when using lookup func
                       replica == "R1") %>%
         dplyr::select(tidyselect::starts_with("in_"))
 
+    # there are warnings here because our toy estimates directory does not contain
+    # the same number of files as the real estimates directory would
     s3_start <- Sys.time()
     r3 <- mse(stratum_data = stratum_3,
               stratum_name = "stratum 3",
@@ -127,6 +129,8 @@ testthat::test_that("mse function returns correct results when using lookup func
                       replica == "R1") %>%
         dplyr::select(tidyselect::starts_with("in_"))
 
+    # there are warnings here because our toy estimates directory does not contain
+    # the same number of files as the real estimates directory would
     s4_start <- Sys.time()
     r4 <- mse(stratum_data = stratum_4,
               stratum_name = "stratum 4",

@@ -11,7 +11,8 @@ summary_observed(
   conflict_filter = FALSE,
   forced_dis_filter = FALSE,
   edad_minors_filter = FALSE,
-  include_props = FALSE
+  include_props = FALSE,
+  digits = 2
 )
 }
 \arguments{
@@ -33,6 +34,8 @@ the rule "is_forced_dis" or not.}
 
 \item{include_props}{A logical value indicating whether or not to include
 the proportions from the calculations.}
+
+\item{digits}{Number of decimal places to round the results to. Default is 2.}
 }
 \value{
 A data frame with two or more columns, (1) name of variable(s) and (2)
@@ -46,5 +49,5 @@ local_dir <- system.file("extdata", "right", package = "verdata")
 replicates_data <- read_replicates(local_dir, "reclutamiento", 1, 2)
 tab_observed <- summary_observed("reclutamiento", replicates_data,
 strata_vars = "sexo", conflict_filter = FALSE, forced_dis_filter = FALSE,
-edad_minors_filter = FALSE, include_props = FALSE)
+edad_minors_filter = FALSE, include_props = FALSE, digits = 2)
 }

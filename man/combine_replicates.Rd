@@ -12,7 +12,8 @@ combine_replicates(
   conflict_filter = TRUE,
   forced_dis_filter = FALSE,
   edad_minors_filter = FALSE,
-  include_props = FALSE
+  include_props = FALSE,
+  digits = 2
 )
 }
 \arguments{
@@ -35,6 +36,9 @@ the "is_conflict" rule.}
 
 \item{include_props}{A logical value indicating whether or not to include
 the proportions from the calculations before merging with summary_observed's output.}
+
+\item{digits}{Number of decimal places to round the results to. Default value
+is 2.}
 }
 \value{
 A data frame with 5 or more columns: name of variable(s), \code{observed}
@@ -50,8 +54,9 @@ local_dir <- system.file("extdata", "right", package = "verdata")
 replicates_data <- read_replicates(local_dir, "reclutamiento", 1, 2)
 replicates_obs_data <- summary_observed("reclutamiento", replicates_data,
 strata_vars = "sexo", conflict_filter = FALSE, forced_dis_filter = FALSE,
-edad_minors_filter = FALSE, include_props = FALSE)
+edad_minors_filter = FALSE, include_props = FALSE, digits = 2)
 tab_combine <- combine_replicates("reclutamiento", replicates_obs_data,
 replicates_data, strata_vars = 'sexo', conflict_filter = TRUE,
-forced_dis_filter = FALSE, edad_minors_filter = FALSE, include_props = FALSE)
+forced_dis_filter = FALSE, edad_minors_filter = FALSE, include_props = FALSE,
+digits = 2)
 }

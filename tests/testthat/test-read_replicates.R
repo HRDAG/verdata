@@ -28,9 +28,9 @@ testthat::test_that("Hashing wrong content with default crash", {
 
 testthat::test_that("Hashing wrong content with crash set to F", {
 
-    testthat::expect_s3_class(read_replicate(wrong_dir, F),
+    testthat::expect_s3_class(read_replicate(wrong_dir, FALSE),
                               "data.frame")
-    testthat::expect_warning(read_replicate(wrong_dir, F), "The content of the files is not identical to the ones published.
+    testthat::expect_warning(read_replicate(wrong_dir, FALSE), "The content of the files is not identical to the ones published.
                 The results of the analysis may be inconsistent.")
 
 })
@@ -51,8 +51,8 @@ testthat::test_that("Hashing content of wrong files with default crash", {
 })
 
 testthat::test_that("Hashing content of wrong with crash set to F", {
-    testthat::expect_warning(read_replicates(wrong_dir, "reclutamiento", 1, 2, F))
-    testthat::expect_s3_class(read_replicates(wrong_dir, "reclutamiento", 1, 2, F), "data.frame")
+    testthat::expect_warning(read_replicates(wrong_dir, "reclutamiento", 1, 2, FALSE))
+    testthat::expect_s3_class(read_replicates(wrong_dir, "reclutamiento", 1, 2, FALSE), "data.frame")
 
 })
 
