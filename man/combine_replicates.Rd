@@ -34,7 +34,7 @@ the "is_conflict" rule.}
 \item{edad_minors_filter}{Optional filter by age ("edad") < 18.}
 
 \item{include_props}{A logical value indicating whether or not to include
-the proportions from the calculations before to merge with summary_observed's output.}
+the proportions from the calculations before merging with summary_observed's output.}
 }
 \value{
 A data frame with 5 or more columns: name of variable(s), \code{observed}
@@ -50,7 +50,7 @@ local_dir <- system.file("extdata", "right", package = "verdata")
 replicates_data <- read_replicates(local_dir, "reclutamiento", 1, 2)
 replicates_obs_data <- summary_observed("reclutamiento", replicates_data,
 strata_vars = "sexo", conflict_filter = FALSE, forced_dis_filter = FALSE,
-edad_minors_filter = FALSE, include_props = FALSE, include_props_na = FALSE)
+edad_minors_filter = FALSE, include_props = FALSE)
 tab_combine <- combine_replicates("reclutamiento", replicates_obs_data,
 replicates_data, strata_vars = 'sexo', conflict_filter = TRUE,
 forced_dis_filter = FALSE, edad_minors_filter = FALSE, include_props = FALSE)

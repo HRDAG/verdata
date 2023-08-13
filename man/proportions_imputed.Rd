@@ -29,10 +29,10 @@ local_dir <- system.file("extdata", "right", package = "verdata")
 replicates_data <- read_replicates(local_dir, "reclutamiento", 1, 2, "parquet")
 replicates_obs_data <- summary_observed("reclutamiento", replicates_data,
 strata_vars = "sexo", conflict_filter = FALSE, forced_dis_filter = FALSE,
-edad_minors_filter = FALSE, include_props = FALSE, include_props_na  = FALSE)
+edad_minors_filter = FALSE, include_props = FALSE)
 tab_combine <- combine_replicates("reclutamiento", replicates_obs_data,
 replicates_data, strata_vars = 'sexo', conflict_filter = TRUE,
-forced_dis_filter = FALSE, edad_minors_filter = FALSE,include_props = FALSE)
+forced_dis_filter = FALSE, edad_minors_filter = FALSE, include_props = FALSE)
 prop_data_complete <- proportions_imputed(tab_combine, strata_vars = "sexo",
 digits = 2)
 }

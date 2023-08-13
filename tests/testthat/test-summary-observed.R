@@ -1,7 +1,7 @@
 # ============================================
 # Authors:     PA
-# Maintainers: PA
-# Copyright:   2022, HRDAG, GPL v2 or later
+# Maintainers: PA, MG
+# Copyright:   2023, HRDAG, GPL v2 or later
 # ============================================
 #
 local_dir <- system.file("extdata", "right", package = "verdata")
@@ -25,15 +25,15 @@ testthat::test_that("The table must have the same observations to CEV document",
                                      conflict_filter = TRUE,
                                      forced_dis_filter = FALSE,
                                      edad_minors_filter = TRUE,
-                                     include_props = FALSE,
-                                     include_props_na = FALSE)
+                                     include_props = FALSE)
 
+    testthat::has_names(c("sexo", "observed")) # should not have proportion columns
     testthat::expect_identical(tab_observed$observed, tab_cev$observed)
 
 })
 
 
-testthat::test_that("This function works with more than one strata", {
+testthat::test_that("This function works with more than one stratification variable", {
 
     testthat::expect_no_error(
       tab_observed <- summary_observed("reclutamiento",
@@ -42,13 +42,12 @@ testthat::test_that("This function works with more than one strata", {
                                        conflict_filter = TRUE,
                                        forced_dis_filter = FALSE,
                                        edad_minors_filter = TRUE,
-                                       include_props = FALSE,
-                                       include_props_na = FALSE))
+                                       include_props = FALSE))
 
 })
 
 
-testthat::test_that("This function works with strata does not have missing values", {
+testthat::test_that("This function works with stratification variables that do not have missing values", {
 
     testthat::expect_no_error(
         tab_observed <- summary_observed("reclutamiento",
@@ -57,13 +56,12 @@ testthat::test_that("This function works with strata does not have missing value
                                           conflict_filter = TRUE,
                                           forced_dis_filter = FALSE,
                                           edad_minors_filter = TRUE,
-                                          include_props = FALSE,
-                                          include_props_na = FALSE))
+                                          include_props = FALSE))
 })
 
 
 
-testthat::test_that("This function works with more than one strata that has missing values", {
+testthat::test_that("This function works with more than one stratification variable that has missing values", {
 
     testthat::expect_no_error(
         tab_observed <- summary_observed("reclutamiento",
@@ -72,11 +70,10 @@ testthat::test_that("This function works with more than one strata that has miss
                                          conflict_filter = TRUE,
                                          forced_dis_filter = FALSE,
                                          edad_minors_filter = TRUE,
-                                         include_props = FALSE,
-                                         include_props_na = FALSE))
+                                         include_props = FALSE))
 })
 
-testthat::test_that("This function works with more than one strata that does not has missing values", {
+testthat::test_that("This function works with more than one stratification variable that does not have missing values", {
 
     testthat::expect_no_error(
         strata_tab_observed <- summary_observed("reclutamiento",
@@ -85,11 +82,10 @@ testthat::test_that("This function works with more than one strata that does not
                                                 conflict_filter = TRUE,
                                                 forced_dis_filter = FALSE,
                                                 edad_minors_filter = TRUE,
-                                                include_props = FALSE,
-                                                include_props_na = FALSE))
+                                                include_props = FALSE))
 })
 
-testthat::test_that("Confirm sum = 1 in observed", {
+testthat::test_that("Confirm sum = 1 in observed and output has desired structure", {
 
   tab_observed <- summary_observed("reclutamiento",
                                    replicates_data_filter,
@@ -97,9 +93,9 @@ testthat::test_that("Confirm sum = 1 in observed", {
                                    conflict_filter = TRUE,
                                    forced_dis_filter = FALSE,
                                    edad_minors_filter = TRUE,
-                                   include_props = TRUE,
-                                   include_props_na = TRUE)
-
+                                   include_props = TRUE)
+  
+testthat::has_names(c("etnia", "observed", "obs_prop_no", "obs_prop"))
 testthat::expect_equal(sum(tab_observed$obs_prop_na), 1)
 
 })
@@ -115,8 +111,7 @@ testthat::test_that("The function must return an error if the user put another
                                                          conflict_filter = TRUE,
                                                          forced_dis_filter = FALSE,
                                                          edad_minors_filter = TRUE,
-                                                         include_props = TRUE,
-                                                         include_props_na = TRUE))
+                                                         include_props = TRUE))
 })
 
 testthat::test_that("The function must return an error if the user put
@@ -131,8 +126,7 @@ testthat::test_that("The function must return an error if the user put
                                                          conflict_filter = TRUE,
                                                          forced_dis_filter = FALSE,
                                                          edad_minors_filter = TRUE,
-                                                         include_props = TRUE,
-                                                         include_props_na = TRUE))
+                                                         include_props = TRUE))
 })
 
 
@@ -146,8 +140,7 @@ testthat::test_that("The function must return an error if the user put a variabl
                                                          conflict_filter = TRUE,
                                                          forced_dis_filter = FALSE,
                                                          edad_minors_filter = TRUE,
-                                                         include_props = TRUE,
-                                                         include_props_na = TRUE))
+                                                         include_props = TRUE))
 })
 
 testthat::test_that("The function must return an error if the user put
@@ -161,23 +154,7 @@ testthat::test_that("The function must return an error if the user put
                                                          conflict_filter = TRUE,
                                                          forced_dis_filter = TRUE,
                                                          edad_minors_filter = TRUE,
-                                                         include_props = FALSE,
-                                                         include_props_na = FALSE))
-                    })
-
-testthat::test_that("The function must return an error if the user put
-                    an invalid combination of arguments:
-                    include_props == FALSE & include_props_na == TRUE", {
-
-                      testthat::expect_error(
-                        tab_observed <- summary_observed("reclutamiento",
-                                                         replicates_data_filter,
-                                                         strata_vars = "sexo",
-                                                         conflict_filter = TRUE,
-                                                         forced_dis_filter = FALSE,
-                                                         edad_minors_filter = TRUE,
-                                                         include_props = FALSE,
-                                                         include_props_na = TRUE))
+                                                         include_props = FALSE))
                     })
 
 testthat::test_that("The function must return an error if the user try to work with
@@ -193,23 +170,7 @@ testthat::test_that("The function must return an error if the user try to work w
                                                          conflict_filter = TRUE,
                                                          forced_dis_filter = FALSE,
                                                          edad_minors_filter = TRUE,
-                                                         include_props = FALSE,
-                                                         include_props_na = FALSE))
-                    })
-
-testthat::test_that("The function must return an error if the user put
-                    include_props_na = TRUE when the strata_vars' variable
-                    has not missing values", {
-
-                      testthat::expect_error(
-                        tab_observed <- summary_observed("reclutamiento",
-                                                         replicates_data_filter,
-                                                         strata_vars = "dept_code_hecho",
-                                                         conflict_filter = TRUE,
-                                                         forced_dis_filter = FALSE,
-                                                         edad_minors_filter = TRUE,
-                                                         include_props = TRUE,
-                                                         include_props_na = TRUE))
+                                                         include_props = FALSE))
                     })
 
 tab_observed <- summary_observed("reclutamiento",
@@ -218,8 +179,7 @@ tab_observed <- summary_observed("reclutamiento",
                                  conflict_filter = TRUE,
                                  forced_dis_filter = FALSE,
                                  edad_minors_filter = TRUE,
-                                 include_props = TRUE,
-                                 include_props_na = TRUE)
+                                 include_props = TRUE)
 
 testthat::test_that("The function must return an error if the user input
                     information that is not a data frame in prop's function", {
@@ -230,7 +190,6 @@ testthat::test_that("The function must return an error if the user input
                       testthat::expect_error(
                           proportions_table <- proportions_observed(not_data_frame,
                                                                     strata_vars = "sexo",
-                                                                    include_props_na = TRUE,
                                                                     digits = 3))
                     })
 

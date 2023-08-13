@@ -1,7 +1,7 @@
 # ============================================
 # Authors:     PA
 # Maintainers: PA
-# Copyright:   2022, HRDAG, GPL v2 or later
+# Copyright:   2023, HRDAG, GPL v2 or later
 # ============================================
 
 local_dir <- system.file("extdata", "right", package = "verdata")
@@ -18,8 +18,7 @@ tab_observed <- summary_observed("reclutamiento",
                                  conflict_filter = TRUE,
                                  forced_dis_filter = FALSE,
                                  edad_minors_filter = TRUE,
-                                 include_props = FALSE,
-                                 include_props_na = FALSE)
+                                 include_props = FALSE)
 
 testthat::test_that("The imp_lo can't be less from observed and
                     can't be bigger than imp_mean" , {
@@ -45,8 +44,7 @@ tab_observed <- summary_observed("reclutamiento",
                                  conflict_filter = TRUE,
                                  forced_dis_filter = FALSE,
                                  edad_minors_filter = TRUE,
-                                 include_props = FALSE,
-                                 include_props_na = FALSE)
+                                 include_props = FALSE)
 
 testthat::test_that("The function works to one strata" , {
 
@@ -67,8 +65,7 @@ tab_observed <- summary_observed("reclutamiento",
                                  conflict_filter = TRUE,
                                  forced_dis_filter = FALSE,
                                  edad_minors_filter = TRUE,
-                                 include_props = FALSE,
-                                 include_props_na = FALSE)
+                                 include_props = FALSE)
 
 testthat::test_that("The function works to more than one strata" , {
 
@@ -89,8 +86,7 @@ tab_observed <- summary_observed("reclutamiento",
                                  conflict_filter = TRUE,
                                  forced_dis_filter = FALSE,
                                  edad_minors_filter = TRUE,
-                                 include_props = FALSE,
-                                 include_props_na = FALSE)
+                                 include_props = FALSE)
 
 testthat::test_that("The function must return an error if the user put another
                     violation that is different to: 'reclutamiento', 'desaparicion',
@@ -199,13 +195,18 @@ tab_combine <- combine_replicates("reclutamiento",
                                   include_props = FALSE)
 
 
-testthat::test_that("The function must return an error if the user put
-                    a digit that is different to 2", {
+testthat::test_that("The function should run if more than two decimal places are specified,
+                    but it should fail if negative decimal places are specified", {
 
-                      testthat::expect_error(
+                      testthat::expect_no_error(
                         proportions_table <- proportions_imputed(tab_combine,
                                                                  strata_vars = "sexo",
                                                                  digits = 3))
+                        
+                        testthat::expect_error(
+                            proportions_table <- proportions_imputed(tab_combine,
+                                                                     strata_vars = "sexo",
+                                                                     digits = -3))
                     })
 
 testthat::test_that("The function must return an error if the user put
