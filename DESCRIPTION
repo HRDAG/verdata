@@ -1,6 +1,6 @@
 Package: verdata
 Title: Analyze Data From the Truth Commission in Colombia
-Version: 0.0.1
+Version: 0.9
 Authors@R:
   c(person(given = "Maria",
            family = "Gargiulo",
