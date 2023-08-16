@@ -9,11 +9,9 @@
 #' @param replicate_path Path to the replicate. The name of the file must include
 #' the violation in Spanish and lower case letters (homicidio, secuestro,
 #' reclutamiento, desaparicion).
-#' @param crash A parameter to define whether the function should crash if the file
-#' is not identical to the one published. If crash = TRUE (default), the data won't
-#' be loaded. If crash = FALSE, the data will be loaded with a warning.
 #'
-#' @return A data frame with the data from the indicated replicate.
+#' @return A data frame with the data from the indicated replicate and a column
+#' `match` indicating whether the file hash matches the expected hash.
 #'
 #' @importFrom dplyr %>%
 #'
@@ -27,7 +25,7 @@
 #' read_replicate(local_dir)
 #'
 #' @noRd
-read_replicate <- function(replicate_path, crash = TRUE) {
+read_replicate <- function(replicate_path) {
 
     violacion <- stringr::str_extract(pattern = "homicidio|desaparicion|secuestro|reclutamiento",
                                       replicate_path)
@@ -121,7 +119,7 @@ read_replicates <- function(replicates_dir, violation, replicate_nums,
                             crash = TRUE) {
 
     files <- build_path(replicates_dir, violation, replicate_nums)
-    replicate_data <- purrr::map_dfr(files, read_replicate, crash)
+    replicate_data <- purrr::map_dfr(files, read_replicate)
 
     corrupted_replicates <- replicate_data %>%
         dplyr::filter(!match) %>%
