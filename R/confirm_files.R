@@ -1,7 +1,7 @@
 # ============================================
 # Authors:     MJ
-# Maintainers: MJ
-# Copyright:   2022, HRDAG, GPL v2 or later
+# Maintainers: MJ, MG
+# Copyright:   2023, HRDAG, GPL v2 or later
 # ============================================
 
 #' Confirm a file is the same as the published version.
@@ -10,10 +10,9 @@
 #' of the files must include the violation in Spanish and lower case letters
 #' (homicidio, secuestro, reclutamiento, desaparicion).
 #
-#' @return "You have the right file!" message if the files are identical to the
-#' files published or error and "This file is not identical to the one published.
-#' This means the results of the analysis may potentially be inconsistent." if
-#' they are not.
+#' @return A data frame row with two columns: `replicate_path`, a string indicating the
+#' path to the replicate checked and `confirmed`, a boolean values indicating
+#' whether the replicate contents match the published version.
 #'
 #' @importFrom dplyr %>%
 #'
@@ -27,9 +26,8 @@ confirm_file <- function(replicate_path) {
 
     violacion <- stringr::str_extract(pattern = "homicidio|desaparicion|secuestro|reclutamiento",
                                       replicate_path)
-    
-    file_extension <- stringr::str_extract(pattern = "parquet|csv",
-                                           replicate_path)
+
+    file_extension <- stringr::str_extract(pattern = "parquet|csv", replicate_path)
 
     hash_file <- dplyr::tibble(violacion = violacion,
                                replica = stringr::str_extract(pattern = ("(?:R)\\d+"),
@@ -57,34 +55,40 @@ confirm_file <- function(replicate_path) {
     is_eq <- all.equal(file_test, hash_file)
 
     if (isTRUE(is_eq)) {
-        message("You have the right file!")
 
-        }
+        results <- tibble::tibble(replicte_path = replicate_path,
+                                  confirmed = TRUE)
+        return(results)
 
-     else {
-
-
-    final <- medidas(replicate_path)
-
-    summary_table <- get(violacion) %>%
-            dplyr::filter(replica %in% final$replica)
-
-    final <- final[order(final$variable), ]
-
-    summary_table <- summary_table[order(summary_table$variable), ]
-
-    mea_eq <- all.equal(summary_table, final, check.attributes = FALSE)
-
-    if (isTRUE(mea_eq)) {
-
-        message("You have the right file!")
-
-        }
+    }
 
     else {
 
-    stop("This file is not identical to the one published. This means the results of the
-    analysis may potentially be inconsistent.")
+
+        final <- medidas(replicate_path)
+
+        summary_table <- get(violacion) %>%
+            dplyr::filter(replica %in% final$replica)
+
+        final <- final[order(final$variable), ]
+
+        summary_table <- summary_table[order(summary_table$variable), ]
+
+        mea_eq <- all.equal(summary_table, final, check.attributes = FALSE)
+
+        if (isTRUE(mea_eq)) {
+
+            results <- tibble::tibble(replicte_path = replicate_path,
+                                      confirmed = TRUE)
+            return(results)
+
+        }
+
+        else {
+
+            results <- tibble::tibble(replicte_path = replicate_path,
+                                      confirmed = FALSE)
+            return(results)
 
         }
 
@@ -100,38 +104,31 @@ confirm_file <- function(replicate_path) {
 #' letters (homicidio, secuestro, reclutamiento, desaparicion).
 #' @param violation Violation being analyzed. Options are "homicidio", "secuestro",
 #' "reclutamiento", and "desaparicion".
-#' @param first_rep First replicate in the range of replicates to be analyzed
-#' @param last_rep Last replicate in the range of replicates to be analyzed.
+#' @param replicate_nums A numeric vector containing the replicates to be analyzed.
+#' Values in the vector should be between 1 and 100 inclusive.
 #'
-#' @return "You have the right file!" message if the files are identical to the
-#' files published or error and "This file is not identical to the one published.
-#' This means the results of the analysis may potentially be inconsistent." if
-#' they are not.
+#' @return # TODO
 #' @export
 #'
 #' @importFrom dplyr %>%
 #'
 #' @examples
 #' local_dir <- system.file("extdata", "right", package = "verdata")
-#' confirm_files(local_dir, "reclutamiento", 1, 2)
-confirm_files <- function(replicates_dir, violation, first_rep, last_rep) {
-  
-    files <- build_path(replicates_dir, violation, first_rep, last_rep)
-    purrr::walk(files, confirm_file)
-    
-    if (first_rep < 1 & last_rep > 100){
-      message("Replicates available go from 1 to 100. Authenticated replicates 1 to 100")
-    } else {
-      
-      if (first_rep < 1){
-        message(paste("First replicate available is replicate 1. Authenticated replicates 1 to", last_rep))
-      }
-      
-      if (last_rep > 100){
-        message(paste("There are only 100 replicates available. Authenticated replicates", first_rep, "to 100"))
-      }
-      
+#' confirm_files(local_dir, "reclutamiento", c(1, 2))
+confirm_files <- function(replicates_dir, violation, replicate_nums) {
+
+    files <- build_path(replicates_dir, violation, replicate_nums)
+
+    results <- purrr::map_dfr(files, confirm_file)
+
+    if (any(!results$confirmed)) {
+
+        warning("Some replicate file contents do not match the published versions")
+
     }
+
+    return(results)
+
 }
 
 # --- Done

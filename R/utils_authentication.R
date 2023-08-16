@@ -20,13 +20,13 @@ medidas <- function(replicate_path) {
 
         replicate_data <- arrow::read_parquet(replicate_path)
 
-        }
+    }
 
     else {
 
         replicate_data <- readr::read_csv(replicate_path)
 
-        }
+    }
 
     replicate <- unique(replicate_data$replica)
 
@@ -35,8 +35,8 @@ medidas <- function(replicate_path) {
         dplyr::summarise(valor = dplyr::n()) %>%
         dplyr::filter(dept_code_hecho == 5 | dept_code_hecho == 20) %>%
         dplyr::mutate(variable = dplyr::recode(dept_code_hecho,
-                                 "5" = "antioquia",
-                                 "20" = "cesar")) %>%
+                                               "5" = "antioquia",
+                                               "20" = "cesar")) %>%
         dplyr::select(variable,valor)
 
     etnia <- replicate_data %>%
@@ -83,7 +83,7 @@ medidas <- function(replicate_path) {
         dplyr::group_by(sexo) %>%
         dplyr::summarise(valor = dplyr::n()) %>%
         dplyr::mutate(variable = dplyr::recode(sexo,
-                                        "MUJER" = "mujer menor de edad")) %>%
+                                               "MUJER" = "mujer menor de edad")) %>%
         dplyr::select(variable, valor)
 
     caq_89_93 <- replicate_data %>%
@@ -165,13 +165,13 @@ medidas <- function(replicate_path) {
 build_path <- function(replicates_dir, violation, replicate_nums) {
 
     if (length(replicate_nums) == 0) {
-      stop("replicate_nums is empty, please specifify which replicates to use")
+        stop("replicate_nums is empty, please specifify which replicates to use")
     }
-    
+
     if (!all(is.numeric(replicate_nums))) {
         stop("replicate_nums should contain only numeric values")
     }
-    
+
     if (any(replicate_nums < 1 | replicate_nums > 100)) {
         stop("All values of replicate_nums should be between 1 and 100 inclusive")
     }
@@ -180,73 +180,82 @@ build_path <- function(replicates_dir, violation, replicate_nums) {
 
     if (violation %in% valid_violations) {
 
-      path <- list.files(path = replicates_dir, full.names = TRUE)
+        path <- list.files(path = replicates_dir, full.names = TRUE)
 
-      if (rlang::is_empty(path)) {
+        if (rlang::is_empty(path)) {
 
-        stop("This directory does not contain any files")
+            stop("This directory does not contain any files")
 
-      }
+        }
 
-      parquet_check <- list.files(replicates_dir, pattern = "parquet")
+        parquet_check <- list.files(replicates_dir, pattern = "parquet")
 
-      csv_check <- list.files(replicates_dir, pattern = "csv")
+        csv_check <- list.files(replicates_dir, pattern = "csv")
 
-      if (rlang::is_empty(parquet_check) & rlang::is_empty(csv_check)) {
+        if (rlang::is_empty(parquet_check) & rlang::is_empty(csv_check)) {
 
-        stop("No parquet or csv files were found in this directory")
+            stop("No parquet or csv files were found in this directory")
 
-      }
+        }
 
-      if (!rlang::is_empty(parquet_check) & rlang::is_empty(csv_check)) {
+        if (!rlang::is_empty(parquet_check) & rlang::is_empty(csv_check)) {
 
-        file_extension <- "parquet"
+            file_extension <- "parquet"
 
-      }
+        }
 
-      if (rlang::is_empty(parquet_check) & !rlang::is_empty(csv_check)) {
+        if (rlang::is_empty(parquet_check) & !rlang::is_empty(csv_check)) {
 
-        file_extension <- "csv"
+            file_extension <- "csv"
 
-      }
+        }
 
-      if (!rlang::is_empty(parquet_check) & !rlang::is_empty(csv_check)) {
+        if (!rlang::is_empty(parquet_check) & !rlang::is_empty(csv_check)) {
 
-        file_extension <- "parquet"
+            file_extension <- "parquet"
 
-      }
+        }
 
-      if (file_extension == "parquet") {
+        if (file_extension == "parquet") {
 
-        matchpattern <- "([^-]+)\\-R([0-9]+).parquet"
+            matchpattern <- "([^-]+)\\-R([0-9]+).parquet"
 
-        matches <- stringr::str_match(path, matchpattern) %>%
-          tibble::as_tibble(.name_repair = ~c("full_match", "violation", "rep_number"))
+            matches <- stringr::str_match(path, matchpattern) %>%
+                tibble::as_tibble(.name_repair = ~c("full_match", "violation", "rep_number"))
 
-        rep_lista <- tibble::tibble(full_path = path, matches) %>%
-          dplyr::mutate(rep_number = as.integer(rep_number)) %>%
-          dplyr::filter(violation == violation & rep_number %in% replicate_nums) %>%
-          purrr::pluck("full_path")
+            rep_lista <- tibble::tibble(full_path = path, matches) %>%
+                dplyr::mutate(rep_number = as.integer(rep_number)) %>%
+                dplyr::filter(violation == violation & rep_number %in% replicate_nums) %>%
+                purrr::pluck("full_path")
 
-      } else {
+        } else {
 
-        matchpattern <- "([^-]+)\\-R([0-9]+).csv"
+            matchpattern <- "([^-]+)\\-R([0-9]+).csv"
 
-        matches <- stringr::str_match(path, matchpattern) %>%
-          tibble::as_tibble(.name_repair = ~c("full_match", "violation", "rep_number"))
+            matches <- stringr::str_match(path, matchpattern) %>%
+                tibble::as_tibble(.name_repair = ~c("full_match", "violation", "rep_number"))
 
-        rep_lista <- tibble::tibble(full_path = path, matches) %>%
-          dplyr::mutate(rep_number = as.integer(rep_number)) %>%
-          dplyr::filter(violation == violation & rep_number %in% replicate_nums) %>%
-          purrr::pluck("full_path")
-      }
+            rep_lista <- tibble::tibble(full_path = path, matches) %>%
+                dplyr::mutate(rep_number = as.integer(rep_number)) %>%
+                dplyr::filter(violation == violation & rep_number %in% replicate_nums) %>%
+                purrr::pluck("full_path")
+        }
 
-      return(rep_lista)
+        check_paths <- file.exists(rep_lista)
+
+        if (any(!check_paths)) {
+
+            paste("replicates_dir missing replicates:", rep_lista[!check_paths], collapse = ",", recycle0 = TRUE)
+            stop(glue::glue("replicates_dir missing replicates:\n{paste0(rep_lista[!check_paths], collapse = '\n')}"))
+
+        }
+
+        return(rep_lista)
     }
 
     else {
 
-    stop("Violation argument incorrectly specified. Please enter one of the following valid violation types: reclutamiento, secuestro, homicidio, desaparicion")
+        stop("Violation argument incorrectly specified. Please enter one of the following valid violation types: reclutamiento, secuestro, homicidio, desaparicion")
 
     }
 
