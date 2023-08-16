@@ -1,7 +1,7 @@
 # ============================================
 # Authors:     MJ
-# Maintainers: MJ
-# Copyright:   2022, HRDAG, GPL v2 or later
+# Maintainers: MJ, MG
+# Copyright:   2023, HRDAG, GPL v2 or later
 # ============================================
 
 #' Calculate measurements in order to make sure each replicate file has the correct
@@ -156,21 +156,24 @@ medidas <- function(replicate_path) {
 #' the replicates to be checked
 #' @param violation Violation to be analyzed. Options are "homicidio", "secuestro",
 #' "reclutamiento", and "desaparicion".
-#' @param first_rep First replicate in the range of replicates to be analyzed.
-#' @param last_rep Last replicate in the range of replicates to be analyzed.
-#
+#' @param replicate_nums A numeric vector containing the replicates to be analyzed.
+#' Values in the vector should be between 1 and 100 inclusive.
 #' @return A data frame with the path to the replicates, the replicate number,
 #' and violation type.
 #'
 #' @noRd
-build_path <- function(replicates_dir, violation, first_rep, last_rep) {
+build_path <- function(replicates_dir, violation, replicate_nums) {
 
-    if (!is.numeric(first_rep)) {
-      stop("first_rep argument should be numeric")
+    if (length(replicate_nums) == 0) {
+      stop("replicate_nums is empty, please specifify which replicates to use")
     }
-
-    if (!is.numeric(last_rep)) {
-      stop("last_rep argument should be numeric")
+    
+    if (!all(is.numeric(replicate_nums))) {
+        stop("replicate_nums should contain only numeric values")
+    }
+    
+    if (any(replicate_nums < 1 | replicate_nums > 100)) {
+        stop("All values of replicate_nums should be between 1 and 100 inclusive")
     }
 
     valid_violations <- c("secuestro", "reclutamiento", "homicidio", "desaparicion")
@@ -222,8 +225,7 @@ build_path <- function(replicates_dir, violation, first_rep, last_rep) {
 
         rep_lista <- tibble::tibble(full_path = path, matches) %>%
           dplyr::mutate(rep_number = as.integer(rep_number)) %>%
-          dplyr::filter(violation == violation,
-                        dplyr::between(rep_number, first_rep, last_rep)) %>%
+          dplyr::filter(violation == violation & rep_number %in% replicate_nums) %>%
           purrr::pluck("full_path")
 
       } else {
@@ -235,8 +237,7 @@ build_path <- function(replicates_dir, violation, first_rep, last_rep) {
 
         rep_lista <- tibble::tibble(full_path = path, matches) %>%
           dplyr::mutate(rep_number = as.integer(rep_number)) %>%
-          dplyr::filter(violation == violation,
-                        dplyr::between(rep_number, first_rep, last_rep)) %>%
+          dplyr::filter(violation == violation & rep_number %in% replicate_nums) %>%
           purrr::pluck("full_path")
       }
 
@@ -251,4 +252,4 @@ build_path <- function(replicates_dir, violation, first_rep, last_rep) {
 
 }
 
-
+# done.
