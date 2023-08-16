@@ -107,7 +107,10 @@ confirm_file <- function(replicate_path) {
 #' @param replicate_nums A numeric vector containing the replicates to be analyzed.
 #' Values in the vector should be between 1 and 100 inclusive.
 #'
-#' @return # TODO
+#' @return A data frame row with `replicate_num` rows and two columns:
+#' `replicate_path`, a string indicating the path to the replicate checked and
+#' `confirmed`, a boolean values indicating whether the replicate contents match
+#' the published version.
 #' @export
 #'
 #' @importFrom dplyr %>%
@@ -131,4 +134,5 @@ confirm_files <- function(replicates_dir, violation, replicate_nums) {
 
 }
 
-# --- Done
+
+# done.

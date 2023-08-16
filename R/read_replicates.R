@@ -1,7 +1,7 @@
 # ============================================
 # Authors:     MJ
-# Maintainers: MJ
-# Copyright:   2022, HRDAG, GPL v2 or later
+# Maintainers: MJ, MG
+# Copyright:   2023, HRDAG, GPL v2 or later
 # ============================================
 
 #' Read a replicate and hash its contents to make sure it's identical to the one published.
@@ -32,8 +32,7 @@ read_replicate <- function(replicate_path, crash = TRUE) {
     violacion <- stringr::str_extract(pattern = "homicidio|desaparicion|secuestro|reclutamiento",
                                       replicate_path)
 
-    file_extension <- stringr::str_extract(pattern = "parquet|csv",
-                                           replicate_path)
+    file_extension <- stringr::str_extract(pattern = "parquet|csv", replicate_path)
 
     if (file_extension == "parquet") {
 
@@ -48,7 +47,7 @@ read_replicate <- function(replicate_path, crash = TRUE) {
             dplyr::filter(replica %in% hash_intor$replica,
                           violacion == hash_intor$violacion)
 
-        } else {
+    } else {
 
         replicate_data <- readr::read_csv(replicate_path)
 
@@ -60,42 +59,34 @@ read_replicate <- function(replicate_path, crash = TRUE) {
         content_test <- content_csv %>%
             dplyr::filter(replica %in% hash_intor$replica)
 
-        }
+    }
 
     is_eq <- all.equal(content_test, hash_intor)
 
     if (isTRUE(is_eq)) {
 
-        return(replicate_data)
+        return(replicate_data %>% mutate(match = TRUE))
 
     } else {
 
-    final <- medidas(replicate_path)
+        final <- medidas(replicate_path)
 
-    summary_table <- get(violacion) %>%
+        summary_table <- get(violacion) %>%
             dplyr::filter(replica %in% final$replica)
 
-    final <- final[order(final$variable), ]
+        final <- final[order(final$variable), ]
 
-    summary_table <- summary_table[order(summary_table$variable), ]
+        summary_table <- summary_table[order(summary_table$variable), ]
 
-    mea_eq <- all.equal(summary_table, final, check.attributes = FALSE)
+        mea_eq <- all.equal(summary_table, final, check.attributes = FALSE)
 
-    if (isTRUE(mea_eq)) {
+        if (isTRUE(mea_eq)) {
 
-        return(replicate_data)
-
-    }
-
-     else if (crash) {
-
-        stop("The content of the files is not identical to the ones published.")
+            return(replicate_data %>% mutate(match = TRUE))
 
         } else {
 
-        warning("The content of the files is not identical to the ones published.
-                The results of the analysis may be inconsistent.")
-        return(replicate_data)
+            return(replicate_data %>% mutate(match = FALSE))
 
         }
 
@@ -111,8 +102,8 @@ read_replicate <- function(replicate_path, crash = TRUE) {
 #' and the replicate number preceded by "R", (e.g., "R1" for replicate 1).
 #' @param violation A string indicating the violation being analyzed. Options are
 #' "homicidio", "secuestro", "reclutamiento", and "desaparicion".
-#' @param first_rep First replicate in the range of replicates to be analyzed.
-#' @param last_rep Last replicate in the range of replicates to be analyzed.
+#' @param replicate_nums A numeric vector containing the replicates to be analyzed.
+#' Values in the vector should be between 1 and 100 inclusive.
 #' @param crash A parameter to define whether the function should crash if the
 #' content of the file is not identical to the one published. If crash = TRUE
 #' (default), it will return error and not read the data, if crash = FALSE, the
@@ -126,29 +117,37 @@ read_replicate <- function(replicate_path, crash = TRUE) {
 #' @examples
 #' local_dir <- system.file("extdata", "right", package = "verdata")
 #' read_replicates(local_dir, "reclutamiento", 1, 2)
-read_replicates <- function(replicates_dir, violation, first_rep, last_rep,
+read_replicates <- function(replicates_dir, violation, replicate_nums,
                             crash = TRUE) {
 
-    files <- build_path(replicates_dir, violation, first_rep, last_rep)
+    files <- build_path(replicates_dir, violation, replicate_nums)
     replicate_data <- purrr::map_dfr(files, read_replicate, crash)
 
-    if (first_rep < 1 & last_rep > 100){
-      message("Replicates available go from 1 to 100. Authenticated and loaded replicates 1 to 100")
+    corrupted_replicates <- replicate_data %>%
+        filter(!match) %>%
+        distinct(replica) %>%
+        pull(replica)
+
+    if (crash) {
+
+        if (all(replicate_data$match)) {
+
+            return(replicate_data %>% select(-match))
+
+        } else {
+
+            stop(glue::glue("The content of the files is not identical to the ones published.\nThe following replicates have incorrect content:\n{paste0(corrupted_replicates, collapse = '\n')}"))
+
+        }
+
     } else {
 
-      if (first_rep < 1){
-        message(paste("First replicate available is replicate 1. Authenticated and loaded replicates 1 to", last_rep))
-      }
-
-      if (last_rep > 100){
-        message(paste("There are only 100 replicates available. Authenticated and loaded replicates", first_rep, "to 100"))
-      }
+        warning(glue::glue("The content of the files is not identical to the ones published.\nThe results of the analysis may be inconsistent.\nThe following replicates have incorrect content:\n{paste0(corrupted_replicates, collapse = '\n')}"))
+        return(replicate_data %>% select(-match))
 
     }
-
-    return(replicate_data)
 
 }
 
 
-# --- Done
+# done.
