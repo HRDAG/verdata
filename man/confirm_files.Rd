@@ -4,7 +4,7 @@
 \alias{confirm_files}
 \title{Confirm files are identical to the ones published.}
 \usage{
-confirm_files(replicates_dir, violation, first_rep, last_rep)
+confirm_files(replicates_dir, violation, replicate_nums)
 }
 \arguments{
 \item{replicates_dir}{Directory containing the replicates.
@@ -14,20 +14,19 @@ letters (homicidio, secuestro, reclutamiento, desaparicion).}
 \item{violation}{Violation being analyzed. Options are "homicidio", "secuestro",
 "reclutamiento", and "desaparicion".}
 
-\item{first_rep}{First replicate in the range of replicates to be analyzed}
-
-\item{last_rep}{Last replicate in the range of replicates to be analyzed.}
+\item{replicate_nums}{A numeric vector containing the replicates to be analyzed.
+Values in the vector should be between 1 and 100 inclusive.}
 }
 \value{
-"You have the right file!" message if the files are identical to the
-files published or error and "This file is not identical to the one published.
-This means the results of the analysis may potentially be inconsistent." if
-they are not.
+A data frame row with \code{replicate_num} rows and two columns:
+\code{replicate_path}, a string indicating the path to the replicate checked and
+\code{confirmed}, a boolean values indicating whether the replicate contents match
+the published version.
 }
 \description{
 Confirm files are identical to the ones published.
 }
 \examples{
 local_dir <- system.file("extdata", "right", package = "verdata")
-confirm_files(local_dir, "reclutamiento", 1, 2)
+confirm_files(local_dir, "reclutamiento", c(1, 2))
 }

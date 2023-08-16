@@ -65,7 +65,7 @@ read_replicate <- function(replicate_path, crash = TRUE) {
 
     if (isTRUE(is_eq)) {
 
-        return(replicate_data %>% mutate(match = TRUE))
+        return(replicate_data %>% dplyr::mutate(match = TRUE))
 
     } else {
 
@@ -82,11 +82,11 @@ read_replicate <- function(replicate_path, crash = TRUE) {
 
         if (isTRUE(mea_eq)) {
 
-            return(replicate_data %>% mutate(match = TRUE))
+            return(replicate_data %>% dplyr::mutate(match = TRUE))
 
         } else {
 
-            return(replicate_data %>% mutate(match = FALSE))
+            return(replicate_data %>% dplyr::mutate(match = FALSE))
 
         }
 
@@ -124,15 +124,15 @@ read_replicates <- function(replicates_dir, violation, replicate_nums,
     replicate_data <- purrr::map_dfr(files, read_replicate, crash)
 
     corrupted_replicates <- replicate_data %>%
-        filter(!match) %>%
-        distinct(replica) %>%
-        pull(replica)
+        dplyr::filter(!match) %>%
+        dplyr::distinct(replica) %>%
+        dplyr::pull(replica)
 
     if (crash) {
 
         if (all(replicate_data$match)) {
 
-            return(replicate_data %>% select(-match))
+            return(replicate_data %>% dplyr::select(-match))
 
         } else {
 
@@ -143,7 +143,7 @@ read_replicates <- function(replicates_dir, violation, replicate_nums,
     } else {
 
         warning(glue::glue("The content of the files is not identical to the ones published.\nThe results of the analysis may be inconsistent.\nThe following replicates have incorrect content:\n{paste0(corrupted_replicates, collapse = '\n')}"))
-        return(replicate_data %>% select(-match))
+        return(replicate_data %>% dplyr::select(-match))
 
     }
 

@@ -4,7 +4,7 @@
 \alias{read_replicates}
 \title{Read replicates in a directory and verify they are identical to the ones published.}
 \usage{
-read_replicates(replicates_dir, violation, first_rep, last_rep, crash = TRUE)
+read_replicates(replicates_dir, violation, replicate_nums, crash = TRUE)
 }
 \arguments{
 \item{replicates_dir}{Adirectory to the replicates.
@@ -15,9 +15,8 @@ and the replicate number preceded by "R", (e.g., "R1" for replicate 1).}
 \item{violation}{A string indicating the violation being analyzed. Options are
 "homicidio", "secuestro", "reclutamiento", and "desaparicion".}
 
-\item{first_rep}{First replicate in the range of replicates to be analyzed.}
-
-\item{last_rep}{Last replicate in the range of replicates to be analyzed.}
+\item{replicate_nums}{A numeric vector containing the replicates to be analyzed.
+Values in the vector should be between 1 and 100 inclusive.}
 
 \item{crash}{A parameter to define whether the function should crash if the
 content of the file is not identical to the one published. If crash = TRUE

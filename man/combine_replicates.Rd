@@ -51,7 +51,7 @@ Combine replicates according to the Normal approximation using the laws of total
 }
 \examples{
 local_dir <- system.file("extdata", "right", package = "verdata")
-replicates_data <- read_replicates(local_dir, "reclutamiento", 1, 2)
+replicates_data <- read_replicates(local_dir, "reclutamiento", c(1, 2))
 replicates_obs_data <- summary_observed("reclutamiento", replicates_data,
 strata_vars = "sexo", conflict_filter = FALSE, forced_dis_filter = FALSE,
 edad_minors_filter = FALSE, include_props = FALSE, digits = 2)
