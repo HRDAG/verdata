@@ -94,7 +94,7 @@ testthat::test_that("Confirm sum = 1 in observed and output has desired structur
                                    forced_dis_filter = FALSE,
                                    edad_minors_filter = TRUE,
                                    include_props = TRUE)
-  
+
 testthat::has_names(c("etnia", "observed", "obs_prop_no", "obs_prop"))
 testthat::expect_equal(sum(tab_observed$obs_prop_na), 1)
 

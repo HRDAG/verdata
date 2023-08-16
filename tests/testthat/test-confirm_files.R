@@ -42,39 +42,45 @@ testthat::test_that("Hashing wrong files", {
 })
 
 testthat::test_that("Function should return an error if the violation type is incorrect", {
-  
+
   testthat::expect_error(confirm_files(right_dir, "RECLUTAMIENTO", c(1, 2)))
-  
+
 })
 
 testthat::test_that("Expect message when number of replicates exceed available replicates", {
-  
+
   testthat::expect_error(confirm_files(right_dir, "reclutamiento", 90:110))
-  
+
 })
 
 testthat::test_that("Expect message when first replicate is less than 1", {
-  
+
   testthat::expect_error(confirm_files(right_dir, "reclutamiento", 0:2))
-  
+
 })
 
 testthat::test_that("Expect message when first replicate is less than 1 and last is more than 100", {
-  
+
   testthat::expect_error(confirm_files(right_dir, "reclutamiento", 0:101))
-  
+
 })
 
-testthat::test_that("Function should return an error if the first_rep argument dos not have the correct format", {
-  
+testthat::test_that("Function should return an error if replicate numbers are misspecified", {
+
   testthat::expect_error(confirm_files(right_dir, "reclutamiento", c("1", 2)))
-  
+
 })
 
-testthat::test_that("Function should return an error if the last_rep argument dos not have the correct format", {
-  
+testthat::test_that("Function should return an error if replicate numbers are misspecified", {
+
   testthat::expect_error(confirm_files(right_dir, "RECLUTAMIENTO", c(1, "dos")))
-  
+
+})
+
+testthat::test_that("Function should return an error if one or more of the replicates is not in the directory, but within the plausible bounds", {
+
+    testthat::expect_error(confirm_files(right_dir, "reclutamiento", 1:10))
+
 })
 
 # --- Done

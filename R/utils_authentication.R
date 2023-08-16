@@ -225,8 +225,7 @@ build_path <- function(replicates_dir, violation, replicate_nums) {
 
             rep_lista <- tibble::tibble(full_path = path, matches) %>%
                 dplyr::mutate(rep_number = as.integer(rep_number)) %>%
-                dplyr::filter(violation == violation & rep_number %in% replicate_nums) %>%
-                purrr::pluck("full_path")
+                dplyr::filter(violation == violation & rep_number %in% replicate_nums) 
 
         } else {
 
@@ -237,20 +236,17 @@ build_path <- function(replicates_dir, violation, replicate_nums) {
 
             rep_lista <- tibble::tibble(full_path = path, matches) %>%
                 dplyr::mutate(rep_number = as.integer(rep_number)) %>%
-                dplyr::filter(violation == violation & rep_number %in% replicate_nums) %>%
-                purrr::pluck("full_path")
+                dplyr::filter(violation == violation & rep_number %in% replicate_nums)
         }
 
-        check_paths <- file.exists(rep_lista)
+        if (nrow(rep_lista) < length(replicate_nums)) {
 
-        if (any(!check_paths)) {
-
-            paste("replicates_dir missing replicates:", rep_lista[!check_paths], collapse = ",", recycle0 = TRUE)
-            stop(glue::glue("replicates_dir missing replicates:\n{paste0(rep_lista[!check_paths], collapse = '\n')}"))
+            missing_reps <- setdiff(replicate_nums, rep_lista$rep_number)
+            stop(glue::glue("replicates_dir missing replicates:\n{paste0(missing_reps, collapse = '\n')}"))
 
         }
 
-        return(rep_lista)
+        return(rep_lista %>% purrr::pluck("full_path"))
     }
 
     else {

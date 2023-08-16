@@ -69,21 +69,21 @@ testthat::test_that("Lookup non existing estimates", {
 
 
 testthat::test_that("Return error if the stratum cantains values different ti 0 and 1", {
-  
+
   testthat::expect_error(lookup_estimates(wrong_stratum, estimates_dir))
-  
+
 })
 
 testthat::test_that("Return error if the data frame includes columns different to `in_`", {
-  
+
   testthat::expect_error(lookup_estimates(bad_columns, estimates_dir))
-  
+
 })
 
 testthat::test_that("Return warning if the estimates directory does not have all files", {
-  
+
   testthat::expect_warning(lookup_estimates(my_stratum, estimates_dir))
-  
+
 })
 
 # --- Done

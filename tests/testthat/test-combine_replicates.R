@@ -202,7 +202,7 @@ testthat::test_that("The function should run if more than two decimal places are
                         proportions_table <- proportions_imputed(tab_combine,
                                                                  strata_vars = "sexo",
                                                                  digits = 3))
-                        
+
                         testthat::expect_error(
                             proportions_table <- proportions_imputed(tab_combine,
                                                                      strata_vars = "sexo",
