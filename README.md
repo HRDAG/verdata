@@ -1,5 +1,7 @@
 Click [here](https://github.com/HRDAG/verdata/blob/main/inst/docs/README-en.md) for instructions in English.
 
+[![R-CMD-check](https://github.com/HRDAG/verdata/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/HRDAG/verdata/actions/workflows/R-CMD-check.yaml)
+
 <div class="columns">
 
 <div class="column" width="40%">

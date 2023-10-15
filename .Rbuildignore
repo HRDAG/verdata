@@ -2,3 +2,4 @@
 ^\.Rproj\.user$
 .RDataTmp
 LICENSE
+^\.github$
