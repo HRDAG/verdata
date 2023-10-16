@@ -1,7 +1,7 @@
 Haga clic [aquí](https://github.com/HRDAG/verdata/blob/main/README.md) para instrucciones en español.
 
  <!-- badges: start -->
-[![R-CMD-check](https://github.com/HRDAG/verdata/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/HRDAG/verdata/actions/workflows/R-CMD-check.yaml)
+[![R-CMD-check](https://github.com/HRDAG/verdata/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/HRDAG/verdata/actions/workflows/check-standard.yaml)
   [![Codecov test coverage](https://codecov.io/gh/HRDAG/verdata/branch/main/graph/badge.svg)](https://app.codecov.io/gh/HRDAG/verdata?branch=main)
   <!-- badges: end -->
 
