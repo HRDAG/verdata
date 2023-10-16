@@ -3,3 +3,4 @@
 .RDataTmp
 LICENSE
 ^\.github$
+^codecov\.yml$
