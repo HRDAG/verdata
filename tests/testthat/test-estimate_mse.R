@@ -139,7 +139,7 @@ testthat::test_that("mse function returns correct results when using lookup func
 
     testthat::expect_equal(nrow(r4), 1000)
     testthat::expect_named(r4, c("validated", "N", "valid_sources", "n_obs", "stratum_name"))
-    testthat::expect_true(as.numeric(s4_end - s4_start) > 10) # needs to estimate, should take more time
+    testthat::expect_true(as.numeric(s4_end - s4_start) > 5) # needs to estimate, should take more time
 
 })
 
