@@ -4,9 +4,7 @@
 # Copyright:   2023, HRDAG, GPL v2 or later
 # ============================================
 
-#' @title get_valid_sources
-#'
-#' @description Determine valid sources for estimation of a stratum of interest.
+#' Determine valid sources for estimation of a stratum of interest.
 #'
 #' @param stratum_data_prepped A data frame with all records in a stratum of interest.
 #' Columns indicating sources should be prefixed with `in_` and should be numeric
