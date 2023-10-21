@@ -147,9 +147,7 @@ run_lcmcr <- function(stratum_data_prepped, stratum_name, min_n = 1,
 
 }
 
-#' @title estimates_exist
-#'
-#' @description Check whether stratum estimates already exist in pre-calculated files.
+#' Check whether stratum estimates already exist in pre-calculated files.
 #'
 #' @param stratum_data_prepped A data frame including all records in a stratum of
 #' interest. The data frame should only include the source columns prefixed with
@@ -157,7 +155,7 @@ run_lcmcr <- function(stratum_data_prepped, stratum_name, min_n = 1,
 #' @param estimates_dir Directory containing pre-calculated estimates, if you
 #' would like to use pre-calculated results.
 #'
-#' #' @return A list with two entries, `estimates_exist` and `estimates_path`.
+#' @return A list with two entries, `estimates_exist` and `estimates_path`.
 #' `estimates_exist` is a logical value indicating whether calculations for the
 #' stratum of interest are available in the directory containing the pre-calculated
 #' estimates. If `estimates_exist` is `TRUE`, `estimates_path` will contain the

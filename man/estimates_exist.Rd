@@ -2,7 +2,7 @@
 % Please edit documentation in R/estimate_mse.R
 \name{estimates_exist}
 \alias{estimates_exist}
-\title{estimates_exist}
+\title{Check whether stratum estimates already exist in pre-calculated files.}
 \usage{
 estimates_exist(stratum_data_prepped, estimates_dir)
 }
@@ -12,14 +12,15 @@ interest. The data frame should only include the source columns prefixed with
 \code{in_} and all columns should only contain 1's and 0's.}
 
 \item{estimates_dir}{Directory containing pre-calculated estimates, if you
-would like to use pre-calculated results.
-
-#' @return A list with two entries, \code{estimates_exist} and \code{estimates_path}.
+would like to use pre-calculated results.}
+}
+\value{
+A list with two entries, \code{estimates_exist} and \code{estimates_path}.
 \code{estimates_exist} is a logical value indicating whether calculations for the
 stratum of interest are available in the directory containing the pre-calculated
 estimates. If \code{estimates_exist} is \code{TRUE}, \code{estimates_path} will contain the
 full file path to the JSON file containing the estimates, otherwise it will
-be \code{NA}.}
+be \code{NA}.
 }
 \description{
 Check whether stratum estimates already exist in pre-calculated files.
