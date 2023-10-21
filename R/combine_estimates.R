@@ -4,9 +4,7 @@
 # Copyright:   2023, HRDAG, GPL v2 or later
 # ============================================
 
-#' @title combine_estimates
-#'
-#' @description Combine MSE estimations results for a given stratum calculated
+#' Combine MSE estimation results for a given stratum calculated
 #' using multiple replicate files created using multiple imputation. Combination
 #' is done using the standard approach that makes use of the laws of total
 #' expectation and total variance.
