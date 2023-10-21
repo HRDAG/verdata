@@ -2,7 +2,9 @@
 % Please edit documentation in R/estimate_mse.R
 \name{run_lcmcr}
 \alias{run_lcmcr}
-\title{run_lcmcr}
+\title{Calculate multiple systems estimation estimates using the Bayesian
+Non-Parametric Latent-Class Capture-Recapture model developed by Daniel
+Manrique-Vallier (2016).}
 \usage{
 run_lcmcr(
   stratum_data_prepped,

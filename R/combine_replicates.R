@@ -4,11 +4,8 @@
 # Copyright:   2023, HRDAG, GPL v2 or later
 # ============================================
 
-#' @title proportions_imputed
-#'
-#' @description Calculate the proportions of each level of a variable after
-#' applying `combine_replicates` to complete data (that includes
-#' imputed values).
+#' Calculate the proportions of each level of a variable after
+#' applying `combine_replicates` to complete data (includes imputed values).
 #'
 #' @param complete_data A data frame containing the output from `combine_replicates`.
 #' @param strata_vars A vector of column names identifying the variables to be

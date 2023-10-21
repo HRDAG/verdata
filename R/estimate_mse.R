@@ -45,9 +45,7 @@ get_valid_sources <- function(stratum_data_prepped, min_n = 1) {
 }
 
 
-#' @title run_lcmcr
-#'
-#' @description Calculate multiple systems estimation estimates using the Bayesian
+#' Calculate multiple systems estimation estimates using the Bayesian
 #' Non-Parametric Latent-Class Capture-Recapture model developed by Daniel
 #' Manrique-Vallier (2016).
 #'
