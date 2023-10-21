@@ -4,9 +4,7 @@
 # Copyright:   2023, HRDAG, GPL v2 or later
 # ============================================
 
-#' @title get_valid_sources
-#'
-#' @description Determine valid sources for estimation of a stratum of interest.
+#' Determine valid sources for estimation of a stratum of interest.
 #'
 #' @param stratum_data_prepped A data frame with all records in a stratum of interest.
 #' Columns indicating sources should be prefixed with `in_` and should be numeric
@@ -47,9 +45,7 @@ get_valid_sources <- function(stratum_data_prepped, min_n = 1) {
 }
 
 
-#' @title run_lcmcr
-#'
-#' @description Calculate multiple systems estimation estimates using the Bayesian
+#' Calculate multiple systems estimation estimates using the Bayesian
 #' Non-Parametric Latent-Class Capture-Recapture model developed by Daniel
 #' Manrique-Vallier (2016).
 #'
@@ -149,9 +145,7 @@ run_lcmcr <- function(stratum_data_prepped, stratum_name, min_n = 1,
 
 }
 
-#' @title estimates_exist
-#'
-#' @description Check whether stratum estimates already exist in pre-calculated files.
+#' Check whether stratum estimates already exist in pre-calculated files.
 #'
 #' @param stratum_data_prepped A data frame including all records in a stratum of
 #' interest. The data frame should only include the source columns prefixed with
@@ -159,7 +153,7 @@ run_lcmcr <- function(stratum_data_prepped, stratum_name, min_n = 1,
 #' @param estimates_dir Directory containing pre-calculated estimates, if you
 #' would like to use pre-calculated results.
 #'
-#' #' @return A list with two entries, `estimates_exist` and `estimates_path`.
+#' @return A list with two entries, `estimates_exist` and `estimates_path`.
 #' `estimates_exist` is a logical value indicating whether calculations for the
 #' stratum of interest are available in the directory containing the pre-calculated
 #' estimates. If `estimates_exist` is `TRUE`, `estimates_path` will contain the

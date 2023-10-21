@@ -2,7 +2,10 @@
 % Please edit documentation in R/combine_estimates.R
 \name{combine_estimates}
 \alias{combine_estimates}
-\title{combine_estimates}
+\title{Combine MSE estimation results for a given stratum calculated
+using multiple replicate files created using multiple imputation. Combination
+is done using the standard approach that makes use of the laws of total
+expectation and total variance.}
 \usage{
 combine_estimates(stratum_estimates)
 }
@@ -19,7 +22,7 @@ associated 95\% uncertainty interval (lower bound is \code{N_025}, upper bound i
 \code{N_975}).
 }
 \description{
-Combine MSE estimations results for a given stratum calculated
+Combine MSE estimation results for a given stratum calculated
 using multiple replicate files created using multiple imputation. Combination
 is done using the standard approach that makes use of the laws of total
 expectation and total variance.

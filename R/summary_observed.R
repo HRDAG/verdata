@@ -4,10 +4,8 @@
 # Copyright:   2023, HRDAG, GPL v2 or later
 # ============================================
 
-#' @title proportions_observed
-#'
-#' @description Calculate the proportions of each level of a variable after
-#' to calculate using `summary_observed` on observed values.
+#' Calculate the proportions of each level of a variable after applying
+#' `summary_observed` to observed values.
 #'
 #' @param obs_data A data frame containing the output from `summary_observed`.
 #' @param strata_vars A vector of column names identifying the variables to be

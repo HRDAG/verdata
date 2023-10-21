@@ -2,7 +2,8 @@
 % Please edit documentation in R/summary_observed.R
 \name{proportions_observed}
 \alias{proportions_observed}
-\title{proportions_observed}
+\title{Calculate the proportions of each level of a variable after applying
+\code{summary_observed} to observed values.}
 \usage{
 proportions_observed(obs_data, strata_vars, digits = 2)
 }
@@ -19,8 +20,8 @@ A data frame that contains the proportions after applying
 \code{summary_observed}.
 }
 \description{
-Calculate the proportions of each level of a variable after
-to calculate using \code{summary_observed} on observed values.
+Calculate the proportions of each level of a variable after applying
+\code{summary_observed} to observed values.
 }
 \examples{
 local_dir <- system.file("extdata", "right", package = "verdata")

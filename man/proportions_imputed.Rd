@@ -2,7 +2,8 @@
 % Please edit documentation in R/combine_replicates.R
 \name{proportions_imputed}
 \alias{proportions_imputed}
-\title{proportions_imputed}
+\title{Calculate the proportions of each level of a variable after
+applying \code{combine_replicates} to complete data (includes imputed values).}
 \usage{
 proportions_imputed(complete_data, strata_vars, digits = 2)
 }
@@ -21,8 +22,7 @@ A data frame that contains the proportions after applying
 }
 \description{
 Calculate the proportions of each level of a variable after
-applying \code{combine_replicates} to complete data (that includes
-imputed values).
+applying \code{combine_replicates} to complete data (includes imputed values).
 }
 \examples{
 local_dir <- system.file("extdata", "right", package = "verdata")

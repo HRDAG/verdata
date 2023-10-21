@@ -2,7 +2,7 @@
 % Please edit documentation in R/estimate_mse.R
 \name{get_valid_sources}
 \alias{get_valid_sources}
-\title{get_valid_sources}
+\title{Determine valid sources for estimation of a stratum of interest.}
 \usage{
 get_valid_sources(stratum_data_prepped, min_n = 1)
 }
