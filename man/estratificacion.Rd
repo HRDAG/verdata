@@ -7,7 +7,7 @@
 los resultados del informe metedológico del proyecto conjunto CEV-HRDAG-JEP
 (versión en español).}
 \format{
-Un data frame con 31 filas y 4 variables
+Un data frame con 31 filas y 4 variables.
 \describe{
 \item{violacion}{el hecho de violencia al analizar}
 \item{estimacion}{el tipo de análisis que utiliza la estratificación (p.ej., patrones de violencia por año, sexo, etc.)}
@@ -16,7 +16,7 @@ Un data frame con 31 filas y 4 variables
 }
 }
 \source{
-proyecto conjunto JEP-CEV-HRDAG
+Proyecto conjunto JEP-CEV-HRDAG.
 }
 \usage{
 data(estratificacion)

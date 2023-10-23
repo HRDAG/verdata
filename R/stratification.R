@@ -11,7 +11,7 @@
 #' @docType data
 #'
 #' @usage  data(stratification)
-#' @format A data frame with 31 rows and 4 variables
+#' @format A data frame with 31 rows and 4 variables.
 #' \describe{
 #'   \item{violation}{the human rights violation being analyzed}
 #'   \item{estimation}{the type of analysis the stratification was used for (e.g., patterns of violence by year, sex, etc.)}
@@ -19,7 +19,7 @@
 #'   \item{notes}{additional notes about the stratification; NA if no notes}
 #' }
 #'
-#' @source joint JEP-CEV-HRDAG project
+#' @source Joint JEP-CEV-HRDAG project.
 #'
 "stratification"
 
