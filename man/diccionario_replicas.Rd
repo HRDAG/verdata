@@ -6,7 +6,7 @@
 \title{Diccionario de datos para las variables que aparecen en los archivos de las
 réplicas.}
 \format{
-Un data frame con 55 filas y 4 variables
+Un data frame con 55 filas y 4 variables.
 \describe{
 \item{nombre_variable}{nombre de la variable}
 \item{tipo}{tipo de la variable: caracter, numérico, lógico}
@@ -15,7 +15,7 @@ Un data frame con 55 filas y 4 variables
 }
 }
 \source{
-proyecto conjunto JEP-CEV-HRDAG
+Proyecto conjunto JEP-CEV-HRDAG.
 }
 \usage{
 data(diccionario_replicas)

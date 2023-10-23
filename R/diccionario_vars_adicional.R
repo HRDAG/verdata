@@ -9,7 +9,7 @@
 #' @docType data
 #' 
 #' @usage data(diccionario_vars_adicional)
-#' @format Un data frame con 11 filas y 4 variables
+#' @format Un data frame con 11 filas y 4 variables.
 #' \describe{
 #'   \item{nombre_variable}{nombre de la variable}
 #'   \item{tipo}{tipo de la variable: caracter, numérico, lógico}
@@ -17,7 +17,7 @@
 #'   \item{categorias_variable}{valores posibles de la variable}
 #' }
 #'
-#' @source proyecto conjunto JEP-CEV-HRDAG
+#' @source Proyecto conjunto JEP-CEV-HRDAG.
 #'
 "diccionario_vars_adicional"
 

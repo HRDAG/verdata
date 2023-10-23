@@ -7,7 +7,7 @@
 of the methodological report of the joint JEP-CEV-HRDAG project
 (version in English).}
 \format{
-A data frame with 31 rows and 4 variables
+A data frame with 31 rows and 4 variables.
 \describe{
 \item{violation}{the human rights violation being analyzed}
 \item{estimation}{the type of analysis the stratification was used for (e.g., patterns of violence by year, sex, etc.)}
@@ -16,7 +16,7 @@ A data frame with 31 rows and 4 variables
 }
 }
 \source{
-joint JEP-CEV-HRDAG project
+Joint JEP-CEV-HRDAG project.
 }
 \usage{
 data(stratification)

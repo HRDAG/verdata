@@ -5,7 +5,7 @@
 \alias{diccionario_vars_adicional}
 \title{Variables adicionales que pueden ser útiles para analizar los datos.}
 \format{
-Un data frame con 11 filas y 4 variables
+Un data frame con 11 filas y 4 variables.
 \describe{
 \item{nombre_variable}{nombre de la variable}
 \item{tipo}{tipo de la variable: caracter, numérico, lógico}
@@ -14,7 +14,7 @@ Un data frame con 11 filas y 4 variables
 }
 }
 \source{
-proyecto conjunto JEP-CEV-HRDAG
+Proyecto conjunto JEP-CEV-HRDAG.
 }
 \usage{
 data(diccionario_vars_adicional)
