@@ -78,3 +78,6 @@ resultado un intervalo (que incluye la media). Usa la aproximación normal usand
 
 ## Agradecimientos
 Agradecemos a [Micaela Morales](https://github.com/mmazul) por su atenta prueba beta.
+
+## Contribuir al paquete
+Contribuciones y sugerencias siempre son bienvenidas. Si tienes un problema, pregunta o duda sobre `verdata` puedes abrir un issue en GitHub. Si quieres contribuir nueva funcionalidad puedes abrir un pull request. 
