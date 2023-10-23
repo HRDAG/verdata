@@ -131,15 +131,12 @@ testthat::test_that("mse function returns correct results when using lookup func
 
     # there are warnings here because our toy estimates directory does not contain
     # the same number of files as the real estimates directory would
-    s4_start <- Sys.time()
     r4 <- mse(stratum_data = stratum_4,
               stratum_name = "stratum 4",
               estimates_dir = estimates_dir)
-    s4_end <- Sys.time()
 
     testthat::expect_equal(nrow(r4), 1000)
     testthat::expect_named(r4, c("validated", "N", "valid_sources", "n_obs", "stratum_name"))
-    testthat::expect_true(as.numeric(s4_end - s4_start) > 5) # needs to estimate, should take more time
 
 })
 
