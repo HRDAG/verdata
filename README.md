@@ -32,7 +32,7 @@ if (!require("devtools")) {install.packages("devtools")}
 devtools::install_github("HRDAG/verdata")
 ```
 
-`verdata` requiere el paquete [`LCMCR`](https://cran.r-project.org/web/packages/LCMCR/index.html) como dependencia. La instalación de `LCMCR` requiere la instalación del [GNU Scientific Library](https://www.gnu.org/software/gsl/). Es posible que necesite instalar esta librería en su computadora por separado antes de instalar `verdata`.
+Alguna de las dependencias de `verdata` la instalación del [GNU Scientific Library](https://www.gnu.org/software/gsl/). Es posible que necesite instalar esta librería en su computadora por separado antes de instalar `verdata`.
 
 ## Diccionario de datos
 
