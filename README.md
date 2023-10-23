@@ -36,6 +36,8 @@ Alguna de las dependencias de `verdata` la instalación del [GNU Scientific Libr
 
 ## Diccionario de datos
 
+`verdata` tiene dos data frames que contienen información relacionada con el diccionario de datos de las réplicas. En `diccionario_replicas` encontrará la definición de cada una de las variables que se encuentran allí. En `diccionario_vars_adicional` encontrará nuevas variables que fueron usadas en algunos análisis estadísticos durante la construcción del informe final de la CEV.
+
 En el subdirectorio `inst/docs` usted puede encontrar la información relacionada con el diccionario de datos de las réplicas. En este encontrará la definición de cada una de las variables que se encuentran allí, así como nuevas variables que fueron usadas en algunos análisis estadísticos durante la construcción del informe final de la CEV.
 
 ## Uso
@@ -80,4 +82,4 @@ resultado un intervalo (que incluye la media). Usa la aproximación normal usand
 Agradecemos a [Micaela Morales](https://github.com/mmazul) por su atenta prueba beta.
 
 ## Contribuir al paquete
-Contribuciones y sugerencias siempre son bienvenidas. Si tienes un problema, pregunta o duda sobre `verdata` puedes abrir un issue en GitHub. Si quieres contribuir nueva funcionalidad puedes abrir un pull request. 
+Contribuciones y sugerencias siempre son bienvenidas. Si tiene un problema, pregunta o duda sobre `verdata` puede abrir un issue en GitHub. Si quiere contribuir nueva funcionalidad puede abrir un pull request. 
