@@ -28,7 +28,7 @@ Click [here](https://github.com/HRDAG/verdata/blob/main/inst/docs/README-en.md) 
 Se puede instalar la versión la versión en desarrollo de `verdata` desde GitHub así:
 
 ```r
-install.packages("devtools")
+if (!require("devtools")) {install.packages("devtools")}
 devtools::install_github("HRDAG/verdata")
 ```
 
