@@ -15,9 +15,9 @@ Click [here](https://github.com/HRDAG/verdata/blob/main/inst/docs/README-en.md) 
 
 # verdata
 
-`verdata` es un paquete de `R` que está pensado como una herramienta para el uso y análisis de los datos de conflicto armado en Colombia resultantes del [proyecto conjunto JEP-CEV-HRDAG](https://hrdag.org/wp-content/uploads/2022/08/20220818-fase4-informe-corrected.pdf). Fue creado con tres grupos de funcciones. Primero, investigadoras pueden usar `verdata` para verificar que están utilizando versiones inalteradas de los datos publicados. Segundo, pueden usar `verdata` para replicar los resultados principales del proyecto conjunto JEP-CEV-HRDAG. Finalemente, pueden `verdata` para deseñar sus propios análisis estadísticos de patrones de violencia que abordan los dos tipos de datos faltantes presentes en los datos documentados.
+`verdata` es un paquete de `R` que está pensado como una herramienta para el uso y análisis de los datos de conflicto armado en Colombia. Estos datos derivan del [proyecto conjunto JEP-CEV-HRDAG](https://hrdag.org/wp-content/uploads/2022/08/20220818-fase4-informe-corrected.pdf), los cuales, a través del paquete, pueden ser analizados utilizando tres conjuntos de funciones: En primer lugar, las personas interesadas pueden utilizar `verdata` para verificar que están utilizando los datos originalmente publicados, es decir, permite autenticar tanto los archivos como su contenido. Segundo, pueden usar `verdata` para replicar los principales resultados del proyecto conjunto JEP-CEV-HRDAG. Finalmente, para el tercer conjunto, pueden utilizar `verdata` para diseñar sus propios análisis estadísticos de patrones de violencia que abordan los dos tipos de datos faltantes presentes en el proyecto (campos faltantes y registros faltantes).
 
-Se pueden descargar los datos sobre desaparición, homicidio, reclutamiento de niños, niñas y adolescentes y secuestro del [sitio web del Departamento Administrativo Nacional de Estadística](https://microdatos.dane.gov.co/index.php/catalog/795/get-microdata). Estos datos corresponden a 100 réplicas, producto del proceso de imputación estadística de campos faltantes (ver sección 4 del [informe metodológico del proyecto](https://hrdag.org/wp-content/uploads/2022/08/20220818-fase4-informe-corrected.pdf)). El repositorio [`verdata-examples`](https://github.com/HRDAG/verdata-examples) contiene ejemplos que ilustran cómo usar correctamente los datos y este paquete.
+Se pueden descargar los datos sobre las cuatro violaciones a los derechos humanos que se trabajaron en el proyecto: desaparición, homicidio, secuestro y reclutamiento de niños, niñas y adolescentes, los cuales se encuentran en el [sitio web del Departamento Administrativo Nacional de Estadística (DANE)](https://microdatos.dane.gov.co/index.php/catalog/795/get-microdata). Estos datos corresponden a 100 réplicas para cada violación, los cuales fueron producto del proceso de imputación estadística múltiple de campos faltantes (ver sección 4 del [informe metodológico del proyecto](https://hrdag.org/wp-content/uploads/2022/08/20220818-fase4-informe-corrected.pdf)). Además, el repositorio [`verdata-examples`](https://github.com/HRDAG/verdata-examples) contiene ejemplos que ilustran cómo usar correctamente estos datos (réplicas) a través del paquete previamente mencionado.
 
 <div class="column" width="60%">
 
@@ -33,18 +33,15 @@ Se puede instalar la versión la versión en desarrollo de `verdata` desde GitHu
 if (!require("devtools")) {install.packages("devtools")}
 devtools::install_github("HRDAG/verdata")
 ```
-
-Alguna de las dependencias de `verdata` la instalación del [GNU Scientific Library](https://www.gnu.org/software/gsl/). Es posible que necesite instalar esta librería en su computadora por separado antes de instalar `verdata`.
+`verdata` requiere algunos paquetes como dependencia. Para esto es recomendable la instalación del [GNU Scientific Library](https://www.gnu.org/software/gsl/). Es posible que necesite instalar esta librería en su computadora por separado antes de instalar `verdata`.
 
 ## Diccionario de datos
 
-`verdata` tiene dos data frames que contienen información relacionada con el diccionario de datos de las réplicas. En `diccionario_replicas` encontrará la definición de cada una de las variables que se encuentran allí. En `diccionario_vars_adicional` encontrará nuevas variables que fueron usadas en algunos análisis estadísticos durante la construcción del informe final de la CEV.
-
-En el subdirectorio `inst/docs` usted puede encontrar la información relacionada con el diccionario de datos de las réplicas. En este encontrará la definición de cada una de las variables que se encuentran allí, así como nuevas variables que fueron usadas en algunos análisis estadísticos durante la construcción del informe final de la CEV.
+El repositorio `verdata` presenta dos data frames, los cuales se encuentran en la ruta `inst/docs`. Estas contienen información relacionada con el diccionario de datos de las réplicas. En otras palabras, en `diccionario_replicas` encontrará la definición de cada una de las variables que se encuentran allí y, en `diccionario_vars_adicional`, encontrará nuevas variables que fueron usadas en algunos análisis estadísticos durante la construcción del informe final de la CEV.
 
 ## Uso
 
-Para el uso de este paquete es necesario haber descargado los datos previamente de alguno de los sitios en los que se encuentran publicados. Este paquete ofrece al público 8 funciones para el tratamiento de los datos, divididas así:
+Para el uso de este paquete es necesario haber descargado previamente los datos de alguno de los sitios en los que se encuentran publicados. Este paquete ofrece al público 8 funciones para el tratamiento de los datos, divididas así:
 
 ### Verificación y lectura de datos en `R`:
 
