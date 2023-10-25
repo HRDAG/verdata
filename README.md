@@ -1,9 +1,9 @@
 Click [here](https://github.com/HRDAG/verdata/blob/main/inst/docs/README-en.md) for instructions in English.
 
- <!-- badges: start -->
+<!-- badges: start -->
 [![R-CMD-check](https://github.com/HRDAG/verdata/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/HRDAG/verdata/actions/workflows/check-standard.yaml)
   [![Codecov test coverage](https://codecov.io/gh/HRDAG/verdata/branch/main/graph/badge.svg)](https://app.codecov.io/gh/HRDAG/verdata?branch=main)
-  <!-- badges: end -->
+<!-- badges: end -->
 
 <div class="columns">
 
@@ -37,7 +37,7 @@ devtools::install_github("HRDAG/verdata")
 
 ## Diccionario de datos
 
-El repositorio `verdata` presenta dos data frames, los cuales se encuentran en la ruta `inst/docs`. Estas contienen información relacionada con el diccionario de datos de las réplicas. En otras palabras, en `diccionario_replicas` encontrará la definición de cada una de las variables que se encuentran allí y, en `diccionario_vars_adicional`, encontrará nuevas variables que fueron usadas en algunos análisis estadísticos durante la construcción del informe final de la CEV.
+`verdata` presenta dos data frames que contienen información relacionada con el diccionario de datos de las réplicas. En `diccionario_replicas` encontrará la definición de cada una de las variables que se encuentran allí y, en `diccionario_vars_adicional`, encontrará nuevas variables que fueron usadas en algunos análisis estadísticos durante la construcción del informe final de la CEV.
 
 ## Uso
 
@@ -81,4 +81,4 @@ resultado un intervalo (que incluye la media). Usa la aproximación normal usand
 Agradecemos a [Micaela Morales](https://github.com/mmazul) por su atenta prueba beta.
 
 ## Contribuir al paquete
-Contribuciones y sugerencias siempre son bienvenidas. Si tiene un problema, pregunta o duda sobre `verdata` puede abrir un issue en GitHub. Si quiere contribuir nueva funcionalidad puede abrir un pull request. 
+Contribuciones y sugerencias siempre son bienvenidas. Si tiene un problema, pregunta o duda sobre `verdata` puede abrir un issue en GitHub. Si quiere contribuir nueva funcionalidad puede abrir un pull request.
