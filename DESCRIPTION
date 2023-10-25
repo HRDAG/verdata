@@ -17,7 +17,7 @@ Authors@R:
     person(given = "Patrick",
            family = "Ball",
            role = "rev"))
-Description: This package facilitates use and analysis of data about the armed conflict in Colombia resulting from the joint JEP-CEV-HRDAG project. The package has three main sets of features. First, researchers can use this package to verify that they are using unaltered versions of the data published by the Colombian National Administrative Department of Statistics. Second, they can use the package to replicate the main findings of the joint JEP-CEV-HRDAG project. Finally, they can use the package to design their own statistical analyses of patterns of violence that address the two forms of missing data present in the documented data.
+Description: This package facilitates use and analysis of data about the armed conflict in Colombia resulting from the joint JEP-CEV-HRDAG project.
 License: GPL-2
 URL: https://github.com/HRDAG/verdata
 BugReports: https://github.com/HRDAG/verdata/issues

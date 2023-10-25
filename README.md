@@ -1,9 +1,9 @@
 Click [here](https://github.com/HRDAG/verdata/blob/main/inst/docs/README-en.md) for instructions in English.
 
- <!-- badges: start -->
+<!-- badges: start -->
 [![R-CMD-check](https://github.com/HRDAG/verdata/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/HRDAG/verdata/actions/workflows/check-standard.yaml)
   [![Codecov test coverage](https://codecov.io/gh/HRDAG/verdata/branch/main/graph/badge.svg)](https://app.codecov.io/gh/HRDAG/verdata?branch=main)
-  <!-- badges: end -->
+<!-- badges: end -->
 
 <div class="columns">
 
@@ -15,7 +15,9 @@ Click [here](https://github.com/HRDAG/verdata/blob/main/inst/docs/README-en.md) 
 
 # verdata
 
-`verdata` es un paquete de `R` que está pensado como una herramienta para el uso y análisis de los datos de conflicto armado en Colombia resultantes del [proyecto conjunto JEP-CEV-HRDAG](https://hrdag.org/wp-content/uploads/2022/08/20220818-fase4-informe-corrected.pdf). Se pueden descargar los datos sobre desaparición, homicidio, reclutamiento de niños, niñas y adolescentes y secuestro del [sitio web del Departamento Administrativo Nacional de Estadística](https://microdatos.dane.gov.co/index.php/catalog/795). Estos datos corresponden a 100 réplicas, producto del proceso de imputación estadística de campos faltantes (ver sección 4 del [informe metedológico del proyecto](https://hrdag.org/wp-content/uploads/2022/08/20220818-fase4-informe-corrected.pdf)). El repositorio [`verdata-examples`](https://github.com/HRDAG/verdata-examples) contiene ejemplos que ilustran cómo usar correctamente los datos y este paquete.
+`verdata` es un paquete de `R` que está pensado como una herramienta para el uso y análisis de los datos de conflicto armado en Colombia. Estos datos derivan del [proyecto conjunto JEP-CEV-HRDAG](https://hrdag.org/wp-content/uploads/2022/08/20220818-fase4-informe-corrected.pdf), los cuales, a través del paquete, pueden ser analizados utilizando tres conjuntos de funciones: En primer lugar, las personas interesadas pueden utilizar `verdata` para verificar que están utilizando los datos originalmente publicados, es decir, permite autenticar tanto los archivos como su contenido. Segundo, pueden usar `verdata` para replicar los principales resultados del proyecto conjunto JEP-CEV-HRDAG. Finalmente, para el tercer conjunto, pueden utilizar `verdata` para diseñar sus propios análisis estadísticos de patrones de violencia que abordan los dos tipos de datos faltantes presentes en el proyecto (campos faltantes y registros faltantes).
+
+Se pueden descargar los datos sobre las cuatro violaciones a los derechos humanos que se trabajaron en el proyecto: desaparición, homicidio, secuestro y reclutamiento de niños, niñas y adolescentes, los cuales se encuentran en el [sitio web del Departamento Administrativo Nacional de Estadística (DANE)](https://microdatos.dane.gov.co/index.php/catalog/795/get-microdata). Estos datos corresponden a 100 réplicas para cada violación, los cuales fueron producto del proceso de imputación estadística múltiple de campos faltantes (ver sección 4 del [informe metodológico del proyecto](https://hrdag.org/wp-content/uploads/2022/08/20220818-fase4-informe-corrected.pdf)). Además, el repositorio [`verdata-examples`](https://github.com/HRDAG/verdata-examples) contiene ejemplos que ilustran cómo usar correctamente estos datos (réplicas) a través del paquete previamente mencionado.
 
 <div class="column" width="60%">
 
@@ -28,19 +30,18 @@ Click [here](https://github.com/HRDAG/verdata/blob/main/inst/docs/README-en.md) 
 Se puede instalar la versión la versión en desarrollo de `verdata` desde GitHub así:
 
 ```r
-install.packages("devtools")
+if (!require("devtools")) {install.packages("devtools")}
 devtools::install_github("HRDAG/verdata")
 ```
-
-`verdata` requiere el paquete [`LCMCR`](https://cran.r-project.org/web/packages/LCMCR/index.html) como dependencia. La instalación de `LCMCR` requiere la instalación del [GNU Scientific Library](https://www.gnu.org/software/gsl/). Es posible que necesite instalar esta librería en su computadora por separado antes de instalar `verdata`.
+`verdata` requiere algunos paquetes como dependencia. Para esto es recomendable la instalación del [GNU Scientific Library](https://www.gnu.org/software/gsl/). Es posible que necesite instalar esta librería en su computadora por separado antes de instalar `verdata`.
 
 ## Diccionario de datos
 
-En el subdirectorio `inst/docs` usted puede encontrar la información relacionada con el diccionario de datos de las réplicas. En este encontrará la definición de cada una de las variables que se encuentran allí, así como nuevas variables que fueron usadas en algunos análisis estadísticos durante la construcción del informe final de la CEV.
+`verdata` presenta dos data frames que contienen información relacionada con el diccionario de datos de las réplicas. En `diccionario_replicas` encontrará la definición de cada una de las variables que se encuentran allí y, en `diccionario_vars_adicional`, encontrará nuevas variables que fueron usadas en algunos análisis estadísticos durante la construcción del informe final de la CEV.
 
 ## Uso
 
-Para el uso de este paquete es necesario haber descargado los datos previamente de alguno de los sitios en los que se encuentran publicados. Este paquete ofrece al público 8 funciones para el tratamiento de los datos, divididas así:
+Para el uso de este paquete es necesario haber descargado previamente los datos de alguno de los sitios en los que se encuentran publicados. Este paquete ofrece al público 8 funciones para el tratamiento de los datos, divididas así:
 
 ### Verificación y lectura de datos en `R`:
 
@@ -62,7 +63,7 @@ Para el uso de este paquete es necesario haber descargado los datos previamente 
 
 ### Datos estimados:
 
-* La función `estimates_exist` permite validar si la estimación de los estratos de intrés ya existen, y se encuentran en los archivos de estimaciones precalculadas publicados, que deben haber sido previamente descargados del [sitio de la Comisión](https://www.comisiondelaverdad.co/analitica-de-datos-informacion-y-recursos#c3). Esta función requiere los datos estratificados y el directorio en el que se encuentran las estimaciones precalculadas y devolverá un valor lógico que indica si la estimación existe o no, y la ruta en la que se encuentra, en caso de que exista. En caso de que usted quiera replicar los resultados de la Comisión de la Verdad, los objetos de datos `estratificacion` (en español) y `stratification` (en inglés) especifican qué estratificaciones se usaron para cada estimación presente en el [informe metodológico del proyecto](https://hrdag.org/wp-content/uploads/2022/08/20220818-fase4-informe-corrected.pdf).
+* La función `estimates_exist` permite validar si la estimación de los estratos de interés ya existen, y se encuentran en los archivos de estimaciones precalculadas publicados, que deben haber sido previamente descargados del [sitio de la Comisión](https://www.comisiondelaverdad.co/analitica-de-datos-informacion-y-recursos#c3). Esta función requiere los datos estratificados y el directorio en el que se encuentran las estimaciones precalculadas y devolverá un valor lógico que indica si la estimación existe o no, y la ruta en la que se encuentra, en caso de que exista. En caso de que usted quiera replicar los resultados de la Comisión de la Verdad, los objetos de datos `estratificacion` (en español) y `stratification` (en inglés) especifican qué estratificaciones se usaron para cada estimación presente en el [informe metodológico del proyecto](https://hrdag.org/wp-content/uploads/2022/08/20220818-fase4-informe-corrected.pdf).
 
 * La función `mse` permite hacer estimaciones del subregistro, usando el modelo de [LCMCR](https://onlinelibrary.wiley.com/doi/10.1111/biom.12502) (ver sección 6 del [informe metodológico del proyecto](https://hrdag.org/wp-content/uploads/2022/08/20220818-fase4-informe-corrected.pdf)).
 Para usar esta función es necesario haber definido variables de estratificación, es decir, agrupación, para hacer la estimación
@@ -78,3 +79,6 @@ resultado un intervalo (que incluye la media). Usa la aproximación normal usand
 
 ## Agradecimientos
 Agradecemos a [Micaela Morales](https://github.com/mmazul) por su atenta prueba beta.
+
+## Contribuir al paquete
+Contribuciones y sugerencias siempre son bienvenidas. Si tiene un problema, pregunta o duda sobre `verdata` puede abrir un issue en GitHub. Si quiere contribuir nueva funcionalidad puede abrir un pull request.

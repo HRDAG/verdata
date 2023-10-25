@@ -3,7 +3,7 @@ Haga clic [aquí](https://github.com/HRDAG/verdata/blob/main/README.md) para ins
  <!-- badges: start -->
 [![R-CMD-check](https://github.com/HRDAG/verdata/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/HRDAG/verdata/actions/workflows/check-standard.yaml)
   [![Codecov test coverage](https://codecov.io/gh/HRDAG/verdata/branch/main/graph/badge.svg)](https://app.codecov.io/gh/HRDAG/verdata?branch=main)
-  <!-- badges: end -->
+<!-- badges: end -->
 
 <div class="columns">
 
@@ -15,7 +15,9 @@ Haga clic [aquí](https://github.com/HRDAG/verdata/blob/main/README.md) para ins
 
 # verdata
 
-`verdata` is an `R` package designed as a tool for the use and analysis of data about the armed conflict in Colombia resulting from the [joint JEP-CEV-HRDAG project](https://hrdag.org/wp-content/uploads/2022/08/20220818-fase4-informe-corrected.pdf). Data about disappearance, homicide, recruitment of children and adolescents, and kidnapping can be downloaded from the [National Administrative Department of Statistics' website](https://microdatos.dane.gov.co/index.php/catalog/795). The data about each of the four human rights violations correspond to 100 replicates, which are the result of a statistical imputation process of missing fields (see Section 4 of the [methodological report of the project](https://www.comisiondelaverdad.co/sites/default/files/descargables/2022-08/04_Anexo_Proyecto_JEP_CEV_HRDAG_08022022.pdf)). The repository [`verdata-examples`](https://github.com/HRDAG/verdata-examples) contains examples that illustrate how to correctly use the data and this package. These examples are currently only available in Spanish, but we are working on translating them to English.
+`verdata` is an `R` package designed as a tool for the use and analysis of data about the armed conflict in Colombia resulting from the [joint JEP-CEV-HRDAG project](https://hrdag.org/wp-content/uploads/2022/08/20220818-fase4-informe-corrected.pdf). `verdata` has three main sets of features. First, researchers can use `verdata` to verify that they are using unaltered versions of the published data. Second, they can use `verdata` to replicate the main findings of the joint JEP-CEV-HRDAG project. Finally, they can use `verdata` to design their own statistical analyses of patterns of violence that address the two forms of missing data present in the documented data.
+
+Data about disappearance, homicide, recruitment of children and adolescents, and kidnapping can be downloaded from the [National Administrative Department of Statistics' (DANE in Spanish)  website](https://microdatos.dane.gov.co/index.php/catalog/795/get-microdata). The data about each of the four human rights violations correspond to 100 replicates, which are the result of a statistical imputation process of missing fields (see Section 4 of the [methodological report of the project](https://www.comisiondelaverdad.co/sites/default/files/descargables/2022-08/04_Anexo_Proyecto_JEP_CEV_HRDAG_08022022.pdf)). To download the data, click the *descargar* button next to the files you would like to download. The repository [`verdata-examples`](https://github.com/HRDAG/verdata-examples) contains examples that illustrate how to correctly use the data and this package. These examples are currently only available in Spanish, but we are working on translating them to English.
 
 <div class="column" width="60%">
 
@@ -28,15 +30,15 @@ Haga clic [aquí](https://github.com/HRDAG/verdata/blob/main/README.md) para ins
 You can install the development version of `verdata` from GitHub with:
 
 ```r
-install.packages("devtools")
+if (!require("devtools")) {install.packages("devtools")}
 devtools::install_github("HRDAG/verdata")
 ```
 
-`verdata` requires the package [`LCMCR`](https://cran.r-project.org/web/packages/LCMCR/index.html) as a dependency. Installing `LCMCR` requires installing the [GNU Scientific Library](https://www.gnu.org/software/gsl/). It's possible that you will need to install this library separately before installing `verdata`.
+One of the `verdata`'s dependencies requires the installation of the [GNU Scientific Library](https://www.gnu.org/software/gsl/). It's possible that you will need to install this library separately before installing `verdata`.
 
 ## Data dictionary
 
-In the subdirectory `inst/docs` you can find the data dictionary for the replicate files. This dictionary includes the definition of each one of the variables in the replicate files, as well as information about additional variables that were constructed for the final report of the Colombian Truth Commission. The dicionary is currently only available in Spanish, but we are working on translating it to English.
+`verdata` has two data frames that contain information about the data dictionary for the replicate files. In `diccionario_replias`, you will find the definition of each of the variables contained within. In `diccionario_vars_adicional`, you will find additional variables that were constructed for the final report of the Colombian Truth Commission. These data dictionaries are currently only available in Spanish, but we are working on translating them to English.
 
 ## Usage
 
@@ -68,5 +70,8 @@ To use this package, it is necessary to have previously downloaded the data from
 
 * Finally, the `combine_estimates` function allows you to combine the results of the estimation, yielding an approximate 95% credibility interval and the point estimate of the mean of the total number of victims in a stratum of interest including both the uncertainty from the missing data imputation and from the multiple systems estimation model. The function uses the Normal approximation using the laws of total expectation and total variance. See Section 18.2 of [*Bayesian Data Analysis*](http://www.stat.columbia.edu/~gelman/book/) for more information.
 
-## Thank yous
+## Acknowledgments
 We thank [Micaela Morales](https://github.com/mmazul) for her thoughtful beta testing of the package.
+
+## Contribute to the package
+Comments and suggestions are very welcome. If you have a problem, question, or issue with `verdata`, please open an issue on GitHub. If you would like to add new functionality to the package, please open a pull request.
