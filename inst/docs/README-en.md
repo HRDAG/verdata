@@ -74,4 +74,6 @@ To use this package, it is necessary to have previously downloaded the data from
 We thank [Micaela Morales](https://github.com/mmazul) for her thoughtful beta testing of the package.
 
 ## Contribute to the package
-Comments and suggestions are very welcome. If you have a problem, question, or issue with `verdata`, please open an issue on GitHub. If you would like to add new functionality to the package, please open a pull request.
+Comments and suggestions are very welcome. If you have a problem, question, or issue with `verdata`, please open an issue on GitHub. If you would like to add new functionality to the package, please open a pull request. Continuous integration is setup to automatically run tests upon a pull request being opened. If you would like to run the existing tests locally prior to opening a pull request you can do so using `testthat::test_local()`.
+
+<!-- done. -->

@@ -81,4 +81,6 @@ resultado un intervalo (que incluye la media). Usa la aproximación normal usand
 Agradecemos a [Micaela Morales](https://github.com/mmazul) por su atenta prueba beta.
 
 ## Contribuir al paquete
-Contribuciones y sugerencias siempre son bienvenidas. Si tiene un problema, pregunta o duda sobre `verdata` puede abrir un issue en GitHub. Si quiere contribuir nueva funcionalidad puede abrir un pull request.
+Contribuciones y sugerencias siempre son bienvenidas. Si tiene un problema, pregunta o duda sobre `verdata` puede abrir un issue en GitHub. Si quiere contribuir nueva funcionalidad puede abrir un pull request. La integración continua está configurada para ejecutar las pruebas automáticamente cuando abre un pull request. Si desea ejecutar las pruebas localmente antes de abrir un pull request, puede hacerlo con `testthat::test_local()`.
+
+<!-- done. -->
