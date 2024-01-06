@@ -1,0 +1,48 @@
+cff-version: "1.2.0"
+authors:
+- family-names: Gargiulo
+  given-names: Maria
+  orcid: "https://orcid.org/0000-0003-1870-8990"
+- family-names: Durán
+  given-names: María Juliana
+  orcid: "https://orcid.org/0009-0005-3720-8125"
+- family-names: Amado
+  given-names: Paula Andrea
+  orcid: "https://orcid.org/0009-0004-0806-0857"
+- family-names: Ball
+  given-names: Patrick
+contact:
+- family-names: Gargiulo
+  given-names: Maria
+  orcid: "https://orcid.org/0000-0003-1870-8990"
+doi: 10.5281/zenodo.10359636
+message: If you use this software, please cite our article in the
+  Journal of Open Source Software.
+preferred-citation:
+  authors:
+  - family-names: Gargiulo
+    given-names: Maria
+    orcid: "https://orcid.org/0000-0003-1870-8990"
+  - family-names: Durán
+    given-names: María Juliana
+    orcid: "https://orcid.org/0009-0005-3720-8125"
+  - family-names: Amado
+    given-names: Paula Andrea
+    orcid: "https://orcid.org/0009-0004-0806-0857"
+  - family-names: Ball
+    given-names: Patrick
+  date-published: 2024-01-06
+  doi: 10.21105/joss.05844
+  issn: 2475-9066
+  issue: 93
+  journal: Journal of Open Source Software
+  publisher:
+    name: Open Journals
+  start: 5844
+  title: "verdata: An R package for analyzing data from the Truth
+    Commission in Colombia"
+  type: article
+  url: "https://joss.theoj.org/papers/10.21105/joss.05844"
+  volume: 9
+title: "verdata: An R package for analyzing data from the Truth
+  Commission in Colombia"
