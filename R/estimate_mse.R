@@ -303,7 +303,7 @@ lookup_estimates <- function(stratum_data_prepped, estimates_dir) {
 #' considered valid for estimation. `min_n` should never be less than or equal to
 #' 0; the default value is 1.
 #' @param K The maximum number of latent classes to fit. By default the function
-#' will calculate `K` as the minimum value of 2^{number of valid sources} - 1 or 15.
+#' will calculate `K` as the minimum value of 2 raised to the number of valid sources - 1 or 15.
 #' @param buffer_size Size of the tracing buffer. Default value is 10,000.
 #' @param sampler_thinning Thinning interval for the tracing buffer. Default value is 1,000.
 #' @param seed Integer seed for the internal random number generator. Default value is 19481210.

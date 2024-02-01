@@ -35,7 +35,7 @@ considered valid for estimation. \code{min_n} should never be less than or equal
 0; the default value is 1.}
 
 \item{K}{The maximum number of latent classes to fit. By default the function
-will calculate \code{K} as the minimum value of 2^{number of valid sources} - 1 or 15.}
+will calculate \code{K} as the minimum value of 2 raised to the number of valid sources - 1 or 15.}
 
 \item{buffer_size}{Size of the tracing buffer. Default value is 10,000.}
 
