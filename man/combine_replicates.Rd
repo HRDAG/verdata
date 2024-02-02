@@ -50,6 +50,7 @@ lower bound of the 95\% confidence interval, \code{imp_hi} the upper bound of th
 Combine replicates according to the Normal approximation using the laws of total expectation and variance.
 }
 \examples{
+\dontrun{
 local_dir <- system.file("extdata", "right", package = "verdata")
 replicates_data <- read_replicates(local_dir, "reclutamiento", c(1, 2))
 replicates_obs_data <- summary_observed("reclutamiento", replicates_data,
@@ -59,4 +60,5 @@ tab_combine <- combine_replicates("reclutamiento", replicates_obs_data,
 replicates_data, strata_vars = 'sexo', conflict_filter = TRUE,
 forced_dis_filter = FALSE, edad_minors_filter = FALSE, include_props = FALSE,
 digits = 2)
+}
 }

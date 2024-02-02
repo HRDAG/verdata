@@ -24,6 +24,7 @@ Calculate the proportions of each level of a variable after applying
 \code{summary_observed} to observed values.
 }
 \examples{
+\dontrun{
 local_dir <- system.file("extdata", "right", package = "verdata")
 replicates_data <- read_replicates(local_dir, "reclutamiento", c(1, 2))
 tab_observed <- summary_observed("reclutamiento", replicates_data,
@@ -31,4 +32,5 @@ strata_vars = "sexo", conflict_filter = TRUE, forced_dis_filter = FALSE,
 edad_minors_filter = TRUE, include_props = TRUE)
 prop_data <- proportions_observed(tab_observed, strata_vars = "sexo",
 digits = 2)
+}
 }

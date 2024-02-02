@@ -11,7 +11,9 @@ library(purrr)
 
 local_dir <- system.file("extdata", "right", package = "verdata")
 estimates_dir <- system.file("extdata", "estimates", package = "verdata")
-estimates_files <- list.files(estimates_dir, "json", recursive = TRUE, full.names = TRUE)
+estimates_files <- list.files(estimates_dir, "json",
+                              recursive = TRUE,
+                              full.names = TRUE)
 
 # manually log additional stratum info necessary for combination
 strata_data <- tibble::tribble(~stratum_id, ~replicate, ~n_obs,

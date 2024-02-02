@@ -176,7 +176,10 @@ build_path <- function(replicates_dir, violation, replicate_nums) {
         stop("All values of replicate_nums should be between 1 and 100 inclusive")
     }
 
-    valid_violations <- c("secuestro", "reclutamiento", "homicidio", "desaparicion")
+    valid_violations <- c("secuestro",
+                          "reclutamiento",
+                          "homicidio",
+                          "desaparicion")
 
     if (violation %in% valid_violations) {
 
@@ -221,18 +224,22 @@ build_path <- function(replicates_dir, violation, replicate_nums) {
             matchpattern <- "([^-]+)\\-R([0-9]+).parquet"
 
             matches <- stringr::str_match(path, matchpattern) %>%
-                tibble::as_tibble(.name_repair = ~c("full_match", "violation", "rep_number"))
+                tibble::as_tibble(.name_repair = ~c("full_match",
+                                                    "violation",
+                                                    "rep_number"))
 
             rep_lista <- tibble::tibble(full_path = path, matches) %>%
                 dplyr::mutate(rep_number = as.integer(rep_number)) %>%
-                dplyr::filter(violation == violation & rep_number %in% replicate_nums) 
+                dplyr::filter(violation == violation & rep_number %in% replicate_nums)
 
         } else {
 
             matchpattern <- "([^-]+)\\-R([0-9]+).csv"
 
             matches <- stringr::str_match(path, matchpattern) %>%
-                tibble::as_tibble(.name_repair = ~c("full_match", "violation", "rep_number"))
+                tibble::as_tibble(.name_repair = ~c("full_match",
+                                                    "violation",
+                                                    "rep_number"))
 
             rep_lista <- tibble::tibble(full_path = path, matches) %>%
                 dplyr::mutate(rep_number = as.integer(rep_number)) %>%

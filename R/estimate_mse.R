@@ -356,7 +356,8 @@ mse <- function(stratum_data, stratum_name,
 
         return(tibble::tibble_row(validated = FALSE,
                                   N = NA_real_,
-                                  valid_sources = paste(valid_sources, collapse = ","),
+                                  valid_sources = paste(valid_sources,
+                                                        collapse = ","),
                                   n_obs = NA_real_,
                                   stratum_name = stratum_name))
 
@@ -400,7 +401,8 @@ mse <- function(stratum_data, stratum_name,
 
             estimates <- lookup_results %>%
                 dplyr::mutate(validated = TRUE,
-                              valid_sources = paste(names(stratum_data_prepped), collapse = ","),
+                              valid_sources = paste(names(stratum_data_prepped),
+                                                    collapse = ","),
                               n_obs = n_obs,
                               stratum_name = stratum_name) %>%
                 dplyr::select(validated, N, valid_sources, n_obs, stratum_name)
