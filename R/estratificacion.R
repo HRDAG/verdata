@@ -5,11 +5,11 @@
 # ============================================
 
 #' Datos que documentan las estratificaciones necesarias para replicar
-#' los resultados del informe metedológico del proyecto conjunto CEV-HRDAG-JEP
+#' los resultados del informe metodológico del proyecto conjunto CEV-HRDAG-JEP
 #' (versión en español).
-#' 
+#'
 #' @docType data
-#' 
+#'
 #' @usage data(estratificacion)
 #' @format Un data frame con 31 filas y 4 variables.
 #' \describe{

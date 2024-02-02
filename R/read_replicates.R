@@ -94,7 +94,7 @@ read_replicate <- function(replicate_path) {
 
 #' Read replicates in a directory and verify they are identical to the ones published.
 #'
-#' @param replicates_dir Adirectory to the replicates.
+#' @param replicates_dir A path to the directory containing the replicates.
 #' Then file name of each replicate must contain at least the name of the violation
 #' in Spanish and lower case letters (homicidio, secuestro, reclutamiento, desaparicion),
 #' and the replicate number preceded by "R", (e.g., "R1" for replicate 1).

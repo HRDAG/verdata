@@ -28,6 +28,7 @@ Depends:
     R (>= 3.5)
 Suggests:
     covr,
+    spelling,
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
 Imports:
@@ -52,3 +53,4 @@ Imports:
     rlang,
 LazyData: true
 RdMacros: Rdpack
+Language: en-US

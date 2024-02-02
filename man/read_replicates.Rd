@@ -7,7 +7,7 @@
 read_replicates(replicates_dir, violation, replicate_nums, crash = TRUE)
 }
 \arguments{
-\item{replicates_dir}{Adirectory to the replicates.
+\item{replicates_dir}{A path to the directory containing the replicates.
 Then file name of each replicate must contain at least the name of the violation
 in Spanish and lower case letters (homicidio, secuestro, reclutamiento, desaparicion),
 and the replicate number preceded by "R", (e.g., "R1" for replicate 1).}
