@@ -8,7 +8,7 @@ local_dir <- system.file("extdata", "right", package = "verdata")
 
 replicates_data <- read_replicates(local_dir, "reclutamiento", c(1, 2))
 
-expected <- filter_standard_cev(replicates_data,
+expected <- verdata::filter_standard_cev(replicates_data,
                                 "reclutamiento",
                                 perp_change = TRUE)
 
@@ -49,8 +49,6 @@ testthat::test_that("The function must return an error if the user put
                         replicates_test <- filter_standard_cev(not_data_frame,
                                                                "reclutamiento",
                                                                perp_change = TRUE))
-
-
                     })
 
 
@@ -63,5 +61,24 @@ testthat::test_that("The function must return an error if the user put another
                                                                "desplazamiento",
                                                                perp_change = TRUE))
                     })
+
+testthat::test_that("The function filter correct all periods in reclutamiento", {
+
+  periods_expected <- c("1990_1993", "1994_1997", "1998_2001", "2002_2005", 
+                        "2006_2009", "2010_2013", "2014_2017")
+
+  periods_correct <- all(expected$periodo_pres %in% periods_expected)
+  testthat::expect_true(periods_correct)
+
+})
+
+
+testthat::test_that("The function filter correct the age in reclutamiento", {
+  
+  ages_correct <- all(expected$edad_jep %in% c("INFANCIA", "ADOLESCENCIA"))
+  testthat::expect_true(ages_correct)
+  
+})
+
 
 # --- Done
