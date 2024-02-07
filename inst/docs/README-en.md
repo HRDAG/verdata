@@ -67,7 +67,7 @@ To use this package, it is necessary to have previously downloaded the data from
 
 * The `estimates_exist` function allows you to see whether your strata of interest already exist in the pre-calculated estimation files that you downloaded from the [Truth Commission website](https://www.comisiondelaverdad.co/analitica-de-datos-informacion-y-recursos#c3) onto your local machine. This function requires the stratified data and the directory where you've saved the pre-calculated estimates as inputs and returns a data frame with a logical value for whether the estimate exists and a path to the file containing the estimation results if the estimates exists. If you would like to replicate the Truth Commission's results, the data objects `estratificacion` (in Spanish) and `stratification` (in English) specify the stratifications used for each of estimates presented in the [methodological report](https://www.comisiondelaverdad.co/sites/default/files/descargables/2022-08/04_Anexo_Proyecto_JEP_CEV_HRDAG_08022022.pdf).
 
-* The `mse` function allows you to make estimates of underreporting using [LCMCR](https://onlinelibrary.wiley.com/doi/10.1111/biom.12502) specification (see Section 6 of the [methodological report](https://www.comisiondelaverdad.co/sites/default/files/descargables/2022-08/04_Anexo_Proyecto_JEP_CEV_HRDAG_08022022.pdf)). To use this function, you need to define stratification variables and apply the stratification (i.e., by grouping the data according to these variables). See the function's example and Section 8.4.2 of the [methodological report](https://www.comisiondelaverdad.co/sites/default/files/descargables/2022-08/04_Anexo_Proyecto_JEP_CEV_HRDAG_08022022.pdf)). These estimates take time and computational resources to run. If you would like to make use of the estimates already calculated by our team, you'll need to download the estimates from the [Truth Commission website](https://www.comisiondelaverdad.co/analitica-de-datos-informacion-y-recursos#c3) onto your local machine. You can make use of the pre-calculated estimates by specifying the path to the `estimates_dir` argument.  Keep in mind that by providing a directory, the function assumes the same specifications for the model used in the project. If you want to use other specifications, don't provide a directory to the estimates.
+* The `mse` function allows you to make estimates of underreporting using [LCMCR](https://doi.org/10.1111/biom.12502) specification (see Section 6 of the [methodological report](https://www.comisiondelaverdad.co/sites/default/files/descargables/2022-08/04_Anexo_Proyecto_JEP_CEV_HRDAG_08022022.pdf)). To use this function, you need to define stratification variables and apply the stratification (i.e., by grouping the data according to these variables). See the function's example and Section 8.4.2 of the [methodological report](https://www.comisiondelaverdad.co/sites/default/files/descargables/2022-08/04_Anexo_Proyecto_JEP_CEV_HRDAG_08022022.pdf)). These estimates take time and computational resources to run. If you would like to make use of the estimates already calculated by our team, you'll need to download the estimates from the [Truth Commission website](https://www.comisiondelaverdad.co/analitica-de-datos-informacion-y-recursos#c3) onto your local machine. You can make use of the pre-calculated estimates by specifying the path to the `estimates_dir` argument.  Keep in mind that by providing a directory, the function assumes the same specifications for the model used in the project. If you want to use other specifications, don't provide a directory to the estimates.
 
 * Finally, the `combine_estimates` function allows you to combine the results of the estimation, yielding an approximate 95% credibility interval and the point estimate of the mean of the total number of victims in a stratum of interest including both the uncertainty from the missing data imputation and from the multiple systems estimation model. The function uses the Normal approximation using the laws of total expectation and total variance. See Section 18.2 of [*Bayesian Data Analysis*](http://www.stat.columbia.edu/~gelman/book/) for more information.
 
@@ -76,5 +76,28 @@ We thank [Micaela Morales](https://github.com/mmazul) for her thoughtful beta te
 
 ## Contribute to the package
 Comments and suggestions are very welcome. If you have a problem, question, or issue with `verdata`, please open an issue on GitHub. If you would like to add new functionality to the package, please open a pull request. Continuous integration is setup to automatically run tests upon a pull request being opened. If you would like to run the existing tests locally prior to opening a pull request you can do so using `testthat::test_local()`.
+
+## Citing the package
+
+You can cite the package as:
+
+> Gargiulo et al., (2024). verdata: An R package for analyzing data from the Truth Commission in Colombia. Journal of Open Source Software, 9(93), 5844, <https://doi.org/10.21105/joss.05844>.
+
+BibTex entry:
+
+```
+@article{Gargiulo2024,
+    doi = {10.21105/joss.05844},
+    url = {https://doi.org/10.21105/joss.05844},
+    year = {2024},
+    publisher = {The Open Journal},
+    volume = {9},
+    number = {93},
+    pages = {5844},
+    author = {Maria Gargiulo and María Juliana Durán and Paula Andrea Amado and Patrick Ball},
+    title = {verdata: An R package for analyzing data from the Truth Commission in Colombia},
+    journal = {Journal of Open Source Software}
+} 
+```
 
 <!-- done. -->
