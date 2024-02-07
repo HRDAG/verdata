@@ -25,3 +25,18 @@ be \code{NA}.
 \description{
 Check whether stratum estimates already exist in pre-calculated files.
 }
+\examples{
+\dontrun{
+in_A <- sample(c(0, 1), size = 100, replace = TRUE, prob = c(0.45, 0.65))
+in_B <- sample(c(0, 1), size = 100, replace = TRUE, prob = c(0.5, 0.5))
+in_C <- sample(c(0, 1), size = 100, replace = TRUE, prob = c(0.75, 0.25))
+in_D <- sample(c(0, 1), size = 100, replace = TRUE, prob = c(1, 0))
+
+my_stratum <- tibble::tibble(in_A, in_B, in_C, in_D) \%>\%
+    dplyr::mutate(rs = rowSums(.)) \%>\%
+    dplyr::filter(rs >= 1) \%>\%
+    dplyr::select(-rs)
+
+estimates_exist(stratum_data_prepped = my_stratum, estimates_dir = "path_to_estimates")
+}
+}
