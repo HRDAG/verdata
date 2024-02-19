@@ -18,9 +18,11 @@
 #' @importFrom dplyr %>%
 #'
 #' @examples
+#' \dontrun{
 #' local_dir <- system.file("extdata", "right", package = "verdata")
 #' replicates_data <- read_replicates(local_dir, "reclutamiento", 1, 2)
 #' filter_standard_cev(replicates_data, "reclutamiento", perp_change = TRUE)
+#' }
 filter_standard_cev <- function(replicates_data, violation, perp_change = TRUE) {
 
   if (!is.data.frame(replicates_data)) {

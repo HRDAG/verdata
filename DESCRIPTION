@@ -1,56 +1,48 @@
 Package: verdata
 Title: Analyze Data from the Truth Commission in Colombia
 Version: 0.9.1
-Authors@R:
-  c(person(given = "Maria",
-           family = "Gargiulo",
-           role = c("aut", "cre"),
-           email = "mariag@hrdag.org"),
-    person(given = "María Juliana",
-           family = "Durán",
-           role = "aut",
-           email = "mduranfedullo@gmail.com"),
-    person(given = "Paula Andrea",
-           family = "Amado",
-           role = "aut",
-           email = "pamadoa1@gmail.com"),
-    person(given = "Patrick",
-           family = "Ball",
-           role = "rev"))
-Description: Facilitates use and analysis of data about the armed conflict in Colombia resulting from the joint JEP-CEV-HRDAG project.
+Authors@R: c(
+    person("Maria", "Gargiulo", , "mariag@hrdag.org", role = c("aut", "cre")),
+    person("María Juliana", "Durán", , "mduranfedullo@gmail.com", role = "aut"),
+    person("Paula Andrea", "Amado", , "pamadoa1@gmail.com", role = "aut"),
+    person("Patrick", "Ball", role = "rev")
+  )
+Description: Facilitates use and analysis of data about the armed conflict
+    in Colombia resulting from the joint JEP-CEV-HRDAG project.
 License: GPL-2
 URL: https://github.com/HRDAG/verdata
 BugReports: https://github.com/HRDAG/verdata/issues
-Encoding: UTF-8
-Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.3
 Depends:
     R (>= 3.5)
+Imports:
+    arrow,
+    assertr,
+    base,
+    digest,
+    dplyr,
+    glue,
+    LCMCR,
+    logger,
+    purrr,
+    Rdpack,
+    readr,
+    rjson,
+    rlang,
+    stats,
+    stringr,
+    tibble,
+    tidyr,
+    tidyselect,
+    tools
 Suggests:
     covr,
     spelling,
     testthat (>= 3.0.0)
+RdMacros:
+    Rdpack
 Config/testthat/edition: 3
-Imports:
-    Rdpack,
-    arrow,
-    digest,
-    dplyr,
-    glue,
-    purrr,
-    tools,
-    logger,
-    base,
-    stats,
-    LCMCR,
-    assertr,
-    tidyr,
-    tidyselect,
-    readr,
-    stringr,
-    tibble,
-    rjson,
-    rlang,
-LazyData: true
-RdMacros: Rdpack
+Encoding: UTF-8
 Language: en-US
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.1
