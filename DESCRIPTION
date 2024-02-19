@@ -7,6 +7,7 @@ Authors@R: c(
     person("Paula Andrea", "Amado", , "pamadoa1@gmail.com", role = "aut"),
     person("Patrick", "Ball", role = "rev")
   )
+Maintainer: Maria Gargiulo <mariag@hrdag.org>
 Description: Facilitates use and analysis of data about the armed conflict
     in Colombia resulting from the joint JEP-CEV-HRDAG project.
 License: GPL-2

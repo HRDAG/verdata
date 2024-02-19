@@ -14,9 +14,9 @@ This is a new submission to CRAN.
 There were no errors or warnings, but there were four notes distinct notes across R-hub's three test environments.
 
 ```
-── verdata 0.9.1: NOTE
+── verdata 0.9.2: NOTE
 
-  Build ID:   verdata_0.9.1.tar.gz-3523114f10754322855eb5612c23e39c
+  Build ID:   verdata_0.9.2.tar.gz-3523114f10754322855eb5612c23e39c
   Platform:   Windows Server 2022, R-devel, 64 bit
   Submitted:  2h 5m 56.3s ago
   Build time: 6m 57s
@@ -40,9 +40,9 @@ There were no errors or warnings, but there were four notes distinct notes acros
 This package is a new submission to CRAN. The `NULL` directory and the `lastMiKTeXException` appear to be known R-hub issues and can likely be ignored. See [R-hub issue #503](https://github.com/r-hub/rhub/issues/503) for information about the `NULL` directory issue and [R-hub issue #560](https://github.com/r-hub/rhub/issues/560) for more information about the `lastMiKTeXException` issue.
 
 ```
-── verdata 0.9.1: NOTE
+── verdata 0.9.2: NOTE
 
-  Build ID:   verdata_0.9.1.tar.gz-ae460def69ec4f80b806d1e1ebc90325
+  Build ID:   verdata_0.9.2.tar.gz-ae460def69ec4f80b806d1e1ebc90325
   Platform:   Ubuntu Linux 20.04.1 LTS, R-release, GCC
   Submitted:  2h 5m 56.3s ago
   Build time: 2h 2m 17.6s
@@ -61,9 +61,9 @@ This package is a new submission to CRAN. The `NULL` directory and the `lastMiKT
 This package is a new submission to CRAN. The `no comand 'tidy' found` issue appears to be a known R-hub issue and can likely be ignored. [R-hub issue #548](https://github.com/r-hub/rhub/issues/548) has more information.
 
 ```
-── verdata 0.9.1: NOTE
+── verdata 0.9.2: NOTE
 
-  Build ID:   verdata_0.9.1.tar.gz-f4477c10431f403f8b0338f5159bdc5f
+  Build ID:   verdata_0.9.2.tar.gz-f4477c10431f403f8b0338f5159bdc5f
   Platform:   Fedora Linux, R-devel, clang, gfortran
   Submitted:  2h 5m 56.3s ago
   Build time: 1h 48m 45.4s
