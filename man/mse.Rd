@@ -65,7 +65,7 @@ If the stratum is estimable the return will consist of \code{n_samples} divided 
 Prepare data for estimation and calculate estimates using \code{run_lcmcr}.
 }
 \examples{
-\dontrun{
+\donttest{
 set.seed(19481210)
 in_A <- sample(c(0, 1), size = 100, replace = TRUE, prob = c(0.45, 0.65))
 in_B <- sample(c(0, 1), size = 100, replace = TRUE, prob = c(0.5, 0.5))

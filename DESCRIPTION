@@ -24,6 +24,7 @@ Imports:
     glue,
     LCMCR,
     logger,
+    magrittr,
     purrr,
     Rdpack,
     readr,

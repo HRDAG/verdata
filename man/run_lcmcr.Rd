@@ -62,7 +62,7 @@ Non-Parametric Latent-Class Capture-Recapture model developed by Daniel
 Manrique-Vallier (2016).
 }
 \examples{
-\dontrun{
+\donttest{
 set.seed(19481210)
 library(dplyr)
 

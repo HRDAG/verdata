@@ -84,7 +84,7 @@ get_valid_sources <- function(stratum_data_prepped, min_n = 1) {
 #' \insertRef{manriquevallier2016}{verdata}
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' set.seed(19481210)
 #' library(dplyr)
 #'
@@ -163,7 +163,7 @@ run_lcmcr <- function(stratum_data_prepped, stratum_name, min_n = 1,
 #' @importFrom dplyr "%>%"
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' in_A <- sample(c(0, 1), size = 100, replace = TRUE, prob = c(0.45, 0.65))
 #' in_B <- sample(c(0, 1), size = 100, replace = TRUE, prob = c(0.5, 0.5))
 #' in_C <- sample(c(0, 1), size = 100, replace = TRUE, prob = c(0.75, 0.25))
@@ -245,7 +245,7 @@ estimates_exist <- function(stratum_data_prepped, estimates_dir) {
 #' @importFrom dplyr "%>%"
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' in_A <- sample(c(0, 1), size = 100, replace = TRUE, prob = c(0.45, 0.65))
 #' in_B <- sample(c(0, 1), size = 100, replace = TRUE, prob = c(0.5, 0.5))
 #' in_C <- sample(c(0, 1), size = 100, replace = TRUE, prob = c(0.75, 0.25))
@@ -341,7 +341,7 @@ lookup_estimates <- function(stratum_data_prepped, estimates_dir) {
 #' @importFrom dplyr "%>%"
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' set.seed(19481210)
 #' in_A <- sample(c(0, 1), size = 100, replace = TRUE, prob = c(0.45, 0.65))
 #' in_B <- sample(c(0, 1), size = 100, replace = TRUE, prob = c(0.5, 0.5))

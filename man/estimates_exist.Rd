@@ -26,7 +26,7 @@ be \code{NA}.
 Check whether stratum estimates already exist in pre-calculated files.
 }
 \examples{
-\dontrun{
+\donttest{
 in_A <- sample(c(0, 1), size = 100, replace = TRUE, prob = c(0.45, 0.65))
 in_B <- sample(c(0, 1), size = 100, replace = TRUE, prob = c(0.5, 0.5))
 in_C <- sample(c(0, 1), size = 100, replace = TRUE, prob = c(0.75, 0.25))
