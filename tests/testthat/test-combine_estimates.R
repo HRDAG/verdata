@@ -54,13 +54,15 @@ estimates <- map_dfr(.x = estimates_files,
 
 testthat::test_that("Testing estimate done using only one replicate", {
 
-    testthat::expect_warning(estimates %>% filter(replicate == "R1") %>%
-                                 combine_estimates(.))
+    testthat::expect_warning(estimates %>%
+                             filter(replicate == "R1") %>%
+                             combine_estimates(.))
 
-    options(warn = -1)
-    r1 <- estimates %>% filter(replicate == "R1") %>%
+    suppressWarnings({
+        r1 <- estimates %>%
+        filter(replicate == "R1") %>%
         combine_estimates(.)
-    options(warn = 0)
+    })
 
     testthat::expect_equal(nrow(r1), 1)
     testthat::expect_named(r1, c("N_025", "N_mean", "N_975"))

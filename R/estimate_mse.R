@@ -119,7 +119,6 @@ run_lcmcr <- function(stratum_data_prepped, stratum_name, min_n = 1,
                                     ~factor(.x, levels = c(0, 1)))) %>%
         as.data.frame()
 
-    options(warn = -1)
     sampler <- lcmCR(captures = stratum_data_prepped,
                      K = K,
                      tabular = FALSE,
@@ -135,7 +134,6 @@ run_lcmcr <- function(stratum_data_prepped, stratum_name, min_n = 1,
                          samples = n_samples,
                          thinning = posterior_thinning,
                          output = FALSE)
-    options(warn = 0)
 
     N <- N[seq(1, length(N), n_samples / 1000)] # thin again
 
