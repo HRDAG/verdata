@@ -12,7 +12,12 @@ Description: Facilitates use and analysis of data about the armed conflict
     in Colombia resulting from the joint project between La Jurisdicción
     Especial para la Paz (JEP), La Comisión para el Esclarecimiento de la
     Verdad, la Convivencia y la No repetición (CEV), and the Human Rights Data
-    Analysis Group (HRDAG).
+    Analysis Group (HRDAG). The data are 100 replicates from a multiple
+    imputation through chained equations as described in Van Buuren and
+    Groothuis-Oudshoorn (2011) <doi:10.18637/jss.v045.i03>. With the replicates
+    the user can examine four human rights violations that occurred in the
+    Colombian conflict accounting for the impact of missing fields and fully
+    missing observations.
 License: GPL-2
 URL: https://github.com/HRDAG/verdata
 BugReports: https://github.com/HRDAG/verdata/issues
