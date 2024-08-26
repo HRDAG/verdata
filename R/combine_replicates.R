@@ -19,7 +19,8 @@
 #' @examples
 #' local_dir <- system.file("extdata", "right", package = "verdata")
 #' replicates_data <- read_replicates(replicates_dir = local_dir,
-#' violation = "reclutamiento", replicate_nums = c(1, 2), crash = TRUE)
+#' violation = "reclutamiento", replicate_nums = c(1, 2), version = "v1",
+#' crash = TRUE)
 #' replicates_obs_data <- summary_observed("reclutamiento", replicates_data,
 #' strata_vars = "sexo", conflict_filter = FALSE, forced_dis_filter = FALSE,
 #' edad_minors_filter = FALSE, include_props = FALSE)
@@ -82,7 +83,8 @@ proportions_imputed <- function(complete_data,
 #' @examples
 #' \dontrun{
 #' local_dir <- system.file("extdata", "right", package = "verdata")
-#' replicates_data <- read_replicates(local_dir, "reclutamiento", c(1, 2))
+#' replicates_data <- read_replicates(local_dir, "reclutamiento", c(1, 2),
+#' version = "v1")
 #' replicates_obs_data <- summary_observed("reclutamiento", replicates_data,
 #' strata_vars = "sexo", conflict_filter = FALSE, forced_dis_filter = FALSE,
 #' edad_minors_filter = FALSE, include_props = FALSE, digits = 2)

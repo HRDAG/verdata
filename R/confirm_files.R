@@ -9,6 +9,7 @@
 #' @param replicate_path Path to the replicate to be confirmed. The name
 #' of the files must include the violation in Spanish and lower case letters
 #' (homicidio, secuestro, reclutamiento, desaparicion).
+#' @param version Version of the data being read in. Options are "v1" or "v2".
 #
 #' @return A data frame row with two columns: `replicate_path`, a string indicating the
 #' path to the replicate checked and `confirmed`, a boolean values indicating
@@ -19,10 +20,10 @@
 #' @examples
 #' local_dir_csv <- system.file("extdata", "right",
 #' "verdata-reclutamiento-R1.csv.zip", package = "verdata")
-#' confirm_file(local_dir_csv)
+#' confirm_file(local_dir_csv, version = "v1")
 #'
 #' @noRd
-confirm_file <- function(replicate_path) {
+confirm_file <- function(replicate_path, version) {
 
     violacion <- stringr::str_extract(pattern = "homicidio|desaparicion|secuestro|reclutamiento",
                                       replicate_path)
@@ -37,18 +38,29 @@ confirm_file <- function(replicate_path) {
                                                                      algo = "sha1",
                                                                      file = TRUE)))
 
-    if (file_extension == "parquet") {
+    if (version == "v1" & file_extension == "parquet") {
 
-        file_test <- file %>%
+        file_test <- file_parquet_v1 %>%
             dplyr::filter(replica %in% hash_file$replica &
                               violacion %in% hash_file$violacion)
 
+    } else if (version == "v2" & file_extension == "parquet") {
 
-    } else if (file_extension == "csv") {
-
-        file_test <- file_csv %>%
+        file_test <- file_parquet_v2 %>%
             dplyr::filter(replica %in% hash_file$replica &
                               violacion %in% hash_file$violacion)
+
+    } else if (version == "v1" & file_extension == "csv") {
+
+        file_test <- file_csv_v1 %>%
+            dplyr::filter(replica %in% hash_file$replica &
+                              violacion %in% hash_file$violacion)
+
+    } else if (version == "v1" & file_extension == "csv") {
+
+        file_test <- file_csv_v2 %>%
+            dplyr::filter(replica %in% hash_file$replica &
+                              violacion %in% hash_file$violacion) # TODO: check
 
     }
 
@@ -64,10 +76,11 @@ confirm_file <- function(replicate_path) {
 
     else {
 
-
         final <- medidas(replicate_path)
 
-        summary_table <- get(violacion) %>%
+        violacion_file <- paste0(violacion, "_", version)
+
+        summary_table <- get(violacion_file) %>%
             dplyr::filter(replica %in% final$replica)
 
         final <- final[order(final$variable), ]
@@ -106,6 +119,8 @@ confirm_file <- function(replicate_path) {
 #' "reclutamiento", and "desaparicion".
 #' @param replicate_nums A numeric vector containing the replicates to be analyzed.
 #' Values in the vector should be between 1 and 100 inclusive.
+#' @param version Version of the data being read in. Options are "v1" or "v2".
+#' The default value is "v2".
 #'
 #' @return A data frame row with `replicate_num` rows and two columns:
 #' `replicate_path`, a string indicating the path to the replicate checked and
@@ -117,20 +132,36 @@ confirm_file <- function(replicate_path) {
 #'
 #' @examples
 #' local_dir <- system.file("extdata", "right", package = "verdata")
-#' confirm_files(local_dir, "reclutamiento", c(1, 2))
-confirm_files <- function(replicates_dir, violation, replicate_nums) {
+#' confirm_files(local_dir, "reclutamiento", c(1, 2), version = "v1")
+confirm_files <- function(replicates_dir, violation, replicate_nums, version = "v2") {
 
     files <- build_path(replicates_dir, violation, replicate_nums)
 
-    results <- purrr::map_dfr(files, confirm_file)
+    results <- purrr::map_dfr(files, confirm_file, version = version)
 
     if (any(!results$confirmed)) {
 
         warning("Some replicate file contents do not match the published versions")
 
-    }
+    } else if (version == "v1") {
 
-    return(results)
+        message("You are using v1 of the data. This version is appropriate for
+                replicating the results of the joint JEP-CEV-HRDAG project. If you
+                would like to conduct your own analysis of the conflict in Colombia,
+                please use v2 of the data.")
+
+        return(results)
+
+    } else if (version == "v2") {
+
+        message("You are using v2 of the data. This version is appropriate for
+                conducting your own analysis of the conflict in Colombia. If you
+                would like to repliate the results of the joint JEP-CEV-HRDAG project,
+                please use v1 of the data.")
+
+        return(results)
+
+    }
 
 }
 

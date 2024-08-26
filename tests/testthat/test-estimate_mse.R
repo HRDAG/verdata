@@ -97,7 +97,8 @@ testthat::test_that("mse function returns correct results for estimable and non-
 testthat::test_that("mse function returns correct results when using lookup functionality", {
 
     local_dir <- system.file("extdata", "right", package = "verdata")
-    replicates <- read_replicates(local_dir, "reclutamiento", 1, 1)
+    replicates <- read_replicates(local_dir, "reclutamiento", replicate_nums = 1,
+                                  version = "v1", crash = 1)
 
     estimates_dir <- system.file("extdata", "estimates", package = "verdata")
 
@@ -143,7 +144,8 @@ testthat::test_that("mse function returns correct results when using lookup func
 testthat::test_that("mse function returns errors when inputs are misspecified", {
 
     local_dir <- system.file("extdata", "right", package = "verdata")
-    replicates <- read_replicates(local_dir, "reclutamiento", 1, 1)
+    replicates <- read_replicates(local_dir, "reclutamiento", replicate_nums = 1,
+                                  version = "v1", crash = 1)
 
     stratum_5 <- replicates %>%
         dplyr::select(-tidyselect::starts_with("in_"))
@@ -167,7 +169,8 @@ testthat::test_that("lookup function correctly finds strata that have and have n
 
 
     local_dir <- system.file("extdata", "right", package = "verdata")
-    replicates <- read_replicates(local_dir, "reclutamiento", 1, 1)
+    replicates <- read_replicates(local_dir, "reclutamiento", replicate_nums = 1,
+                                  version = "v1", crash = 1)
 
     estimates_dir <- system.file("extdata", "estimates", package = "verdata")
 

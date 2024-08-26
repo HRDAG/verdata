@@ -6,7 +6,7 @@
 #
 local_dir <- system.file("extdata", "right", package = "verdata")
 
-replicates_data <- read_replicates(local_dir, "reclutamiento", c(1, 2))
+replicates_data <- read_replicates(local_dir, "reclutamiento", c(1, 2), version = "v1")
 
 replicates_data_filter <- filter_standard_cev(replicates_data,
                                               "reclutamiento",

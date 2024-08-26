@@ -5,7 +5,8 @@
 # ============================================
 
 local_dir <- system.file("extdata", "right", package = "verdata")
-replicates <- read_replicates(local_dir, "reclutamiento", 1, 1)
+replicates <- read_replicates(local_dir, "reclutamiento", replicate_nums = 1,
+                              version = "v1", crash = 1)
 
 estimates_dir <- system.file("extdata", "estimates", package = "verdata")
 
