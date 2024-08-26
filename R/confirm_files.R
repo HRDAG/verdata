@@ -150,8 +150,6 @@ confirm_files <- function(replicates_dir, violation, replicate_nums, version = "
                 would like to conduct your own analysis of the conflict in Colombia,
                 please use v2 of the data.")
 
-        return(results)
-
     } else if (version == "v2") {
 
         message("You are using v2 of the data. This version is appropriate for
@@ -159,9 +157,9 @@ confirm_files <- function(replicates_dir, violation, replicate_nums, version = "
                 would like to repliate the results of the joint JEP-CEV-HRDAG project,
                 please use v1 of the data.")
 
-        return(results)
-
     }
+
+    return(results)
 
 }
 

@@ -118,8 +118,8 @@ testthat::test_that("The variables is_forced_dis and is_conflict are type
                                                         "desaparicion",
                                                         perp_change = TRUE)
 
-                        testthat::expect_is(data_dis$is_forced_dis, "integer")
-                        testthat::expect_is(data_dis$is_conflict, "integer")
+                        testthat::expect_type(data_dis$is_forced_dis, "integer")
+                        testthat::expect_type(data_dis$is_conflict, "integer")
 
                     })
 
