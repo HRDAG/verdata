@@ -8,7 +8,7 @@ read_replicates(
   replicates_dir,
   violation,
   replicate_nums,
-  version = "v2",
+  version,
   crash = TRUE
 )
 }
@@ -25,7 +25,9 @@ and the replicate number preceded by "R", (e.g., "R1" for replicate 1).}
 Values in the vector should be between 1 and 100 inclusive.}
 
 \item{version}{Version of the data being read in. Options are "v1" or "v2".
-The default value is "v2".}
+"v1" is appropriate for replicating the replicating the results of the joint
+JEP-CEV-HRDAG project. "v2" is appropriate for conducting your new analyses
+of the conflict in Colombia.}
 
 \item{crash}{A parameter to define whether the function should crash if the
 content of the file is not identical to the one published. If crash = TRUE

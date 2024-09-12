@@ -10,6 +10,9 @@
 #' the violation in Spanish and lower case letters (homicidio, secuestro,
 #' reclutamiento, desaparicion).
 #' @param version Version of the data being read in. Options are "v1" or "v2".
+#' "v1" is appropriate for replicating the replicating the results of the joint
+#' JEP-CEV-HRDAG project. "v2" is appropriate for conducting your new analyses
+#' of the conflict in Colombia.
 #'
 #' @return A data frame with the data from the indicated replicate and a column
 #' `match` indicating whether the file hash matches the expected hash.
@@ -27,6 +30,12 @@
 #'
 #' @noRd
 read_replicate <- function(replicate_path, version) {
+
+    if (is.null(version) | !version %in% c("v1", "v2")) {
+
+        stop("Data version not properly specified. Options are 'v1' or 'v2'.")
+
+    }
 
     violacion <- stringr::str_extract(pattern = "homicidio|desaparicion|secuestro|reclutamiento",
                                       replicate_path)
@@ -134,7 +143,9 @@ read_replicate <- function(replicate_path, version) {
 #' @param replicate_nums A numeric vector containing the replicates to be analyzed.
 #' Values in the vector should be between 1 and 100 inclusive.
 #' @param version Version of the data being read in. Options are "v1" or "v2".
-#' The default value is "v2".
+#' "v1" is appropriate for replicating the replicating the results of the joint
+#' JEP-CEV-HRDAG project. "v2" is appropriate for conducting your new analyses
+#' of the conflict in Colombia.
 #' @param crash A parameter to define whether the function should crash if the
 #' content of the file is not identical to the one published. If crash = TRUE
 #' (default), it will return error and not read the data, if crash = FALSE, the
@@ -149,7 +160,13 @@ read_replicate <- function(replicate_path, version) {
 #' local_dir <- system.file("extdata", "right", package = "verdata")
 #' read_replicates(local_dir, "reclutamiento", 1, 2, version = "v1")
 read_replicates <- function(replicates_dir, violation, replicate_nums,
-                            version = "v2", crash = TRUE) {
+                            version, crash = TRUE) {
+
+    if (is.null(version) | !version %in% c("v1", "v2")) {
+
+        stop("Data version not properly specified. Options are 'v1' or 'v2'.")
+
+    }
 
     files <- build_path(replicates_dir, violation, replicate_nums)
     replicate_data <- purrr::map_dfr(files, read_replicate, version = version)
