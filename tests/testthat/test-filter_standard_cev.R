@@ -6,7 +6,7 @@
 
 local_dir <- system.file("extdata", "right", package = "verdata")
 
-replicates_data <- read_replicates(local_dir, "reclutamiento", c(1, 2))
+replicates_data <- read_replicates(local_dir, "reclutamiento", c(1, 2), version = "v1")
 
 expected <- verdata::filter_standard_cev(replicates_data,
                                          "reclutamiento",
@@ -118,8 +118,8 @@ testthat::test_that("The variables is_forced_dis and is_conflict are type
                                                         "desaparicion",
                                                         perp_change = TRUE)
 
-                        testthat::expect_is(data_dis$is_forced_dis, "integer")
-                        testthat::expect_is(data_dis$is_conflict, "integer")
+                        testthat::expect_type(data_dis$is_forced_dis, "integer")
+                        testthat::expect_type(data_dis$is_conflict, "integer")
 
                     })
 

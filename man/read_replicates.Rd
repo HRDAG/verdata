@@ -4,7 +4,13 @@
 \alias{read_replicates}
 \title{Read replicates in a directory and verify they are identical to the ones published.}
 \usage{
-read_replicates(replicates_dir, violation, replicate_nums, crash = TRUE)
+read_replicates(
+  replicates_dir,
+  violation,
+  replicate_nums,
+  version,
+  crash = TRUE
+)
 }
 \arguments{
 \item{replicates_dir}{A path to the directory containing the replicates.
@@ -17,6 +23,11 @@ and the replicate number preceded by "R", (e.g., "R1" for replicate 1).}
 
 \item{replicate_nums}{A numeric vector containing the replicates to be analyzed.
 Values in the vector should be between 1 and 100 inclusive.}
+
+\item{version}{Version of the data being read in. Options are "v1" or "v2".
+"v1" is appropriate for replicating the replicating the results of the joint
+JEP-CEV-HRDAG project. "v2" is appropriate for conducting your new analyses
+of the conflict in Colombia.}
 
 \item{crash}{A parameter to define whether the function should crash if the
 content of the file is not identical to the one published. If crash = TRUE
@@ -31,5 +42,5 @@ Read replicates in a directory and verify they are identical to the ones publish
 }
 \examples{
 local_dir <- system.file("extdata", "right", package = "verdata")
-read_replicates(local_dir, "reclutamiento", 1, 2)
+read_replicates(local_dir, "reclutamiento", 1, 2, version = "v1")
 }

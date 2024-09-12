@@ -4,7 +4,7 @@
 \alias{confirm_files}
 \title{Confirm files are identical to the ones published.}
 \usage{
-confirm_files(replicates_dir, violation, replicate_nums)
+confirm_files(replicates_dir, violation, replicate_nums, version)
 }
 \arguments{
 \item{replicates_dir}{Directory containing the replicates.
@@ -16,6 +16,11 @@ letters (homicidio, secuestro, reclutamiento, desaparicion).}
 
 \item{replicate_nums}{A numeric vector containing the replicates to be analyzed.
 Values in the vector should be between 1 and 100 inclusive.}
+
+\item{version}{Version of the data being read in. Options are "v1" or "v2".
+"v1" is appropriate for replicating the replicating the results of the joint
+JEP-CEV-HRDAG project. "v2" is appropriate for conducting your new analyses
+of the conflict in Colombia.}
 }
 \value{
 A data frame row with \code{replicate_num} rows and two columns:
@@ -28,5 +33,5 @@ Confirm files are identical to the ones published.
 }
 \examples{
 local_dir <- system.file("extdata", "right", package = "verdata")
-confirm_files(local_dir, "reclutamiento", c(1, 2))
+confirm_files(local_dir, "reclutamiento", c(1, 2), version = "v1")
 }
