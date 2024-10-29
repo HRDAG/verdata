@@ -176,37 +176,9 @@ read_replicates <- function(replicates_dir, violation, replicate_nums,
         dplyr::distinct(replica) %>%
         dplyr::pull(replica)
 
-    if (crash) {
+    hashes_match <- all(replicate_data$match)
 
-        if (all(replicate_data$match)) {
-
-            if (version == "v1") {
-
-                message("You are using v1 of the data. This version is appropriate for
-                replicating the results of the joint JEP-CEV-HRDAG project. If you
-                would like to conduct your own analysis of the conflict in Colombia,
-                please use v2 of the data.")
-
-            } else if (version == "v2") {
-
-                message("You are using v2 of the data. This version is appropriate for
-                conducting your own analysis of the conflict in Colombia. If you
-                would like to repliate the results of the joint JEP-CEV-HRDAG project,
-                please use v1 of the data.")
-
-            }
-
-            return(replicate_data %>% dplyr::select(-match))
-
-        } else {
-
-            stop(glue::glue("The content of the files is not identical to the ones published.\nThe following replicates have incorrect content:\n{paste0(corrupted_replicates, collapse = '\n')}"))
-
-        }
-
-    } else {
-
-        warning(glue::glue("The content of the files is not identical to the ones published.\nThe results of the analysis may be inconsistent.\nThe following replicates have incorrect content:\n{paste0(corrupted_replicates, collapse = '\n')}"))
+    if (hashes_match) {
 
         if (version == "v1") {
 
@@ -226,9 +198,18 @@ read_replicates <- function(replicates_dir, violation, replicate_nums,
 
         return(replicate_data %>% dplyr::select(-match))
 
+    } else if (!hashes_match & !crash) {
+
+        warning(glue::glue("The content of the files is not identical to the ones published.\nThe results of the analysis may be inconsistent.\nThe following replicates have incorrect content:\n{paste0(corrupted_replicates, collapse = '\n')}"))
+
+        return(replicate_data %>% dplyr::select(-match))
+
+    } else if (!hashes_match & crash) {
+
+        stop(glue::glue("The content of the files is not identical to the ones published.\nThe results of the analysis may be inconsistent.\nThe following replicates have incorrect content:\n{paste0(corrupted_replicates, collapse = '\n')}"))
+
     }
 
 }
-
 
 # done.
