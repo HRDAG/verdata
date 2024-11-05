@@ -22,4 +22,4 @@ utils::globalVariables(c("replica","is_conflict","observed",
                          "data_combine", "digits", "is_conflict_dis_rep",
                          "edad_jep", "edad_jep_imputed", "muni_code_hecho",
                          "proportions_observed", "etnia_imputed", "etnia2",
-                         "quinquenio", "periodo_pres"))
+                         "quinquenio", "periodo_pres", "in_24"))

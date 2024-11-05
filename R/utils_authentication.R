@@ -132,9 +132,19 @@ medidas <- function(replicate_path) {
                                                "2007" = "farc en 2007")) %>%
         dplyr::select(variable, valor)
 
+    N_rows <- replicate_data %>%
+        dplyr::summarise(valor = dplyr::n()) %>%
+        dplyr::mutate(variable = "N rows") %>%
+        dplyr::select(variable, valor)
+
+    N_in_24 <- replicate_data %>%
+        dplyr::summarise(valor = sum(in_24)) %>%
+        dplyr::mutate(variable = "N in_24") %>%
+        dplyr::select(variable, valor)
+
     comparar <- dplyr::bind_rows(dpto, etnia, edad, year_2002_2007, year_1990_1994,
                                  sexo, perp, w_minor, caq_89_93, may, paras_bog,
-                                 paras_2016, mestizo_2000, farc_2007)
+                                 paras_2016, mestizo_2000, farc_2007, N_rows, N_in_24)
 
     replicate <- rep(replicate, each = nrow(comparar)) %>%
         as.data.frame()
