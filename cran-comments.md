@@ -1,95 +1,151 @@
-## Submission comments
-This is a new submission to CRAN.
+## `devtools::check()` results
 
-## Test environments
+0 errors  | 0 warnings  | 0 notes
 
-- Locally on macOS Sonoma with R version 4.3.2
-- Windows Server 2022, R-devel, 64 bit (via `rhub`)
-- Ubuntu Linux 20.04.1 LTS, R-release, GCC (via `rhub`)
-- Fedora Linux, R-devel, clang, gfortran (via `rhub`)
-- win-builder
+─  using R version 4.4.0 (2024-04-24)
+─  using platform: x86_64-apple-darwin20
+─  R was compiled by
+       Apple clang version 14.0.0 (clang-1400.0.29.202)
+       GNU Fortran (GCC) 12.2.0
+─  running under: macOS Sonoma 14.5
 
-## R CMD check results
+## `R CMD CHECK` results
+* using R version 4.4.0 (2024-04-24)
+* using platform: x86_64-apple-darwin20
+* R was compiled by
+    Apple clang version 14.0.0 (clang-1400.0.29.202)
+    GNU Fortran (GCC) 12.2.0
+* running under: macOS Sonoma 14.5
+* using session charset: UTF-8
+* checking for file ‘verdata/DESCRIPTION’ ... OK
+* this is package ‘verdata’ version ‘0.9.2’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... OK
+* checking if this is a source package ... OK
+* checking if there is a namespace ... OK
+* checking for executable files ... OK
+* checking for hidden files and directories ... OK
+* checking for portable file names ... OK
+* checking for sufficient/correct file permissions ... OK
+* checking whether package ‘verdata’ can be installed ... OK
+* checking installed package size ... OK
+* checking package directory ... OK
+* checking DESCRIPTION meta-information ... OK
+* checking top-level files ... OK
+* checking for left-over files ... OK
+* checking index information ... OK
+* checking package subdirectories ... OK
+* checking code files for non-ASCII characters ... OK
+* checking R files for syntax errors ... OK
+* checking whether the package can be loaded ... OK
+* checking whether the package can be loaded with stated dependencies ... OK
+* checking whether the package can be unloaded cleanly ... OK
+* checking whether the namespace can be loaded with stated dependencies ... OK
+* checking whether the namespace can be unloaded cleanly ... OK
+* checking dependencies in R code ... OK
+* checking S3 generic/method consistency ... OK
+* checking replacement functions ... OK
+* checking foreign function calls ... OK
+* checking R code for possible problems ... OK
+* checking Rd files ... OK
+* checking Rd metadata ... OK
+* checking Rd cross-references ... OK
+* checking for missing documentation entries ... OK
+* checking for code/documentation mismatches ... OK
+* checking Rd \usage sections ... OK
+* checking Rd contents ... OK
+* checking for unstated dependencies in examples ... OK
+* checking contents of ‘data’ directory ... OK
+* checking data for non-ASCII characters ... NOTE
+  Note: found 148 marked UTF-8 strings
+* checking LazyData ... OK
+* checking data for ASCII and uncompressed saves ... OK
+* checking R/sysdata.rda ... OK
+* checking examples ... OK
+* checking for unstated dependencies in ‘tests’ ... OK
+* checking tests ... OK
+  Running ‘spelling.R’
+  Running ‘testthat.R’
+* checking PDF version of manual ... OK
+* DONE
+Status: 1 NOTE
 
-There were no errors or warnings, but there were four notes distinct notes across R-hub's three test environments.
+We are aware of the non-ASCII characters (e.g., in the README, authors names, etc.)
+and our intended and declared coding is UTF-8
 
-```
-── verdata 0.9.2: NOTE
+## `rhub::check()` results
 
-  Build ID:   verdata_0.9.2.tar.gz-3523114f10754322855eb5612c23e39c
-  Platform:   Windows Server 2022, R-devel, 64 bit
-  Submitted:  2h 5m 56.3s ago
-  Build time: 6m 57s
+- Tested on: linux (R-devel), m1-san (R-devel), macos-arm64 (R-devel), macos (R-devel) and windows (R-devel)
+- log files returned no errors or notes
 
-❯ checking CRAN incoming feasibility ... [12s] NOTE
-  Maintainer: 'Maria Gargiulo <mariag@hrdag.org>'
+## `devtools::check_win_devel()` results
+* using R version 4.4.0 (2024-04-24)
+* using platform: x86_64-apple-darwin20
+* R was compiled by
+    Apple clang version 14.0.0 (clang-1400.0.29.202)
+    GNU Fortran (GCC) 12.2.0
+* running under: macOS Sonoma 14.5
+* using session charset: UTF-8
+* checking for file ‘verdata/DESCRIPTION’ ... OK
+* this is package ‘verdata’ version ‘0.9.2’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... OK
+* checking if this is a source package ... OK
+* checking if there is a namespace ... OK
+* checking for executable files ... OK
+* checking for hidden files and directories ... OK
+* checking for portable file names ... OK
+* checking for sufficient/correct file permissions ... OK
+* checking whether package ‘verdata’ can be installed ... OK
+* checking installed package size ... OK
+* checking package directory ... OK
+* checking DESCRIPTION meta-information ... OK
+* checking top-level files ... OK
+* checking for left-over files ... OK
+* checking index information ... OK
+* checking package subdirectories ... OK
+* checking code files for non-ASCII characters ... OK
+* checking R files for syntax errors ... OK
+* checking whether the package can be loaded ... OK
+* checking whether the package can be loaded with stated dependencies ... OK
+* checking whether the package can be unloaded cleanly ... OK
+* checking whether the namespace can be loaded with stated dependencies ... OK
+* checking whether the namespace can be unloaded cleanly ... OK
+* checking dependencies in R code ... OK
+* checking S3 generic/method consistency ... OK
+* checking replacement functions ... OK
+* checking foreign function calls ... OK
+* checking R code for possible problems ... OK
+* checking Rd files ... OK
+* checking Rd metadata ... OK
+* checking Rd cross-references ... OK
+* checking for missing documentation entries ... OK
+* checking for code/documentation mismatches ... OK
+* checking Rd \usage sections ... OK
+* checking Rd contents ... OK
+* checking for unstated dependencies in examples ... OK
+* checking contents of ‘data’ directory ... OK
+* checking data for non-ASCII characters ... NOTE
+  Note: found 148 marked UTF-8 strings
+* checking LazyData ... OK
+* checking data for ASCII and uncompressed saves ... OK
+* checking R/sysdata.rda ... OK
+* checking examples ... OK
+* checking for unstated dependencies in ‘tests’ ... OK
+* checking tests ... OK
+  Running ‘spelling.R’
+  Running ‘testthat.R’
+* checking PDF version of manual ... OK
+* DONE
+Status: 1 NOTE
 
-  New submission
+This is a new submission. An earlier version of the package was previously 
+submitted to CRAN in February 2024, but was not published. I have not previously
+a package on CRAN.
 
-❯ checking for non-standard things in the check directory ... NOTE
-  Found the following files/directories:
-    ''NULL''
-
-❯ checking for detritus in the temp directory ... NOTE
-  Found the following files/directories:
-    'lastMiKTeXException'
-
-0 errors ✔ | 0 warnings ✔ | 3 notes ✖
-```
-
-This package is a new submission to CRAN. The `NULL` directory and the `lastMiKTeXException` appear to be known R-hub issues and can likely be ignored. See [R-hub issue #503](https://github.com/r-hub/rhub/issues/503) for information about the `NULL` directory issue and [R-hub issue #560](https://github.com/r-hub/rhub/issues/560) for more information about the `lastMiKTeXException` issue.
-
-```
-── verdata 0.9.2: NOTE
-
-  Build ID:   verdata_0.9.2.tar.gz-ae460def69ec4f80b806d1e1ebc90325
-  Platform:   Ubuntu Linux 20.04.1 LTS, R-release, GCC
-  Submitted:  2h 5m 56.3s ago
-  Build time: 2h 2m 17.6s
-
-❯ checking CRAN incoming feasibility ... [7s/37s] NOTE
-  Maintainer: ‘Maria Gargiulo <mariag@hrdag.org>’
-
-  New submission
-
-❯ checking HTML version of manual ... NOTE
-  Skipping checking HTML validation: no command 'tidy' found
-
-0 errors ✔ | 0 warnings ✔ | 2 notes ✖
-```
-
-This package is a new submission to CRAN. The `no comand 'tidy' found` issue appears to be a known R-hub issue and can likely be ignored. [R-hub issue #548](https://github.com/r-hub/rhub/issues/548) has more information.
-
-```
-── verdata 0.9.2: NOTE
-
-  Build ID:   verdata_0.9.2.tar.gz-f4477c10431f403f8b0338f5159bdc5f
-  Platform:   Fedora Linux, R-devel, clang, gfortran
-  Submitted:  2h 5m 56.3s ago
-  Build time: 1h 48m 45.4s
-
-❯ checking CRAN incoming feasibility ... [8s/44s] NOTE
-  Maintainer: ‘Maria Gargiulo <mariag@hrdag.org>’
-
-  New submission
-
-❯ checking HTML version of manual ... NOTE
-  Skipping checking HTML validation: no command 'tidy' found
-
-0 errors ✔ | 0 warnings ✔ | 2 notes ✖
-```
-
-This package is a new submission to CRAN. The `no comand 'tidy' found` issue appears to be a known R-hub issue and can likely be ignored. [R-hub issue #548](https://github.com/r-hub/rhub/issues/548) has more information.
-
-win-builder had no errors or messages, but had one note.
-
-```
-* checking CRAN incoming feasibility ... NOTE
-Maintainer: 'Maria Gargiulo <mariag@hrdag.org>'
-
-New submission
-```
-
-This package is a new submission to CRAN.
+The words and links flagged by the check are correct and do not need to be
+changed.
 
 <!-- done. -->

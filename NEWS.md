@@ -1,3 +1,3 @@
-# verdata 0.9.2
+# verdata 1.0.0
 
 * Submitted to CRAN
