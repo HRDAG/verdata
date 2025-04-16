@@ -1,8 +1,8 @@
 Click [here](https://github.com/HRDAG/verdata/blob/main/inst/docs/README-en.md) for instructions in English.
 
 <!-- badges: start -->
-[![R-CMD-check](https://github.com/HRDAG/verdata/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/HRDAG/verdata/actions/workflows/check-standard.yaml)
-  [![Codecov test coverage](https://codecov.io/gh/HRDAG/verdata/branch/main/graph/badge.svg)](https://app.codecov.io/gh/HRDAG/verdata?branch=main)
+[![DOI](https://joss.theoj.org/papers/10.21105/joss.05844/status.svg)](https://doi.org/10.21105/joss.05844)
+[![Codecov test coverage](https://codecov.io/gh/HRDAG/verdata/graph/badge.svg)](https://app.codecov.io/gh/HRDAG/verdata)
 <!-- badges: end -->
 
 <div class="columns">
