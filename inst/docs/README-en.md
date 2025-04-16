@@ -2,7 +2,6 @@ Haga clic [aquí](https://github.com/HRDAG/verdata/blob/main/README.md) para ins
 
  <!-- badges: start -->
 [![DOI](https://joss.theoj.org/papers/10.21105/joss.05844/status.svg)](https://doi.org/10.21105/joss.05844)
-[![R-CMD-check](https://github.com/HRDAG/verdata/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/HRDAG/verdata/actions/workflows/check-standard.yaml)
   [![Codecov test coverage](https://codecov.io/gh/HRDAG/verdata/branch/main/graph/badge.svg)](https://app.codecov.io/gh/HRDAG/verdata?branch=main)
 <!-- badges: end -->
 
@@ -16,9 +15,31 @@ Haga clic [aquí](https://github.com/HRDAG/verdata/blob/main/README.md) para ins
 
 # verdata
 
-`verdata` is an `R` package designed as a tool for the use and analysis of data about the armed conflict in Colombia resulting from the [joint JEP-CEV-HRDAG project](https://hrdag.org/wp-content/uploads/2022/08/20220818-fase4-informe-corrected.pdf). `verdata` has three main sets of features. First, researchers can use `verdata` to verify that they are using unaltered versions of the published data. Second, they can use `verdata` to replicate the main findings of the joint JEP-CEV-HRDAG project. Finally, they can use `verdata` to design their own statistical analyses of patterns of violence that address the two forms of missing data present in the documented data.
+`verdata` is an `R` package designed as a tool for the use and analysis of data about the armed conflict in Colombia resulting from the [JEP-CEV-HRDAG Joint Project](https://hrdag.org/CEV-JEP/20250306-methodological-report-EN.pdf) (note that this is a translation of the Spanish report available [here](https://hrdag.org/CEV-JEP/20250306-methodological-report-ES.pdf)). `verdata` has three main sets of features. First, researchers can use `verdata` to verify that they are using unaltered versions of the published data. Second, they can use `verdata` to replicate the main findings of the joint JEP-CEV-HRDAG project. Finally, they can use `verdata` to design their own statistical analyses of patterns of violence that address the two forms of missing data present in the documented data.
 
-Data about disappearance, homicide, recruitment of children and adolescents, and kidnapping can be downloaded from the [National Administrative Department of Statistics' (DANE in Spanish)  website](https://microdatos.dane.gov.co/index.php/catalog/795/get-microdata). The data about each of the four human rights violations correspond to 100 replicates, which are the result of a statistical imputation process of missing fields (see Section 4 of the [methodological report of the project](https://www.comisiondelaverdad.co/sites/default/files/descargables/2022-08/04_Anexo_Proyecto_JEP_CEV_HRDAG_08022022.pdf)). To download the data, click the *descargar* button next to the files you would like to download. The repository [`verdata-examples`](https://github.com/HRDAG/verdata-examples) contains examples that illustrate how to correctly use the data and this package. These examples are currently only available in Spanish, but we are working on translating them to English.
+There are two versions of the data about the four human rights considered in the Joint Project: disappearance, homicide, kidnapping, and forced recruitment. The first version (v1) corresponds to the data used for the analyses in the Methodological Report of the JEP-CEV-HRDAG Joint Project. This version of the data can be used to replicae the findings of the Methodological Report. After the publication of the first version of the data a state entity with legitimate access to the original data discovered some problems with the published data. The entity found some instances of the inclusion of indirect victims in one of the sources analyzed in the project. The second version of the data (v2) corrects these errors and is appropriate for new analyses of the Colombian conflict. More information is available [here](https://hrdag.org/colombia/).
+
+### Download data to replicate analyses conducted in the Methodological Report (v1)
+
+Download data from the Departamento Administrativo Nacional de Estadística (DANE), the national statistics office in Colombia: [https://microdatos.dane.gov.co/index.php/catalog/795/get-microdata](https://microdatos.dane.gov.co/index.php/catalog/795/get-microdata)
+
+Download data from the Human Rights Data Analysis Group (HRDAG) via IPFS:
+
+- Disappearance [[csv]](https://bafybeicb22gzaugj6jlrg47542oh7i2alzqbxwijedx7jfrstwgaxkxonm.ipfs.w3s.link/ipfs/bafybeicb22gzaugj6jlrg47542oh7i2alzqbxwijedx7jfrstwgaxkxonm/desaparicion-v1.csv.zip) [[parquet]](https://bafybeicfjzjsl72ntzvne5apc4mubhtvsb7pd2qgvtqhuzbjznm7bxkuzy.ipfs.w3s.link/ipfs/bafybeicfjzjsl72ntzvne5apc4mubhtvsb7pd2qgvtqhuzbjznm7bxkuzy/desaparicion-v1.parquet.zip)
+- Forced recruitment [[csv]](https://bafybeicb22gzaugj6jlrg47542oh7i2alzqbxwijedx7jfrstwgaxkxonm.ipfs.w3s.link/ipfs/bafybeicb22gzaugj6jlrg47542oh7i2alzqbxwijedx7jfrstwgaxkxonm/reclutamiento-v1.csv.zip) [[parquet]](https://bafybeicfjzjsl72ntzvne5apc4mubhtvsb7pd2qgvtqhuzbjznm7bxkuzy.ipfs.w3s.link/ipfs/bafybeicfjzjsl72ntzvne5apc4mubhtvsb7pd2qgvtqhuzbjznm7bxkuzy/reclutamiento-v1.parquet.zip)
+- Homicide [[csv]](https://bafybeicb22gzaugj6jlrg47542oh7i2alzqbxwijedx7jfrstwgaxkxonm.ipfs.w3s.link/ipfs/bafybeicb22gzaugj6jlrg47542oh7i2alzqbxwijedx7jfrstwgaxkxonm/homicidio-v1.csv.zip) [[parquet]](https://bafybeicfjzjsl72ntzvne5apc4mubhtvsb7pd2qgvtqhuzbjznm7bxkuzy.ipfs.w3s.link/ipfs/bafybeicfjzjsl72ntzvne5apc4mubhtvsb7pd2qgvtqhuzbjznm7bxkuzy/homicidio-v1.parquet.zip)
+- Kidnapping [[csv]](https://bafybeicb22gzaugj6jlrg47542oh7i2alzqbxwijedx7jfrstwgaxkxonm.ipfs.w3s.link/ipfs/bafybeicb22gzaugj6jlrg47542oh7i2alzqbxwijedx7jfrstwgaxkxonm/secuestro-v1.csv.zip) [[parquet]](https://bafybeicfjzjsl72ntzvne5apc4mubhtvsb7pd2qgvtqhuzbjznm7bxkuzy.ipfs.w3s.link/ipfs/bafybeicfjzjsl72ntzvne5apc4mubhtvsb7pd2qgvtqhuzbjznm7bxkuzy/secuestro-v1.parquet.zip)
+
+### Download data to design your own analyses of the armed conflict in Colombia (v2)
+
+Download data from the Human Rights Data Analysis Group (HRDAG) via IPFS:
+
+- Desaparición [[csv]](https://bafybeicb22gzaugj6jlrg47542oh7i2alzqbxwijedx7jfrstwgaxkxonm.ipfs.w3s.link/ipfs/bafybeicb22gzaugj6jlrg47542oh7i2alzqbxwijedx7jfrstwgaxkxonm/desaparicion-v2.csv.zip) [[parquet]](https://bafybeicb22gzaugj6jlrg47542oh7i2alzqbxwijedx7jfrstwgaxkxonm.ipfs.w3s.link/ipfs/bafybeicb22gzaugj6jlrg47542oh7i2alzqbxwijedx7jfrstwgaxkxonm/desaparicion-v2.parquet.zip)
+- Reclutamiento [[csv]](https://bafybeicb22gzaugj6jlrg47542oh7i2alzqbxwijedx7jfrstwgaxkxonm.ipfs.w3s.link/ipfs/bafybeicb22gzaugj6jlrg47542oh7i2alzqbxwijedx7jfrstwgaxkxonm/reclutamiento-v2.csv.zip) [[parquet]](https://bafybeicb22gzaugj6jlrg47542oh7i2alzqbxwijedx7jfrstwgaxkxonm.ipfs.w3s.link/ipfs/bafybeicb22gzaugj6jlrg47542oh7i2alzqbxwijedx7jfrstwgaxkxonm/reclutamiento-v2.parquet.zip)
+- Homicidio [[csv]](https://bafybeicb22gzaugj6jlrg47542oh7i2alzqbxwijedx7jfrstwgaxkxonm.ipfs.w3s.link/ipfs/bafybeicb22gzaugj6jlrg47542oh7i2alzqbxwijedx7jfrstwgaxkxonm/homicidio-v2.csv.zip) [[parquet]](https://bafybeicb22gzaugj6jlrg47542oh7i2alzqbxwijedx7jfrstwgaxkxonm.ipfs.w3s.link/ipfs/bafybeicb22gzaugj6jlrg47542oh7i2alzqbxwijedx7jfrstwgaxkxonm/homicidio-v2.parquet.zip)
+- Secuestro [[csv]](https://bafybeicb22gzaugj6jlrg47542oh7i2alzqbxwijedx7jfrstwgaxkxonm.ipfs.w3s.link/ipfs/bafybeicb22gzaugj6jlrg47542oh7i2alzqbxwijedx7jfrstwgaxkxonm/secuestro-v2.csv.zip) [[parquet]](https://bafybeicb22gzaugj6jlrg47542oh7i2alzqbxwijedx7jfrstwgaxkxonm.ipfs.w3s.link/ipfs/bafybeicb22gzaugj6jlrg47542oh7i2alzqbxwijedx7jfrstwgaxkxonm/secuestro-v2.parquet.zip)
+
+Both versions of the data are 100 replicate data files for each violation. These replicates were created using multiple imputation to address missing fields (see Section 4 of the [Methodological Report](https://hrdag.org/CEV-JEP/20250306-methodological-report-EN.pdf)). The repository [`verdata-examples`](https://github.com/HRDAG/verdata-examples) contains examples that illustrate how to correctly use the data and this package. These examples are currently only available in Spanish, but we are working on translating them to English.
 
 <div class="column" width="60%">
 

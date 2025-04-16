@@ -1,11 +1,11 @@
 # ============================================
 # Authors:     PA
-# Maintainers: PA
+# Maintainers: PA, MG
 # Copyright:   2023, HRDAG, GPL v2 or later
 # ============================================
 
 #' Calculate the proportions of each level of a variable after
-#' applying `combine_replicates` to complete data (includes imputed values).
+#' applying `combine_replicates` to completed data (includes imputed values).
 #'
 #' @param complete_data A data frame containing the output from `combine_replicates`.
 #' @param strata_vars A vector of column names identifying the variables to be
@@ -56,7 +56,9 @@ proportions_imputed <- function(complete_data,
 
 }
 
-#' Combine replicates according to the Normal approximation using the laws of total expectation and variance.
+#' Combine imputed replicates according to calculate totals. Combination
+#' is done using the standard approach that makes use of the laws of total
+#' expectation and total variance.
 #'
 #' @param replicates_obs_data The data frame that results from applying `summary_observed`.
 #' @param replicates_data A data frame containing replicates data.
@@ -67,7 +69,7 @@ proportions_imputed <- function(complete_data,
 #' "reclutamiento" and "desaparicion".
 #' @param forced_dis_filter Filter that indicates if the data is filtered using the
 #' "is_forced_dis" rule.
-#' @param edad_minors_filter Optional filter by age ("edad") < 18.
+#' @param edad_minors_filter Optional filter by age (`edad`) < 18.
 #' @param include_props A logical value indicating whether or not to include
 #'  the proportions from the calculations before merging with summary_observed's output.
 #' @param digits Number of decimal places to round the results to. Default value

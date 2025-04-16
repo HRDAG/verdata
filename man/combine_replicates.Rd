@@ -2,7 +2,9 @@
 % Please edit documentation in R/combine_replicates.R
 \name{combine_replicates}
 \alias{combine_replicates}
-\title{Combine replicates according to the Normal approximation using the laws of total expectation and variance.}
+\title{Combine imputed replicates according to calculate totals. Combination
+is done using the standard approach that makes use of the laws of total
+expectation and total variance.}
 \usage{
 combine_replicates(
   violation,
@@ -32,7 +34,7 @@ the "is_conflict" rule.}
 \item{forced_dis_filter}{Filter that indicates if the data is filtered using the
 "is_forced_dis" rule.}
 
-\item{edad_minors_filter}{Optional filter by age ("edad") < 18.}
+\item{edad_minors_filter}{Optional filter by age (\code{edad}) < 18.}
 
 \item{include_props}{A logical value indicating whether or not to include
 the proportions from the calculations before merging with summary_observed's output.}
@@ -47,7 +49,9 @@ lower bound of the 95\% confidence interval, \code{imp_hi} the upper bound of th
 95\% confidence interval, and \code{imp_mean} the point estimate of the mean value.
 }
 \description{
-Combine replicates according to the Normal approximation using the laws of total expectation and variance.
+Combine imputed replicates according to calculate totals. Combination
+is done using the standard approach that makes use of the laws of total
+expectation and total variance.
 }
 \examples{
 \dontrun{
