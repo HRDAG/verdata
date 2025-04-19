@@ -26,7 +26,7 @@
 #' \insertRef{BDA3}{verdata}
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' set.seed(19481210)
 #'
 #' library(dplyr)

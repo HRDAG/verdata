@@ -81,7 +81,7 @@ Para el uso de este paquete es necesario haber descargado previamente los datos 
 
 ### Datos imputados:
 
-* La función `combine_replicates` usa la aproximación normal usando las reglas de total expectativa y varianza para combinar las réplicas, lo que permite obtener un intervalo de la imputación. Ver sección 18.2 de [*Bayesian Data Analysis*](https://www.stat.columbia.edu/~gelman/book/) para más información.
+* La función `combine_replicates` usa la aproximación normal usando las reglas de total expectativa y varianza para combinar las réplicas, lo que permite obtener un intervalo de la imputación. Ver sección 18.2 de [*Bayesian Data Analysis*](https://sites.stat.columbia.edu/gelman/book/) para más información.
 
 ### Datos estimados:
 

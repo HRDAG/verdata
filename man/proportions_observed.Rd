@@ -24,7 +24,7 @@ Calculate the proportions of each level of a variable after applying
 \code{summary_observed} to observed values.
 }
 \examples{
-\dontrun{
+\donttest{
 local_dir <- system.file("extdata", "right", package = "verdata")
 replicates_data <- read_replicates(local_dir, "reclutamiento", c(1, 2), version = "v1")
 tab_observed <- summary_observed("reclutamiento", replicates_data,

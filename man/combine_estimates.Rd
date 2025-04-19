@@ -28,7 +28,7 @@ is done using the standard approach that makes use of the laws of total
 expectation and total variance.
 }
 \examples{
-\dontrun{
+\donttest{
 set.seed(19481210)
 
 library(dplyr)

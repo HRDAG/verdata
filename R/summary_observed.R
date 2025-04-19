@@ -16,7 +16,7 @@
 #' `summary_observed`.
 #' @export
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' local_dir <- system.file("extdata", "right", package = "verdata")
 #' replicates_data <- read_replicates(local_dir, "reclutamiento", c(1, 2), version = "v1")
 #' tab_observed <- summary_observed("reclutamiento", replicates_data,

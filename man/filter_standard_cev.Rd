@@ -23,9 +23,9 @@ A filtered data frame.
 Filter records to replicate results presented in the CEV methodology report.
 }
 \examples{
-\dontrun{
+\donttest{
 local_dir <- system.file("extdata", "right", package = "verdata")
-replicates_data <- read_replicates(local_dir, "reclutamiento", 1, 2)
+replicates_data <- read_replicates(local_dir, "reclutamiento", c(1, 2), version = "v1")
 filter_standard_cev(replicates_data, "reclutamiento", perp_change = TRUE)
 }
 }

@@ -82,7 +82,7 @@ To use this package, it is necessary to have previously downloaded the data from
 
 ### Imputed data
 
-* The `combine_replicates` function uses the Normal approximation using the laws of total expectation and variance to combine the replicates, yielding a 95% confidence interval and a point estimate of the mean number of documented victims taking the imputation uncertainty into consideration. See Section 18.2 of [*Bayesian Data Analysis*](http://www.stat.columbia.edu/~gelman/book/) for more information.
+* The `combine_replicates` function uses the Normal approximation using the laws of total expectation and variance to combine the replicates, yielding a 95% confidence interval and a point estimate of the mean number of documented victims taking the imputation uncertainty into consideration. See Section 18.2 of [*Bayesian Data Analysis*](https://sites.stat.columbia.edu/gelman/book/) for more information.
 
 ### Estimates
 
