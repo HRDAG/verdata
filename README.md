@@ -97,7 +97,7 @@ de estas-. Tenga presente que al proveer un directorio la función asume las mis
 proyecto. Si usted quiere usar otras especificaciones, no debe suministrar un directorio a las estimaciones.
 
 * Por último, la función `combine_estimates` permite combinar los resultados de la estimación, lo que, una vez más, dará como
-resultado un intervalo (que incluye la media). Usa la aproximación normal usando las reglas de total expectativa y varianza. Ver sección 18.2 de [*Bayesian Data Analysis*](http://www.stat.columbia.edu/~gelman/book/) para más información.
+resultado un intervalo (que incluye la media). Usa la aproximación normal usando las reglas de total expectativa y varianza. Ver sección 18.2 de [*Bayesian Data Analysis*](https://sites.stat.columbia.edu/gelman/book/) para más información.
 
 ## Agradecimientos
 Agradecemos a [Micaela Morales](https://github.com/mmazul) por su atenta prueba beta.
