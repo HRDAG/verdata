@@ -143,7 +143,7 @@ Status: 1 NOTE
 
 This is a new submission. An earlier version of the package was previously 
 submitted to CRAN in February 2024, but was not published. I have not previously
-a package on CRAN.
+published a package on CRAN.
 
 The words and links flagged by the check are correct and do not need to be
 changed.
