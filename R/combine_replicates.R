@@ -83,7 +83,7 @@ proportions_imputed <- function(complete_data,
 #' @importFrom dplyr %>%
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' local_dir <- system.file("extdata", "right", package = "verdata")
 #' replicates_data <- read_replicates(local_dir, "reclutamiento", c(1, 2),
 #' version = "v1")

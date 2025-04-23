@@ -54,7 +54,7 @@ is done using the standard approach that makes use of the laws of total
 expectation and total variance.
 }
 \examples{
-\dontrun{
+\donttest{
 local_dir <- system.file("extdata", "right", package = "verdata")
 replicates_data <- read_replicates(local_dir, "reclutamiento", c(1, 2),
 version = "v1")
