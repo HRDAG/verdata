@@ -49,6 +49,12 @@ Both versions of the data are 100 replicate data files for each violation. These
 
 ## Installation
 
+You can install the stable version of `verdata` from [CRAN](https://cran.r-project.org/) with:
+
+```r
+install.packages("verdata")
+```
+
 You can install the development version of `verdata` from GitHub with:
 
 ```r

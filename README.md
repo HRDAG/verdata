@@ -49,7 +49,13 @@ Ambas versiones de los datos corresponden a 100 réplicas para cada violación, 
 
 ## Instalación
 
-Se puede instalar la versión en desarrollo de `verdata` desde GitHub así:
+Se puede instalar `verdata` directamente de [CRAN](https://cran.r-project.org/) con:
+
+```r
+install.packages("verdata")
+```
+
+También se puede instalar la versión en desarrollo de `verdata` desde GitHub así:
 
 ```r
 if (!require("devtools")) {install.packages("devtools")}
