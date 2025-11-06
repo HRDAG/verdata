@@ -41,6 +41,8 @@ Descargar datos del Human Rights Data Analysis Group (HRDAG) con IPFS:
 
 Ambas versiones de los datos corresponden a 100 réplicas para cada violación, los cuales fueron producto del proceso de imputación estadística múltiple de campos faltantes (ver sección 4 del [informe metodológico del proyecto](https://hrdag.org/CEV-JEP/20250306-methodological-report-ES.pdf)). Además, el repositorio [`verdata-examples`](https://github.com/HRDAG/verdata-examples) contiene ejemplos que ilustran cómo usar correctamente estos datos (réplicas) a través del paquete previamente mencionado.
 
+En los archivos de datos, cada fila representa una víctima única. La columna `match_group_id` contiene el identificador único para cada víctima. Una persona puede ser víctima de un solo hecho victimizante o de dos hechos victimizantes: homicidio y desaparición, homicidio y reclutamiento o homicidio y secuestro. Se puede usar la columna `match_group_id` con los archivos de interés para identificar víctimas de dos hechos victimizantes. Ver sección 3.6.1 del [informe metodológico del proyecto](https://hrdag.org/CEV-JEP/20250306-methodological-report-ES.pdf) para más información sobre el caso de múltiples hechos victimizantes.
+
 <div class="column" width="60%">
 
 </div>
