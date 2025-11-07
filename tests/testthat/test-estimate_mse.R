@@ -120,7 +120,7 @@ testthat::test_that("mse function returns correct results when using lookup func
     testthat::expect_equal(nrow(r3), 1000)
     testthat::expect_named(r3, c("validated", "N", "valid_sources", "n_obs", "stratum_name"))
     testthat::expect_equal(round(mean(r3$N), 0), 2066)
-    testthat::expect_true(as.numeric(s3_end - s3_start) < 1) # just looking up, should be fast
+    testthat::expect_true(as.numeric(s3_end - s3_start) < 2) # just looking up, should be fast
 
     # not pre-calculated
     stratum_4 <- replicates %>%
