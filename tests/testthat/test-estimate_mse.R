@@ -164,6 +164,7 @@ testthat::test_that("mse function returns errors when inputs are misspecified", 
 
 testthat::test_that("lookup function correctly finds strata that have and have not been estimated", {
 
+    testthat::skip_on_cran()
 
     local_dir <- system.file("extdata", "right", package = "verdata")
     replicates <- read_replicates(local_dir, "reclutamiento", replicate_nums = 1,

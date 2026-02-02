@@ -38,6 +38,8 @@ my_stratum <- tibble::tibble(in_A, in_B) %>%
 
 testthat::test_that("Lookup existing estimates", {
 
+    testthat::skip_on_cran()
+
     estrato <- replicates %>%
         dplyr::filter(sexo == "HOMBRE",
                       yy_hecho == 1999,
@@ -53,6 +55,8 @@ testthat::test_that("Lookup existing estimates", {
 })
 
 testthat::test_that("Lookup non existing estimates", {
+
+    testthat::skip_on_cran()
 
     estrato <- replicates %>%
         dplyr::filter(sexo == "HOMBRE",
