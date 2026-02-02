@@ -5,13 +5,16 @@
 ─  R was compiled by
        Apple clang version 14.0.0 (clang-1400.0.29.202)
        GNU Fortran (GCC) 12.2.0
-─  running under: macOS 15.6.1
+─  running under: macOS 15.7.3
+─  using session charset: UTF-8
+─  using options ‘--no-manual --as-cran’
 
 0 errors ✔ | 0 warnings ✔ | 0 notes ✔
 
 # devtools::check_win_devel() results
+
 * using log directory 'd:/RCompile/CRANguest/R-devel/verdata.Rcheck'
-* using R Under development (unstable) (2025-11-06 r88990 ucrt)
+* using R Under development (unstable) (2026-02-01 r89366 ucrt)
 * using platform: x86_64-w64-mingw32
 * R was compiled by
     gcc.exe (GCC) 14.3.0
@@ -19,9 +22,9 @@
 * running under: Windows Server 2022 x64 (build 20348)
 * using session charset: UTF-8
 * checking for file 'verdata/DESCRIPTION' ... OK
-* this is package 'verdata' version '1.0.1'
+* this is package 'verdata' version '1.0.2'
 * package encoding: UTF-8
-* checking CRAN incoming feasibility ... [28s] NOTE
+* checking CRAN incoming feasibility ... [12s] NOTE
 Maintainer: 'Maria Gargiulo <mariag@hrdag.org>'
 
 Found the following (possibly) invalid URLs:
@@ -136,13 +139,14 @@ add trailing slashes, or replace the old by the new URL.
 * checking R/sysdata.rda ... OK
 * checking examples ... OK
 * checking for unstated dependencies in 'tests' ... OK
-* checking tests ... [152s] OK
+* checking tests ... [27m] OK
   Running 'spelling.R'
-  Running 'testthat.R' [151s]
-* checking PDF version of manual ... [11s] OK
+  Running 'testthat.R' [27m]
+* checking PDF version of manual ... [12s] OK
 * checking HTML version of manual ... OK
 * DONE
 Status: 1 NOTE
 
 The links flagged by the check are correct and do not need to be changed.
 
+<!-- done. -->
