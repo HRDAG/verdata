@@ -16,6 +16,7 @@ in_D <- sample(c(0, 1), size = 100, replace = TRUE, prob = c(1, 0))
 
 testthat::test_that("get_valid_sources returns correct results", {
 
+    testthat::skip_on_cran()
 
     stratum_1 <- tibble::tibble(in_A, in_B, in_C, in_D)
     testthat::expect_true(setequal(get_valid_sources(stratum_1),
@@ -31,6 +32,8 @@ testthat::test_that("get_valid_sources returns correct results", {
 
 testthat::test_that("internal run_lcmcr function returns correct results for
                     estimable and non-estimable strata", {
+
+                        testthat::skip_on_cran()
 
                         stratum_1 <- tibble::tibble(in_A, in_B, in_C, in_D) %>%
                             dplyr::mutate(rs = rowSums(.)) %>%
@@ -65,6 +68,8 @@ testthat::test_that("internal run_lcmcr function returns correct results for
 
 testthat::test_that("mse function returns correct results for estimable and non-estimable strata", {
 
+    testthat::skip_on_cran()
+
     stratum_1 <- tibble::tibble(in_A, in_B, in_C, in_D)
     r1 <- mse(stratum_data = stratum_1,
               stratum_name = "stratum 1",
@@ -95,6 +100,8 @@ testthat::test_that("mse function returns correct results for estimable and non-
 
 
 testthat::test_that("mse function returns correct results when using lookup functionality", {
+
+    testthat::skip_on_cran()
 
     local_dir <- system.file("extdata", "right", package = "verdata")
     replicates <- read_replicates(local_dir, "reclutamiento", replicate_nums = 1,
@@ -139,6 +146,8 @@ testthat::test_that("mse function returns correct results when using lookup func
 })
 
 testthat::test_that("mse function returns errors when inputs are misspecified", {
+
+    testthat::skip_on_cran()
 
     local_dir <- system.file("extdata", "right", package = "verdata")
     replicates <- read_replicates(local_dir, "reclutamiento", replicate_nums = 1,

@@ -4,6 +4,8 @@
 
 * Setting tests involving `lookup_estimates()` to `skip_on_cran` with `testthat` due to flaky behavior with Linux development environments on CRAN. These tests are working on all other testing environments.
 
+* Setting tests involving `estimate_mse()` to `skip_on_cran` because they are resulting in long build times for Windows and Debian.
+
 # verdata 1.0.1
 
 * Timing test for `mse()` using `lookup_estimates` option uses more generous comparison to ensure that test doesn't fail unnecessarily when estimates are correctly looked up.

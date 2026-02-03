@@ -14,86 +14,18 @@
 # devtools::check_win_devel() results
 
 * using log directory 'd:/RCompile/CRANguest/R-devel/verdata.Rcheck'
-* using R Under development (unstable) (2026-02-01 r89366 ucrt)
+* using R Under development (unstable) (2026-02-02 r89367 ucrt)
 * using platform: x86_64-w64-mingw32
 * R was compiled by
     gcc.exe (GCC) 14.3.0
     GNU Fortran (GCC) 14.3.0
 * running under: Windows Server 2022 x64 (build 20348)
 * using session charset: UTF-8
+* current time: 2026-02-03 16:49:08Z
 * checking for file 'verdata/DESCRIPTION' ... OK
 * this is package 'verdata' version '1.0.2'
 * package encoding: UTF-8
-* checking CRAN incoming feasibility ... [12s] NOTE
-Maintainer: 'Maria Gargiulo <mariag@hrdag.org>'
-
-Found the following (possibly) invalid URLs:
-  URL: https://bafybeicb22gzaugj6jlrg47542oh7i2alzqbxwijedx7jfrstwgaxkxonm.ipfs.w3s.link/ipfs/bafybeicb22gzaugj6jlrg47542oh7i2alzqbxwijedx7jfrstwgaxkxonm/desaparicion-v1.csv.zip (moved to https://bafybeicb22gzaugj6jlrg47542oh7i2alzqbxwijedx7jfrstwgaxkxonm.ipfs.w3s.link/desaparicion-v1.csv.zip)
-    From: README.md
-    Status: 301
-    Message: Moved Permanently
-  URL: https://bafybeicb22gzaugj6jlrg47542oh7i2alzqbxwijedx7jfrstwgaxkxonm.ipfs.w3s.link/ipfs/bafybeicb22gzaugj6jlrg47542oh7i2alzqbxwijedx7jfrstwgaxkxonm/desaparicion-v2.csv.zip (moved to https://bafybeicb22gzaugj6jlrg47542oh7i2alzqbxwijedx7jfrstwgaxkxonm.ipfs.w3s.link/desaparicion-v2.csv.zip)
-    From: README.md
-    Status: 301
-    Message: Moved Permanently
-  URL: https://bafybeicb22gzaugj6jlrg47542oh7i2alzqbxwijedx7jfrstwgaxkxonm.ipfs.w3s.link/ipfs/bafybeicb22gzaugj6jlrg47542oh7i2alzqbxwijedx7jfrstwgaxkxonm/desaparicion-v2.parquet.zip (moved to https://bafybeicb22gzaugj6jlrg47542oh7i2alzqbxwijedx7jfrstwgaxkxonm.ipfs.w3s.link/desaparicion-v2.parquet.zip)
-    From: README.md
-    Status: 301
-    Message: Moved Permanently
-  URL: https://bafybeicb22gzaugj6jlrg47542oh7i2alzqbxwijedx7jfrstwgaxkxonm.ipfs.w3s.link/ipfs/bafybeicb22gzaugj6jlrg47542oh7i2alzqbxwijedx7jfrstwgaxkxonm/homicidio-v1.csv.zip (moved to https://bafybeicb22gzaugj6jlrg47542oh7i2alzqbxwijedx7jfrstwgaxkxonm.ipfs.w3s.link/homicidio-v1.csv.zip)
-    From: README.md
-    Status: 301
-    Message: Moved Permanently
-  URL: https://bafybeicb22gzaugj6jlrg47542oh7i2alzqbxwijedx7jfrstwgaxkxonm.ipfs.w3s.link/ipfs/bafybeicb22gzaugj6jlrg47542oh7i2alzqbxwijedx7jfrstwgaxkxonm/homicidio-v2.csv.zip (moved to https://bafybeicb22gzaugj6jlrg47542oh7i2alzqbxwijedx7jfrstwgaxkxonm.ipfs.w3s.link/homicidio-v2.csv.zip)
-    From: README.md
-    Status: 301
-    Message: Moved Permanently
-  URL: https://bafybeicb22gzaugj6jlrg47542oh7i2alzqbxwijedx7jfrstwgaxkxonm.ipfs.w3s.link/ipfs/bafybeicb22gzaugj6jlrg47542oh7i2alzqbxwijedx7jfrstwgaxkxonm/homicidio-v2.parquet.zip (moved to https://bafybeicb22gzaugj6jlrg47542oh7i2alzqbxwijedx7jfrstwgaxkxonm.ipfs.w3s.link/homicidio-v2.parquet.zip)
-    From: README.md
-    Status: 301
-    Message: Moved Permanently
-  URL: https://bafybeicb22gzaugj6jlrg47542oh7i2alzqbxwijedx7jfrstwgaxkxonm.ipfs.w3s.link/ipfs/bafybeicb22gzaugj6jlrg47542oh7i2alzqbxwijedx7jfrstwgaxkxonm/reclutamiento-v1.csv.zip (moved to https://bafybeicb22gzaugj6jlrg47542oh7i2alzqbxwijedx7jfrstwgaxkxonm.ipfs.w3s.link/reclutamiento-v1.csv.zip)
-    From: README.md
-    Status: 301
-    Message: Moved Permanently
-  URL: https://bafybeicb22gzaugj6jlrg47542oh7i2alzqbxwijedx7jfrstwgaxkxonm.ipfs.w3s.link/ipfs/bafybeicb22gzaugj6jlrg47542oh7i2alzqbxwijedx7jfrstwgaxkxonm/reclutamiento-v2.csv.zip (moved to https://bafybeicb22gzaugj6jlrg47542oh7i2alzqbxwijedx7jfrstwgaxkxonm.ipfs.w3s.link/reclutamiento-v2.csv.zip)
-    From: README.md
-    Status: 301
-    Message: Moved Permanently
-  URL: https://bafybeicb22gzaugj6jlrg47542oh7i2alzqbxwijedx7jfrstwgaxkxonm.ipfs.w3s.link/ipfs/bafybeicb22gzaugj6jlrg47542oh7i2alzqbxwijedx7jfrstwgaxkxonm/reclutamiento-v2.parquet.zip (moved to https://bafybeicb22gzaugj6jlrg47542oh7i2alzqbxwijedx7jfrstwgaxkxonm.ipfs.w3s.link/reclutamiento-v2.parquet.zip)
-    From: README.md
-    Status: 301
-    Message: Moved Permanently
-  URL: https://bafybeicb22gzaugj6jlrg47542oh7i2alzqbxwijedx7jfrstwgaxkxonm.ipfs.w3s.link/ipfs/bafybeicb22gzaugj6jlrg47542oh7i2alzqbxwijedx7jfrstwgaxkxonm/secuestro-v1.csv.zip (moved to https://bafybeicb22gzaugj6jlrg47542oh7i2alzqbxwijedx7jfrstwgaxkxonm.ipfs.w3s.link/secuestro-v1.csv.zip)
-    From: README.md
-    Status: 301
-    Message: Moved Permanently
-  URL: https://bafybeicb22gzaugj6jlrg47542oh7i2alzqbxwijedx7jfrstwgaxkxonm.ipfs.w3s.link/ipfs/bafybeicb22gzaugj6jlrg47542oh7i2alzqbxwijedx7jfrstwgaxkxonm/secuestro-v2.csv.zip (moved to https://bafybeicb22gzaugj6jlrg47542oh7i2alzqbxwijedx7jfrstwgaxkxonm.ipfs.w3s.link/secuestro-v2.csv.zip)
-    From: README.md
-    Status: 301
-    Message: Moved Permanently
-  URL: https://bafybeicb22gzaugj6jlrg47542oh7i2alzqbxwijedx7jfrstwgaxkxonm.ipfs.w3s.link/ipfs/bafybeicb22gzaugj6jlrg47542oh7i2alzqbxwijedx7jfrstwgaxkxonm/secuestro-v2.parquet.zip (moved to https://bafybeicb22gzaugj6jlrg47542oh7i2alzqbxwijedx7jfrstwgaxkxonm.ipfs.w3s.link/secuestro-v2.parquet.zip)
-    From: README.md
-    Status: 301
-    Message: Moved Permanently
-  URL: https://bafybeicfjzjsl72ntzvne5apc4mubhtvsb7pd2qgvtqhuzbjznm7bxkuzy.ipfs.w3s.link/ipfs/bafybeicfjzjsl72ntzvne5apc4mubhtvsb7pd2qgvtqhuzbjznm7bxkuzy/desaparicion-v1.parquet.zip (moved to https://bafybeicfjzjsl72ntzvne5apc4mubhtvsb7pd2qgvtqhuzbjznm7bxkuzy.ipfs.w3s.link/desaparicion-v1.parquet.zip)
-    From: README.md
-    Status: 301
-    Message: Moved Permanently
-  URL: https://bafybeicfjzjsl72ntzvne5apc4mubhtvsb7pd2qgvtqhuzbjznm7bxkuzy.ipfs.w3s.link/ipfs/bafybeicfjzjsl72ntzvne5apc4mubhtvsb7pd2qgvtqhuzbjznm7bxkuzy/homicidio-v1.parquet.zip (moved to https://bafybeicfjzjsl72ntzvne5apc4mubhtvsb7pd2qgvtqhuzbjznm7bxkuzy.ipfs.w3s.link/homicidio-v1.parquet.zip)
-    From: README.md
-    Status: 301
-    Message: Moved Permanently
-  URL: https://bafybeicfjzjsl72ntzvne5apc4mubhtvsb7pd2qgvtqhuzbjznm7bxkuzy.ipfs.w3s.link/ipfs/bafybeicfjzjsl72ntzvne5apc4mubhtvsb7pd2qgvtqhuzbjznm7bxkuzy/reclutamiento-v1.parquet.zip (moved to https://bafybeicfjzjsl72ntzvne5apc4mubhtvsb7pd2qgvtqhuzbjznm7bxkuzy.ipfs.w3s.link/reclutamiento-v1.parquet.zip)
-    From: README.md
-    Status: 301
-    Message: Moved Permanently
-  URL: https://bafybeicfjzjsl72ntzvne5apc4mubhtvsb7pd2qgvtqhuzbjznm7bxkuzy.ipfs.w3s.link/ipfs/bafybeicfjzjsl72ntzvne5apc4mubhtvsb7pd2qgvtqhuzbjznm7bxkuzy/secuestro-v1.parquet.zip (moved to https://bafybeicfjzjsl72ntzvne5apc4mubhtvsb7pd2qgvtqhuzbjznm7bxkuzy.ipfs.w3s.link/secuestro-v1.parquet.zip)
-    From: README.md
-    Status: 301
-    Message: Moved Permanently
-For content that is 'Moved Permanently', please change http to https,
-add trailing slashes, or replace the old by the new URL.
+* checking CRAN incoming feasibility ... [12s] OK
 * checking package namespace information ... OK
 * checking package dependencies ... OK
 * checking if this is a source package ... OK
@@ -139,14 +71,12 @@ add trailing slashes, or replace the old by the new URL.
 * checking R/sysdata.rda ... OK
 * checking examples ... OK
 * checking for unstated dependencies in 'tests' ... OK
-* checking tests ... [27m] OK
+* checking tests ... [13s] OK
   Running 'spelling.R'
-  Running 'testthat.R' [27m]
+  Running 'testthat.R' [13s]
 * checking PDF version of manual ... [12s] OK
 * checking HTML version of manual ... OK
 * DONE
-Status: 1 NOTE
-
-The links flagged by the check are correct and do not need to be changed.
+Status: OK
 
 <!-- done. -->
